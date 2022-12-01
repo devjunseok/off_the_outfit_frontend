@@ -1,0 +1,123 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-01 ]
+________________________________________________________________
+
+= table of Css
+
+1. index.html
+2. header.html
+3. nav.html
+4. footer.html
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+/* _______________________________________________________________  */
+/* 1. index.html */
+/* _______________________________________________________________  */
+
+
+/* _______________________________________________________________  */
+/* 2. header.html */
+/* _______________________________________________________________  */
+
+
+.main-wrapper {
+    width: 100vw;
+    height: 70px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-wrapper .main-title {
+    font-size: 30pt;
+    padding: 15px 0 0 30px;
+}
+
+.main-wrapper .search-wrapper {
+    padding: 20px 0 0 30px;
+}
+
+.main-wrapper .search-wrapper .search-box {
+    width: 180px;
+    height: 25px;
+    border: solid 3px black;
+    margin-right: 0;
+}
+
+.main-wrapper .search-wrapper .search-button {
+    width: 33px;
+    height: 33px;
+    margin-left: 0;
+    border: solid 3px black;
+    background-color: black;
+    position: absolute;
+    cursor: pointer;
+}
+
+.main-wrapper .search-word-ranking {
+    font-size: 0.8em;
+    margin: 30px 0 0 50px;
+}
+
+.header-member {
+    width: 100vw;
+    height: 40px;
+    background-color: black;
+}
+
+.header-member .header-links {
+    color: #ffffff;
+    padding: 10px 0 0 0;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-member .header-link {
+    color: #ffffff;
+    font-size: 6pt;
+}
+
+.header-member .header-link {
+    color: #ffffff;
+    font-size: 6pt;
+}
+
+
+
+/* _______________________________________________________________  */
+/* 3. nav.html */
+/* _______________________________________________________________  */
+
+
+/* _______________________________________________________________  */
+/* 4. footer.html */
+/* _______________________________________________________________  */
