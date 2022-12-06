@@ -1,0 +1,132 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-06 ]
+________________________________________________________________
+
+= table of Css
+
+1. login.html
+
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+/* _______________________________________________________________  */
+/* 1. login.html */
+/* _______________________________________________________________  */
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login_box {
+    width: 500px;
+    height: 600px;
+}
+.main_logo {
+    width: 500px;
+    height: 60px;
+    font-size: 30pt;
+    line-height: 60px;
+    text-align: center;
+}
+.login_title {
+    width: 450px;
+    height: 60px;
+    line-height: 60px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+}
+.social_login {
+    width: 450px;
+    height: 60px;
+    line-height: 60px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+}
+.login_id {
+    width: 450px;
+    height: 60px;
+    line-height: 60px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.password {
+    width: 450px;
+    height: 60px;
+    line-height: 60px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.login_button {
+    width: 450px;
+    height: 60px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    text-align: center;
+    line-height: 60px;
+    border-style: none;
+}
+.dividing_line {
+    width: 160px;
+    color: #c0c0c0;
+}
+.password_find {
+    width: 450px;
+    margin: 10px auto 10px auto;
+    text-align: right;
+}
+.signup_button_box {
+    width: 450px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px auto 10px auto;
+    justify-content: space-between;
+}
+.signup_button {
+    width: 250px;
+    height: 50px;
+    background-color: #f0f0f0;
+    text-align: center;
+    line-height: 50px;
+}
