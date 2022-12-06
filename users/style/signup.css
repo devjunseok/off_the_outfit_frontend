@@ -61,7 +61,6 @@ body {
 .signup_box {
     width: 500px;
     height: 760px;
-    background-color: #c0c0c0;
 }
 .main_logo {
     width: 500px;
@@ -168,4 +167,5 @@ body {
     line-height: 40px;
     background-color: #f0f0f0;
     text-align: center;
+    border-style: none;
 }
