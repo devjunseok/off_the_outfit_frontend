@@ -1,0 +1,171 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-06 ]
+________________________________________________________________
+
+= table of Css
+
+1. signup.html
+
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+.between {
+    justify-content: space-between;
+}
+
+/* _______________________________________________________________  */
+/* 1. signup.html */
+/* _______________________________________________________________  */
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.signup_box {
+    width: 500px;
+    height: 760px;
+    background-color: #c0c0c0;
+}
+.main_logo {
+    width: 500px;
+    height: 60px;
+    font-size: 30pt;
+    line-height: 60px;
+    text-align: center;
+}
+.signup_title {
+    width: 450px;
+    margin: 10px auto 10px auto;
+}
+.signup_id {
+    width: 430px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_password {
+    width: 430px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_password2 {
+    width: 430px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_email {
+    width: 430px;
+    height: 60px;
+    line-height: 60px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_address {
+    width: 430px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px auto 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_gender {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px 10px 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_date_of_birth {
+    width: 270px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px auto 10px 10px;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_height {
+    width: 220px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px 10px 10px auto;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_weight {
+    width: 170px;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px auto 10px 10px;
+    background-color: #f0f0f0;
+    border-style: none;
+}
+.signup_box .vertical_alignment input {
+    padding: 0 10px 0 10px;
+}
+.dividing_line {
+    width: 160px;
+    color: #c0c0c0;
+}
+.signup_button_box {
+    width: 450px;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px auto 10px auto;
+    justify-content: space-between;
+}
+.signup_button {
+    width: 250px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
