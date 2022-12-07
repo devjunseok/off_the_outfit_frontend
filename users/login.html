@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +19,9 @@
                 <div class="login_title">로그인</div>
                 <div class="social_login">소셜 로그인</div>
                 <div class="horizontal_alignment"><hr class="dividing_line">또는<hr class="dividing_line"></div>
-                <input class="login_id" placeholder="아이디" />
-                <input class="password" placeholder="비밀번호" />
-                <button class="login_button">로그인</button>
+                <input id="username" class="login_id" placeholder="아이디" />
+                <input type="password" id="password" class="password" placeholder="비밀번호" />
+                <button type="submit" class="login_button"  onclick="handleLogin()">로그인</button>
                 <div class="password_find">비밀번호 찾기</div>
             </div>
             <hr class="dividing_bottom_line">
@@ -30,7 +31,7 @@
             </div>
         </div>
     </div>
-
-
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/login_api.js"></script>
 </body>
 </html>
