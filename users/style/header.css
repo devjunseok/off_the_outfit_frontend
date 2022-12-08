@@ -1,0 +1,200 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-08 ]
+________________________________________________________________
+
+= Users table of Css
+
+1. /users/header.html
+2. /users/nav.html
+3. /users/footer.html
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+/* _______________________________________________________________  */
+/* 1. /users/header.html */
+/* _______________________________________________________________  */
+
+
+.main-wrapper {
+    width: 100vw;
+    height: 70px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-wrapper .main-title {
+    font-size: 30pt;
+    padding: 15px 0 0 30px;
+}
+
+.main-wrapper .search-wrapper {
+    padding: 20px 0 0 30px;
+}
+
+.main-wrapper .search-wrapper .search-box {
+    width: 180px;
+    height: 25px;
+    border: solid 3px black;
+    margin-right: 0;
+}
+
+.main-wrapper .search-wrapper .search-button {
+    width: 33px;
+    height: 33px;
+    margin-left: 0;
+    border: solid 3px black;
+    background-color: black;
+    position: absolute;
+    cursor: pointer;
+}
+
+.main-wrapper .search-word-ranking {
+    font-size: 0.8em;
+    margin: 30px 0 0 50px;
+}
+
+.header-profile_info {
+    width: 100vw;
+    height: 200px;
+    background-color: black;
+}
+
+.header-profile_info .info_left_area {
+    width: 50vw;
+    height: 200px;
+}
+
+.info_left_area .main_profile_image {
+    width: 160px;
+    height: 160px;
+    border-radius: 80px;
+    margin: 20px 20px 20px 150px;
+}
+
+.info_left_area .right_main_profile_info_box {
+    width: 400px;
+    height: 120px;
+    margin: 40px;
+}
+
+.right_main_profile_info_box .profile_nickname {
+    font-size: 30pt;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.right_main_profile_info_box .profile_tier_info {
+    font-size: 15pt;
+    color: #ffffff;
+    margin-top: 10px ;
+}
+
+.header-profile_info .info_right_area {
+    width: 50vw;
+    height: 300px;
+}
+
+
+
+
+
+/* _______________________________________________________________  */
+/* 2. nav.html */
+/* _______________________________________________________________  */
+
+.left_area {
+    background-color: #ffffff;
+    width: 300px;
+    height: 180vh;
+    border-right: solid 2px #c0c0c0;
+    padding: 10px;
+}
+
+.left_area .nav_main_bt {
+    display: flex;
+    flex-direction: row;
+    width: 280px;
+    height: 60px;
+    background-color: #ffffff;
+    margin: 10px;
+}
+
+.left_area .nav_main_bt_left {
+    width: 140px;
+    height: 60px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+    text-align: center;
+    line-height: 60px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.left_area .nav_main_bt_right {
+    width: 140px;
+    height: 60px;
+    background-color: #000000;
+    border: solid 1px #000000;
+    color: #ffffff;
+    text-align: center;
+    line-height: 60px;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.nav_alphabet_area {
+    width: 280px;
+    height: 100px;
+    background-color: #c0c0c0;
+    margin: 10px;
+}
+
+.nav_brand_list_area {
+    width: 280px;
+    height: 70vh;
+    background-color: #c0c0c0;
+    margin: 10px;
+}
+
+
+/* _______________________________________________________________  */
+/* 3. footer.html */
+/* _______________________________________________________________  */
