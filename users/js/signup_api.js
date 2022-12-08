@@ -46,7 +46,6 @@ async function handleSignup() {
             
         })
     })
-    console.log('로딩되었음2')
 
     const response_json = await response.json()
     console.log('로딩되었음3')
@@ -55,19 +54,14 @@ async function handleSignup() {
     if (response.status == 201){
         alert(response_json["message"])
             window.location.replace(`${frontEndBaseUrl}/users/login.html`);
-    }else {
+    }else{
         alert(response_json["username"])
-        alert(response_json["email"])
-        alert(response_json["nickname"])
-        alert(response_json["address"])
-        alert(response_json["gender"])
-        alert(response_json["height"])
-        alert(response_json["weight"])
-        alert(response_json["date_of_birth"])
+        console.log(username)
+        alert(response_json["username"])
+
 
     }
 }
-
 
 
 
