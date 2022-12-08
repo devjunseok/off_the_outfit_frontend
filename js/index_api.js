@@ -58,6 +58,12 @@ function timeForToday(value) {
 
 
 window.onload = async function getIndex_API(){
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontEndBaseUrl}/users/login.html`;
+        
+        
+    } else {
   
         //게시글 전체 리스트 조회
         feed_list = await getIndexFeedList()
@@ -90,4 +96,5 @@ window.onload = async function getIndex_API(){
             })    
         })
 
+}
 }
