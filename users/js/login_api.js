@@ -2,6 +2,8 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 
+
+
 async function handleLogin() {
 
     const username = document.getElementById("username").value
@@ -45,4 +47,7 @@ async function handleLogin() {
         // window.location.reload();
     }
 }
+
+
+
 
