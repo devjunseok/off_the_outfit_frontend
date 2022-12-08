@@ -14,7 +14,6 @@ async function updatePost() {
     feed_image = document.getElementById("feed_image").files[0];
 
     const formData = new FormData();
-    console.log(tags,content,feed_image)
     
     formData.append("content", content);
     formData.append("tags", tags);
