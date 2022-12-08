@@ -31,6 +31,32 @@ async function getUser(){
 }
 
 
+// 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
+function timeForToday(value) {
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    if (betweenTime < 1) return '방금전';
+    if (betweenTime < 60) {
+        return `${betweenTime}분전`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+        return `${betweenTimeHour}시간전`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+        return `${betweenTimeDay}일전`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)}년전`;
+}
+
+
+
 window.onload = async function getIndex_API(){
   
         //게시글 전체 리스트 조회
@@ -41,25 +67,27 @@ window.onload = async function getIndex_API(){
 
         //게시글 출력 반복문 부분
         var wrap = document.getElementsByClassName('new_feedbox')[0];
+        last_login_time = timeForToday()
 
         feed_list.forEach(feed => {
-            console.log(feed.content)
+            
+            //태그 출력반복문
+            feed.tags.forEach(tags=>{
+                
 
-        wrap.innerHTML += `<div class="FeedBox" style="background-color: #fafafa; border: solid 1px #aaaaaa; box-shadow: 1px 1px 1px 1px #aaaaaa;">
-        <div style="width: 300px; min-width: 300px; height: 400px; min-height: 400px;">
-            <div style="display: flex; flex-direction: row; justify-content: space-between; height: 40px;"><div style="display: flex; flex-direction: row;">
-            <div>
-            <img src=${backEndBaseUrl}/${feed.image} alt="" style="width: 90px; height: 90px; border-radius: 10px; margin: 10px 5px 0 5px;"></img>
-            </div>
-            <div class = "new_feed_user">${feed.user}</div>
-            </div>
-            <div>
-             ${feed.content}
-            </div>`
+            wrap.innerHTML += `
+                <img src=${backEndBaseUrl}/${feed.image} alt="" style="width: 90px; height: 90px; border-radius: 10px; margin: 10px 5px 0 5px;"></img>
+                <div class ="new_feed_user">${feed.user}</div>
+                <div class = "new_feed_content">${feed.content}</div>
+                <div class = "new_feed_unlike_count">싫어요갯수${feed.unlike_count}개</div>
+                <div class = "new_feed_like_count">좋아요갯수${feed.like_count}개</div>
+                <div class = "new_feed_tags">태그: ${tags}</div>
+                <div class = "new_feed_tags">${timeForToday(feed.updated_at)}</div>
+                `
 
-    
+        
 
-
+            })    
         })
 
 }
