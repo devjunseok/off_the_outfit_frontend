@@ -74,3 +74,4 @@ window.onload = async function getIndexDetail_API(){
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
     }
 }
+
