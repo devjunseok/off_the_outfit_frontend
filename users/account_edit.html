@@ -22,7 +22,7 @@
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
                     <div class="edit_name">아이디</div>
-                    <div class="edit_view">아이디</div>
+                    <div class="edit_view_username">아이디</div>
                     <div class="edit_button"></div>
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
@@ -32,38 +32,38 @@
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
                     <div class="edit_name">닉네임</div>
-                    <div class="edit_view">닉네임</div>
-                    <div class="edit_button"><button>닉네임 변경</button></div>
+                    <div class="edit_view_nickname" id="edit_nickname">닉네임</div>
+                    <div class="edit_button"><button id = "edit_nick_button"onclick="handleUpdate_nickname()">닉네임 변경</button></div>
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
                     <div class="edit_name">이메일</div>
-                    <div class="edit_view">email@offtheoutfit.com</div>
-                    <div class="edit_button"><button>이메일 변경</button></div>
+                    <div class="edit_view_email"id="edit_email">email@offtheoutfit.com</div>
+                    <div class="edit_button"><button id = "edit_email_button"onclick="handleUpdate_email()">이메일 변경</button></div>
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
                     <div class="edit_name">생년월일</div>
-                    <div class="edit_view">1900. 00. 00</div>
+                    <div class="edit_view_dob">1900. 00. 00</div>
                     <div class="edit_button"></div>
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
                     <div class="edit_name">신체 사이즈</div>
-                    <div class="edit_view">000cm / 00kg</div>
-                    <div class="edit_button"><button>신체 사이즈 변경</button></div>
+                    <div class="edit_view_body"id="edit_body">000cm / 00kg</div>
+                    <div class="edit_button"><button id = "edit_body_button"onclick="handleUpdate_Body()">신체 사이즈 변경</button></div>
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
                     <div class="edit_name">성별</div>
-                    <div class="edit_view">성별</div>
+                    <div class="edit_view_gender">성별</div>
                     <div class="edit_button"></div>
                 </div>
                 <div class="edit_box_sub horizontal_alignment">
                     <div class="edit_name">주소</div>
-                    <div class="edit_view">서울특별시</div>
-                    <div class="edit_button"><button>주소 변경</button></div>
-                </div>
-            </div>
+                    <div class="edit_view_address"id="edit_address">서울특별시</div>
+                    <div class="edit_button"><button id = "edit_address_button"onclick="handleUpdate_address()">주소 변경</button></div>
+                </div> 
             <div class="bottom_section"></div>
         </div>
     </div>
+</div>
 
     <script src="/users/js/account_edit_api.js"></script>
     <script src="/users/js/account_edit.js"></script>
