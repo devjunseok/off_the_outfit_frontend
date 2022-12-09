@@ -46,12 +46,11 @@ body {
 }
 
 /* _______________________________________________________________  */
-/* 1. index.html */
+/* 1. index.html  -- 인기 게시글 */
 /* _______________________________________________________________  */
 
 .main_body_area {
     width: 1280px;
-    height: 670px;
     margin: 10px;
 }
 
@@ -71,16 +70,10 @@ body {
     height: 40px;
 }
 
-.top_section_menu .ts_menu_list {
-    list-style-type: none;
-    width: 100%;
-}
-
-.ts_menu_list .ts_name {
-    text-align: center;
-    line-height: 40px;
-    margin-left: 10px;
-    float: left;
+.top_section_menu .ts_menu_title {
+    width: 100px;
+    font-size: 15pt;
+    font-weight: bold;
 }
 
 .top_section .main_feed_list_box {
@@ -187,12 +180,95 @@ body {
     font-size: 10pt;
 }
 
-
+/* _______________________________________________________________  */
+/* 1. index.html  -- 전체 게시글 */
+/* _______________________________________________________________  */
 
 .main_body_area .bottom_section {
     width: 1260px;
-    height: 1000px;
+    height: 100%;
     margin: 10px;
+}
+
+.bottom_section .sub_feed_list_box {
+    width: 1260px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.sub_feed_list_box .sub_feed_box {
+    width: 242px;
+    height: 370px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.sub_feed_box .sub_feed_image_box {
+    width: 242px;
+    height: 280px;
+    background-color: #000000;
+}
+
+.sub_feed_box .sub_feed_image_box img {
+    width: 242px;
+    height: 280px;
+    object-fit: cover;
+}
+
+.sub_feed_box .info_top_section {
+    width: 222px;
+    height: 25px;
+    justify-content: space-between;
+
+    margin: 0 10px 0 10px;
+}
+
+.info_top_section .sub_nickname {
+    font-size: 10pt;
+    line-height: 25px;
+}
+
+.info_top_section .sub_like {
+    font-size: 10pt;
+    width: 20px;
+    height: 20px;
     background-color: #c0c0c0;
-    margin: 10px;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 20px;
+}
+
+
+.sub_feed_box .info_middle_section {
+    width: 242px;
+    height: 45px;
+    background-color: #ffffff;
+}
+
+.info_middle_section .sub_content {
+    width: 222px;
+    height: 45px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+}
+
+
+.sub_feed_box .info_bottom_section {
+    width: 222px;
+    height: 20px;
+    justify-content: space-between;
+
+    color: #606060;
+    margin: 0 10px 0 10px;
+    line-height: 20px;
+}
+
+.info_bottom_section .sub_tags {
+    font-size: 9pt;
+}
+
+.info_bottom_section .sub_created_at {
+    font-size: 5pt;
 }

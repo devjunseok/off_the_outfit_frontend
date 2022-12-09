@@ -12,19 +12,39 @@
     <div class="horizontal_alignment">
         <div data-include-path="nav.html"></div>
         <div class="main_body_area">
-            <div class="top_section">
-                <div class="top_section_menu">
-                    <ul class="ts_menu_list">
-                        <li class="ts_name">NEW</li>
-                        <li class="ts_name">BEST</li>
-                    </ul>
-                </div>
+            <div class="top_section_menu">
+                <span id="view_button_01" class="ts_menu_title">BEST</span>
+            </div>
+            <div id="main_view_content_01" class="top_section">
                 <div class="main_feed_list_box horizontal_alignment">
-                   
+                   <!-- BEST 게시글 반복 구간 -->
                 </div>
             </div>
             <div class="section_dividing_line"></div>
-            <div class="bottom_section"></div>
+            <div class="bottom_section">
+                <div class="sub_feed_list_box horizontal_alignment">
+                    <div class="sub_feed_box vertical_alignment">
+                        <div class="sub_feed_image_box">
+                            <img class="feed_image" src="/static/img/default.png"/>
+                        </div>
+                        <div class="sub_feed_info_box">
+                            <div class="info_top_section horizontal_alignment">
+                                <div class="sub_nickname">닉네임</div>
+                                <div class="sub_like">32</div>
+                            </div>
+                            <div class="info_middle_section">
+                                <div class="sub_content">내용 입니다. 이건 내용</div>
+                            </div>
+                            <div class="info_bottom_section horizontal_alignment">
+                                <div class="sub_tags">#태그</div>
+                                <div class="sub_created_at">몇분전</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
         </div>
     </div>
     <div id="weather">
@@ -32,10 +52,11 @@
         <span></span>
     </div>
 
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="/js/index_api.js"></script>
     <script src="/js/index.js"></script>
     <script src="/js/header_api.js"></script>
     <script src="/js/weather_api.js"></script>
-
+    
 </body>
 </html>
