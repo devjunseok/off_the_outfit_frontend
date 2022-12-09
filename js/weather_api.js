@@ -15,12 +15,12 @@ function onGeoOk(position) {
         .then((response) => response.json())
         .then((data) => {
             city.innerText = data.name;
-            weather.innerText = `${data.weather[0].main} / ${Math.round(data.main.temp-273.15)} 도 `;
+            weather.innerText = `${data.weather[0].main} / ${Math.round(data.main.temp-273.15)}°`;
             
         });
 }
 
-// 현제 위치 확인
+// 현재 위치 확인
 
 function onGeoError() {
     alert("Can't find you. No weather for you.");
