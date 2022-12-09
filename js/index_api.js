@@ -82,7 +82,7 @@ window.onload = async function getIndex_API(){
             wrap.innerHTML += `
             <div class="new_feed_box vertical_alignment">
                 <div class="nf_image_box">
-                    <img class="nf_image" src="${backEndBaseUrl}${feed.image}"/>
+                    <img class="nf_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.id}'"/>
                 </div>
                 <div class="nf_info_box horizontal_alignment">
                     <div class="left_section vertical_alignment">
