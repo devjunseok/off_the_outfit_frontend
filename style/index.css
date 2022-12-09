@@ -105,6 +105,7 @@ body {
     width: 410px;
     height: 460px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .new_feed_box .nf_info_box {
