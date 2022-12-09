@@ -188,6 +188,52 @@ body {
 }
 
 
+/* 검색어 랭킹 박스 */
+.rolling_box{
+    position: relative;
+    width: 380px;
+    height: 32px;
+    font-size: 13pt;
+    letter-spacing: -1px;
+}
+
+.rolling_box > .search-word-ranking{
+    position: relative;
+    width: auto;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}        
+.rolling_box ul{
+    list-style: none;
+}
+.rolling_box li{
+    position: absolute;
+    top: -36px;
+    left: 0;
+}
+/* 검색어 랭킹 롤링 부분 */
+.rolling_box li.prev{
+    top: 36px;
+    transition: top 0.5s ease;
+}
+.rolling_box li.current{
+    top: 0;
+    transition: top 0.5s ease;
+}
+.rolling_box li.next{
+    top: -36px;
+}
+.rolling_box a{
+    display: block;
+    display: -webkit-box;
+    text-decoration: none;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient:vertical;
+    overflow: hidden;
+    color: #000;
+}
+
 
 
 /* _______________________________________________________________  */
