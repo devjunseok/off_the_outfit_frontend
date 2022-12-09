@@ -1,10 +1,10 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
-console.log("hi")
 
-async function getIndexFeedDetail(id){
-    const response = await fetch(`${backEndBaseUrl}/communities/${id}/`,{
+// 게시글 상세보기 API
+async function getIndexFeedDetail(feed_id){
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/`,{
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
@@ -17,7 +17,32 @@ async function getIndexFeedDetail(id){
 }
 
 
+// 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
+function timeForToday(value) {
+    const today = new Date();
+    const timeValue = new Date(value);
 
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    if (betweenTime < 1) return '방금전';
+    if (betweenTime < 60) {
+        return `${betweenTime}분전`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+        return `${betweenTimeHour}시간전`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+        return `${betweenTimeDay}일전`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)}년전`;
+}
+
+
+// 게시글 상세보기 출력 부분
 window.onload = async function getIndexDetail_API(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     if (User_payload === undefined ||  User_payload === null){
@@ -25,85 +50,27 @@ window.onload = async function getIndexDetail_API(){
         
         
     } else {
-        const id = location.search.replace("?id=", "")
-        feed = await getIndexFeedDetail(id)
-        comments = feed.comments
-        created_at = timeForToday(feed.created_at)
-        like_List = await getLike()
+        const feed_id = location.search.replace('?id=', '')
+        feed = await getIndexFeedDetail(feed_id)
+        console.log(feed)
 
-        // var wrap = document.getElementsByClassName('FeedDetailBox')[0];
-        // var like_wrap = document.getElementsByClassName('like_box')[0];
-        // var like_count = document.getElementById('like_count')
-        var comment_wrap = document.getElementsByClassName('CommentDetailList')[0];
-        // var feed_nickname = document.getElementsByClassName('FeedDetailUserNickname')[0];
-        var feed_image = document.getElementsByClassName('image')[0];
-        var feed_content = document.getElementsByClassName('FeedDetailFeedContent')[0];
-        var feed_tag = document.getElementsByClassName('FeedDetailFeedCategory')[0];
-        var feed_created_at = document.getElementsByClassName('FeedDetailFeedCreated')[0];
-        var feed_profile_image = document.getElementsByClassName('FeedDetailFeedProfileImage')[0];
-        var feed_update = document.getElementsByClassName('FeedDetailFeedupdate')[0];
-        feed_update.setAttribute("href",`${frontEndBaseUrl}/articles/update.html?id=${feed.pk}`)
+        var feed_image = document.getElementsByClassName('feed_image')[0];
+        var profile_image = document.getElementsByClassName('profile_image')[0];
+        var nickname = document.getElementsByClassName('nickname')[0];
+        var feed_like = document.getElementsByClassName('feed_like')[0];
+        var feed_unlike = document.getElementsByClassName('feed_unlike')[0];
+        var feed_content = document.getElementsByClassName('feed_content')[0];
+        var feed_tags = document.getElementsByClassName('feed_tags')[0];
+        var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
 
-        if(like_List.like.length == 0){
-            // console.log("좋아요 한 유저가 없을때")
-            like_wrap.innerHTML +=`<button style="border: none; background: none; margin-top: 3px;"><img onclick="handleLike()" style="width: 20px; height: 20px; margin: 5px 10px 0 0;" src="../static/icon/heart.png" /></button>`
-            }
-            else{
-                // console.log("좋아요 한 유저가 있을때")
-                counts = 0
-            // 게시물 좋아요 유무를 체크하는 조건문 부분
-                like_List.like.forEach(liker => {
-    
-                    if(liker==User_payload.user_id){
-                    // console.log(`${liker}유저가 이 게시물을 좋아요 중입니다`)
-                    counts = +1
-                }
-                    else{
-                    // console.log(`${liker}유저가 이 게시물을 좋아요 중이 아닙니다`)
-                    }
-                })
-            // 체크한 부분을 토대로 출력해주는 부분
-                if(counts==1){
-                    // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중입니다`)
-                    like_wrap.innerHTML +=`<button style="border: none; background: none; margin-top: 3px;"><img onclick="handleLike()" style="width: 20px; height: 20px; margin: 5px 10px 0 0;" src="../static/icon/heart_bk.png" /></button>`
-                }
-                else{
-                    // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중이 아닙니다`)
-                    like_wrap.innerHTML +=`<button style="border: none; background: none; margin-top: 3px;"><img onclick="handleLike()" style="width: 20px; height: 20px; margin: 5px 10px 0 0;" src="../static/icon/heart.png" /></button>`
-                }
-            }
-            like_count.innerText = `좋아요${like_List.like_count}개`
-
-        // wrap.innerHTML = ``
-
-       // wrap.innerHTML = ``
-    comments.forEach(cmt => {            
-        comment_wrap.innerHTML += `<div style="display: flex; flex-direction: row; justify-content: space-between ;">
-                                    <div style="display: flex; flex-direction: row;">
-                                        <div style="margin-left: 5px; font-weight: bold;">${cmt.user}</div>
-                                        <div style="margin-left: 5px;">${cmt.comment}</div>
-                                    </div>
-                                    <!-- 댓글 수정, 삭제 부분 -->                                        
-                                        <input type="submit" value='수정' onclick="handleCommentUpdate(${cmt.id})" style="background-color: transparent; border: none; margin-right: 10px; color: red;">
-                                        <input type="submit" value='X' onclick="handleCommentDelete(${cmt.id})" style="background-color: transparent; border: none; margin-right: 10px; color: red;">                                        
-                                </div>`            
-    });
-
-        feed_nickname.innerText = `${feed.user}`
-        feed_transfer_image.innerHTML = `<img style="cursor: pointer; width: 1000px; min-width: 1000px; height: 600px; min-height: 600px; object-fit: contain; background-color: black;" src="${backEndBaseUrl}${feed.transfer_image}">`
-        feed_title.innerText = `${feed.title}`
+        // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
+        feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
+        // profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
+        nickname.innerText = `${feed.user}`
+        feed_like.innerText = `${feed.like_count}`
+        feed_unlike.innerText = `${feed.unlike_count}`
         feed_content.innerText = `${feed.content}`
-        feed_category.innerText = `${feed.category}`
-        feed_created_at.innerText = `${created_at}`
-        feed_profile_image.setAttribute("src", `${backEndBaseUrl}/${feed.profile_image}` )
+        feed_tags.innerText = `${feed.tags}`
+        feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
     }
-
-
-
-
-
-
-
-    }
-
-    console.log("hi")
+}
