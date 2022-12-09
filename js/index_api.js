@@ -72,29 +72,36 @@ window.onload = async function getIndex_API(){
 
 
         //게시글 출력 반복문 부분
-        var wrap = document.getElementsByClassName('new_feedbox')[0];
-        last_login_time = timeForToday()
+        var wrap = document.getElementsByClassName('main_feed_list_box')[0];
 
-        feed_list.forEach(feed => {
-            
+        feed_list.slice(0, 3).forEach(feed => {
+            console.log(feed)
             //태그 출력반복문
             feed.tags.forEach(tags=>{
                 
-
             wrap.innerHTML += `
-                <img src=${backEndBaseUrl}/${feed.image} alt="" style="width: 90px; height: 90px; border-radius: 10px; margin: 10px 5px 0 5px;"></img>
-                <div class ="new_feed_user">${feed.user}</div>
-                <div class = "new_feed_content">${feed.content}</div>
-                <div class = "new_feed_unlike_count">싫어요갯수${feed.unlike_count}개</div>
-                <div class = "new_feed_like_count">좋아요갯수${feed.like_count}개</div>
-                <div class = "new_feed_tags">태그: ${tags}</div>
-                <div class = "new_feed_tags">${timeForToday(feed.updated_at)}</div>
-                `
-
-        
-
+            <div class="new_feed_box vertical_alignment">
+                <div class="nf_image_box">
+                    <img class="nf_image" src="${backEndBaseUrl}${feed.image}"/>
+                </div>
+                <div class="nf_info_box horizontal_alignment">
+                    <div class="left_section vertical_alignment">
+                        <div class="nf_nickname">${feed.user}</div>
+                        <div class="nf_content">${feed.content}</div>
+                        <div class="nf_tag">${tags}</div>
+                    </div>
+                    <div class="right_section vertical_alignment">
+                        <div class="like_box horizontal_alignment">
+                            <div class="nf_like">${feed.like_count}</div>
+                            <div class="nf_unlike">${feed.unlike_count}</div>
+                        </div>
+                        <div class="right_section_middle"></div>
+                        <div class="nf_create_at">${timeForToday(feed.updated_at)}</div>
+                    </div>
+                </div>
+            </div>
+            `
             })    
         })
-
 }
 }
