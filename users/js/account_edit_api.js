@@ -36,7 +36,7 @@ async function updateNickname(value){
     const response_json = await response.json()
     if (response.status == 200){
         alert(response_json["message"])
-        window.location.replace(`${frontEndBaseUrl}/`);
+        window.location.reload();
     }else {
         alert(response_json["detail"])
     }   
@@ -96,7 +96,7 @@ async function updateAddress(value){
     const response_json = await response.json()
     if (response.status == 200){
         alert(response_json["message"])
-            window.location.replace(`${frontEndBaseUrl}/`);
+            window.location.reload();
     }else {
         alert(response_json["detail"])
     
@@ -159,7 +159,7 @@ async function updateBody(value){
     const response_json = await response.json()
     if (response.status == 200){
         alert(response_json["message"])
-            window.location.replace(`${frontEndBaseUrl}/`);
+            window.location.reload();
     }else {
         alert(response_json["detail"]) 
     }
