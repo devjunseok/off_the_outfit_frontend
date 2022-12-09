@@ -74,7 +74,7 @@ window.onload = async function getIndexDetail_API(){
         feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
         // 업데이트 html로 id값 같이 보내기
-        feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed.pk}`)
+        feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
         
     }
 }
