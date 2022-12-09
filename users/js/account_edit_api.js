@@ -191,11 +191,10 @@ async function updateAddress(value){
         }
 
         async function updateBody(value){
+            
     
             let User_payload = JSON.parse(localStorage.getItem('payload'))
         
-            const height = value
-            const weight = value
             const response = await fetch(`${backEndBaseUrl}/users/`, {
                 headers: {
                 'content-type': 'application/json',
@@ -203,11 +202,10 @@ async function updateAddress(value){
                 },
                 method: 'PUT',
                 body: JSON.stringify({
-        
-                    "height":height,
-                    "weight":weight
-                
-            
+
+                    "height":value.height,
+                    "weight":value.weight
+
                 })
         
             })
@@ -225,49 +223,66 @@ async function updateAddress(value){
                 return response_json
                 }
 
-                function handleUpdate_Body(){
+function handleUpdate_Body(){
 
-                    const edit_body = document.getElementById("edit_body")
-                
-                    const updateInput2 = document.createElement("input",[ edit_body]);
-                
-                    edit_body.style.visibility = "hidden"
-                
-                    updateInput2.setAttribute("id","update-input2")
-                
-                    updateInput2.value = edit_body.innerHTML
-                
-                
-                    edit_body.parentNode.insertBefore(updateInput2, edit_body)
-                
-                    const updateBodyButton = document.getElementById("edit_body_button")
-                
-                
-                    updateBodyButton.setAttribute("onclick", "handleUpdateConfirm_Body()")
-                
-                }
-                
-                
-                
-                
-                
-                function handleUpdateConfirm_Body(){
-                
-                    const updateInput2 =document.getElementById('update-input2')
-                
-                    const edit_body = document.getElementById("edit_body")
-                
-                    updateInput2.value
-                
-                    edit_body.style.visibility = "visible"
-                
-                    const updateBodyButton = document.getElementById("edit_body_button")
-                
-                    updateBodyButton.setAttribute("onclick", "handleUpdate_Body()")
-                
-                    updateInput2.remove()
-                    
-                }
+    const edit_body_height = document.getElementById("edit_body_height")
+    const edit_body_weight = document.getElementById("edit_body_weight")
+
+    const updateInputHeight = document.createElement("input",[edit_body_height]);
+    const updateInputWeight = document.createElement("input",[edit_body_weight]);
+
+    edit_body_height.style.visibility = "hidden"
+    edit_body_weight.style.visibility = "hidden"
+
+    updateInputHeight.setAttribute("id","update-InputHeight")
+    updateInputWeight.setAttribute("id","update-InputWeight")
+
+    updateInputHeight.value = edit_body_height.innerHTML
+    updateInputHeight.value = edit_body_weight.innerHTML
+
+
+    edit_body_height.parentNode.insertBefore(updateInputHeight, edit_body_height)
+    edit_body_weight.parentNode.insertBefore(updateInputWeight, edit_body_weight)
+
+    const updateBodyButton = document.getElementById("edit_body_button")
+
+
+    updateBodyButton.setAttribute("onclick", "handleUpdateConfirm_Body()")
+
+}
+
+
+
+
+
+function handleUpdateConfirm_Body(){
+
+    const updateInputHeight =document.getElementById('update-InputHeight')
+    const updateInputWeight =document.getElementById('update-InputWeight')
+
+    const edit_body_height = document.getElementById("edit_body_height")
+    const edit_body_weight = document.getElementById("edit_body_weight")
+    
+    values = {
+        "height":updateInputHeight.value,
+        "weight":updateInputWeight.value
+    }
+
+    updateBody(values)
+    
+
+
+    edit_body_height.style.visibility = "visible"
+    edit_body_weight.style.visibility = "visible"
+
+    const updateBodyButton = document.getElementById("edit_body_button")
+
+    updateBodyButton.setAttribute("onclick", "handleUpdate_Body()")
+
+    updateInputHeight.remove()
+    updateInputWeight.remove()
+    
+}
                 
 
 
@@ -281,7 +296,8 @@ async function updateAddress(value){
         var edit_view_username = document.getElementsByClassName('edit_view_username')[0];
         var edit_view_nickname = document.getElementsByClassName('edit_view_nickname')[0];
         var edit_view_dob = document.getElementsByClassName('edit_view_dob')[0];
-        var edit_view_body = document.getElementsByClassName('edit_view_body')[0];
+        var edit_view_body_height = document.getElementsByClassName('edit_view_body_height')[0];
+        var edit_view_body_weight = document.getElementsByClassName('edit_view_body_weight')[0];
         var edit_view_gender = document.getElementsByClassName('edit_view_gender')[0];
         var edit_view_address = document.getElementsByClassName('edit_view_address')[0];
         var edit_view_email = document.getElementsByClassName('edit_view_email')[0];
@@ -292,7 +308,8 @@ async function updateAddress(value){
         edit_view_username.innerText = `${profile_list.username}`
         edit_view_nickname.innerText = `${profile_list.nickname}`
         edit_view_gender.innerText = `${profile_list.gender}`
-        edit_view_body.innerText =`${profile_list.height}cm / ${profile_list.weight}kg`
+        edit_view_body_height.innerText =`${profile_list.height}cm `
+        edit_view_body_weight.innerText =` ${profile_list.weight}kg`
         edit_view_address.innerText = `${profile_list.address}`
 
 
