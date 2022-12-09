@@ -9,6 +9,7 @@ async function handleLogout() {
 }
 
 
+// 유저 네임 보이기
 window.onload =()=>  {
     const payload = localStorage.getItem("payload");
     const payload_parse =JSON.parse(payload)
