@@ -62,6 +62,7 @@ window.onload = async function getIndexDetail_API(){
         var feed_content = document.getElementsByClassName('feed_content')[0];
         var feed_tags = document.getElementsByClassName('feed_tags')[0];
         var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
+        var feed_update_go = document.getElementsByClassName('feed_update_go')[0];
 
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
@@ -72,5 +73,8 @@ window.onload = async function getIndexDetail_API(){
         feed_content.innerText = `${feed.content}`
         feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
+        // 업데이트 html로 id값 같이 보내기
+        feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed.pk}`)
+        
     }
 }
