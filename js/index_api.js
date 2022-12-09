@@ -69,39 +69,70 @@ window.onload = async function getIndex_API(){
         feed_list = await getIndexFeedList()
         console.log(feed_list)
         
+        // 인기 게시글
+        best_feed_list = feed_list.slice(0, 3)
 
+        //인기 게시글 출력 반복문 부분
+        var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];
 
-        //게시글 출력 반복문 부분
-        var wrap = document.getElementsByClassName('main_feed_list_box')[0];
-
-        feed_list.slice(0, 3).forEach(feed => {
-            console.log(feed)
-            //태그 출력반복문
-            feed.tags.forEach(tags=>{
+        best_feed_list.forEach(best_feed => {
+            //태그 출력 반복문
+            best_feed.tags.forEach(tag => {
                 
-            wrap.innerHTML += `
-            <div class="new_feed_box vertical_alignment">
-                <div class="nf_image_box">
-                    <img class="nf_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.id}'"/>
-                </div>
-                <div class="nf_info_box horizontal_alignment">
-                    <div class="left_section vertical_alignment">
-                        <div class="nf_nickname">${feed.user}</div>
-                        <div class="nf_content">${feed.content}</div>
-                        <div class="nf_tag">${tags}</div>
+                best_wrap.innerHTML += `
+                <div class="new_feed_box vertical_alignment">
+                    <div class="nf_image_box">
+                        <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.id}'"/>
                     </div>
-                    <div class="right_section vertical_alignment">
-                        <div class="like_box horizontal_alignment">
-                            <div class="nf_like">${feed.like_count}</div>
-                            <div class="nf_unlike">${feed.unlike_count}</div>
+                    <div class="nf_info_box horizontal_alignment">
+                        <div class="left_section vertical_alignment">
+                            <div class="nf_nickname">${best_feed.user}</div>
+                            <div class="nf_content">${best_feed.content}</div>
+                            <div class="nf_tag">${tag}</div>
                         </div>
-                        <div class="right_section_middle"></div>
-                        <div class="nf_create_at">${timeForToday(feed.updated_at)}</div>
+                        <div class="right_section vertical_alignment">
+                            <div class="like_box horizontal_alignment">
+                                <div class="nf_like">${best_feed.like_count}</div>
+                                <div class="nf_unlike">${best_feed.unlike_count}</div>
+                            </div>
+                            <div class="right_section_middle"></div>
+                            <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `
+                `
             })    
         })
+
+        // 전체 게시글 출력 반복문 부분
+        wrap = document.getElementsByClassName('sub_feed_list_box')[0];
+
+        feed_list.forEach(feed => {
+            // 태그 출력 반복문
+            feed.tags.forEach(tag => {
+                
+                wrap.innerHTML += `
+                <div class="sub_feed_box vertical_alignment">
+                    <div class="sub_feed_image_box">
+                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}"/>
+                    </div>
+                    <div class="sub_feed_info_box">
+                        <div class="info_top_section horizontal_alignment">
+                            <div class="sub_nickname">${feed.user}</div>
+                            <div class="sub_like">${feed.like_count}</div>
+                        </div>
+                        <div class="info_middle_section">
+                            <div class="sub_content">${feed.content}</div>
+                        </div>
+                        <div class="info_bottom_section horizontal_alignment">
+                            <div class="sub_tags">${tag}</div>
+                            <div class="sub_created_at">${timeForToday(feed.updated_at)}</div>
+                        </div>
+                    </div>
+                </div>
+                `
+            })
+        })
+        
 }
 }
