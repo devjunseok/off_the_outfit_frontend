@@ -1,0 +1,198 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-09 ]
+________________________________________________________________
+
+= table of Css
+
+1. /communities/detail.html
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+/* _______________________________________________________________  */
+/* 1. detail.html */
+/* _______________________________________________________________  */
+
+.main_body_area {
+    width: 1220px;
+    height: 840px;
+    margin: 10px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+.main_body_area .top_section {
+    width: 1200px;
+    height: 800px;
+    background-color: #ffffff;
+    margin: 10px;
+}
+
+.top_section .info_bar {
+    background-color: #ffffff;
+    width: 1200px;
+    height: 60px;
+}
+
+.top_section .detail_area {
+    background-color: #ffffff;
+    width: 1200px;
+    height: 740px;
+}
+
+.detail_area .ua_left_section {
+    background-color: #ffffff;
+    width: 740px;
+    height: 740px;
+}
+
+.ua_left_section .feed_image {
+    width: 740px;
+    height: 740px;
+    border-style: none;
+    object-fit: cover;
+    background-color: black;
+}
+
+
+.detail_area .ua_right_section {
+    width: 460px;
+    height: 740px;
+}
+
+.ua_right_section .feed_info_box {
+    width: 460px;
+    height: 740px;
+
+}
+
+.feed_info_box .info_top_section {
+    width: 460px;
+    height: 220px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+.info_top_section .user_profile_info {
+
+    width: 460px;
+    height: 40px;
+}
+
+.user_profile_info .profile_image {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+.user_profile_info .nickname {
+    font-size: 18pt;
+    color: #606060;
+    margin-top: 5px;
+}
+
+.info_top_section .like_box {
+    height: 30px;
+    justify-content: right;
+}
+
+.like_box .feed_like {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    color: #ffffff;
+    background-color: #c0c0c0;
+    text-align: center;
+    line-height: 30px;
+    margin: 5px;
+    font-size: 10pt;
+}
+
+.like_box .feed_unlike {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    color: #ffffff;
+    background-color: #c0c0c0;
+    text-align: center;
+    line-height: 30px;
+    margin: 5px;
+    font-size: 10pt;
+}
+
+.info_top_section .feed_content {
+    background-color: #ffffff;
+    width: 450px;
+    height: 130px;
+    padding: 5px;
+}
+
+.info_top_section .feed_tags {
+    background-color: #ffffff;
+    width: 380px;
+    height: 30px;
+    margin: 5px;
+}
+
+.info_top_section .feed_create_at {
+    width: 80px;
+    background-color: #ffffff;
+    height: 20px;
+    line-height: 20px;
+    color: #606060;
+    text-align: right;
+    margin: 5px;
+    font-size: 10pt;
+}
+
+.feed_info_box .comment_middle_section {
+    width: 460px;
+    height: 500px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+.feed_info_box .comment_bottom_section {
+
+    width: 460px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
