@@ -7,3 +7,5 @@ async function handleLogout() {
     alert("로그아웃 되었습니다");
     window.location.replace(`${frontEndBaseUrl}/users/login.html`);
 }
+
+
