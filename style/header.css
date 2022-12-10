@@ -94,6 +94,7 @@ body {
 
 .header-member {
     width: 100vw;
+    min-width: 1620px;
     height: 40px;
     background-color: black;
 }
@@ -172,7 +173,7 @@ body {
 .left_area {
     background-color: #ffffff;
     width: 300px;
-    height: 180vh;
+    height: 100vh;
     border-right: solid 2px #c0c0c0;
     padding: 10px;
 }
