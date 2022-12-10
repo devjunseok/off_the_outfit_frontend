@@ -82,7 +82,7 @@ window.onload = async function getIndex_API(){
   
         // 전체 상품 조회
         product_list = await getIndexProductList()
-        product_list = product_list.slice(0, 10)
+        product_list = product_list.slice(0, 15)
         console.log(product_list)
 
         //인기 게시글 출력 반복문 부분
