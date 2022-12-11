@@ -85,7 +85,10 @@ window.onload = async function getIndex_API(){
 
         // 인기 게시글
         best_feed_list = await getIndexFeedList()
-        best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
+        if (best_feed_list.length > 3 ) {
+            best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
+        }
+        
 
         //인기 게시글 출력 반복문 부분
         var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];

@@ -2,6 +2,20 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 
+// 인기 검색어 랭킹 조회
+async function getHeaderSearchWordRanking(){
+    const response = await fetch(`${backEndBaseUrl}/communities/search/word/ranking/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
 
 //게시글 생성
 async function createPost() {

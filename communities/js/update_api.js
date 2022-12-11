@@ -15,6 +15,22 @@ async function getIndexFeedDetail(feed_id){
     return response_json
 }
 
+
+// 인기 검색어 랭킹 조회
+async function getHeaderSearchWordRanking(){
+    const response = await fetch(`${backEndBaseUrl}/communities/search/word/ranking/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
+
 //  게시글 수정
 async function updatePost() {
 
