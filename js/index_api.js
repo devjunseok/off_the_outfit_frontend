@@ -71,7 +71,6 @@ async function getHeaderSearchWordRanking(){
 }
 
 
-
 window.onload = async function getIndex_API(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     if (User_payload === undefined ||  User_payload === null){
@@ -181,5 +180,24 @@ window.onload = async function getIndex_API(){
         word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
     }
     
+
+    // NAV 브랜드 리스트 조회
+    brand_list = await getNavBrandList()
+
+    alphabet = location.search.replace('?key=', '')
+    if(alphabet.length == 0){
+        brand_list = brand_list.slice(0, 20)
+    }
+    var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
+    brand_list.forEach(br => {
+        if(br.brand_name_en.startsWith(alphabet, 1)){
+        brand_wrap.innerHTML += `
+        <div class="brand_box">
+            <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+            <div class="brand_name_kr">${br.brand_name_kr}</div>
+        </div>
+        `
+        }
+    })
 }
 }
