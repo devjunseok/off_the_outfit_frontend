@@ -4,9 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>팔로우</title>
+    <title>팔로우 목록</title>
+    <link rel="stylesheet" href="/users/style/follow.css">
 </head>
 <body>
-    
-</body>
+    <div data-include-path="/users/header.html"></div>
+    <div class="horizontal_alignment">
+        <div data-include-path="/users/nav.html"></div>
+        <div class="main_body_area">
+            <div class="top_section">
+                <div class="basic_follow_info">팔로우 목록</div>
+                <div class="info_line"></div>
+                <div class="follow_list">
+                    <div class="user_box_main horizontal_alignment">
+                        <div class="left_info_section horizontal_alignment">
+                            <div class="user_profile_image"><img class="image_view" src="/static/img/default.png"></div>
+                            <div class="user_profile_nickname">닉네임</div>
+                        </div>
+                        <div class="middle_info_section horizontal_alignment">
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title">팔로우</div>
+                                <div class="summary_value">43</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">팔로워</div>
+                                <div class="summary_value">25</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">피드</div>
+                                <div class="summary_value">34</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">옷장</div>
+                                <div class="summary_value">65</div>
+                            </div>
+                        </div>
+                        <div class="right_info_section vertical_alignment">
+                            <div class="follow_button"><button>팔로우</button></div>
+                            <div class="feed_list_button"><button>피드 보기</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom_section"></div>
+        </div>
+    </div>
+
+
+    <script src="/users/js/follow_api.js"></script>
+    <script src="/users/js/follow.js"></script>
+    <script src="/users/js/header.js"></script>
 </html>
