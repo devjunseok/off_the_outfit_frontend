@@ -94,7 +94,7 @@ window.onload = async function getIndex_API(){
             product_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${prod.product_image}" alt="">
+                    <img src="${prod.product_image}">
                 </div>
                 <div class="info_top_section horizontal_alignment">
                     <div class="product_brand">${prod.brand}</div>
