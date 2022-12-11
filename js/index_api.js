@@ -129,7 +129,7 @@ window.onload = async function getIndex_API(){
                 wrap.innerHTML += `
                 <div class="sub_feed_box vertical_alignment">
                     <div class="sub_feed_image_box">
-                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}"/>
+                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.id}'"/>
                     </div>
                     <div class="sub_feed_info_box">
                         <div class="info_top_section horizontal_alignment">

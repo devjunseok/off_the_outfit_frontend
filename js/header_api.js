@@ -9,6 +9,7 @@ async function handleLogout() {
     window.location.replace(`${frontEndBaseUrl}/users/login.html`);
 }
 
+
 // 검색 버튼
 async function searchButton(){
     const search_id = document.getElementById("search").value

@@ -260,6 +260,7 @@ body {
 .left_area .mypage_list li {
     margin-top: 10px;
     font-size: 10pt;
+    cursor: pointer;
 
 }
 
