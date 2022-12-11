@@ -67,7 +67,7 @@ window.onload = async function getUserInfo_API(){
                 </div>
             </div>
             <div class="right_info_section vertical_alignment">
-                <div class="follow_button"><button>팔로우</button></div>
+                <div class="follow_button"><button >팔로우</button></div>
                 <div class="feed_list_button"><button>피드 보기</button></div>
             </div>
         </div>
