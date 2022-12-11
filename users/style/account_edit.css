@@ -151,9 +151,87 @@ body {
     padding: 5px 15px 5px 15px;
     background-color: #ffffff;
     border: solid 1px #c0c0c0;
+    position: absolute;
+    margin-top: 15px;
 }
 
 .edit_box_sub .edit_button button:hover {
     background-color: #000000;
     color: #ffffff;
+}
+
+.edit_box_sub .edit_view_username {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .edit_view_nickname {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .edit_view_email {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .edit_view_dob {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .edit_view_body {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .edit_view_gender {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .edit_view_address {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_view_body .edit_view_body_line {
+    margin: 0 5px 0 5px;
+}
+
+.edit_box_main input {
+    border-style: none;
+}
+
+.edit_box_sub input {
+    border-style: none;
+    width: 380px;
+    margin-left: 16px;
+}
+
+.edit_view_body input {
+    border-style: none;
+    width: 80px;
+    margin-left: 20px;
 }

@@ -2,8 +2,8 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 게시글 전체 리스트 조회
-async function getIndexFeedList(){
-    const response = await fetch(`${backEndBaseUrl}/communities/`,{
+async function getIndexProductList(){
+    const response = await fetch(`${backEndBaseUrl}/products/product/`,{
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
@@ -80,74 +80,38 @@ window.onload = async function getIndex_API(){
         
     } else {
   
-        //게시글 전체 리스트 조회
-        feed_list = await getIndexFeedList()
-
-        // 인기 게시글
-        best_feed_list = await getIndexFeedList()
-        best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
+        // 전체 상품 조회
+        product_list = await getIndexProductList()
+        product_list = product_list.slice(0, 15)
+        console.log(product_list)
 
         //인기 게시글 출력 반복문 부분
-        var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];
 
-        best_feed_list.forEach(best_feed => {
-            //태그 출력 반복문
-            best_feed.tags.forEach(tag => {
-                
-                best_wrap.innerHTML += `
-                <div class="new_feed_box vertical_alignment">
-                    <div class="nf_image_box">
-                        <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.id}'"/>
-                    </div>
-                    <div class="nf_info_box horizontal_alignment">
-                        <div class="left_section vertical_alignment">
-                            <div class="nf_nickname">${best_feed.user}</div>
-                            <div class="nf_content">${best_feed.content}</div>
-                            <div class="nf_tag">${tag}</div>
-                        </div>
-                        <div class="right_section vertical_alignment">
-                            <div class="like_box horizontal_alignment">
-                                <div class="nf_like">${best_feed.like_count}</div>
-                                <div class="nf_unlike">${best_feed.unlike_count}</div>
-                            </div>
-                            <div class="right_section_middle"></div>
-                            <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
-                        </div>
-                    </div>
+
+        // 전체 상품 반복 출력
+        var product_wrap = document.getElementsByClassName('product_list_box')[0];
+        product_list.forEach(prod => {
+            product_wrap.innerHTML += `
+            <div class="product_box">
+                <div class="product_image_box">
+                    <img src="${prod.product_image}" alt="">
                 </div>
-                `
-            })    
-        })
-
-        // 전체 게시글 출력 반복문 부분
-        wrap = document.getElementsByClassName('sub_feed_list_box')[0];
-
-        feed_list.forEach(feed => {
-            // 태그 출력 반복문
-            feed.tags.forEach(tag => {
-                
-                wrap.innerHTML += `
-                <div class="sub_feed_box vertical_alignment">
-                    <div class="sub_feed_image_box">
-                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}"/>
-                    </div>
-                    <div class="sub_feed_info_box">
-                        <div class="info_top_section horizontal_alignment">
-                            <div class="sub_nickname">${feed.user}</div>
-                            <div class="sub_like">${feed.like_count}</div>
-                        </div>
-                        <div class="info_middle_section">
-                            <div class="sub_content">${feed.content}</div>
-                        </div>
-                        <div class="info_bottom_section horizontal_alignment">
-                            <div class="sub_tags">${tag}</div>
-                            <div class="sub_created_at">${timeForToday(feed.updated_at)}</div>
-                        </div>
-                    </div>
+                <div class="info_top_section horizontal_alignment">
+                    <div class="product_brand">${prod.brand}</div>
+                    <div class="product_review">review:${prod.review_count}</div>
                 </div>
-                `
-            })
-        })
+                <div class="info_middle_section">
+                    <div class="product_name">${prod.product_name}</div>
+                    <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                </div>
+                <div class="info_bottom_section horizontal_alignment">
+                    <div class="product_category">하의 > ${prod.category}</div>
+                    <div class="product_number">No.${prod.product_number}</div>
+                </div>
+            </div>
+            `
+        });
+
 
 
     // 검색어 랭킹 조회

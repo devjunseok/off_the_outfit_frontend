@@ -4,12 +4,12 @@ ________________________________________________________________
 project : off_the_outfit website for last team sparta
 
 Edited by gicheol. ( hanmari.code@gmail.com )
-[ Last Edited 2022-12-08 ]
+[ Last Edited 2022-12-11 ]
 ________________________________________________________________
 
 = table of Css
 
-1. index.html
+1. /products/index.html
 
 = color code
 
@@ -46,7 +46,7 @@ body {
 }
 
 /* _______________________________________________________________  */
-/* 1. index.html  -- 인기 게시글 */
+/* 1. index.html */
 /* _______________________________________________________________  */
 
 .main_body_area {
@@ -193,32 +193,32 @@ body {
     margin: 10px;
 }
 
-.bottom_section .sub_feed_list_box {
+.bottom_section .product_list_box {
     width: 1260px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
 
-.sub_feed_list_box .sub_feed_box {
+.product_list_box .product_box {
     width: 242px;
     height: 370px;
     margin-right: 10px;
     margin-bottom: 20px;
 }
 
-.sub_feed_box .sub_feed_image_box {
+.product_box .product_image_box {
     width: 242px;
     height: 280px;
     background-color: #000000;
 }
 
-.sub_feed_box .sub_feed_image_box img {
+.product_box .product_image_box img {
     width: 242px;
     height: 280px;
     object-fit: cover;
 }
 
-.sub_feed_box .info_top_section {
+.product_box .info_top_section {
     width: 222px;
     height: 25px;
     justify-content: space-between;
@@ -226,33 +226,37 @@ body {
     margin: 0 10px 0 10px;
 }
 
-.info_top_section .sub_nickname {
+.info_top_section .product_brand {
     font-size: 10pt;
     line-height: 25px;
 }
 
-.info_top_section .sub_like {
+.info_top_section .product_review {
     font-size: 10pt;
-    width: 20px;
-    height: 20px;
-    background-color: #c0c0c0;
-    color: #ffffff;
-    border-radius: 10px;
     margin-top: 5px;
-    text-align: center;
     line-height: 20px;
 }
 
 
-.sub_feed_box .info_middle_section {
+.product_box .info_middle_section {
     width: 242px;
     height: 45px;
     background-color: #ffffff;
 }
 
-.info_middle_section .sub_content {
+.info_middle_section .product_name {
     width: 222px;
-    height: 45px;
+    height: 25px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info_middle_section .product_price {
+    width: 222px;
+    height: 20px;
     font-size: 10pt;
     margin: 0 10px 0 10px;
     white-space: nowrap;
@@ -261,7 +265,7 @@ body {
 }
 
 
-.sub_feed_box .info_bottom_section {
+.product_box .info_bottom_section {
     width: 222px;
     height: 20px;
     justify-content: space-between;
@@ -271,10 +275,10 @@ body {
     line-height: 20px;
 }
 
-.info_bottom_section .sub_tags {
+.info_bottom_section .product_category {
     font-size: 9pt;
 }
 
-.info_bottom_section .sub_created_at {
+.info_bottom_section .product_number {
     font-size: 5pt;
 }
