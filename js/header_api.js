@@ -1,5 +1,6 @@
+// /header.html
 
-
+// 로그아웃 버튼
 async function handleLogout() {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
@@ -9,3 +10,8 @@ async function handleLogout() {
 }
 
 
+// 검색 버튼
+async function searchButton(){
+    const search_id = document.getElementById("search").value
+    location.href = `${frontEndBaseUrl}/communities/search.html?search=${search_id}`
+}
