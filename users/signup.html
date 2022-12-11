@@ -50,14 +50,22 @@
             </div>
             <hr class="dividing_bottom_line">
             <div class="signup_button_box">
+
+                <button type="submit" class="signup_button" onclick="showPopup()">약관 읽기</button>
                 <select class="signup_button" name="cars" id="term_agree">
-                    <option value="">약관 동의(선택필수)</option>
+        
+                    <option type="button" value="팝업창 호출" onclick="showPopup();">약관 동의(필수)</option>
                     <option value="True">동의</option>
-                    <option value="">비동의</option>
+                    
+
+                
+                    
                 </select>
+                
                 <p></p>
                 <p></p>
                 <button type="submit" class="signup_button" onclick="handleSignup()">회원가입</button>
+                
             </div>
         </div>
     </div>

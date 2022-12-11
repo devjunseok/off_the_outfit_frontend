@@ -64,7 +64,18 @@ async function handleSignup() {
 }
 
 
+function showPopup(){
+    var options = 'top=300, left=500, width=700, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open("test.html","팝업 테스트",options);
+}
 
 
+function WinClose()
+
+ {
+
+   window.open('','_self').close();     
+
+}
 
 
