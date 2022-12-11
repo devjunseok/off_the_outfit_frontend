@@ -1,0 +1,149 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-11 ]
+________________________________________________________________
+
+= Users table of Css
+
+1. users/follow.html
+
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+/* _______________________________________________________________  */
+/* 1. follow.html */
+/* _______________________________________________________________  */
+
+.main_body_area .top_section {
+    background-color: #ffffff;
+    width: 1000px;
+    margin-top: 10px;
+}
+
+.top_section .basic_follow_info {
+    font-size: 14pt;
+    font-weight: 600;
+}
+
+.top_section .info_line {
+    border-bottom: solid 3px black;
+    margin-top: 3px;
+}
+
+
+/* 팔로우 목록 */
+.top_section .user_box_main {
+    background-color: #ffffff;
+    width: 1000px;
+    height: 100px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+
+/* 팔로우 목록 유저 정보 */
+.user_box_main .left_info_section {
+    width: 400px;
+}
+
+.user_box_main .user_profile_image {
+    text-align: left;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.user_profile_image .image_view {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    margin: 15px 0 15px 0;
+}
+
+.left_info_section .user_profile_nickname {
+    font-size: 15pt;
+    margin: auto 0 auto 0;
+}
+
+
+/* 팔로우 목록 활동 요약 부분 */
+.user_box_main .middle_info_section {
+    width: 400px;
+    height: 100px;
+    text-align: center;
+}
+
+.middle_info_section .summary_box {
+    margin: 0 5px 0 5px;
+    width: 60px;
+    margin: auto 0 auto 0;
+    text-align: center;
+}
+
+.summary_box .summary_title {
+    font-size: 12pt;
+}
+
+.summary_box .summary_value {
+    font-size: 10pt;
+}
+
+
+
+/* 팔로우 목록 버튼 부분 */
+.user_box_main .right_info_section {
+    width: 200px;
+    text-align: left;
+    margin: auto 0 auto 0;
+}
+
+.user_box_main .right_info_section button {
+    border-radius: 0px;
+    border-style: none;
+    margin: 5px 0 5px 0;
+    padding: 5px 15px 5px 15px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+}
+
+.user_box_main .right_info_section button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}

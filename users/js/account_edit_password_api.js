@@ -2,11 +2,11 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 
-// 본인 정보 제외 유저 조회
-async function getUserInfo(){
+// 회원 정보 조회 API
+async function getUserDetailInfo(){
 
     let User_payload = JSON.parse(localStorage.getItem('payload'))
-    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followings/`,{
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`,{
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
@@ -15,6 +15,66 @@ async function getUserInfo(){
     })
     response_json = await response.json()
     return response_json
+}
+
+
+// 닉네임 변경 API
+async function updateNickname(value){
+    
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const nickname = value
+    const response = await fetch(`${backEndBaseUrl}/users/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+            "nickname":nickname
+        })
+    })
+    const response_json = await response.json()
+    if (response.status == 200){
+        alert(response_json["message"])
+        window.location.reload();
+    }else {
+        alert(response_json["detail"])
+    }   
+return response_json
+}
+
+// 닉네임 변경 버튼 01
+function handleUpdate_nickname() {
+
+    const edit_nickname = document.getElementById("edit_nickname")
+    const updateInputNickname = document.createElement("input",[edit_nickname]);
+    
+    edit_nickname.style.visibility = "hidden"
+    edit_nickname.style.width = "0"
+    updateInputNickname.setAttribute("id","update-InputNickname")
+    updateInputNickname.value = edit_nickname.innerHTML
+    edit_nickname.parentNode.insertBefore(updateInputNickname, edit_nickname)
+
+    const updateNickButton = document.getElementById("edit_nick_button")
+
+    updateNickButton.setAttribute("onclick", "handleUpdateConfirm_nick()")
+}
+
+// 닉네임 변경 버튼 02
+function handleUpdateConfirm_nick(){
+
+    const updateInputNickname = document.getElementById('update-InputNickname')
+    const edit_nickname = document.getElementById("edit_nickname")
+    
+    updateNickname(updateInputNickname.value)
+    
+    edit_nickname.style.visibility = "visible"
+    edit_nickname.style.width = "400px"
+
+    const updateNickButton = document.getElementById("edit_nick_button")
+ 
+    updateNickButton.setAttribute("onclick", "handleUpdate_nickname()")
+    updateInputNickname.remove()
 }
 
 
@@ -34,49 +94,9 @@ async function getHeaderSearchWordRanking(){
                 
 
 // 회원 정보 출력 API
-window.onload = async function getUserInfo_API(){
-    //회원정보 리스트 조회
-    profile_list = await getUserInfo()
-    console.log(profile_list)
-    //회원정보 출력 반복문 부분
-    var follow_wrap = document.getElementsByClassName('follow_list')[0];
+window.onload = async function getProfile_API(){
 
-    profile_list.forEach(user => {
-        follow_wrap.innerHTML += `
-        <div class="user_box_main horizontal_alignment">
-            <div class="left_info_section horizontal_alignment">
-                <div class="user_profile_image"><img class="image_view" src="${backEndBaseUrl}${user.profile_image}"></div>
-                <div class="user_profile_nickname">${user.nickname}</div>
-            </div>
-            <div class="middle_info_section horizontal_alignment">
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title">팔로우</div>
-                    <div class="summary_value">${user.followings_count}</div>
-                </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">팔로워</div>
-                    <div class="summary_value">${user.followers_count}</div>
-                </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">피드</div>
-                    <div class="summary_value">${user.feeds_count}</div>
-                </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">옷장</div>
-                    <div class="summary_value">${user.closet_set_count}</div>
-                </div>
-            </div>
-            <div class="right_info_section vertical_alignment">
-                <div class="follow_button"><button>팔로우</button></div>
-                <div class="feed_list_button"><button>피드 보기</button></div>
-            </div>
-        </div>
-        `
-    })
-
-
-
-
+    
 
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()

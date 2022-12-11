@@ -6,7 +6,7 @@ const backEndBaseUrl = "http://127.0.0.1:8000"
 async function getUserInfo(){
 
     let User_payload = JSON.parse(localStorage.getItem('payload'))
-    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followings/`,{
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followers/`,{
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
