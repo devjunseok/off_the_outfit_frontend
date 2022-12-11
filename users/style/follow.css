@@ -71,7 +71,7 @@ body {
 .top_section .user_box_main {
     background-color: #ffffff;
     width: 1000px;
-    height: 150px;
+    height: 100px;
     border-bottom: solid 2px #c0c0c0;
 }
 
@@ -83,18 +83,18 @@ body {
 
 .user_box_main .user_profile_image {
     text-align: left;
-    line-height: 150px;
-    width: 150px;
-    height: 150px;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
     margin-left: 20px;
     font-weight: bold;
 }
 
 .user_profile_image .image_view {
-    width: 90px;
-    height: 90px;
-    border-radius: 45px;
-    margin: 30px 0 30px 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    margin: 15px 0 15px 0;
 }
 
 .left_info_section .user_profile_nickname {
@@ -106,7 +106,7 @@ body {
 /* 팔로우 목록 활동 요약 부분 */
 .user_box_main .middle_info_section {
     width: 400px;
-    height: 150px;
+    height: 100px;
     text-align: center;
 }
 
