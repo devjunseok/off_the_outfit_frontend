@@ -193,6 +193,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+.like_box .like_button img {
+
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    
+}
 
 
 
