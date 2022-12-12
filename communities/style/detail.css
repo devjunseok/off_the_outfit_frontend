@@ -207,6 +207,20 @@ body {
     margin: 10px;
 }
 
+.comment_middle_section .recomment_box {
+    width: 460px;
+    justify-content: space-between;
+}
+
+
+.recomment_box .reco_nickname {
+    margin: 10px;
+}
+
+.recomment_box .reco_recomment {
+    margin-left: 10px;
+}
+
 .feed_info_box .comment_bottom_section {
 
     width: 460px;
