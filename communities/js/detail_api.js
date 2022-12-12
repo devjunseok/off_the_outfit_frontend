@@ -50,6 +50,27 @@ async function handleLike(){
 
 }
 
+//싫어요 실행
+
+async function handleUnLike(){
+
+    feed_id = location.search.replace("?id=","")
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+    
+            })
+        })
+        window.location.reload()
+
+}
+
+
+
 
 // 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
 function timeForToday(value) {
@@ -74,6 +95,7 @@ function timeForToday(value) {
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
+//게시글 삭제
 async function deleteFeed(){
 
     feed_id =location.search.replace("?id=","")
@@ -105,7 +127,7 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
-        console.log(feed.like.length)
+        console.log(feed)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -117,6 +139,7 @@ window.onload = async function getIndexDetail_API(){
         var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
         var feed_update_go = document.getElementsByClassName('feed_update_go')[0];
         var like_wrap = document.getElementsByClassName('like_button')[0];
+        var unlike_wrap = document.getElementsByClassName('unlike_button')[0];
 
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
@@ -129,7 +152,7 @@ window.onload = async function getIndexDetail_API(){
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
         // 업데이트 html로 id값 같이 보내기
         feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
-
+        // 좋아요 부분
         if(feed.like.length == 0){
             console.log("좋아요 한 유저가 없을때")
             like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
@@ -156,6 +179,35 @@ window.onload = async function getIndexDetail_API(){
                 else{
                     // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중이 아닙니다`)
                     like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
+                }
+            }
+        //싫어요 부분
+        if(feed.unlike.length == 0){
+            console.log("싫어요 한 유저가 없을때")
+            unlike_wrap.innerHTML +=`<img class="feed_umji_view" src="/static/img/unlike.png" onclick="handleUnLike()"/>`
+            }
+            else{
+                // console.log("싫어요 한 유저가 있을때")
+                Ucounts = 0
+            // 게시물 싫어요 유무를 체크하는 조건문 부분
+                feed.unlike.forEach(unliker => {
+    
+                    if(unliker==User_payload.user_id){
+                    // console.log(`${liker}유저가 이 게시물을 싫어요 중입니다`)
+                    Ucounts = +1
+                }
+                    else{
+                    // console.log(`${liker}유저가 이 게시물을 싫어요 중이 아닙니다`)
+                    }
+                })
+            // 체크한 부분을 토대로 출력해주는 부분
+                if(Ucounts==1){
+                    // console.log(`${like_List.pk}번 게시물을 이 유저가 싫어요 중입니다`)
+                    unlike_wrap.innerHTML +=`<img class="feed_umji_view" src="/static/img/unlike_bk.png" onclick="handleUnLike()">`
+                }
+                else{
+                    // console.log(`${like_List.pk}번 게시물을 이 유저가 싫어요 중이 아닙니다`)
+                    unlike_wrap.innerHTML +=`<img class="feed_umji_view" src="/static/img/unlike.png" onclick="handleUnLike()"/>`
                 }
             }
         
