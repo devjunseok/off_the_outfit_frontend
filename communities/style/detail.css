@@ -222,6 +222,10 @@ body {
     margin-left: 10px;
 }
 
+.comment_middle_section .recomment_input_box {
+    display: none;
+}
+
 .comment_middle_section .recomment_box {
     width: 460px;
     justify-content: space-between;

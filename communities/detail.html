@@ -55,6 +55,22 @@
                                 <!-- 댓글 목록 부분 -->
                                 <div class="comment_middle_section vertical_alignment">
                                 <!-- 댓글 반복문 출력 부분 -->
+                                <div class="vertical_alignment">
+                                    <div class="comment_box horizontal_alignment">
+                                        <div class="cmt_user horizontal_alignment">  
+                                            <div class="cmt_nickname">${comt.user}</div>
+                                            <div class="cmt_comment">${comt.comment}</div>
+                                        </div>
+                                        <div class="cmt_button_box horizontal_alignment">
+                                            <div class="cmt_reco_button" onclick="recommentInputFlex()">대댓글</div>
+                                            <div class="cmt_like_button">O</div>
+                                        </div>
+                                    </div>
+                                    <div class="recomment_input_box" id="recomment_input_box" style="display: none;">
+                                        <textarea class="reco_input" id="recomment_content" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                                        <button class="recomment_create_button" type="submit" onclick="">댓글작성</button>
+                                    </div>
+                                </div>
                                 </div>
                                 <!-- 댓글 작성 버튼 -->
                                 <div class="comment_bottom_section">
