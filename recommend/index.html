@@ -5,26 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>offtheoutfit</title>
-    <link rel="stylesheet" href="/products/style/index.css">
+    <link rel="stylesheet" href="/recommend/style/index.css">
 </head>
 <body>
     <div data-include-path="/header.html"></div>
     <div class="horizontal_alignment">
-        <div data-include-path="/nav.html"></div>
+        <div data-include-path="/recommend/nav.html"></div>
         <div class="main_body_area">
-            <div class="top_section_menu">
-                <span id="view_button_01" class="ts_menu_title">BEST</span>
+            <div class="outer_section_menu">
+                <span id="view_button_01" class="ts_menu_title">아우터</span>
             </div>
-            <div id="main_view_content_01" class="top_section">
-                <div class="main_feed_list_box horizontal_alignment">
-                   <!-- BEST 게시글 반복 구간 -->
+            <div class="section_dividing_line"></div>
+            <div class="outer_section">
+                <div class="product_list_box horizontal_alignment" id="outer">
+                    <!-- 아우터 상품 반복 구간 -->
                 </div>
+            </div>
+            <div class="top_section_menu">
+                <span id="view_button_01" class="ts_menu_title">상의</span>
+            </div>
+            <div class="section_dividing_line"></div>
+            <div class="top_section">
+                <div class="product_list_box horizontal_alignment" id="top">
+                    <!-- 상의 상품 반복 구간 -->
+                </div>
+            </div>
+            <div class="bottom_section_menu">
+                <span id="view_button_01" class="ts_menu_title">하의</span>
             </div>
             <div class="section_dividing_line"></div>
             <div class="bottom_section">
-                <div class="product_list_box horizontal_alignment">
-                    <!-- 전체 상품 반복 구간 -->
-
+                <div class="product_list_box horizontal_alignment" id="bottom">
+                    <!-- 하의 상품 반복 구간 -->
                 </div>
             </div>
         </div>

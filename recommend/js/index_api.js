@@ -2,16 +2,17 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 게시글 전체 리스트 조회
-async function getIndexProductList(){
-    const response = await fetch(`${backEndBaseUrl}/products/product/`,{
+async function getIndexProductList(city){
+
+    const response = await fetch(`${backEndBaseUrl}/recommend/weather/${city}/`, {
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
         },
-        method:'GET',
+        method: 'GET',
     })
 
-    response_json = await response.json()
+    const response_json = await response.json()
     return response_json
 }
 
@@ -79,25 +80,25 @@ window.onload = async function getIndex_API(){
         
         
     } else {
-  
+        city = location.search.replace("?city=", "")
+
         // 전체 상품 조회
-        product_list = await getIndexProductList()
-        product_list = product_list.slice(0, 15)
+        product_list = await getIndexProductList(city)
         console.log(product_list)
 
         //인기 게시글 출력 반복문 부분
 
 
         // 전체 상품 반복 출력
-        var product_wrap = document.getElementsByClassName('product_list_box')[0];
-        product_list.forEach(prod => {
+        var product_wrap = document.getElementById('outer')
+        product_list.outer.forEach(prod => {
             product_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
                     <img src="${prod.product_image}" alt="">
                 </div>
                 <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.brand}</div>
+                    <div class="product_brand">${prod.brand_name_en}</div>
                     <div class="product_review">review:${prod.review_count}</div>
                 </div>
                 <div class="info_middle_section">
@@ -105,7 +106,7 @@ window.onload = async function getIndex_API(){
                     <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
                 </div>
                 <div class="info_bottom_section horizontal_alignment">
-                    <div class="product_category">하의 > ${prod.category}</div>
+                    <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
                     <div class="product_number">No.${prod.product_number}</div>
                 </div>
             </div>
