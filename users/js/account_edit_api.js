@@ -34,9 +34,12 @@ async function updateNickname(value){
         })
     })
     const response_json = await response.json()
+    console.log(response_json["nickname"])
+
     if (response.status == 200){
+        var divNickname= document.getElementById("edit_nickname")
+        divNickname.innerText = response_json["nickname"]
         alert(response_json["message"])
-        window.location.reload();
     }else {
         alert(response_json["detail"])
     }   

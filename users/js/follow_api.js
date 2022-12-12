@@ -2,7 +2,7 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 
-// 팔로우 한 유저 조회
+// 내가 팔로우 한 유저 조회
 async function getUserFollowInfo(){
 
     let User_payload = JSON.parse(localStorage.getItem('payload'))
@@ -17,6 +17,22 @@ async function getUserFollowInfo(){
     return response_json
 }
 
+// 인기 검색어 랭킹 조회
+async function getHeaderSearchWordRanking(){
+    const response = await fetch(`${backEndBaseUrl}/communities/search/word/ranking/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
+
+//팔로우 하기,취소하기
 async function handleFollow(user_id){
 
     const response = await fetch(`${backEndBaseUrl}/users/follow/${user_id}/`, {
@@ -34,21 +50,6 @@ async function handleFollow(user_id){
     console.log(response_json)
     window.location.reload();
 
-    return response_json
-}
-
-
-// 인기 검색어 랭킹 조회
-async function getHeaderSearchWordRanking(){
-    const response = await fetch(`${backEndBaseUrl}/communities/search/word/ranking/`,{
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method:'GET',
-    })
-
-    response_json = await response.json()
     return response_json
 }
                 
