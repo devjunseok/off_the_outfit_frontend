@@ -9,10 +9,10 @@
 <body>
     <nav class="left_area">
         <div class="nav_main_bt">
-            <div class="nav_main_bt_left">품목</div>
-            <div class="nav_main_bt_right" id="nav_main_bt_right">브랜드</div>
+            <div class="nav_main_bt_left" id="nav_main_bt_left" onclick="categoryOn()">품목</div>
+            <div class="nav_main_bt_right" id="nav_main_bt_right" onclick="brandOn()">브랜드</div>
         </div>
-        <div class="nav_main_brand_right" id="nav_main_brand_right">
+        <div class="nav_main_brand_right vertical_alignment" id="nav_main_brand_right">
             <div class="nav_alphabet_area">
                 <div class="top_section">
                     <div class="double_alphabet_mini_box">BEST</div>
@@ -52,6 +52,10 @@
             <div class="nav_brand_list_area">
                 <!-- 브랜드명 반복 부분 -->
             </div>
+        </div>
+
+        <div class="nav_main_category_left vertical_alignment" id="nav_main_category_left">
+            카테고리 메뉴
         </div>
 
     </nav>
