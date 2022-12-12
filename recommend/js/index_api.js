@@ -83,6 +83,7 @@ window.onload = async function getIndex_API(){
         city = location.search.replace("?city=", "")
 
         // 지역 추천 상품 리스트 조회
+
         product_list = await getIndexProductList(city)
         console.log(product_list)
 
