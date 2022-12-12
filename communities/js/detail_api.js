@@ -164,7 +164,8 @@ window.onload = async function getIndexDetail_API(){
                 <div class="cmt_nickname">${comt.user}</div>
                 <div class="cmt_comment">${comt.comment}</div>
             </div>
-                <div class="cmt_like_box">
+            <div class="cmt_button_box horizontal_alignment">
+                <div class="cmt_reco_button">대댓글</div>
                 <div class="cmt_like_button">O</div>
             </div>
         </div>
@@ -173,7 +174,7 @@ window.onload = async function getIndexDetail_API(){
             cmt_wrap.innerHTML +=`
             <div class="recomment_box horizontal_alignment">
                 <div class="reco_user horizontal_alignment">  
-                    <div class="reco_nickname">${reco.user}</div>
+                    <div class="reco_nickname">┗ ${reco.user}</div>
                     <div class="reco_recomment">${reco.recomment}</div>
                 </div>
             </div>
