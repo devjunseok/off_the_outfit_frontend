@@ -1,0 +1,320 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-08 ]
+________________________________________________________________
+
+= table of Css
+
+1. header.html
+2. nav.html
+3. footer.html
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+/* _______________________________________________________________  */
+/* 1. header.html */
+/* _______________________________________________________________  */
+
+
+.main-wrapper {
+    width: 100vw;
+    height: 70px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-wrapper .main-title {
+    font-size: 30pt;
+    padding: 15px 0 0 30px;
+    cursor: pointer;
+}
+
+.main-wrapper .search-wrapper {
+    padding: 20px 0 0 30px;
+}
+
+.main-wrapper .search-wrapper .search-box {
+    width: 180px;
+    height: 25px;
+    border: solid 3px black;
+    margin-right: 0;
+}
+
+.main-wrapper .search-wrapper .search-button {
+    width: 33px;
+    height: 33px;
+    margin-left: 0;
+    border: solid 3px black;
+    background-color: black;
+    position: absolute;
+    cursor: pointer;
+}
+
+.main-wrapper .search-word-ranking {
+    font-size: 0.8em;
+    margin: 30px 0 0 50px;
+}
+
+.header-member {
+    width: 100vw;
+    min-width: 1620px;
+    height: 40px;
+    background-color: black;
+}
+
+.header-member .header-links {
+    color: #ffffff;
+    padding: 10px 0 0 0;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-member .header-link {
+    color: #ffffff;
+    font-size: 10pt;
+    text-decoration: none;
+}
+
+.header-member .header-link-line {
+    color: #ffffff;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+}
+
+/* 검색어 랭킹 박스 */
+.rolling_box{
+    position: relative;
+    width: 380px;
+    height: 32px;
+    font-size: 13pt;
+    letter-spacing: -1px;
+}
+
+.rolling_box > .search-word-ranking{
+    position: relative;
+    width: auto;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}        
+.rolling_box ul{
+    list-style: none;
+}
+.rolling_box li{
+    position: absolute;
+    top: -36px;
+    left: 0;
+}
+/* 검색어 랭킹 롤링 부분 */
+.rolling_box li.prev{
+    top: 36px;
+    transition: top 0.5s ease;
+}
+.rolling_box li.current{
+    top: 0;
+    transition: top 0.5s ease;
+}
+.rolling_box li.next{
+    top: -36px;
+}
+.rolling_box a{
+    display: block;
+    display: -webkit-box;
+    text-decoration: none;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient:vertical;
+    overflow: hidden;
+    color: #000;
+}
+
+
+/* _______________________________________________________________  */
+/* 2. nav.html */
+/* _______________________________________________________________  */
+
+.left_area {
+    background-color: #ffffff;
+    width: 300px;
+    height: 100vh;
+    border-right: solid 2px #c0c0c0;
+    padding: 10px;
+}
+
+.left_area .nav_main_bt {
+    display: flex;
+    flex-direction: row;
+    width: 280px;
+    height: 60px;
+    background-color: #ffffff;
+    margin: 10px;
+}
+
+.left_area .nav_main_bt_left {
+    width: 140px;
+    height: 60px;
+
+    border: solid 1px #c0c0c0;
+    text-align: center;
+    line-height: 60px;
+    font-weight: bold;
+    font-size: 11pt;
+    cursor: pointer;
+}
+
+.left_area .nav_main_bt_right {
+    width: 140px;
+    height: 60px;
+
+    border: solid 1px #c0c0c0;
+    text-align: center;
+    line-height: 60px;
+    font-weight: bold;
+    font-size: 11pt;
+    cursor: pointer;
+}
+
+.left_area .nav_main_bt_left:hover {
+    background-color: #c0c0c0;
+    color: #ffffff;
+}
+
+.left_area .nav_main_bt_right:hover {
+    background-color: #c0c0c0;
+    color: #ffffff;
+}
+
+.nav_alphabet_area {
+    width: 280px;
+    height: 100px;
+    margin: 10px;
+}
+
+.nav_alphabet_area .top_section {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.nav_alphabet_area .middle_section {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.nav_alphabet_area .bottom_section {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.nav_alphabet_area .double_alphabet_mini_box {
+    border: solid 0.5px #c0c0c0;
+    width: 52px;
+    height: 24px;
+    margin: 1px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.nav_alphabet_area .alphabet_mini_box {
+    border: 0.5px solid #c0c0c0;
+    width: 24px;
+    height: 24px;
+    margin: 1px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.nav_alphabet_area .double_alphabet_mini_box:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.nav_alphabet_area .alphabet_mini_box:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.nav_brand_list_area {
+    width: 280px;
+    height: 70vh;
+    margin: 10px;
+}
+
+.nav_brand_list_area .brand_box {
+    width: 280px;
+    height: 50px;
+    border-left: solid 1px #c0c0c0;
+    margin-top: 20px;
+}
+
+.brand_box .brand_name_en {
+    width: 270px;
+    height: 30px;
+    font-size: 13pt;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.brand_box .brand_name_kr {
+    width: 270px;
+    height: 20px;
+    font-size: 10pt;
+    line-height: 20px;
+    margin-left: 10px;
+    color: #c0c0c0;
+}
+
+.left_area .nav_main_category_left {
+    display: none;
+    position: absolute;
+}
+
+
+/* _______________________________________________________________  */
+/* 3. footer.html */
+/* _______________________________________________________________  */
+
+
+
+
+

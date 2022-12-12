@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>팔로우</title>
+    <title>팔로우 목록</title>
+    <link rel="stylesheet" href="/users/style/follow.css">
 </head>
 <body>
-    
-</body>
+    <div data-include-path="/users/header.html"></div>
+    <div class="horizontal_alignment">
+        <div data-include-path="/users/nav.html"></div>
+        <div class="main_body_area">
+            <div class="top_section">
+                <div class="basic_follow_info">팔로우 목록</div>
+                <div class="info_line"></div>
+                <div class="follow_list">
+                    <!-- 팔로우 목록 반복 부분 -->
+                </div>
+            </div>
+            <div class="bottom_section"></div>
+        </div>
+    </div>
+
+
+    <script src="/users/js/follow_api.js"></script>
+    <script src="/users/js/follow.js"></script>
+    <script src="/users/js/header.js"></script>
 </html>

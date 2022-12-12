@@ -5,8 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/style/header.css">
 </head>
 <body>
+    <header>
+        <div class="main-wrapper">
+            <div class="main-title" onclick="location.href='/'">off the outfit</div> 
+            <div class="search-wrapper">
+                <input class="search-box" type="text" placeholder="검색어를 입력해주세요." id="search" name="search">
+                <button class="search-button" onclick="searchButton()"></button>
+            </div>
+            <!-- 실시간 검색어 부분 -->
+            <div class="rolling_box">
+                <div class="search-word-ranking">
+                    <ul>
+                        <li class="current"><a class="rank_01" href="#"></a></li>
+                        <li class="next"><a class="rank_02" href="#"></a></li>
+                        <li><a class="rank_03" href="#"></a></li>
+                        <li><a class="rank_04" href="#"></a></li>
+                        <li><a class="rank_05" href="#"></a></li>
+                        <li><a class="rank_06" href="#"></a></li>
+                        <li><a class="rank_07" href="#"></a></li>
+                        <li><a class="rank_08" href="#"></a></li>
+                        <li><a class="rank_09" href="#"></a></li>
+                        <li class="prev"><a class="rank_10" href="#"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-member">
+            <div class="header-links">
+                <a class="header-link" href="/users/account_edit.html">마이페이지</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link" href="#">최근 본 상품</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link" href="#">옷장</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link" href="">좋아요</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link" type="submit" onclick="handleLogout()">로그아웃</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link" href="/communities/upload.html" >글 작성하기</a>
+                
+            </div>
+        </div>
+    </header>
     
 </body>
 </html>

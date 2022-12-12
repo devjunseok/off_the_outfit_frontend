@@ -5,8 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 업로드</title>
+    <link rel="stylesheet" href="/communities/style/upload.css">
 </head>
 <body>
+    <body>
+        <div data-include-path="/header.html"></div>
+        <div class="horizontal_alignment">
+            <div data-include-path="/nav.html"></div>
+            <div class="main_body_area">
+                <div class="top_section">
+                    <div class="info_bar"></div>
+                    <div class="upload_area horizontal_alignment">
+                        <div class="ua_left_section">
+                            <div class="feed_image_box">
+                                <img id="PreviewImg" src="/static/img/default.png" class="PreviewImg" />
+                            </div>
+                        </div>
+                        <div class="ua_right_section">
+                            <div class="feed_input_box vertical_alignment">
+                                <!-- 게시글 작성시 미리보기 -->
+                                <div class="input_top_section">
+                                    <div class="user_profile_info horizontal_alignment">
+                                        <img class="profile_image" src="/static/img/default.png" id="profile_image" />
+                                        <div class="nickname">nickname</div>
+                                    </div>
+                                    <div class="user_content">off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.</div>
+                                    <div class="input_top_info"></div>
+                                </div>
+                                <!-- 게시글 작성 부분 -->
+                                <div class="input_middle_section vertical_alignment">
+                                    <input id="feed_image" class="image_upload_button" type="file" required="required" value="image" />
+                                    <textarea id="content" class="feed_content" type="text" name="content" placeholder="내용 입력..." cols="20" rows="10" ></textarea>
+                                    <textarea id="tags" class="feed_tags" type="text" name="tags" placeholder="태그 입력..." cols="20" rows="10" ></textarea>
+                                </div>
+                                <!-- 게시글 작성 버튼 -->
+                                <div class="input_bottom_section">
+                                    <button class="feed_create_button" type="submit" onclick="createPost()">작성하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
+        <script src="/communities/js/upload.js"></script>
+        <script src="/communities/js/upload_api.js"></script>
 </body>
 </html>

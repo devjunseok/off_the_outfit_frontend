@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 상세보기</title>
+    <link rel="stylesheet" href="/communities/style/detail.css">
 </head>
 <body>
+    <body>
+        <div data-include-path="/header.html"></div>
+        <div class="horizontal_alignment">
+            <div data-include-path="/nav.html"></div>
+            <div class="main_body_area">
+                <div class="top_section">
+                    <div class="info_bar"></div>
+                    <div class="detail_area horizontal_alignment">
+                        <div class="ua_left_section">
+                            
+                            <!-- 게시글 이미지 -->
+                            <div class="feed_image_box" src="">
+                                <img id="image" src="/static/img/default.png" class="feed_image" />
+                            </div>
+                        </div>
+                        <div class="ua_right_section">
+                            <div class="feed_info_box vertical_alignment">
+                                <!-- 게시글 정보 -->
+                                <div class="info_top_section">
+                                    <div class="horizontal_alignment">
+                                        <div class="user_profile_info horizontal_alignment">
+                                            <img class="profile_image" src="/static/img/default.png" id="profile_image" />
+                                            <div class="nickname">nickname</div>
+                                        </div>
+                                        <div class="like_box horizontal_alignment">
+                                            <div><a class = "feed_update_go">게시글수정</a></div>
+                                            <div><button onclick="deleteFeed()">게시글삭제</button></div>
+                                            <div class ="like_button">
+                                                <!-- 상세 페이지 좋아요 버튼 -->
+                                            </div>
+                                            <div class="feed_like">234</div>
+                                            <div class="feed_unlike">143</div>
+                                            <div class="unlike_button">
+                                                <!-- 상세 페이지 싫어요 버튼 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="feed_content">off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.</div>
+                                    <div class="horizontal_alignment">
+                                        <div class="feed_tags">#이건 #태그 #인척</div>
+                                        <div class="feed_create_at">몇분전</div>
+                                    </div>
+                                </div>
+                                <!-- 댓글 목록 부분 -->
+                                <div class="comment_middle_section vertical_alignment">
+
+                                </div>
+                                <!-- 댓글 작성 버튼 -->
+                                <div class="comment_bottom_section">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
+        
+        <script src="/communities/js/detail_api.js"></script>
+        <script src="/communities/js/detail.js"></script>
 </body>
 </html>
