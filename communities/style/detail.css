@@ -184,6 +184,7 @@ body {
     width: 460px;
     height: 500px;
     border-bottom: solid 2px #c0c0c0;
+    overflow:scroll;
 }
 
 .comment_middle_section .comment_box {
