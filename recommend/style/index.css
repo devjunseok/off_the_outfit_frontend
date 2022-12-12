@@ -187,10 +187,33 @@ body {
 /* 1. index.html  -- 전체 게시글 */
 /* _______________________________________________________________  */
 
+.main_body_area .outer_section {
+    width: 1260px;
+    height: 100%;
+    margin: 10px;
+}
+.main_body_area .top_section {
+    width: 1260px;
+    height: 100%;
+    margin: 10px;
+}
 .main_body_area .bottom_section {
     width: 1260px;
     height: 100%;
     margin: 10px;
+}
+
+
+.outer_section .product_list_box {
+    width: 1260px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.top_section .product_list_box {
+    width: 1260px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .bottom_section .product_list_box {
