@@ -186,6 +186,27 @@ body {
     border-bottom: solid 2px #c0c0c0;
 }
 
+.comment_middle_section .comment_box {
+    width: 460px;
+    justify-content: space-between;
+}
+
+.comment_box .cmt_user {
+    margin: 10px;
+}
+
+.cmt_user .cmt_nickname {
+    font-weight: bold;
+}
+
+.cmt_user .cmt_comment {
+    margin-left: 10px;
+}
+
+.comment_box .cmt_like_box {
+    margin: 10px;
+}
+
 .feed_info_box .comment_bottom_section {
 
     width: 460px;

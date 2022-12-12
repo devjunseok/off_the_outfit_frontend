@@ -81,7 +81,7 @@ window.onload = async function getIndex_API(){
         
     } else {
         city = location.search.replace("?city=", "")
-
+        console.log(city)
         // 전체 상품 조회
         product_list = await getIndexProductList(city)
         console.log(product_list)
