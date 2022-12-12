@@ -125,3 +125,38 @@ window.onload = async function getProfile_API(){
     word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
 
  }
+
+
+ async function updatePass(){
+    
+    
+    const new_pass = document.getElementById("new_pass").value
+    const new_pass2 = document.getElementById("new_pass2").value
+
+    const response = await fetch(`${backEndBaseUrl}/users/passwordchange/`, {
+        headers: {
+        'content-type': 'application/json',
+        "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+            
+            "password":new_pass,
+            "password2":new_pass2,
+        
+    
+        })
+
+    })
+    
+    const response_json = await response.json()
+    if (response.status == 200){
+        alert(response_json["message"])
+        window.location.replace(`http://127.0.0.1:5500/users/account_edit.html`);
+    }else {
+        alert(response_json["password"])     
+    }
+    
+
+}
+
