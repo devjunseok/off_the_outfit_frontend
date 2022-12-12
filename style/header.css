@@ -196,6 +196,7 @@ body {
     line-height: 60px;
     font-weight: bold;
     font-size: 11pt;
+    cursor: pointer;
 }
 
 .left_area .nav_main_bt_right {
@@ -208,20 +209,102 @@ body {
     line-height: 60px;
     font-weight: bold;
     font-size: 11pt;
+    cursor: pointer;
+}
+
+.left_area .nav_main_bt_left:hover {
+    background-color: #000000;
+    border: solid 1px #000000;
+    color: #ffffff;
+}
+
+.left_area .nav_main_bt_right:hover {
+    background-color: #000000;
+    border: solid 1px #000000;
+    color: #ffffff;
 }
 
 .nav_alphabet_area {
     width: 280px;
     height: 100px;
-    background-color: #c0c0c0;
     margin: 10px;
+}
+
+.nav_alphabet_area .top_section {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.nav_alphabet_area .middle_section {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.nav_alphabet_area .bottom_section {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.nav_alphabet_area .double_alphabet_mini_box {
+    border: solid 0.5px #c0c0c0;
+    width: 52px;
+    height: 24px;
+    margin: 1px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.nav_alphabet_area .alphabet_mini_box {
+    border: 0.5px solid #c0c0c0;
+    width: 24px;
+    height: 24px;
+    margin: 1px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.nav_alphabet_area .double_alphabet_mini_box:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.nav_alphabet_area .alphabet_mini_box:hover {
+    color: #ffffff;
+    background-color: #000000;
 }
 
 .nav_brand_list_area {
     width: 280px;
     height: 70vh;
-    background-color: #c0c0c0;
     margin: 10px;
+}
+
+.nav_brand_list_area .brand_box {
+    width: 280px;
+    height: 50px;
+    border-left: solid 1px #c0c0c0;
+    margin-top: 20px;
+}
+
+.brand_box .brand_name_en {
+    width: 270px;
+    height: 30px;
+    font-size: 13pt;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.brand_box .brand_name_kr {
+    width: 270px;
+    height: 20px;
+    font-size: 10pt;
+    line-height: 20px;
+    margin-left: 10px;
+    color: #c0c0c0;
 }
 
 

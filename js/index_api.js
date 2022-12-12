@@ -71,7 +71,6 @@ async function getHeaderSearchWordRanking(){
 }
 
 
-
 window.onload = async function getIndex_API(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     if (User_payload === undefined ||  User_payload === null){
@@ -85,7 +84,10 @@ window.onload = async function getIndex_API(){
 
         // 인기 게시글
         best_feed_list = await getIndexFeedList()
-        best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
+        if (best_feed_list.length > 3 ) {
+            best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
+        }
+        
 
         //인기 게시글 출력 반복문 부분
         var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];
@@ -152,29 +154,50 @@ window.onload = async function getIndex_API(){
 
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()
-    search_word_list = search_word_list.sort((a, b) => b.count - a.count)
+    if (search_word_list.length > 9) {
+        search_word_list = search_word_list.sort((a, b) => b.count - a.count)
 
-    var word_rank_01 = document.getElementsByClassName('rank_01')[0];
-    var word_rank_02 = document.getElementsByClassName('rank_02')[0];
-    var word_rank_03 = document.getElementsByClassName('rank_03')[0];
-    var word_rank_04 = document.getElementsByClassName('rank_04')[0];
-    var word_rank_05 = document.getElementsByClassName('rank_05')[0];
-    var word_rank_06 = document.getElementsByClassName('rank_06')[0];
-    var word_rank_07 = document.getElementsByClassName('rank_07')[0];
-    var word_rank_08 = document.getElementsByClassName('rank_08')[0];
-    var word_rank_09 = document.getElementsByClassName('rank_09')[0];
-    var word_rank_10 = document.getElementsByClassName('rank_10')[0];
+        var word_rank_01 = document.getElementsByClassName('rank_01')[0];
+        var word_rank_02 = document.getElementsByClassName('rank_02')[0];
+        var word_rank_03 = document.getElementsByClassName('rank_03')[0];
+        var word_rank_04 = document.getElementsByClassName('rank_04')[0];
+        var word_rank_05 = document.getElementsByClassName('rank_05')[0];
+        var word_rank_06 = document.getElementsByClassName('rank_06')[0];
+        var word_rank_07 = document.getElementsByClassName('rank_07')[0];
+        var word_rank_08 = document.getElementsByClassName('rank_08')[0];
+        var word_rank_09 = document.getElementsByClassName('rank_09')[0];
+        var word_rank_10 = document.getElementsByClassName('rank_10')[0];
 
-    word_rank_01.innerText = `1등 : ${search_word_list[0]['word']}`
-    word_rank_02.innerText = `2등 : ${search_word_list[1]['word']}`
-    word_rank_03.innerText = `3등 : ${search_word_list[2]['word']}`
-    word_rank_04.innerText = `4등 : ${search_word_list[3]['word']}`
-    word_rank_05.innerText = `5등 : ${search_word_list[4]['word']}`
-    word_rank_06.innerText = `6등 : ${search_word_list[5]['word']}`
-    word_rank_07.innerText = `7등 : ${search_word_list[6]['word']}`
-    word_rank_08.innerText = `8등 : ${search_word_list[7]['word']}`
-    word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
-    word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
+        word_rank_01.innerText = `1등 : ${search_word_list[0]['word']}`
+        word_rank_02.innerText = `2등 : ${search_word_list[1]['word']}`
+        word_rank_03.innerText = `3등 : ${search_word_list[2]['word']}`
+        word_rank_04.innerText = `4등 : ${search_word_list[3]['word']}`
+        word_rank_05.innerText = `5등 : ${search_word_list[4]['word']}`
+        word_rank_06.innerText = `6등 : ${search_word_list[5]['word']}`
+        word_rank_07.innerText = `7등 : ${search_word_list[6]['word']}`
+        word_rank_08.innerText = `8등 : ${search_word_list[7]['word']}`
+        word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
+        word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
+    }
+    
 
+    // NAV 브랜드 리스트 조회
+    brand_list = await getNavBrandList()
+
+    alphabet = location.search.replace('?key=', '')
+    if(alphabet.length == 0){
+        brand_list = brand_list.slice(0, 20)
+    }
+    var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
+    brand_list.forEach(br => {
+        if(br.brand_name_en.startsWith(alphabet, 1)){
+        brand_wrap.innerHTML += `
+        <div class="brand_box">
+            <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+            <div class="brand_name_kr">${br.brand_name_kr}</div>
+        </div>
+        `
+        }
+    })
 }
 }
