@@ -1,8 +1,8 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
-// 게시글 전체 리스트 조회
-async function getIndexProductList(brand_id){
+// 상품 브랜드별 리스트 조회
+async function getIndexProductList(){
     id = location.search.replace('?key=', '').replace('?brand_id=', '').split('&')
     brand_id = id[1]
     const response = await fetch(`${backEndBaseUrl}/products/product/brand/${brand_id}/`,{
@@ -73,6 +73,36 @@ async function getHeaderSearchWordRanking(){
 }
 
 
+// 옷장 상품 등록
+async function closetProductAdd(product_id) {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+        
+        
+    } else {
+        // name_tag = document.getElementById("name_tag").value;
+        // console.log(name_tag)
+        // const formData = new FormData();
+
+        // formData.append("name_tag", name_tag);
+        
+        const response = await fetch(`${backEndBaseUrl}/products/product/${product_id}/closet/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        // body: formData,
+        }); 
+        if (response.status == 200) {
+        alert("옷장 상품 등록");
+        window.location.replace(`${frontEndBaseUrl}/products/closet/`);
+        }
+    }
+}
+
+
 
 window.onload = async function getIndex_API(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
@@ -104,7 +134,10 @@ window.onload = async function getIndex_API(){
                 </div>
                 <div class="info_middle_section">
                     <div class="product_name">${prod.product_name}</div>
-                    <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                    <div class="horizontal_alignment">
+                        <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                        <div class="closet_add_button" onclick="closetProductAdd(${prod.product_number})">closet</div>
+                    </div>
                 </div>
                 <div class="info_bottom_section horizontal_alignment">
                     <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
