@@ -190,7 +190,7 @@ body {
 .left_area .nav_main_bt_left {
     width: 140px;
     height: 60px;
-    background-color: #ffffff;
+
     border: solid 1px #c0c0c0;
     text-align: center;
     line-height: 60px;
@@ -202,9 +202,8 @@ body {
 .left_area .nav_main_bt_right {
     width: 140px;
     height: 60px;
-    background-color: #000000;
-    border: solid 1px #000000;
-    color: #ffffff;
+
+    border: solid 1px #c0c0c0;
     text-align: center;
     line-height: 60px;
     font-weight: bold;
@@ -213,14 +212,12 @@ body {
 }
 
 .left_area .nav_main_bt_left:hover {
-    background-color: #000000;
-    border: solid 1px #000000;
+    background-color: #c0c0c0;
     color: #ffffff;
 }
 
 .left_area .nav_main_bt_right:hover {
-    background-color: #000000;
-    border: solid 1px #000000;
+    background-color: #c0c0c0;
     color: #ffffff;
 }
 
@@ -305,6 +302,11 @@ body {
     line-height: 20px;
     margin-left: 10px;
     color: #c0c0c0;
+}
+
+.left_area .nav_main_category_left {
+    display: none;
+    position: absolute;
 }
 
 

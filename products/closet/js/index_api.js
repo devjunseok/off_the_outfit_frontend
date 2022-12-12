@@ -1,11 +1,10 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
-// 상품 브랜드별 리스트 조회
-async function getIndexProductList(){
-    id = location.search.replace('?key=', '').replace('?brand_id=', '').split('&')
-    brand_id = id[1]
-    const response = await fetch(`${backEndBaseUrl}/products/product/brand/${brand_id}/`,{
+// 유저 기준 옷장 조회
+async function getClosetProductList(){
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/products/product/closet/${User_payload.user_id}/`,{
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
@@ -87,7 +86,7 @@ async function closetProductAdd(product_id) {
         // const formData = new FormData();
 
         // formData.append("name_tag", name_tag);
-        
+
         const response = await fetch(`${backEndBaseUrl}/products/product/${product_id}/closet/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access"),
@@ -102,6 +101,27 @@ async function closetProductAdd(product_id) {
     }
 }
 
+// 옷장 상품 제거
+async function closetProductDelete(product_id) {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/products/product/${product_id}/closet/${User_payload.user_id}/`, {
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+
+    if(response.status == 204){
+        alert("옷장 상품 제거 완료!")
+        window.location.replace(`${frontEndBaseUrl}/products/closet/`); // 삭제가 되고나면 인덱스로 다시 이동하게함
+    }
+    else {
+        alert(response.status);
+    }
+}
+
+
 
 
 window.onload = async function getIndex_API(){
@@ -113,8 +133,7 @@ window.onload = async function getIndex_API(){
     } else {
         
         // 전체 상품 조회
-        product_list = await getIndexProductList()
-        product_list = product_list.slice(0, 50)
+        product_list = await getClosetProductList()
         console.log(product_list)
 
         //인기 게시글 출력 반복문 부분
@@ -126,22 +145,22 @@ window.onload = async function getIndex_API(){
             product_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${prod.product_image}">
+                    <img src="${prod.product.product_image}">
                 </div>
                 <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.brand_name_en}</div>
-                    <div class="product_review">review:${prod.review_count}</div>
+                    <div class="product_brand">${prod.product.brand_name_en}</div>
+                    <div class="product_review">review:${prod.product.review_count}</div>
                 </div>
                 <div class="info_middle_section">
-                    <div class="product_name">${prod.product_name}</div>
+                    <div class="product_name">${prod.product.product_name}</div>
                     <div class="horizontal_alignment">
-                        <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
-                        <div class="closet_add_button" onclick="closetProductAdd(${prod.product_number})">closet</div>
+                        <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                        <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number})">Delete</div>
                     </div>
                 </div>
                 <div class="info_bottom_section horizontal_alignment">
-                    <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
-                    <div class="product_number">No.${prod.product_number}</div>
+                    <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                    <div class="product_number">No.${prod.product.product_number}</div>
                 </div>
             </div>
             `
@@ -176,29 +195,5 @@ window.onload = async function getIndex_API(){
         word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
         word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
     }
-
-
-    // key 값 가져오기
-    id = location.search.replace('?key=', '').replace('?brand_id=', '').split('&')
-    alphabet = id[0]
-
-    // NAV 브랜드 리스트 조회
-    brand_list = await getNavBrandList()
-
-    if(alphabet.length == 0){
-        brand_list = brand_list.slice(0, 20)
-    }
-    var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
-    brand_list.forEach(br => {
-        if(br.brand_name_en.startsWith(alphabet, 1)){
-        brand_wrap.innerHTML += `
-        <div class="brand_box">
-            <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-            <div class="brand_name_kr">${br.brand_name_kr}</div>
-        </div>
-        `
-        }
-    })
-
 }
 }
