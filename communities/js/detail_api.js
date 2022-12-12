@@ -68,6 +68,34 @@ async function handleUnLike(){
         window.location.reload()
 
 }
+//댓글 등록
+async function postComment(feed_id){
+
+    console.log(feed_id)
+    const comment = document.getElementById('comment_content').value;
+    console.log(comment)
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            "comment":comment
+        })
+    })
+    const response_json = await response.json()
+
+    if (response.status == 200){
+        alert(response_json["message"])
+    }else {
+        alert(response_json["detail"])
+    }
+    window.location.reload()   
+    
+    return response_json
+}
+
 
 
 
@@ -141,8 +169,9 @@ window.onload = async function getIndexDetail_API(){
         var like_wrap = document.getElementsByClassName('like_button')[0];
         var unlike_wrap = document.getElementsByClassName('unlike_button')[0];
         var cmt_wrap = document.getElementsByClassName('comment_middle_section')[0];
-        var rcomt_wrap = document.getElementsByClassName('recomment_box')[0];
+        var comment_onclick = document.getElementsByClassName('comment_create_button')[0];
 
+        comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
         // profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
