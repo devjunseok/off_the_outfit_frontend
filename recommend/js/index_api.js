@@ -1,7 +1,7 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
-// 게시글 전체 리스트 조회
+// 지역 추천 상품 리스트 조회
 async function getIndexProductList(city){
 
     const response = await fetch(`${backEndBaseUrl}/recommend/weather/${city}/`, {
@@ -82,17 +82,20 @@ window.onload = async function getIndex_API(){
     } else {
         city = location.search.replace("?city=", "")
 
-        // 전체 상품 조회
+        // 지역 추천 상품 리스트 조회
         product_list = await getIndexProductList(city)
         console.log(product_list)
 
-        //인기 게시글 출력 반복문 부분
+        // 지역 추천 상품 리스트 조회
+        var outer_wrap = document.getElementById('outer')
+        var top_wrap = document.getElementById('top')
+        var bottom_wrap = document.getElementById('bottom')
+        var outer_view = document.getElementById('view_outer_button_01')
+        var top_view = document.getElementById('view_top_button_02')
+        var bottom_view = document.getElementById('view_bottom_button_03')
 
-
-        // 전체 상품 반복 출력
-        var product_wrap = document.getElementById('outer')
         product_list.outer.forEach(prod => {
-            product_wrap.innerHTML += `
+            outer_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
                     <img src="${prod.product_image}" alt="">
@@ -111,7 +114,54 @@ window.onload = async function getIndex_API(){
                 </div>
             </div>
             `
+        outer_view.innerText = `${prod.category[0].sub_category_name}`
+            
         });
+        product_list.top.forEach(prod =>{
+        top_wrap.innerHTML += `
+        <div class="product_box">
+            <div class="product_image_box">
+                <img src="${prod.product_image}" alt="">
+            </div>
+            <div class="info_top_section horizontal_alignment">
+                <div class="product_brand">${prod.brand_name_en}</div>
+                <div class="product_review">review:${prod.review_count}</div>
+            </div>
+            <div class="info_middle_section">
+                <div class="product_name">${prod.product_name}</div>
+                <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+            </div>
+            <div class="info_bottom_section horizontal_alignment">
+                <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                <div class="product_number">No.${prod.product_number}</div>
+            </div>
+        </div>
+        `
+        top_view.innerText = `${prod.category[0].sub_category_name}`
+        });
+        product_list.bottom.forEach(prod =>{
+        bottom_wrap.innerHTML += `
+        <div class="product_box">
+            <div class="product_image_box">
+                <img src="${prod.product_image}" alt="">
+            </div>
+            <div class="info_top_section horizontal_alignment">
+                <div class="product_brand">${prod.brand_name_en}</div>
+                <div class="product_review">review:${prod.review_count}</div>
+            </div>
+            <div class="info_middle_section">
+                <div class="product_name">${prod.product_name}</div>
+                <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+            </div>
+            <div class="info_bottom_section horizontal_alignment">
+                <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                <div class="product_number">No.${prod.product_number}</div>
+            </div>
+        </div>
+        `
+        bottom_view.innerText = `${prod.category[0].sub_category_name}`
+        });
+
 
 
 
