@@ -2,6 +2,21 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 
+// 나를 팔로우한 유저 조회
+async function getFollowerUserInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followers/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
 // 내가 팔로우 한 유저 조회
 async function getUserFollowInfo(){
 
@@ -17,6 +32,7 @@ async function getUserFollowInfo(){
     return response_json
 }
 
+
 // 인기 검색어 랭킹 조회
 async function getHeaderSearchWordRanking(){
     const response = await fetch(`${backEndBaseUrl}/communities/search/word/ranking/`,{
@@ -30,8 +46,6 @@ async function getHeaderSearchWordRanking(){
     response_json = await response.json()
     return response_json
 }
-
-
 //팔로우 하기,취소하기
 async function handleFollow(user_id){
 
@@ -57,13 +71,25 @@ async function handleFollow(user_id){
 // 회원 정보 출력 API
 window.onload = async function getUserInfo_API(){
     //회원정보 리스트 조회
+    follower_list = await getFollowerUserInfo()
     follow_list = await getUserFollowInfo()
-    console.log(follow_list)
     //회원정보 출력 반복문 부분
     var follow_wrap = document.getElementsByClassName('follow_list')[0];
+    follower_list.forEach(user =>{
+        follow_list.forEach(Fuser =>{
+            console.log(Fuser.pk)
+            console.log(user.pk)
+            if(Fuser.pk==user.pk){
+                counts=1
+            }
+            else{
+                counts=0
+            }
 
-    follow_list.forEach(user => {
-        console.log(user)
+        })
+        if(counts == 1){
+            console.log(`${user.pk}번 유저`)
+            console.log("팔로우 중 입니다")
         follow_wrap.innerHTML += `
         <div class="user_box_main horizontal_alignment">
             <div class="left_info_section horizontal_alignment">
@@ -94,7 +120,44 @@ window.onload = async function getUserInfo_API(){
             </div>
         </div>
         `
+        }
+        else{
+            console.log("팔로우 중이 아닙니다")
+            follow_wrap.innerHTML += `
+        <div class="user_box_main horizontal_alignment">
+            <div class="left_info_section horizontal_alignment">
+                <div class="user_profile_image"><img class="image_view" src="${backEndBaseUrl}${user.profile_image}"></div>
+                <div class="user_profile_nickname">${user.nickname}</div>
+            </div>
+            <div class="middle_info_section horizontal_alignment">
+                <div class="summary_box vertical_alignment">
+                    <div class="summary_title">팔로우</div>
+                    <div class="summary_value">${user.followings_count}</div>
+                </div>
+                <div class="summary_box vertical_alignment">
+                    <div class="summary_title ">팔로워</div>
+                    <div class="summary_value">${user.followers_count}</div>
+                </div>
+                <div class="summary_box vertical_alignment">
+                    <div class="summary_title ">피드</div>
+                    <div class="summary_value">${user.feeds_count}</div>
+                </div>
+                <div class="summary_box vertical_alignment">
+                    <div class="summary_title ">옷장</div>
+                    <div class="summary_value">${user.closet_set_count}</div>
+                </div>
+            </div>
+            <div class="right_info_section vertical_alignment">
+                <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
+                <div class="feed_list_button"><button>피드 보기</button></div>
+            </div>
+        </div>
+        `
+
+        }
     })
+
+
 
 
 
@@ -127,5 +190,4 @@ window.onload = async function getUserInfo_API(){
         word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
         word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
     }
-
  }

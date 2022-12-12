@@ -17,6 +17,21 @@ async function getIndexFeedDetail(feed_id){
 }
 
 
+// 인기 검색어 랭킹 조회
+async function getHeaderSearchWordRanking(){
+    const response = await fetch(`${backEndBaseUrl}/communities/search/word/ranking/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
+
 //좋아요 실행
 async function handleLike(){
 
@@ -31,6 +46,7 @@ async function handleLike(){
     
             })
         })
+        window.location.reload()
 
 }
 
@@ -89,6 +105,7 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
+        console.log(feed.like.length)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -110,13 +127,12 @@ window.onload = async function getIndexDetail_API(){
         feed_content.innerText = `${feed.content}`
         feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
-        // like_button.innerText =`${feed.like}`
         // 업데이트 html로 id값 같이 보내기
         feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
 
         if(feed.like.length == 0){
-            // console.log("좋아요 한 유저가 없을때")
-            like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handlelike()">`
+            console.log("좋아요 한 유저가 없을때")
+            like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
             }
             else{
                 // console.log("좋아요 한 유저가 있을때")
@@ -135,14 +151,41 @@ window.onload = async function getIndexDetail_API(){
             // 체크한 부분을 토대로 출력해주는 부분
                 if(counts==1){
                     // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중입니다`)
-                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handlelike()">`
+                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handleLike()">`
                 }
                 else{
                     // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중이 아닙니다`)
-                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handlelike()">`
+                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
                 }
             }
         
+        // 검색어 랭킹 조회
+        search_word_list = await getHeaderSearchWordRanking()
+        if (search_word_list.length > 9) {
+            search_word_list = search_word_list.sort((a, b) => b.count - a.count)
+
+            var word_rank_01 = document.getElementsByClassName('rank_01')[0];
+            var word_rank_02 = document.getElementsByClassName('rank_02')[0];
+            var word_rank_03 = document.getElementsByClassName('rank_03')[0];
+            var word_rank_04 = document.getElementsByClassName('rank_04')[0];
+            var word_rank_05 = document.getElementsByClassName('rank_05')[0];
+            var word_rank_06 = document.getElementsByClassName('rank_06')[0];
+            var word_rank_07 = document.getElementsByClassName('rank_07')[0];
+            var word_rank_08 = document.getElementsByClassName('rank_08')[0];
+            var word_rank_09 = document.getElementsByClassName('rank_09')[0];
+            var word_rank_10 = document.getElementsByClassName('rank_10')[0];
+
+            word_rank_01.innerText = `1등 : ${search_word_list[0]['word']}`
+            word_rank_02.innerText = `2등 : ${search_word_list[1]['word']}`
+            word_rank_03.innerText = `3등 : ${search_word_list[2]['word']}`
+            word_rank_04.innerText = `4등 : ${search_word_list[3]['word']}`
+            word_rank_05.innerText = `5등 : ${search_word_list[4]['word']}`
+            word_rank_06.innerText = `6등 : ${search_word_list[5]['word']}`
+            word_rank_07.innerText = `7등 : ${search_word_list[6]['word']}`
+            word_rank_08.innerText = `8등 : ${search_word_list[7]['word']}`
+            word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
+            word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
+        }
     }
 }
 
