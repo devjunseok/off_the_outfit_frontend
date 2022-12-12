@@ -221,7 +221,7 @@ body {
 }
 
 .nav_main_brand_right {
-    display: none;
+    display: flex;
 }
 
 
@@ -318,6 +318,7 @@ body {
 
 .left_area .nav_main_category_left {
     position: absolute;
+    display: none;
 }
 
 .nav_category_area {
