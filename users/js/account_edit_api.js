@@ -219,6 +219,73 @@ function handleUpdateConfirm_Body(){
 }
 
 
+// 프로필 이미지 변경 API
+async function updateProfileImage(){
+    profile_Image = document.getElementById("update-InputProfileImage").files[0];
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    
+    const formData = new FormData();
+    
+    formData.append("profile_image", profile_Image);
+
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`, {
+        headers: {
+        "Authorization":"Bearer " + localStorage.getItem("access"),
+        },
+        method: 'PUT',
+        body: formData,
+
+    });
+    const response_json = await response.json()
+    if (response.status == 200){
+        alert(response_json["message"])
+        window.location.reload();
+    }else {
+        alert(response_json["detail"])
+    }   
+return response_json
+}
+
+// 프로필 이미지 변경 버튼 01
+function handleUpdate_profile_image() {
+
+    const id_profile_image = document.getElementById("id_profile_image")
+    const updateInputProfileImage = document.createElement("input",[id_profile_image]);
+    
+    id_profile_image.style.visibility = "hidden"
+    id_profile_image.style.width = "0"
+    updateInputProfileImage.setAttribute("id","update-InputProfileImage")
+    updateInputProfileImage.setAttribute("type", "file")
+    updateInputProfileImage.setAttribute("name", "profile_image")
+    updateInputProfileImage.setAttribute("required", "required")
+    updateInputProfileImage.setAttribute("value", "image")
+
+    id_profile_image.parentNode.insertBefore(updateInputProfileImage, id_profile_image)
+
+    const updateProfileImageButton = document.getElementById("edit_profile_image_button")
+
+    updateProfileImageButton.setAttribute("onclick", "handleUpdateConfirm_profile_image()")
+}
+
+// 프로필 이미지 변경 버튼 02
+function handleUpdateConfirm_profile_image(){
+
+    const updateInputProfileImage = document.getElementById('update-InputProfileImage')
+    const id_profile_image = document.getElementById("id_profile_image")
+    
+    updateNickname()
+    
+    id_profile_image.style.visibility = "visible"
+    id_profile_image.style.width = "400px"
+
+    const updateProfileImageButton = document.getElementById("edit_profile_image_button")
+ 
+    updateProfileImageButton.setAttribute("onclick", "handleUpdate_profile_image()")
+    updateInputProfileImage.remove()
+}
+
+
+
 // 인기 검색어 랭킹 조회
 async function getHeaderSearchWordRanking(){
     const response = await fetch(`${backEndBaseUrl}/communities/search/word/ranking/`,{
@@ -264,28 +331,30 @@ window.onload = async function getProfile_API(){
 
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()
-    search_word_list = search_word_list.sort((a, b) => b.count - a.count)
+    if (search_word_list.length > 9) {
+        search_word_list = search_word_list.sort((a, b) => b.count - a.count)
 
-    var word_rank_01 = document.getElementsByClassName('rank_01')[0];
-    var word_rank_02 = document.getElementsByClassName('rank_02')[0];
-    var word_rank_03 = document.getElementsByClassName('rank_03')[0];
-    var word_rank_04 = document.getElementsByClassName('rank_04')[0];
-    var word_rank_05 = document.getElementsByClassName('rank_05')[0];
-    var word_rank_06 = document.getElementsByClassName('rank_06')[0];
-    var word_rank_07 = document.getElementsByClassName('rank_07')[0];
-    var word_rank_08 = document.getElementsByClassName('rank_08')[0];
-    var word_rank_09 = document.getElementsByClassName('rank_09')[0];
-    var word_rank_10 = document.getElementsByClassName('rank_10')[0];
+        var word_rank_01 = document.getElementsByClassName('rank_01')[0];
+        var word_rank_02 = document.getElementsByClassName('rank_02')[0];
+        var word_rank_03 = document.getElementsByClassName('rank_03')[0];
+        var word_rank_04 = document.getElementsByClassName('rank_04')[0];
+        var word_rank_05 = document.getElementsByClassName('rank_05')[0];
+        var word_rank_06 = document.getElementsByClassName('rank_06')[0];
+        var word_rank_07 = document.getElementsByClassName('rank_07')[0];
+        var word_rank_08 = document.getElementsByClassName('rank_08')[0];
+        var word_rank_09 = document.getElementsByClassName('rank_09')[0];
+        var word_rank_10 = document.getElementsByClassName('rank_10')[0];
 
-    word_rank_01.innerText = `1등 : ${search_word_list[0]['word']}`
-    word_rank_02.innerText = `2등 : ${search_word_list[1]['word']}`
-    word_rank_03.innerText = `3등 : ${search_word_list[2]['word']}`
-    word_rank_04.innerText = `4등 : ${search_word_list[3]['word']}`
-    word_rank_05.innerText = `5등 : ${search_word_list[4]['word']}`
-    word_rank_06.innerText = `6등 : ${search_word_list[5]['word']}`
-    word_rank_07.innerText = `7등 : ${search_word_list[6]['word']}`
-    word_rank_08.innerText = `8등 : ${search_word_list[7]['word']}`
-    word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
-    word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
+        word_rank_01.innerText = `1등 : ${search_word_list[0]['word']}`
+        word_rank_02.innerText = `2등 : ${search_word_list[1]['word']}`
+        word_rank_03.innerText = `3등 : ${search_word_list[2]['word']}`
+        word_rank_04.innerText = `4등 : ${search_word_list[3]['word']}`
+        word_rank_05.innerText = `5등 : ${search_word_list[4]['word']}`
+        word_rank_06.innerText = `6등 : ${search_word_list[5]['word']}`
+        word_rank_07.innerText = `7등 : ${search_word_list[6]['word']}`
+        word_rank_08.innerText = `8등 : ${search_word_list[7]['word']}`
+        word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
+        word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
+    }
 
  }

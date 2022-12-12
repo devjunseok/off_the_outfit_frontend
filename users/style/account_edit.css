@@ -105,7 +105,23 @@ body {
     font-weight: bold;
 }
 
-.edit_view .edit_image_view {
+.edit_box_main .edit_profile_image {
+    text-align: left;
+    line-height: 150px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_main input {
+    text-align: left;
+    line-height: 150px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_profile_image .edit_image_view {
     width: 110px;
     height: 110px;
     border-radius: 55px;
