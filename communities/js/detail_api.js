@@ -46,6 +46,7 @@ async function handleLike(){
     
             })
         })
+        window.location.reload()
 
 }
 
@@ -104,6 +105,7 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
+        console.log(feed.like.length)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -125,13 +127,12 @@ window.onload = async function getIndexDetail_API(){
         feed_content.innerText = `${feed.content}`
         feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
-        // like_button.innerText =`${feed.like}`
         // 업데이트 html로 id값 같이 보내기
         feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
 
         if(feed.like.length == 0){
-            // console.log("좋아요 한 유저가 없을때")
-            like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handlelike()">`
+            console.log("좋아요 한 유저가 없을때")
+            like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
             }
             else{
                 // console.log("좋아요 한 유저가 있을때")
@@ -150,11 +151,11 @@ window.onload = async function getIndexDetail_API(){
             // 체크한 부분을 토대로 출력해주는 부분
                 if(counts==1){
                     // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중입니다`)
-                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handlelike()">`
+                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handleLike()">`
                 }
                 else{
                     // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중이 아닙니다`)
-                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handlelike()">`
+                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
                 }
             }
         

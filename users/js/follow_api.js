@@ -2,8 +2,8 @@ const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
 
-// 본인 정보 제외 유저 조회
-async function getUserInfo(){
+// 내가 팔로우 한 유저 조회
+async function getUserFollowInfo(){
 
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followings/`,{
@@ -16,7 +16,6 @@ async function getUserInfo(){
     response_json = await response.json()
     return response_json
 }
-
 
 // 인기 검색어 랭킹 조회
 async function getHeaderSearchWordRanking(){
@@ -31,17 +30,40 @@ async function getHeaderSearchWordRanking(){
     response_json = await response.json()
     return response_json
 }
+
+
+//팔로우 하기,취소하기
+async function handleFollow(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/follow/${user_id}/`, {
+    headers: {
+        'content-type': 'application/json',
+        "Authorization":"Bearer " + localStorage.getItem("access")
+    },
+    method: 'POST',
+    body: JSON.stringify({
+
+        })
+    })
+    
+    const response_json = await response.json()
+    console.log(response_json)
+    window.location.reload();
+
+    return response_json
+}
                 
 
 // 회원 정보 출력 API
 window.onload = async function getUserInfo_API(){
     //회원정보 리스트 조회
-    profile_list = await getUserInfo()
-    console.log(profile_list)
+    follow_list = await getUserFollowInfo()
+    console.log(follow_list)
     //회원정보 출력 반복문 부분
     var follow_wrap = document.getElementsByClassName('follow_list')[0];
 
-    profile_list.forEach(user => {
+    follow_list.forEach(user => {
+        console.log(user)
         follow_wrap.innerHTML += `
         <div class="user_box_main horizontal_alignment">
             <div class="left_info_section horizontal_alignment">
@@ -67,7 +89,7 @@ window.onload = async function getUserInfo_API(){
                 </div>
             </div>
             <div class="right_info_section vertical_alignment">
-                <div class="follow_button"><button>팔로우</button></div>
+                <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
                 <div class="feed_list_button"><button>피드 보기</button></div>
             </div>
         </div>
