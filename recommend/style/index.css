@@ -55,26 +55,10 @@ body {
 }
 
 .main_body_area .section_dividing_line {
-    height: 40px;
     border-bottom: solid 2px #c0c0c0;
 }
 
-.main_body_area .top_section {
-    width: 1260px;
-    height: 600px;
-    margin: 10px;
-}
 
-.top_section_menu {
-    width: 1260px;
-    height: 40px;
-}
-
-.top_section_menu .ts_menu_title {
-    width: 100px;
-    font-size: 15pt;
-    font-weight: bold;
-}
 
 .top_section .main_feed_list_box {
     background-color: #ffffff;
@@ -189,18 +173,38 @@ body {
 
 .main_body_area .outer_section {
     width: 1260px;
-    height: 100%;
+    height: 400px;
     margin: 10px;
 }
 .main_body_area .top_section {
     width: 1260px;
-    height: 100%;
+    height: 400px;
     margin: 10px;
 }
 .main_body_area .bottom_section {
     width: 1260px;
-    height: 100%;
+    height: 400px;
     margin: 10px;
+}
+
+
+.outer_section_menu {
+    width: 1260px;
+
+}
+.top_section_menu {
+    width: 1260px;
+
+}
+.bottom_section_menu {
+    width: 1260px;
+
+}
+
+.ts_menu_title {
+    width: 100px;
+    font-size: 15pt;
+    font-weight: bold;
 }
 
 

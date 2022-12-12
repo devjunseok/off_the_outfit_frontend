@@ -187,20 +187,27 @@ window.onload = async function getIndexDetail_API(){
         // 댓글 닉네임과 내용 반복문
         feed.comments.forEach(comt=>{
             console.log(comt)
-        cmt_wrap.innerHTML +=`<div class="comment_box horizontal_alignment">
-        <div class="cmt_user horizontal_alignment">  
+        cmt_wrap.innerHTML += `
+        <div class="comment_box horizontal_alignment">
+            <div class="cmt_user horizontal_alignment">  
                 <div class="cmt_nickname">${comt.user}</div>
                 <div class="cmt_comment">${comt.comment}</div>
-        </div>
-        <div class="cmt_like_box">
-            <div class="cmt_like_button">O</div>
-        </div>
-        </div>
-        <div class="recomment_box">
-        <div>대댓글닉네임</div>
-        <div>대댓글내용</div>
+            </div>
+                <div class="cmt_like_box">
+                <div class="cmt_like_button">O</div>
+            </div>
         </div>
         `
+        comt.recomment.forEach(reco=>{
+            cmt_wrap.innerHTML +=`
+            <div class="recomment_box horizontal_alignment">
+                <div class="reco_user horizontal_alignment">  
+                    <div class="reco_nickname">${reco.user}</div>
+                    <div class="reco_recomment">${reco.recomment}</div>
+                </div>
+            </div>
+            `
+        })
         })
         // 좋아요 부분
         if(feed.like.length == 0){
