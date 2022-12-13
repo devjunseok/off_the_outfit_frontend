@@ -186,7 +186,7 @@ window.onload = async function getIndexDetail_API(){
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
-        // profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
+        profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
         nickname.innerText = `${feed.user}`
         feed_like.innerText = `${feed.like_count}`
         feed_unlike.innerText = `${feed.unlike_count}`
