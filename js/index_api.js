@@ -190,7 +190,6 @@ window.onload = async function getIndex_API(){
             } else {
                 tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
             }
-                console.log(feed)
                 wrap.innerHTML += `
                 <div class="sub_feed_box vertical_alignment">
                     <div class="sub_feed_image_box">
