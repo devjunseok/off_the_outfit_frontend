@@ -97,7 +97,45 @@ async function postComment(feed_id){
 }
 
 
+//대댓글 등록
+async function postRecomment(feed_id, comment_id, Input_Box){
 
+    const recomment = document.getElementById(Input_Box).value;
+    console.log(recomment)
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            "recomment":recomment
+        })
+    })
+    const response_json = await response.json()
+
+    if (response.status == 200){
+        alert(response_json["message"])
+    }else {
+        alert(response_json["detail"])
+    }
+    window.location.reload()   
+    
+    return response_json
+}
+
+
+// 대댓글 입력 박스
+async function recommentInputFlex(Input_Box) {
+    console.log(Input_Box)
+    let con = document.querySelector(Input_Box);
+
+    if(con.style.display == 'none'){
+        con.style.display = 'flex';
+        }else{
+        con.style.display = 'none';
+    }
+}
 
 
 // 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
@@ -123,6 +161,8 @@ function timeForToday(value) {
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
+
+
 //게시글 삭제
 async function deleteFeed(){
 
@@ -140,19 +180,6 @@ async function deleteFeed(){
     }
     else {
         alert(response.status);
-    }
-}
-
-
-// 대댓글 입력 박스
-async function recommentInputFlex(Input_Box) {
-    console.log(Input_Box)
-    let con = document.querySelector(Input_Box);
-
-    if(con.style.display == 'none'){
-        con.style.display = 'flex';
-        }else{
-        con.style.display = 'none';
     }
 }
 
@@ -213,8 +240,8 @@ window.onload = async function getIndexDetail_API(){
                 </div>
             </div>
             <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
-                <textarea class="reco_input" id="recomment_content" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
-                <button class="recomment_create_button" type="submit" onclick="">댓글작성</button>
+                <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
             </div>
         </div>
         `
