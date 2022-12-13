@@ -250,7 +250,14 @@ window.onload = async function getIndexDetail_API(){
         var cmt_wrap = document.getElementsByClassName('comment_middle_section')[0];
         var comment_onclick = document.getElementsByClassName('comment_create_button')[0];
         var like_info = document.getElementsByClassName('like_info')[0];
+        var etc_list = document.getElementsByClassName('etc_list')[0];
 
+        if(feed.user_id == User_payload.user_id){
+            etc_list.innerHTML += `
+            <a href="${frontEndBaseUrl}/communities/update.html?id=${feed_id}">수정</a>
+            <a onclick="deleteFeed()" >삭제</a>
+            `
+        }
         like_info.innerText = `좋아요 ${feed.like_count}개`
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
@@ -259,8 +266,10 @@ window.onload = async function getIndexDetail_API(){
         nickname.innerText = `${feed.user}`
         feed_content.innerText = `${feed.content}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
-        // 업데이트 html로 id값 같이 보내기
-        feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
+
+
+
+
 
 
         //태그 반복
@@ -315,6 +324,7 @@ window.onload = async function getIndexDetail_API(){
 
         }
         comt.recomment.forEach(reco=>{
+            // 대댓글 삭제 부분
             if(reco.user_id == User_payload.user_id){
                 cmt_wrap.innerHTML +=`
                 <div class="recomment_box horizontal_alignment">
@@ -425,6 +435,78 @@ window.onload = async function getIndexDetail_API(){
             word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
             word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
         }
+
+
+        // NAV 브랜드 리스트 조회
+    brand_list = await getNavBrandList()
+
+    alphabet = location.search.replace('?key=', '')
+    if(alphabet.length == 0){
+        brand_list = brand_list.slice(0, 20)
+    }
+    var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
+    brand_list.forEach(br => {
+        if(br.brand_name_en.startsWith(alphabet, 1)){
+        brand_wrap.innerHTML += `
+        <div class="brand_box">
+            <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+            <div class="brand_name_kr">${br.brand_name_kr}</div>
+        </div>
+        `
+        }
+    })
+
+
+    // NAV 카테고리 리스트 조회
+    category_list = await getCategorylist()
+    
+    // 메인 카테고리명 중복 제거 및 정렬
+    let unique_category = [];
+    category_list.forEach(category => {
+        if(!unique_category.includes(category.main_category_name)) {
+            unique_category.push({"main":category.main_category_name, "number":category.main_category_number});
+        }
+    });
+
+    let main_category_list = unique_category.filter((thing, index) => {
+        const cate = JSON.stringify(thing);
+        return index === unique_category.findIndex(obj => {
+          return JSON.stringify(obj) === cate;
+        });
+    });
+    
+    main_category = main_category_list.sort((a, b) => a.number - b.number)
+    var category_wrap = document.getElementsByClassName('nav_category_area')[0];
+
+    main_category_list.forEach(main => {
+        category_wrap.innerHTML += `
+        <div class="main_category_section horizontal_alignment">
+            <div class="main_info">
+                <div class="main_name">
+                    ${main.main}
+                </div>
+            </div>
+            <div class="main_info_button">
+                +
+            </div>
+        </div>
+        `
+        category_list.forEach(cate => {
+            if(main.main == cate.main_category_name) {
+                category_wrap.innerHTML += `
+                <div class="sub_category_section horizontal_alignment">
+                    <div class="sub_info horizontal_alignment">
+                        <div class="sub_category_name">
+                            ${cate.sub_category_name}
+                        </div>
+                        <div class="sub_count">
+                        </div>
+                    </div>
+                </div>
+                `
+            }
+        })
+    })
     }
 }
 
