@@ -71,9 +71,7 @@ async function handleUnLike(){
 //댓글 등록
 async function postComment(feed_id){
 
-    console.log(feed_id)
     const comment = document.getElementById('comment_content').value;
-    console.log(comment)
     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/`, {
         headers: {
             'content-type': 'application/json',
@@ -101,7 +99,6 @@ async function postComment(feed_id){
 async function postRecomment(feed_id, comment_id, Input_Box){
 
     const recomment = document.getElementById(Input_Box).value;
-    console.log(recomment)
     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/`, {
         headers: {
             'content-type': 'application/json',
@@ -127,7 +124,6 @@ async function postRecomment(feed_id, comment_id, Input_Box){
 
 // 대댓글 입력 박스
 async function recommentInputFlex(Input_Box) {
-    console.log(Input_Box)
     let con = document.querySelector(Input_Box);
 
     if(con.style.display == 'none'){
@@ -236,7 +232,6 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
-        console.log(feed.comments)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -349,7 +344,6 @@ window.onload = async function getIndexDetail_API(){
         })
         // 좋아요 부분
         if(feed.like.length == 0){
-            console.log("좋아요 한 유저가 없을때")
             like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
             }
             else{
@@ -378,7 +372,6 @@ window.onload = async function getIndexDetail_API(){
             }
         //싫어요 부분
         if(feed.unlike.length == 0){
-            console.log("싫어요 한 유저가 없을때")
             unlike_wrap.innerHTML +=`<img class="feed_umji_view" src="/static/img/unlike.png" onclick="handleUnLike()"/>`
             }
             else{
@@ -438,75 +431,74 @@ window.onload = async function getIndexDetail_API(){
 
 
         // NAV 브랜드 리스트 조회
-    brand_list = await getNavBrandList()
-
-    alphabet = location.search.replace('?key=', '')
-    if(alphabet.length == 0){
-        brand_list = brand_list.slice(0, 20)
-    }
-    var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
-    brand_list.forEach(br => {
-        if(br.brand_name_en.startsWith(alphabet, 1)){
-        brand_wrap.innerHTML += `
-        <div class="brand_box">
-            <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-            <div class="brand_name_kr">${br.brand_name_kr}</div>
-        </div>
-        `
+        brand_list = await getNavBrandList()
+        console.log(brand_list)
+        alphabet = location.search.replace('?key=', '')
+        if(alphabet.length == 0){
+            brand_list = brand_list.slice(0, 20)
         }
-    })
-
-
-    // NAV 카테고리 리스트 조회
-    category_list = await getCategorylist()
-    
-    // 메인 카테고리명 중복 제거 및 정렬
-    let unique_category = [];
-    category_list.forEach(category => {
-        if(!unique_category.includes(category.main_category_name)) {
-            unique_category.push({"main":category.main_category_name, "number":category.main_category_number});
-        }
-    });
-
-    let main_category_list = unique_category.filter((thing, index) => {
-        const cate = JSON.stringify(thing);
-        return index === unique_category.findIndex(obj => {
-          return JSON.stringify(obj) === cate;
-        });
-    });
-    
-    main_category = main_category_list.sort((a, b) => a.number - b.number)
-    var category_wrap = document.getElementsByClassName('nav_category_area')[0];
-
-    main_category_list.forEach(main => {
-        category_wrap.innerHTML += `
-        <div class="main_category_section horizontal_alignment">
-            <div class="main_info">
-                <div class="main_name">
-                    ${main.main}
-                </div>
+        var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
+        brand_list.forEach(br => {
+            if(br.brand_name_en.startsWith(alphabet, 1)){
+            brand_wrap.innerHTML += `
+            <div class="brand_box">
+                <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+                <div class="brand_name_kr">${br.brand_name_kr}</div>
             </div>
-            <div class="main_info_button">
-                +
-            </div>
-        </div>
-        `
-        category_list.forEach(cate => {
-            if(main.main == cate.main_category_name) {
-                category_wrap.innerHTML += `
-                <div class="sub_category_section horizontal_alignment">
-                    <div class="sub_info horizontal_alignment">
-                        <div class="sub_category_name">
-                            ${cate.sub_category_name}
-                        </div>
-                        <div class="sub_count">
-                        </div>
-                    </div>
-                </div>
-                `
+            `
             }
         })
-    })
+
+        // NAV 카테고리 리스트 조회
+        category_list = await getCategorylist()
+        
+        // 메인 카테고리명 중복 제거 및 정렬
+        let unique_category = [];
+        category_list.forEach(category => {
+            if(!unique_category.includes(category.main_category_name)) {
+                unique_category.push({"main":category.main_category_name, "number":category.main_category_number});
+            }
+        });
+
+        let main_category_list = unique_category.filter((thing, index) => {
+            const cate = JSON.stringify(thing);
+            return index === unique_category.findIndex(obj => {
+            return JSON.stringify(obj) === cate;
+            });
+        });
+        
+        main_category = main_category_list.sort((a, b) => a.number - b.number)
+        var category_wrap = document.getElementsByClassName('nav_category_area')[0];
+
+        main_category_list.forEach(main => {
+            category_wrap.innerHTML += `
+            <div class="main_category_section horizontal_alignment">
+                <div class="main_info">
+                    <div class="main_name">
+                        ${main.main}
+                    </div>
+                </div>
+                <div class="main_info_button">
+                    +
+                </div>
+            </div>
+            `
+            category_list.forEach(cate => {
+                if(main.main == cate.main_category_name) {
+                    category_wrap.innerHTML += `
+                    <div class="sub_category_section horizontal_alignment">
+                        <div class="sub_info horizontal_alignment">
+                            <div class="sub_category_name">
+                                ${cate.sub_category_name}
+                            </div>
+                            <div class="sub_count">
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }
+            })
+        })
     }
 }
 
