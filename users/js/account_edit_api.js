@@ -383,10 +383,12 @@ window.onload = async function getProfile_API(){
         profile_tier_info.innerText =`LV.5 VIP`
     }
     //출석하기 출력문
-
     var AttendanceCheck = document.getElementById('AttendanceCheck')
-
     AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
     
     
 
