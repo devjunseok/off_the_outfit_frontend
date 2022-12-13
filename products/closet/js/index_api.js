@@ -148,7 +148,7 @@ async function closetNametagCreate() {
     } else {
 
         name_tag = document.getElementById("name_tag").value;
-
+        
         const response = await fetch(`${backEndBaseUrl}/products/product/nametag/`, {
             headers: {
                 'content-type': 'application/json',
@@ -168,7 +168,50 @@ async function closetNametagCreate() {
         return response_json
     }
 }
+
+
+// 네임 태그 상품 등록 API
+async function NametagProdCreate(product_number, closet_id, Input_tag_name) {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+        
+    } else {
+
+        name_tag = document.getElementById(Input_tag_name).value;
+
+        const response = await fetch(`${backEndBaseUrl}/products/product/${product_number}/closet/${closet_id}/`, {
+            headers: {
+                'content-type': 'application/json',
+                "Authorization":"Bearer " + localStorage.getItem("access")
+            },
+            method: 'PUT',
+            body: JSON.stringify({
+                "name_tag":name_tag
+            })
+        })
+        const response_json = await response.json()
     
+        if (response.status == 200){
+            alert(response_json["message"])
+        }
+        window.location.reload()   
+        return response_json
+    }
+}
+    
+
+// 네임태그 상품 입력 박스
+async function nametagProdInputFlex(nametagProdInput) {
+    let con = document.querySelector(nametagProdInput);
+
+    if(con.style.display == 'none'){
+        con.style.display = 'flex';
+        }else{
+        con.style.display = 'none';
+    }
+}
 
 
 
@@ -193,6 +236,7 @@ window.onload = async function getIndex_API(){
         var product_wrap = document.getElementsByClassName('product_list_box')[0];
 
         if(name_tag == undefined){
+            if(user_id == User_payload.user_id){
             product_list.forEach(prod => {
             product_wrap.innerHTML += `
             <div class="product_box">
@@ -207,16 +251,44 @@ window.onload = async function getIndex_API(){
                     <div class="product_name">${prod.product.product_name}</div>
                     <div class="horizontal_alignment">
                         <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
-                        <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                        <div class="name_tag_add_prod" onclick="nametagProdInputFlex('#info_Input_section_${prod.pk}')">Add</div>
+                        <div class="closet_delete_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
                     </div>
                 </div>
                 <div class="info_bottom_section horizontal_alignment">
                     <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
                     <div class="product_number">No.${prod.product.product_number}</div>
                 </div>
+                <div class="info_Input_section horizontal_alignment" id="info_Input_section_${prod.pk}" style="display:none;">
+                    <input class="nametag_prod_input" id="tag_name_${prod.pk}" type="text" placeholder="네임태그..." />
+                    <button class="nametag_prod_add_button" type="submit" onclick="NametagProdCreate(${prod.product.product_number}, ${prod.pk}, 'tag_name_${prod.pk}')">등록</button>
+                </div>
             </div>
             `
-        })
+        })} else {
+            product_list.forEach(prod => {
+                product_wrap.innerHTML += `
+                <div class="product_box">
+                    <div class="product_image_box">
+                        <img src="${prod.product.product_image}">
+                    </div>
+                    <div class="info_top_section horizontal_alignment">
+                        <div class="product_brand">${prod.product.brand_name_en}</div>
+                        <div class="product_review">review:${prod.product.review_count}</div>
+                    </div>
+                    <div class="info_middle_section">
+                        <div class="product_name">${prod.product.product_name}</div>
+                        <div class="horizontal_alignment">
+                            <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                        </div>
+                    </div>
+                    <div class="info_bottom_section horizontal_alignment">
+                        <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                        <div class="product_number">No.${prod.product.product_number}</div>
+                    </div>
+                </div>
+                `
+        })}
 
         } else {
 
@@ -301,7 +373,7 @@ window.onload = async function getIndex_API(){
             <li onclick="location.href='/products/closet/?user_id=${user_info.pk}&?name_tag=${name_tag.tag_name}'">${name_tag.tag_name}</li>
             `
         })
-        
+
         // 네임 태그 본인 옷장에서만 생성
         var name_tag_add_button = document.getElementsByClassName('name_tag_add_button')[0];
         if(search[0] != User_payload.user_id) {

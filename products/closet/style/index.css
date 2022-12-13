@@ -321,10 +321,6 @@ body {
     border: solid 1px #c0c0c0;
 }
 
-.mypage_list {
-
-}
-
 .left_area {
     background-color: #ffffff;
     width: 300px;
@@ -359,4 +355,33 @@ body {
 
 }
 
+.name_tag_add_prod {
+    font-size: 7pt;
+    cursor: pointer;
+}
 
+.name_tag_add_prod:hover {
+    font-weight: bold;
+}
+
+.closet_delete_button {
+    font-size: 7pt;
+    margin-left: 5px;
+    cursor: pointer;
+    color: red;
+}
+
+.closet_delete_button:hover {
+    font-weight: bold;
+}
+
+.info_Input_section {
+    display: none;
+    width: 222px;
+    height: 20px;
+    justify-content: space-between;
+
+    color: #606060;
+    margin: 0 10px 0 10px;
+    line-height: 20px;
+}
