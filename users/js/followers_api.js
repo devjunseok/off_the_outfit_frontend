@@ -1,6 +1,20 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
+// 회원 상세 정보 조회 API
+async function getUserDetailInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
 
 // 나를 팔로우한 유저 조회
 async function getFollowerUserInfo(){
@@ -70,9 +84,11 @@ async function handleFollow(user_id){
 
 // 회원 정보 출력 API
 window.onload = async function getUserInfo_API(){
-    //회원정보 리스트 조회
+    //팔로우,팔로워 회원정보 리스트 조회
     follower_list = await getFollowerUserInfo()
     follow_list = await getUserFollowInfo()
+    //회원정보 상세 조회
+    profile_list = await getUserDetailInfo()
     //회원정보 출력 반복문 부분
     var follow_wrap = document.getElementsByClassName('follow_list')[0];
     follower_list.forEach(user =>{
@@ -157,10 +173,42 @@ window.onload = async function getUserInfo_API(){
         }
     })
 
+    //마이페이지 HAEDER 부분 출력
+    var main_profile_image = document.getElementsByClassName('main_profile_image')[0];
+    var profile_nickname = document.getElementsByClassName('profile_nickname')[0];
+    var profile_tier_info = document.getElementsByClassName('profile_tier_info')[0];
+    var profile_created_at = document.getElementsByClassName('profile_created_at')[0];
+    var profile_next_tier_info = document.getElementsByClassName('profile_next_tier_info')[0];
+    var follow_value = document.getElementById('follow_value_count')
+    var follower_value = document.getElementById('follower_value_count')
+    var feed_value = document.getElementById('feed_value_count')
+    var closet_count_value = document.getElementById('closet_value_count')
 
-
-
-
+    main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+    profile_nickname.innerText = `${profile_list.nickname}`
+    // profile_created_at.innerText = `${profile_list.created_at}`
+    profile_next_tier_info.innerText = `현재 ${profile_list.nickname}님의 포인트는 ${profile_list.point} 포인트 입니다`
+    follow_value.innerText = `${profile_list.followings_count}`
+    follower_value.innerText = `${profile_list.followers_count}`
+    feed_value.innerText = `${profile_list.feeds_count}`
+    closet_count_value.innerText = `${profile_list.closet_set_count}`
+    
+    //마이페이지 등급 조건문
+    if(0<=profile_list.point||profile_list.point < 31){
+        profile_tier_info.innerText =`LV.1 브론즈`
+    }
+    if(31<=profile_list.point||profile_list.point < 51){
+        profile_tier_info.innerText =`LV.2 실버`
+    }
+    if(51<=profile_list.point||profile_list.point <101){
+        profile_tier_info.innerText =`LV.3 골드`
+    }
+    if(101<=profile_list.point||profile_list.point <201){
+        profile_tier_info.innerText =`LV.4 플레티넘`
+    }
+    if(profile_list.point >= 201){
+        profile_tier_info.innerText =`LV.5 VIP`
+    }
 
 
     // 검색어 랭킹 조회

@@ -233,6 +233,11 @@ window.onload = async function getIndex_API(){
         `
         }
     })
+     // NAV 마이페이지 id값 보내기
+    // var Nav_Put_wrap = document.getElementsByClassName('Nav_Put')[0];
+    // feed_list.forEach(feed =>{
+    //     Nav_Put_wrap.innerHTML +=`onclick="location.href='${frontEndBaseUrl}/users/account_edit.html?${feed.pk}'">회원 정보 수정`
+    // })
 
 
     // NAV 카테고리 리스트 조회
