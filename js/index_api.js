@@ -185,7 +185,7 @@ window.onload = async function getIndex_API(){
                 `
             })
 
-
+    // HEADER 부분
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()
     if (search_word_list.length > 9) {
@@ -213,7 +213,10 @@ window.onload = async function getIndex_API(){
         word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
         word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
     }
-    
+
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
     // NAV 브랜드 리스트 조회
     brand_list = await getNavBrandList()
