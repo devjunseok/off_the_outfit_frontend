@@ -94,39 +94,76 @@ window.onload = async function getIndex_API(){
 
         best_feed_list.forEach(best_feed => {
             //태그 출력 반복문
+            tag_list = [];
             best_feed.tags.forEach(tag => {
-                
-                best_wrap.innerHTML += `
-                <div class="new_feed_box vertical_alignment">
-                    <div class="nf_image_box">
-                        <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.id}'"/>
+                tag = `#${tag}`
+                tag_list.push(tag)
+            })
+
+            console.log(tag_list.length)
+            if(tag_list.length == 0){
+                tag_list = []
+            } else if(tag_list.length == 1){
+                tag_list = tag_list
+            } else if(tag_list.length == 2){
+                tag_list = `${tag_list[0]} ${tag_list[1]}`
+            } else if(tag_list.length == 3){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]}`
+            } else if(tag_list.length == 4){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]}`
+            } else {
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
+            }
+            best_wrap.innerHTML += `
+            <div class="new_feed_box vertical_alignment">
+                <div class="nf_image_box">
+                    <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.id}'"/>
+                </div>
+                <div class="nf_info_box horizontal_alignment">
+                    <div class="left_section vertical_alignment">
+                        <div class="nf_nickname">${best_feed.user}</div>
+                        <div class="nf_content">${best_feed.content}</div>
+                        <div class="nf_tag">${tag_list}</div>
                     </div>
-                    <div class="nf_info_box horizontal_alignment">
-                        <div class="left_section vertical_alignment">
-                            <div class="nf_nickname">${best_feed.user}</div>
-                            <div class="nf_content">${best_feed.content}</div>
-                            <div class="nf_tag">${tag}</div>
+                    <div class="right_section vertical_alignment">
+                        <div class="like_box horizontal_alignment">
+                            <div class="nf_like">${best_feed.like_count}</div>
+                            <div class="nf_unlike">${best_feed.unlike_count}</div>
                         </div>
-                        <div class="right_section vertical_alignment">
-                            <div class="like_box horizontal_alignment">
-                                <div class="nf_like">${best_feed.like_count}</div>
-                                <div class="nf_unlike">${best_feed.unlike_count}</div>
-                            </div>
-                            <div class="right_section_middle"></div>
-                            <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
-                        </div>
+                        <div class="right_section_middle"></div>
+                        <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
                     </div>
                 </div>
-                `
-            })    
-        })
+            </div>
+            `
+        })    
+
 
         // 전체 게시글 출력 반복문 부분
         wrap = document.getElementsByClassName('sub_feed_list_box')[0];
 
         feed_list.forEach(feed => {
-            // 태그 출력 반복문
+            //태그 출력 반복문
+            tag_list = [];
             feed.tags.forEach(tag => {
+                tag = `#${tag}`
+                tag_list.push(tag)
+            })
+
+            console.log(tag_list.length)
+            if(tag_list.length == 0){
+                tag_list = []
+            } else if(tag_list.length == 1){
+                tag_list = tag_list
+            } else if(tag_list.length == 2){
+                tag_list = `${tag_list[0]} ${tag_list[1]}`
+            } else if(tag_list.length == 3){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]}`
+            } else if(tag_list.length == 4){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]}`
+            } else {
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
+            }
                 
                 wrap.innerHTML += `
                 <div class="sub_feed_box vertical_alignment">
@@ -142,14 +179,13 @@ window.onload = async function getIndex_API(){
                             <div class="sub_content">${feed.content}</div>
                         </div>
                         <div class="info_bottom_section horizontal_alignment">
-                            <div class="sub_tags">${tag}</div>
+                            <div class="sub_tags">${tag_list}</div>
                             <div class="sub_created_at">${timeForToday(feed.updated_at)}</div>
                         </div>
                     </div>
                 </div>
                 `
             })
-        })
 
 
     // 검색어 랭킹 조회
