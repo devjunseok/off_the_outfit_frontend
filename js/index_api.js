@@ -199,5 +199,57 @@ window.onload = async function getIndex_API(){
         `
         }
     })
+
+
+    // NAV 카테고리 리스트 조회
+    category_list = await getCategorylist()
+    
+    // 메인 카테고리명 중복 제거 및 정렬
+    let unique_category = [];
+    category_list.forEach(category => {
+        if(!unique_category.includes(category.main_category_name)) {
+            unique_category.push({"main":category.main_category_name, "number":category.main_category_number});
+        }
+    });
+
+    let main_category_list = unique_category.filter((thing, index) => {
+        const cate = JSON.stringify(thing);
+        return index === unique_category.findIndex(obj => {
+          return JSON.stringify(obj) === cate;
+        });
+    });
+    
+    main_category = main_category_list.sort((a, b) => a.number - b.number)
+    var category_wrap = document.getElementsByClassName('nav_category_area')[0];
+
+    main_category_list.forEach(main => {
+        category_wrap.innerHTML += `
+        <div class="main_category_section horizontal_alignment">
+            <div class="main_info">
+                <div class="main_name">
+                    ${main.main}
+                </div>
+            </div>
+            <div class="main_info_button">
+                +
+            </div>
+        </div>
+        `
+        category_list.forEach(cate => {
+            if(main.main == cate.main_category_name) {
+                category_wrap.innerHTML += `
+                <div class="sub_category_section horizontal_alignment">
+                    <div class="sub_info horizontal_alignment">
+                        <div class="sub_category_name">
+                            ${cate.sub_category_name}
+                        </div>
+                        <div class="sub_count">
+                        </div>
+                    </div>
+                </div>
+                `
+            }
+        })
+    })
 }
 }

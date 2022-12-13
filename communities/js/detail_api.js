@@ -143,6 +143,18 @@ async function deleteFeed(){
     }
 }
 
+async function recommentInputFlex() {
+    console.log("클릭")
+
+    let con = document.querySelector('.recomment_input_box');
+
+    if(con.style.display == 'none'){
+        con.style.display = 'block';
+        }else{
+        con.style.display = 'none';
+    }
+}
+
 
 
 // 게시글 상세보기 출력 부분
@@ -188,14 +200,20 @@ window.onload = async function getIndexDetail_API(){
         feed.comments.forEach(comt=>{
             console.log(comt)
         cmt_wrap.innerHTML += `
-        <div class="comment_box horizontal_alignment">
-            <div class="cmt_user horizontal_alignment">  
-                <div class="cmt_nickname">${comt.user}</div>
-                <div class="cmt_comment">${comt.comment}</div>
+        <div class="vertical_alignment">
+            <div class="comment_box horizontal_alignment">
+                <div class="cmt_user horizontal_alignment">  
+                    <div class="cmt_nickname">${comt.user}</div>
+                    <div class="cmt_comment">${comt.comment}</div>
+                </div>
+                <div class="cmt_button_box horizontal_alignment">
+                    <div class="cmt_reco_button" onclick="recommentInputFlex()">대댓글</div>
+                    <div class="cmt_like_button">O</div>
+                </div>
             </div>
-            <div class="cmt_button_box horizontal_alignment">
-                <div class="cmt_reco_button">대댓글</div>
-                <div class="cmt_like_button">O</div>
+            <div class="recomment_input_box" id="recomment_input_box" style="display: none;">
+                <textarea class="reco_input" id="recomment_content" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="">댓글작성</button>
             </div>
         </div>
         `
