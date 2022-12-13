@@ -1,5 +1,6 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
+
 // 출석 하기
 async function AttendanceCheck(user_id){
 
@@ -18,9 +19,11 @@ async function AttendanceCheck(user_id){
 return response_json
 }
 
-// 게시글 전체 리스트 조회
-async function getIndexFeedList(){
-    const response = await fetch(`${backEndBaseUrl}/communities/`,{
+// 상품 브랜드별 리스트 조회
+async function getIndexProductList(){
+    category_id = location.search.replace('?category_id=', '')
+
+    const response = await fetch(`${backEndBaseUrl}/products/product/category/${category_id}/`,{
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
@@ -88,6 +91,64 @@ async function getHeaderSearchWordRanking(){
 }
 
 
+// 옷장 상품 등록
+async function closetProductAdd(product_id) {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+        
+        
+    } else {
+        // name_tag = document.getElementById("name_tag").value;
+        // console.log(name_tag)
+        // const formData = new FormData();
+
+        // formData.append("name_tag", name_tag);
+        
+        const response = await fetch(`${backEndBaseUrl}/products/product/${product_id}/closet/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        // body: formData,
+        }); 
+        if (response.status == 200) {
+        alert("옷장 상품 등록");
+        window.location.replace(`${frontEndBaseUrl}/products/closet/?user_id=${User_payload.user_id}`);
+        }
+    }
+}
+
+
+// 브랜드 리스트 조회
+async function getNavBrandList(){
+    const response = await fetch(`${backEndBaseUrl}/products/brand/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
+// 카테고리 리스트 조회
+async function getCategorylist(){
+    const response = await fetch(`${backEndBaseUrl}/products/category/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
 // NAV 카테고리 + 메뉴 버튼 
 async function categoryNavMenu(Input_Box) {
     let con = document.querySelector(Input_Box);
@@ -107,112 +168,44 @@ window.onload = async function getIndex_API(){
         
         
     } else {
-  
-        //게시글 전체 리스트 조회
-        feed_list = await getIndexFeedList()
+        
+        // 전체 상품 조회
+        product_list = await getIndexProductList()
+        product_list = product_list.slice(0, 30)
 
-        // 인기 게시글
-        best_feed_list = await getIndexFeedList()
-        if (best_feed_list.length > 3 ) {
-            best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
-        }
+        // 카테고리명 출력
+        var category_name = document.getElementsByClassName('ts_menu_title')[0];
+        category_name.innerText = `${product_list[0].category[0].main_category_name} > ${product_list[0].category[0].sub_category_name}`
 
-        //인기 게시글 출력 반복문 부분
-        var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];
-
-        best_feed_list.forEach(best_feed => {
-            //태그 출력 반복문
-            tag_list = [];
-            best_feed.tags.forEach(tag => {
-                tag = `#${tag}`
-                tag_list.push(tag)
-            })
-
-            if(tag_list.length == 0){
-                tag_list = []
-            } else if(tag_list.length == 1){
-                tag_list = tag_list
-            } else if(tag_list.length == 2){
-                tag_list = `${tag_list[0]} ${tag_list[1]}`
-            } else if(tag_list.length == 3){
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]}`
-            } else if(tag_list.length == 4){
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]}`
-            } else {
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
-            }
-            best_wrap.innerHTML += `
-            <div class="new_feed_box vertical_alignment">
-                <div class="nf_image_box">
-                    <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.pk}'"/>
+        // 전체 상품 반복 출력
+        var product_wrap = document.getElementsByClassName('product_list_box')[0];
+        product_list.forEach(prod => {
+            product_wrap.innerHTML += `
+            <div class="product_box">
+                <div class="product_image_box">
+                    <img src="${prod.product_image}">
                 </div>
-                <div class="nf_info_box horizontal_alignment">
-                    <div class="left_section vertical_alignment">
-                        <div class="nf_nickname" onclick="location.href='/products/closet/?user_id=${best_feed.user_id}'">${best_feed.user}</div>
-                        <div class="nf_content">${best_feed.content}</div>
-                        <div class="nf_tag">${tag_list}</div>
+                <div class="info_top_section horizontal_alignment">
+                    <div class="product_brand">${prod.brand_name_en}</div>
+                    <div class="product_review">review:${prod.review_count}</div>
+                </div>
+                <div class="info_middle_section">
+                    <div class="product_name">${prod.product_name}</div>
+                    <div class="horizontal_alignment">
+                        <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                        <div class="closet_add_button" onclick="closetProductAdd(${prod.product_number})">closet</div>
                     </div>
-                    <div class="right_section vertical_alignment">
-                        <div class="like_box horizontal_alignment">
-                            <div class="nf_like">${best_feed.like_count}</div>
-                            <div class="nf_unlike">${best_feed.unlike_count}</div>
-                        </div>
-                        <div class="right_section_middle"></div>
-                        <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
-                    </div>
+                </div>
+                <div class="info_bottom_section horizontal_alignment">
+                    <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                    <div class="product_number">No.${prod.product_number}</div>
                 </div>
             </div>
             `
-        })    
+        });
 
 
-        // 전체 게시글 출력 반복문 부분
-        wrap = document.getElementsByClassName('sub_feed_list_box')[0];
 
-        feed_list.forEach(feed => {
-            //태그 출력 반복문
-            tag_list = [];
-            feed.tags.forEach(tag => {
-                tag = `#${tag}`
-                tag_list.push(tag)
-            })
-
-            if(tag_list.length == 0){
-                tag_list = []
-            } else if(tag_list.length == 1){
-                tag_list = tag_list
-            } else if(tag_list.length == 2){
-                tag_list = `${tag_list[0]} ${tag_list[1]}`
-            } else if(tag_list.length == 3){
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]}`
-            } else if(tag_list.length == 4){
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]}`
-            } else {
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
-            }
-                wrap.innerHTML += `
-                <div class="sub_feed_box vertical_alignment">
-                    <div class="sub_feed_image_box">
-                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.pk}'"/>
-                    </div>
-                    <div class="sub_feed_info_box">
-                        <div class="info_top_section horizontal_alignment">
-                            <div class="sub_nickname" onclick="location.href='/products/closet/?user_id=${feed.user_id}'">${feed.user}</div>
-                            <div class="sub_like">${feed.like_count}</div>
-                        </div>
-                        <div class="info_middle_section">
-                            <div class="sub_content">${feed.content}</div>
-                        </div>
-                        <div class="info_bottom_section horizontal_alignment">
-                            <div class="sub_tags">${tag_list}</div>
-                            <div class="sub_created_at">${timeForToday(feed.updated_at)}</div>
-                        </div>
-                    </div>
-                </div>
-                `
-            })
-
-    // HEADER 부분
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()
     if (search_word_list.length > 9) {
@@ -240,10 +233,18 @@ window.onload = async function getIndex_API(){
         word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
         word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
     }
-
+    //출석하기 출력문
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+    
     // 옷장 버튼
     var hd_closet_button = document.getElementById('header_closet_button')
     hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
+
+
+    // key 값 가져오기
+    id = location.search.replace('?key=', '').replace('?brand_id=', '').split('&')
+    alphabet = id[0]
 
     // NAV 브랜드 리스트 조회
     brand_list = await getNavBrandList()
@@ -263,11 +264,6 @@ window.onload = async function getIndex_API(){
         `
         }
     })
-
-    //출석하기 출력문
-    var AttendanceCheck = document.getElementById('AttendanceCheck')
-    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
- 
 
     // NAV 카테고리 리스트 조회
     category_list = await getCategorylist()
@@ -324,5 +320,6 @@ window.onload = async function getIndex_API(){
                 `
             }
         })
-    }
+
+}
 }

@@ -1,0 +1,282 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-11 ]
+________________________________________________________________
+
+= table of Css
+
+1. /products/index.html
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+/* _______________________________________________________________  */
+/* 1. index.html */
+/* _______________________________________________________________  */
+
+.main_body_area {
+    width: 1280px;
+    margin: 10px;
+}
+
+.main_body_area .section_dividing_line {
+    border-bottom: solid 2px #c0c0c0;
+}
+
+.main_body_area .top_section {
+    width: 1260px;
+    height: 600px;
+    margin: 10px;
+}
+
+.top_section_menu {
+    width: 1260px;
+}
+
+.top_section_menu .ts_menu_title {
+    width: 100px;
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+.top_section .main_feed_list_box {
+    background-color: #ffffff;
+    width: 1260px;
+    height: 600px;
+}
+
+.main_feed_list_box .new_feed_box {
+    width: 410px;
+    height: 600px;
+    margin-right: 10px;
+}
+
+.new_feed_box .nf_image_box {
+    width: 410px;
+    height: 460px;
+}
+
+.new_feed_box .nf_image_box img {
+    background-color: #000000;
+    width: 410px;
+    height: 460px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.new_feed_box .nf_info_box {
+    background-color: #ffffff;
+    margin: 10px;
+    width: 390px;
+    height: 120px;
+}
+
+.new_feed_box .left_section {
+    width: 310px;
+    height: 120px;
+}
+
+.left_section .nf_nickname {
+    height: 20px;
+    font-size: 13pt;
+    line-height: 20px;
+    color: #606060;
+}
+
+.left_section .nf_content {
+    width: 290px;
+    height: 60px;
+    font-size: 10pt;
+    margin: 5px 0 5px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.left_section .nf_tag {
+    height: 30px;
+    line-height: 30px;
+}
+
+.new_feed_box .right_section {
+    width: 80px;
+    height: 120px;
+}
+
+.right_section .like_box {
+    height: 30px;
+    justify-content: right;
+}
+
+.like_box .nf_like {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #c0c0c0;
+    text-align: center;
+    line-height: 25px;
+    margin: 5px;
+    font-size: 10pt;
+}
+
+.like_box .nf_unlike {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #c0c0c0;
+    text-align: center;
+    line-height: 25px;
+    margin: 5px;
+    font-size: 10pt;
+}
+
+.right_section .right_section_middle {
+    height: 70px;
+}
+
+.right_section .nf_create_at {
+    background-color: #ffffff;
+    height: 20px;
+    line-height: 20px;
+    color: #606060;
+    text-align: right;
+    margin: 5px;
+    font-size: 10pt;
+}
+
+/* _______________________________________________________________  */
+/* 1. index.html  -- 전체 게시글 */
+/* _______________________________________________________________  */
+
+.main_body_area .bottom_section {
+    width: 1260px;
+    height: 100%;
+    margin: 10px;
+}
+
+.bottom_section .product_list_box {
+    width: 1260px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.product_list_box .product_box {
+    width: 242px;
+    height: 370px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.product_box .product_image_box {
+    width: 242px;
+    height: 280px;
+    background-color: #000000;
+}
+
+.product_box .product_image_box img {
+    width: 242px;
+    height: 280px;
+    object-fit: cover;
+}
+
+.product_box .info_top_section {
+    width: 222px;
+    height: 25px;
+    justify-content: space-between;
+
+    margin: 0 10px 0 10px;
+}
+
+.info_top_section .product_brand {
+    font-size: 10pt;
+    line-height: 25px;
+}
+
+.info_top_section .product_review {
+    font-size: 10pt;
+    margin-top: 5px;
+    line-height: 20px;
+}
+
+
+.product_box .info_middle_section {
+    width: 242px;
+    height: 45px;
+    background-color: #ffffff;
+}
+
+.info_middle_section .product_name {
+    width: 222px;
+    height: 25px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info_middle_section .product_price {
+    width: 222px;
+    height: 20px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.product_box .info_bottom_section {
+    width: 222px;
+    height: 20px;
+    justify-content: space-between;
+
+    color: #606060;
+    margin: 0 10px 0 10px;
+    line-height: 20px;
+}
+
+.info_bottom_section .product_category {
+    font-size: 9pt;
+}
+
+.info_bottom_section .product_number {
+    font-size: 5pt;
+}
