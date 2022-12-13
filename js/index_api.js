@@ -115,7 +115,7 @@ window.onload = async function getIndex_API(){
             best_wrap.innerHTML += `
             <div class="new_feed_box vertical_alignment">
                 <div class="nf_image_box">
-                    <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.id}'"/>
+                    <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.pk}'"/>
                 </div>
                 <div class="nf_info_box horizontal_alignment">
                     <div class="left_section vertical_alignment">
@@ -161,11 +161,11 @@ window.onload = async function getIndex_API(){
             } else {
                 tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
             }
-                
+                console.log(feed)
                 wrap.innerHTML += `
                 <div class="sub_feed_box vertical_alignment">
                     <div class="sub_feed_image_box">
-                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.id}'"/>
+                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.pk}'"/>
                     </div>
                     <div class="sub_feed_info_box">
                         <div class="info_top_section horizontal_alignment">
