@@ -209,7 +209,9 @@ window.onload = async function getIndexDetail_API(){
         var unlike_wrap = document.getElementsByClassName('unlike_button')[0];
         var cmt_wrap = document.getElementsByClassName('comment_middle_section')[0];
         var comment_onclick = document.getElementsByClassName('comment_create_button')[0];
+        var like_info = document.getElementsByClassName('like_info')[0];
 
+        like_info.innerText = `좋아요 ${feed.like_count}개`
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
@@ -217,10 +219,19 @@ window.onload = async function getIndexDetail_API(){
         nickname.innerText = `${feed.user}`
         feed_like.innerText = `${feed.like_count}`
         feed_content.innerText = `${feed.content}`
-        feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
         // 업데이트 html로 id값 같이 보내기
         feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
+
+
+        //태그 반복
+        tag_list = []
+        feed.tags.forEach(tag => {
+            feed_tags.innerHTML += `<a class="tag" href="${frontEndBaseUrl}/communities/search.html?search=${tag}">#${tag}</a>`
+        })
+        
+
+
 
         // 댓글 닉네임과 내용 반복문
         feed.comments.forEach(comt=>{

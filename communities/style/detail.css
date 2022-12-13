@@ -130,17 +130,34 @@ body {
 .info_top_section .feed_content {
     background-color: #ffffff;
     width: 440px;
-    height: 120px;
+    height: 80px;
     padding: 5px;
     margin: 10px 0 0 10px;
 }
 
-.info_top_section .feed_tags {
+.info_top_section .like_info {
     background-color: #ffffff;
     width: 370px;
-    height: 30px;
-    margin-left: 10px;
+    height: 20px;
+    padding: 5px;
+    margin: 0 0 0 10px;
 }
+
+
+.info_top_section .feed_tags {
+    background-color: #ffffff;
+    width: 440px;
+    height: 30px;
+    padding: 5px;
+    margin-left: 5px;
+}
+.feed_tags .tag {
+    color: #606060;
+    margin-left: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 
 .info_top_section .feed_create_at {
     width: 80px;
