@@ -163,7 +163,7 @@ function timeForToday(value) {
 }
 
 
-//게시글 삭제
+// 게시글 삭제
 async function deleteFeed(){
     
     feed_id =location.search.replace("?id=","")
@@ -183,7 +183,7 @@ async function deleteFeed(){
     }
 }
 
-//댓글 삭제
+// 댓글 삭제
 async function deleteComment(comment_id){
     
     feed_id =location.search.replace("?id=","")
@@ -195,7 +195,28 @@ async function deleteComment(comment_id){
     });
 
     if(response.status == 204){
-        alert("게시글삭제완료!")
+        alert("댓글 삭제완료!")
+        window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
+    }
+    else {
+        alert(response.status);
+    }
+}
+
+
+// 대댓글 삭제
+async function deleteRecomment(comment_id, recomment_id){
+    
+    feed_id =location.search.replace("?id=","")
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/${recomment_id}/`, {
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+
+    if(response.status == 204){
+        alert("대댓글 삭제완료!")
         window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
     }
     else {
@@ -294,14 +315,26 @@ window.onload = async function getIndexDetail_API(){
 
         }
         comt.recomment.forEach(reco=>{
-            cmt_wrap.innerHTML +=`
-            <div class="recomment_box horizontal_alignment">
-                <div class="reco_user horizontal_alignment">  
-                    <div class="reco_nickname">┗ ${reco.user}</div>
-                    <div class="reco_recomment">${reco.recomment}</div>
+            if(reco.user_id == User_payload.user_id){
+                cmt_wrap.innerHTML +=`
+                <div class="recomment_box horizontal_alignment">
+                    <div class="reco_user horizontal_alignment">  
+                        <div class="reco_nickname">┗ ${reco.user}</div>
+                        <div class="reco_recomment">${reco.recomment}</div>
+                    </div>
+                    <div class="reco_delete_button" onclick="deleteRecomment(${comt.pk}, ${reco.pk})">X</div>
                 </div>
-            </div>
-            `
+                `
+            } else {
+                cmt_wrap.innerHTML +=`
+                <div class="recomment_box horizontal_alignment">
+                    <div class="reco_user horizontal_alignment">  
+                        <div class="reco_nickname">┗ ${reco.user}</div>
+                        <div class="reco_recomment">${reco.recomment}</div>
+                    </div>
+                </div>
+                `
+            }
         })
         })
         // 좋아요 부분

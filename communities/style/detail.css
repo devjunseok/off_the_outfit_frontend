@@ -234,7 +234,7 @@ body {
 }
 
 .comment_middle_section .recomment_box {
-    width: 460px;
+    width: 410px;
     justify-content: space-between;
     margin: 5px 10px 10px 20px;
 }
@@ -247,6 +247,11 @@ body {
 .recomment_box .reco_recomment {
     color: #c0c0c0;
     margin-left: 10px;
+}
+
+.recomment_box .reco_delete_button {
+    color: red;
+    font-weight: bold;
 }
 
 .recomment_input_box {
