@@ -320,3 +320,43 @@ body {
     color: #ffffff;
     border: solid 1px #c0c0c0;
 }
+
+.mypage_list {
+
+}
+
+.left_area {
+    background-color: #ffffff;
+    width: 300px;
+    padding: 10px;
+}
+
+.left_area .closet_main_title {
+    font-size: 15pt;
+    font-weight: bold;
+    margin-left: 35px;
+}
+
+.left_area .closet_list {
+    list-style: none;
+}
+
+.left_area .closet_list li {
+    margin-top: 10px;
+    font-size: 10pt;
+    cursor: pointer;
+
+}
+
+.left_area .closet_list_name_tag {
+    list-style: none;
+}
+
+.left_area .closet_list_name_tag li {
+    margin-top: 10px;
+    font-size: 10pt;
+    cursor: pointer;
+
+}
+
+

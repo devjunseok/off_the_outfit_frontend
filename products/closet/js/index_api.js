@@ -3,7 +3,9 @@ const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 유저 기준 옷장 조회
 async function getClosetProductList(){
-    user_id = location.search.replace("?user_id=", "")
+    search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
+    user_id = search[0];
+    name_tag = search[1];
     const response = await fetch(`${backEndBaseUrl}/products/product/closet/${user_id}/`,{
         headers: {
             'content-type': 'application/json',
@@ -18,22 +20,10 @@ async function getClosetProductList(){
 
 // 옷장 사용자 정보 가져오기
 async function getUser(){
-    user_id = location.search.replace("?user_id=", "")
-    const response = await fetch(`${backEndBaseUrl}/users/${user_id}/`, {
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method: 'GET',
-    })
+    search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
+    user_id = search[0];
+    name_tag = search[1];
 
-    const response_json = await response.json()
-    return response_json
-}
-
-// 옷장 사용자 정보 가져오기
-async function getUser(){
-    user_id = location.search.replace("?user_id=", "")
     const response = await fetch(`${backEndBaseUrl}/users/${user_id}/`, {
         headers: {
             'content-type': 'application/json',
@@ -194,12 +184,16 @@ window.onload = async function getIndex_API(){
         product_list = await getClosetProductList()
         console.log(product_list)
 
-        //인기 게시글 출력 반복문 부분
-
+        search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
+        user_id = search[0];
+        name_tag = search[1];
+        
 
         // 전체 상품 반복 출력
         var product_wrap = document.getElementsByClassName('product_list_box')[0];
-        product_list.forEach(prod => {
+
+        if(name_tag == undefined){
+            product_list.forEach(prod => {
             product_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
@@ -222,7 +216,38 @@ window.onload = async function getIndex_API(){
                 </div>
             </div>
             `
+        })
+        
+        } else {
+
+        product_list.forEach(prod => {
+            if(prod.name_tag != null){
+            if(prod.name_tag.tag_name == decodeURI(name_tag)){
+            product_wrap.innerHTML += `
+            <div class="product_box">
+                <div class="product_image_box">
+                    <img src="${prod.product.product_image}">
+                </div>
+                <div class="info_top_section horizontal_alignment">
+                    <div class="product_brand">${prod.product.brand_name_en}</div>
+                    <div class="product_review">review:${prod.product.review_count}</div>
+                </div>
+                <div class="info_middle_section">
+                    <div class="product_name">${prod.product.product_name}</div>
+                    <div class="horizontal_alignment">
+                        <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                        <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                    </div>
+                </div>
+                <div class="info_bottom_section horizontal_alignment">
+                    <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                    <div class="product_number">No.${prod.product.product_number}</div>
+                </div>
+            </div>
+            `
+            }}
         });
+    }
 
         //회원정보 리스트 조회
         profile_list = await getUser()
@@ -264,6 +289,18 @@ window.onload = async function getIndex_API(){
             profile_tier_info.innerText =`LV.5 VIP`
         }
 
+
+        // NAV 네임태그 반복
+        user_info = await getUser()
+        name_tag_list = user_info.nametag_set
+        console.log(name_tag_list)
+
+        var closet_list_name_tag = document.getElementsByClassName('closet_list_name_tag')[0];
+        name_tag_list.forEach(name_tag => {
+            closet_list_name_tag.innerHTML += `
+            <li onclick="location.href='/products/closet/?user_id=${user_info.pk}&?name_tag=${name_tag.tag_name}'">${name_tag.tag_name}</li>
+            `
+        })
 
         // 검색어 랭킹 조회
         search_word_list = await getHeaderSearchWordRanking()
