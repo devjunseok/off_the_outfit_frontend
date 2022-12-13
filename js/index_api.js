@@ -87,7 +87,6 @@ window.onload = async function getIndex_API(){
         if (best_feed_list.length > 3 ) {
             best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
         }
-        
 
         //인기 게시글 출력 반복문 부분
         var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];
@@ -120,7 +119,7 @@ window.onload = async function getIndex_API(){
                 </div>
                 <div class="nf_info_box horizontal_alignment">
                     <div class="left_section vertical_alignment">
-                        <div class="nf_nickname">${best_feed.user}</div>
+                        <div class="nf_nickname" onclick="location.href='/products/closet/?user_id=${best_feed.user_id}'">${best_feed.user}</div>
                         <div class="nf_content">${best_feed.content}</div>
                         <div class="nf_tag">${tag_list}</div>
                     </div>
@@ -170,7 +169,7 @@ window.onload = async function getIndex_API(){
                     </div>
                     <div class="sub_feed_info_box">
                         <div class="info_top_section horizontal_alignment">
-                            <div class="sub_nickname">${feed.user}</div>
+                            <div class="sub_nickname" onclick="location.href='/products/closet/?user_id=${feed.user_id}'">${feed.user}</div>
                             <div class="sub_like">${feed.like_count}</div>
                         </div>
                         <div class="info_middle_section">
