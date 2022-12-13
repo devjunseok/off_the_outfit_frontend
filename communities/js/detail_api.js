@@ -315,7 +315,7 @@ window.onload = async function getIndexDetail_API(){
                 }
                 else if(Fcount == 1){
                     console.log("내가 팔로우 하고 있지 않을 때")
-                    detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우취소</button>`
+                    detail_follow.innerHTML += `<button id ="detail_following" onclick="handleFollow(${feed.user_id})">팔로잉</button>`
                 }
             }
 
