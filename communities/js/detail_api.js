@@ -1,6 +1,40 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
+//팔로우 하기,취소하기
+async function handleFollow(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/follow/${user_id}/`, {
+    headers: {
+        'content-type': 'application/json',
+        "Authorization":"Bearer " + localStorage.getItem("access")
+    },
+    method: 'POST',
+    body: JSON.stringify({
+
+        })
+    })
+    
+    const response_json = await response.json()
+    window.location.reload();
+
+    return response_json
+}
+// 나를 팔로우 한 유저 조회 (팔로워)
+async function getFollowerUserInfo(feed_user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/${feed_user_id}/followers/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
+
 
 // 게시글 상세보기 API
 async function getIndexFeedDetail(feed_id){
@@ -232,6 +266,8 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
+        follower_list = await getFollowerUserInfo(feed.user_id)
+        console.log(feed)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -246,6 +282,47 @@ window.onload = async function getIndexDetail_API(){
         var comment_onclick = document.getElementsByClassName('comment_create_button')[0];
         var like_info = document.getElementsByClassName('like_info')[0];
         var etc_list = document.getElementsByClassName('etc_list')[0];
+        var detail_follow = document.getElementsByClassName('detail_follow_box')[0];
+
+        // folo = []
+        // follower_list.forEach(follower=>{
+        //     folo.push(follower.pk)
+        // })
+        // console.log(folo)
+        //     if(folo.includes(User_payload.user_id)) {
+        //         detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우취소</button>`
+
+        //     }
+        //     else if(!folo.includes(User_payload.user_id)){
+        //         detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
+        //     }
+        follower_list.forEach(follower=>{
+
+            console.log(follower)
+            if(follower.length ==0){
+                console.log("팔로우 한 유저가 없을때")
+                detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
+            }
+            else{
+                Fcount =0
+                if(follower.pk == User_payload.user_id){
+                console.log("내가 팔로우 하고 있을 때")
+                Fcount +=1
+                }
+                console.log(Fcount)              
+                
+            }
+            })
+            if(Fcount==1){
+                detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우취소</button>`
+            }
+            else{
+                console.log("내가 팔로우 하고 있지 않을 때")
+                detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
+            }
+
+
+            
 
         if(feed.user_id == User_payload.user_id){
             etc_list.innerHTML += `
@@ -432,7 +509,6 @@ window.onload = async function getIndexDetail_API(){
 
         // NAV 브랜드 리스트 조회
         brand_list = await getNavBrandList()
-        console.log(brand_list)
         alphabet = location.search.replace('?key=', '')
         if(alphabet.length == 0){
             brand_list = brand_list.slice(0, 20)
