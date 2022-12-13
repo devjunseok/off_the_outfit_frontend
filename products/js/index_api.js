@@ -97,7 +97,7 @@ async function closetProductAdd(product_id) {
         }); 
         if (response.status == 200) {
         alert("옷장 상품 등록");
-        window.location.replace(`${frontEndBaseUrl}/products/closet/`);
+        window.location.replace(`${frontEndBaseUrl}/products/closet/?user_id=${User_payload.user_id}`);
         }
     }
 }

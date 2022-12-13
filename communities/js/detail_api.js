@@ -296,33 +296,28 @@ window.onload = async function getIndexDetail_API(){
         //     else if(!folo.includes(User_payload.user_id)){
         //         detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
         //     }
-        follower_list.forEach(follower=>{
+        Fcount = 0
 
-            console.log(follower)
-            if(follower.length ==0){
-                console.log("팔로우 한 유저가 없을때")
-                detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
-            }
-            else{
-                Fcount =0
-                if(follower.pk == User_payload.user_id){
-                console.log("내가 팔로우 하고 있을 때")
-                Fcount +=1
-                }
-                console.log(Fcount)              
+        if(feed.user_id != User_payload.user_id){
+
+            follower_list.forEach(follower=>{
+                console.log(follower)
+                if(follower.length != 0){
+                    if(follower.pk == User_payload.user_id){
+                        console.log("내가 팔로우 하고 있을 때")
+                        Fcount +=1
+                        }
+                    }
                 
+                })
+                if(Fcount == 0){
+                    detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
+                }
+                else if(Fcount == 1){
+                    console.log("내가 팔로우 하고 있지 않을 때")
+                    detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우취소</button>`
+                }
             }
-            })
-            if(Fcount==1){
-                detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우취소</button>`
-            }
-            else{
-                console.log("내가 팔로우 하고 있지 않을 때")
-                detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
-            }
-
-
-            
 
         if(feed.user_id == User_payload.user_id){
             etc_list.innerHTML += `
