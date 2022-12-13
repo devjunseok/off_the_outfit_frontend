@@ -328,7 +328,7 @@ window.onload = async function getProfile_API(){
     edit_view_body_weight.innerText =`${profile_list.weight}`
     edit_view_address.innerText = `${profile_list.address}`
 
-    //HAEDER 부분 출력
+    //마이페이지 HAEDER 부분 출력
     var main_profile_image = document.getElementsByClassName('main_profile_image')[0];
     var profile_nickname = document.getElementsByClassName('profile_nickname')[0];
     var profile_tier_info = document.getElementsByClassName('profile_tier_info')[0];
@@ -347,7 +347,8 @@ window.onload = async function getProfile_API(){
     follower_value.innerText = `${profile_list.followers_count}`
     feed_value.innerText = `${profile_list.feeds_count}`
     closet_count_value.innerText = `${profile_list.closet_set_count}`
-
+    
+    //마이페이지 등급 조건문
     if(0<=profile_list.point||profile_list.point < 31){
         profile_tier_info.innerText =`LV.1 브론즈`
     }
