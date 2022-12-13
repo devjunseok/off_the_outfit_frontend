@@ -208,9 +208,29 @@ body {
     font-size: 10pt;
     color: #606060;
     border: solid 0.5px #606060;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.cmt_button_box .cmt_reco_button:hover {
+    background-color: #000000;
+    color: #ffffff;
 }
 .cmt_button_box .cmt_like_button {
     margin-left: 10px;
+}
+
+.cmt_button_box .cmt_delete_button {
+    margin-left: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+.cmt_like_button .comment_heart_view {
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .comment_middle_section .recomment_box {
@@ -311,15 +331,19 @@ body {
 }
 
 .like_box .like_button img {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .like_box .unlike_button img {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 

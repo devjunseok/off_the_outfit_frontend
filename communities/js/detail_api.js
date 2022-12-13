@@ -165,7 +165,7 @@ function timeForToday(value) {
 
 //게시글 삭제
 async function deleteFeed(){
-
+    
     feed_id =location.search.replace("?id=","")
     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/`, {
         headers: {
@@ -177,6 +177,26 @@ async function deleteFeed(){
     if(response.status == 204){
         alert("게시글삭제완료!")
         window.location.replace(`${frontEndBaseUrl}/`); // 삭제가 되고나면 인덱스로 다시 이동하게함
+    }
+    else {
+        alert(response.status);
+    }
+}
+
+//댓글 삭제
+async function deleteComment(comment_id){
+    
+    feed_id =location.search.replace("?id=","")
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}`, {
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+
+    if(response.status == 204){
+        alert("게시글삭제완료!")
+        window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
     }
     else {
         alert(response.status);
@@ -200,7 +220,6 @@ window.onload = async function getIndexDetail_API(){
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
         var nickname = document.getElementsByClassName('nickname')[0];
-        var feed_like = document.getElementsByClassName('feed_like')[0];
         var feed_content = document.getElementsByClassName('feed_content')[0];
         var feed_tags = document.getElementsByClassName('feed_tags')[0];
         var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
@@ -217,7 +236,6 @@ window.onload = async function getIndexDetail_API(){
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
         profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
         nickname.innerText = `${feed.user}`
-        feed_like.innerText = `${feed.like_count}`
         feed_content.innerText = `${feed.content}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
         // 업데이트 html로 id값 같이 보내기
@@ -231,29 +249,50 @@ window.onload = async function getIndexDetail_API(){
         })
         
 
-
-
         // 댓글 닉네임과 내용 반복문
         feed.comments.forEach(comt=>{
-            console.log(comt)
-        cmt_wrap.innerHTML += `
-        <div class="vertical_alignment">
-            <div class="comment_box horizontal_alignment">
-                <div class="cmt_user horizontal_alignment">  
-                    <div class="cmt_nickname">${comt.user}</div>
-                    <div class="cmt_comment">${comt.comment}</div>
+            // 댓글 삭제 유무
+            if(comt.user_id == User_payload.user_id){
+            cmt_wrap.innerHTML += `
+            <div class="vertical_alignment">
+                <div class="comment_box horizontal_alignment">
+                    <div class="cmt_user horizontal_alignment">  
+                        <div class="cmt_nickname">${comt.user}</div>
+                        <div class="cmt_comment">${comt.comment}</div>
+                    </div>
+                    <div class="cmt_button_box horizontal_alignment">
+                        <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                        <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick=""></div>
+                        <div class="cmt_delete_button" onclick="deleteComment(${comt.pk})">X</div>
+                    </div>
                 </div>
-                <div class="cmt_button_box horizontal_alignment">
-                    <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
-                    <div class="cmt_like_button">O</div>
+                <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                    <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                    <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
                 </div>
             </div>
-            <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
-                <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
-                <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+            `
+        } else {
+            cmt_wrap.innerHTML += `
+            <div class="vertical_alignment">
+                <div class="comment_box horizontal_alignment">
+                    <div class="cmt_user horizontal_alignment">  
+                        <div class="cmt_nickname">${comt.user}</div>
+                        <div class="cmt_comment">${comt.comment}</div>
+                    </div>
+                    <div class="cmt_button_box horizontal_alignment">
+                        <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                        <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick=""></div>
+                    </div>
+                </div>
+                <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                    <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                    <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+                </div>
             </div>
-        </div>
-        `
+            `
+
+        }
         comt.recomment.forEach(reco=>{
             cmt_wrap.innerHTML +=`
             <div class="recomment_box horizontal_alignment">
