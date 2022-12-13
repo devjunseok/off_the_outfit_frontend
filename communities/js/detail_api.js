@@ -97,7 +97,45 @@ async function postComment(feed_id){
 }
 
 
+//대댓글 등록
+async function postRecomment(feed_id, comment_id, Input_Box){
 
+    const recomment = document.getElementById(Input_Box).value;
+    console.log(recomment)
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            "recomment":recomment
+        })
+    })
+    const response_json = await response.json()
+
+    if (response.status == 200){
+        alert(response_json["message"])
+    }else {
+        alert(response_json["detail"])
+    }
+    window.location.reload()   
+    
+    return response_json
+}
+
+
+// 대댓글 입력 박스
+async function recommentInputFlex(Input_Box) {
+    console.log(Input_Box)
+    let con = document.querySelector(Input_Box);
+
+    if(con.style.display == 'none'){
+        con.style.display = 'flex';
+        }else{
+        con.style.display = 'none';
+    }
+}
 
 
 // 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
@@ -123,6 +161,8 @@ function timeForToday(value) {
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
+
+
 //게시글 삭제
 async function deleteFeed(){
 
@@ -140,18 +180,6 @@ async function deleteFeed(){
     }
     else {
         alert(response.status);
-    }
-}
-
-async function recommentInputFlex() {
-    console.log("클릭")
-
-    let con = document.querySelector('.recomment_input_box');
-
-    if(con.style.display == 'none'){
-        con.style.display = 'block';
-        }else{
-        con.style.display = 'none';
     }
 }
 
@@ -173,7 +201,6 @@ window.onload = async function getIndexDetail_API(){
         var profile_image = document.getElementsByClassName('profile_image')[0];
         var nickname = document.getElementsByClassName('nickname')[0];
         var feed_like = document.getElementsByClassName('feed_like')[0];
-        var feed_unlike = document.getElementsByClassName('feed_unlike')[0];
         var feed_content = document.getElementsByClassName('feed_content')[0];
         var feed_tags = document.getElementsByClassName('feed_tags')[0];
         var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
@@ -186,10 +213,9 @@ window.onload = async function getIndexDetail_API(){
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
-        // profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
+        profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
         nickname.innerText = `${feed.user}`
         feed_like.innerText = `${feed.like_count}`
-        feed_unlike.innerText = `${feed.unlike_count}`
         feed_content.innerText = `${feed.content}`
         feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
@@ -207,13 +233,13 @@ window.onload = async function getIndexDetail_API(){
                     <div class="cmt_comment">${comt.comment}</div>
                 </div>
                 <div class="cmt_button_box horizontal_alignment">
-                    <div class="cmt_reco_button" onclick="recommentInputFlex()">대댓글</div>
+                    <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
                     <div class="cmt_like_button">O</div>
                 </div>
             </div>
-            <div class="recomment_input_box" id="recomment_input_box" style="display: none;">
-                <textarea class="reco_input" id="recomment_content" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
-                <button class="recomment_create_button" type="submit" onclick="">댓글작성</button>
+            <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
             </div>
         </div>
         `

@@ -15,7 +15,16 @@
             <div data-include-path="/nav.html"></div>
             <div class="main_body_area">
                 <div class="top_section">
-                    <div class="info_bar"></div>
+                    <div class="info_bar horizontal_alignment">
+                        <div></div>
+                        <div class="etc_dropbox">
+                        <div class="etc_button">...</div>
+                        <div class="etc_list">
+                            <a class="feed_update_go">수정</a>
+                            <a onclick="deleteFeed()" >삭제</a>
+                        </div>
+                        </div>
+                    </div>
                     <div class="detail_area horizontal_alignment">
                         <div class="ua_left_section">
                             
@@ -34,13 +43,10 @@
                                             <div class="nickname"></div>
                                         </div>
                                         <div class="like_box horizontal_alignment">
-                                            <div><a class = "feed_update_go">게시글수정</a></div>
-                                            <div><button onclick="deleteFeed()">게시글삭제</button></div>
                                             <div class ="like_button">
                                                 <!-- 상세 페이지 좋아요 버튼 -->
                                             </div>
                                             <div class="feed_like">234</div>
-                                            <div class="feed_unlike">143</div>
                                             <div class="unlike_button">
                                                 <!-- 상세 페이지 싫어요 버튼 -->
                                             </div>
@@ -55,27 +61,11 @@
                                 <!-- 댓글 목록 부분 -->
                                 <div class="comment_middle_section vertical_alignment">
                                 <!-- 댓글 반복문 출력 부분 -->
-                                <div class="vertical_alignment">
-                                    <div class="comment_box horizontal_alignment">
-                                        <div class="cmt_user horizontal_alignment">  
-                                            <div class="cmt_nickname">${comt.user}</div>
-                                            <div class="cmt_comment">${comt.comment}</div>
-                                        </div>
-                                        <div class="cmt_button_box horizontal_alignment">
-                                            <div class="cmt_reco_button" onclick="recommentInputFlex()">대댓글</div>
-                                            <div class="cmt_like_button">O</div>
-                                        </div>
-                                    </div>
-                                    <div class="recomment_input_box" id="recomment_input_box" style="display: none;">
-                                        <textarea class="reco_input" id="recomment_content" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
-                                        <button class="recomment_create_button" type="submit" onclick="">댓글작성</button>
-                                    </div>
-                                </div>
                                 </div>
                                 <!-- 댓글 작성 버튼 -->
-                                <div class="comment_bottom_section">
-                                    <textarea id="comment_content" type="text" placeholder="댓글 내용 입력" cols="5"rows="5"></textarea>
-                                    <button class="comment_create_button" type="submit" onclick="postComment()">댓글작성</button>
+                                <div class="comment_bottom_section horizontal_alignment">
+                                    <textarea class="comment_input_box" id="comment_content" type="text" placeholder="댓글 내용 입력" cols="5"rows="5"></textarea>
+                                    <button class="comment_create_button" type="submit">댓글작성</button>
                                 </div>
                             </div>
                         </div>
