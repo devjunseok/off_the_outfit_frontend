@@ -332,25 +332,24 @@ body {
     cursor: pointer;
 }
 .etc_list{
-    text-align: right;
     display : none;
     position : absolute;
-    z-index : 1; /*다른 요소들보다 앞에 배치*/
-    font-weight: 400;
+    z-index : 1;
+    font-weight: bold;
     background-color: #ffffff;
     min-width : 100px;
+    right: 0;
 }
 
-.etc_list a{
+.etc_list a {
     display : block;
     text-decoration : none;
-    color : rgb(37, 37, 37);
     font-size: 12px;
     padding : 12px 20px;
     border-bottom: solid 1px #c0c0c0;
 }
 
-.etc_list a:hover{
+.etc_list a:hover {
     background-color : #000000;
     color: #ffffff;
 }
