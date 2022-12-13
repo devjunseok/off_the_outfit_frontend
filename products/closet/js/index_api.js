@@ -102,10 +102,10 @@ async function closetProductAdd(product_id) {
 }
 
 // 옷장 상품 제거
-async function closetProductDelete(product_id) {
+async function closetProductDelete(product_id, closet_id) {
 
     let User_payload = JSON.parse(localStorage.getItem('payload'))
-    const response = await fetch(`${backEndBaseUrl}/products/product/${product_id}/closet/${User_payload.user_id}/`, {
+    const response = await fetch(`${backEndBaseUrl}/products/product/${product_id}/closet/${closet_id}/`, {
         headers: {
         Authorization: "Bearer " + localStorage.getItem("access"),
         },
@@ -155,7 +155,7 @@ window.onload = async function getIndex_API(){
                     <div class="product_name">${prod.product.product_name}</div>
                     <div class="horizontal_alignment">
                         <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
-                        <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number})">Delete</div>
+                        <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
                     </div>
                 </div>
                 <div class="info_bottom_section horizontal_alignment">

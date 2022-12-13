@@ -64,9 +64,10 @@ body {
 }
 
 .top_section .info_bar {
-    background-color: #ffffff;
     width: 1200px;
-    height: 60px;
+    height: 40px;
+    justify-content: space-between;
+    border-bottom: solid 2px #c0c0c0;
 }
 
 .top_section .detail_area {
@@ -108,9 +109,9 @@ body {
 }
 
 .info_top_section .user_profile_info {
-
     width: 460px;
     height: 40px;
+    margin: 10px 0 0 10px;
 }
 
 .user_profile_info .profile_image {
@@ -126,48 +127,37 @@ body {
     margin-top: 5px;
 }
 
-.info_top_section .like_box {
-    height: 30px;
-    justify-content: right;
-}
-
-.like_box .feed_like {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    color: #ffffff;
-    background-color: #c0c0c0;
-    text-align: center;
-    line-height: 30px;
-    margin: 5px;
-    font-size: 10pt;
-}
-
-.like_box .feed_unlike {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    color: #ffffff;
-    background-color: #c0c0c0;
-    text-align: center;
-    line-height: 30px;
-    margin: 5px;
-    font-size: 10pt;
-}
-
 .info_top_section .feed_content {
     background-color: #ffffff;
-    width: 450px;
-    height: 130px;
+    width: 440px;
+    height: 80px;
     padding: 5px;
+    margin: 10px 0 0 10px;
 }
+
+.info_top_section .like_info {
+    background-color: #ffffff;
+    width: 370px;
+    height: 20px;
+    padding: 5px;
+    margin: 0 0 0 10px;
+}
+
 
 .info_top_section .feed_tags {
     background-color: #ffffff;
-    width: 380px;
+    width: 440px;
     height: 30px;
-    margin: 5px;
+    padding: 5px;
+    margin-left: 5px;
 }
+.feed_tags .tag {
+    color: #606060;
+    margin-left: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 
 .info_top_section .feed_create_at {
     width: 80px;
@@ -185,13 +175,14 @@ body {
     height: 500px;
     border-bottom: solid 2px #c0c0c0;
 
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     -ms-overflow-style: none;
 
 }
 
 .comment_middle_section .comment_box {
-    width: 460px;
+    width: 440px;
     justify-content: space-between;
 }
 
@@ -217,17 +208,33 @@ body {
     font-size: 10pt;
     color: #606060;
     border: solid 0.5px #606060;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.cmt_button_box .cmt_reco_button:hover {
+    background-color: #000000;
+    color: #ffffff;
 }
 .cmt_button_box .cmt_like_button {
     margin-left: 10px;
 }
 
-.comment_middle_section .recomment_input_box {
-    display: none;
+.cmt_button_box .cmt_delete_button {
+    margin-left: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+.cmt_like_button .comment_heart_view {
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .comment_middle_section .recomment_box {
-    width: 460px;
+    width: 410px;
     justify-content: space-between;
     margin: 5px 10px 10px 20px;
 }
@@ -242,23 +249,157 @@ body {
     margin-left: 10px;
 }
 
+.recomment_box .reco_delete_button {
+    color: red;
+    font-weight: bold;
+}
+
+.recomment_input_box {
+    width: 460px;
+    height: 45px;
+}
+
+.recomment_input_box .reco_input {
+    width: 300px;
+    height: 32px;
+    margin-left: 20px;
+    resize: none;
+    border: solid 1px #c0c0c0;
+    padding: 5px;
+}
+
+.recomment_input_box .recomment_create_button {
+    background-color: antiquewhite;
+    width: 70px;
+    height: 44px;
+    font-size: 9pt;
+    border-radius: 0px;
+    border-style: none;
+    padding: 5px 5px 5px 5px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+    
+}
+
+.recomment_input_box .recomment_create_button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+
+
+
 .feed_info_box .comment_bottom_section {
     width: 460px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
+    height: 50px;
 }
+
+.comment_bottom_section .comment_input_box {
+    width: 390px;
+    resize: none;
+    border: solid 1px #c0c0c0;
+    padding: 5px;
+}
+
+
+.comment_bottom_section .comment_create_button {
+    width: 70px;
+    border-radius: 0px;
+    border-style: none;
+    padding: 5px 5px 5px 5px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+}
+
+.comment_bottom_section .comment_create_button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+
+
+.info_top_section .like_box {
+    height: 30px;
+    justify-content: right;
+}
+
+.like_box .feed_like {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    color: #ffffff;
+    background-color: #c0c0c0;
+    text-align: center;
+    line-height: 30px;
+    margin: 5px;
+    font-size: 10pt;
+}
+
 .like_box .like_button img {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .like_box .unlike_button img {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 
+.info_bar .etc_button {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 15pt;
+    font-weight: bold;
+    cursor: pointer;
+}
 
+
+.etc_dropbox{
+    position : relative;
+    display : inline-block;
+}
+
+.etc_button{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 15pt;
+    font-weight: bold;
+    cursor: pointer;
+}
+.etc_list{
+    display : none;
+    position : absolute;
+    z-index : 1;
+    font-weight: bold;
+    background-color: #ffffff;
+    min-width : 100px;
+    right: 0;
+}
+
+.etc_list a {
+    display : block;
+    text-decoration : none;
+    font-size: 12px;
+    padding : 12px 20px;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+.etc_list a:hover {
+    background-color : #000000;
+    color: #ffffff;
+}
+
+.etc_dropbox:hover .etc_list {
+    display: block;
+}

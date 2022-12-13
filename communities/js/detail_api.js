@@ -71,9 +71,7 @@ async function handleUnLike(){
 //댓글 등록
 async function postComment(feed_id){
 
-    console.log(feed_id)
     const comment = document.getElementById('comment_content').value;
-    console.log(comment)
     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/`, {
         headers: {
             'content-type': 'application/json',
@@ -97,7 +95,43 @@ async function postComment(feed_id){
 }
 
 
+//대댓글 등록
+async function postRecomment(feed_id, comment_id, Input_Box){
 
+    const recomment = document.getElementById(Input_Box).value;
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            "recomment":recomment
+        })
+    })
+    const response_json = await response.json()
+
+    if (response.status == 200){
+        alert(response_json["message"])
+    }else {
+        alert(response_json["detail"])
+    }
+    window.location.reload()   
+    
+    return response_json
+}
+
+
+// 대댓글 입력 박스
+async function recommentInputFlex(Input_Box) {
+    let con = document.querySelector(Input_Box);
+
+    if(con.style.display == 'none'){
+        con.style.display = 'flex';
+        }else{
+        con.style.display = 'none';
+    }
+}
 
 
 // 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
@@ -123,9 +157,11 @@ function timeForToday(value) {
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
-//게시글 삭제
-async function deleteFeed(){
 
+
+// 게시글 삭제
+async function deleteFeed(){
+    
     feed_id =location.search.replace("?id=","")
     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/`, {
         headers: {
@@ -143,15 +179,44 @@ async function deleteFeed(){
     }
 }
 
-async function recommentInputFlex() {
-    console.log("클릭")
+// 댓글 삭제
+async function deleteComment(comment_id){
+    
+    feed_id =location.search.replace("?id=","")
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}`, {
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
 
-    let con = document.querySelector('.recomment_input_box');
+    if(response.status == 204){
+        alert("댓글 삭제완료!")
+        window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
+    }
+    else {
+        alert(response.status);
+    }
+}
 
-    if(con.style.display == 'none'){
-        con.style.display = 'block';
-        }else{
-        con.style.display = 'none';
+
+// 대댓글 삭제
+async function deleteRecomment(comment_id, recomment_id){
+    
+    feed_id =location.search.replace("?id=","")
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/${recomment_id}/`, {
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "DELETE",
+    });
+
+    if(response.status == 204){
+        alert("대댓글 삭제완료!")
+        window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
+    }
+    else {
+        alert(response.status);
     }
 }
 
@@ -167,13 +232,10 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
-        console.log(feed.comments)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
         var nickname = document.getElementsByClassName('nickname')[0];
-        var feed_like = document.getElementsByClassName('feed_like')[0];
-        var feed_unlike = document.getElementsByClassName('feed_unlike')[0];
         var feed_content = document.getElementsByClassName('feed_content')[0];
         var feed_tags = document.getElementsByClassName('feed_tags')[0];
         var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
@@ -182,55 +244,106 @@ window.onload = async function getIndexDetail_API(){
         var unlike_wrap = document.getElementsByClassName('unlike_button')[0];
         var cmt_wrap = document.getElementsByClassName('comment_middle_section')[0];
         var comment_onclick = document.getElementsByClassName('comment_create_button')[0];
+        var like_info = document.getElementsByClassName('like_info')[0];
+        var etc_list = document.getElementsByClassName('etc_list')[0];
 
+        if(feed.user_id == User_payload.user_id){
+            etc_list.innerHTML += `
+            <a href="${frontEndBaseUrl}/communities/update.html?id=${feed_id}">수정</a>
+            <a onclick="deleteFeed()" >삭제</a>
+            `
+        }
+        like_info.innerText = `좋아요 ${feed.like_count}개`
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
         profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
         nickname.innerText = `${feed.user}`
-        feed_like.innerText = `${feed.like_count}`
-        feed_unlike.innerText = `${feed.unlike_count}`
         feed_content.innerText = `${feed.content}`
-        feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
-        // 업데이트 html로 id값 같이 보내기
-        feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
+
+
+
+
+
+
+        //태그 반복
+        tag_list = []
+        feed.tags.forEach(tag => {
+            feed_tags.innerHTML += `<a class="tag" href="${frontEndBaseUrl}/communities/search.html?search=${tag}">#${tag}</a>`
+        })
+        
 
         // 댓글 닉네임과 내용 반복문
         feed.comments.forEach(comt=>{
-            console.log(comt)
-        cmt_wrap.innerHTML += `
-        <div class="vertical_alignment">
-            <div class="comment_box horizontal_alignment">
-                <div class="cmt_user horizontal_alignment">  
-                    <div class="cmt_nickname">${comt.user}</div>
-                    <div class="cmt_comment">${comt.comment}</div>
+            // 댓글 삭제 유무
+            if(comt.user_id == User_payload.user_id){
+            cmt_wrap.innerHTML += `
+            <div class="vertical_alignment">
+                <div class="comment_box horizontal_alignment">
+                    <div class="cmt_user horizontal_alignment">  
+                        <div class="cmt_nickname">${comt.user}</div>
+                        <div class="cmt_comment">${comt.comment}</div>
+                    </div>
+                    <div class="cmt_button_box horizontal_alignment">
+                        <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                        <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick=""></div>
+                        <div class="cmt_delete_button" onclick="deleteComment(${comt.pk})">X</div>
+                    </div>
                 </div>
-                <div class="cmt_button_box horizontal_alignment">
-                    <div class="cmt_reco_button" onclick="recommentInputFlex()">대댓글</div>
-                    <div class="cmt_like_button">O</div>
-                </div>
-            </div>
-            <div class="recomment_input_box" id="recomment_input_box" style="display: none;">
-                <textarea class="reco_input" id="recomment_content" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
-                <button class="recomment_create_button" type="submit" onclick="">댓글작성</button>
-            </div>
-        </div>
-        `
-        comt.recomment.forEach(reco=>{
-            cmt_wrap.innerHTML +=`
-            <div class="recomment_box horizontal_alignment">
-                <div class="reco_user horizontal_alignment">  
-                    <div class="reco_nickname">┗ ${reco.user}</div>
-                    <div class="reco_recomment">${reco.recomment}</div>
+                <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                    <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                    <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
                 </div>
             </div>
             `
+        } else {
+            cmt_wrap.innerHTML += `
+            <div class="vertical_alignment">
+                <div class="comment_box horizontal_alignment">
+                    <div class="cmt_user horizontal_alignment">  
+                        <div class="cmt_nickname">${comt.user}</div>
+                        <div class="cmt_comment">${comt.comment}</div>
+                    </div>
+                    <div class="cmt_button_box horizontal_alignment">
+                        <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                        <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick=""></div>
+                    </div>
+                </div>
+                <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                    <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                    <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+                </div>
+            </div>
+            `
+
+        }
+        comt.recomment.forEach(reco=>{
+            // 대댓글 삭제 부분
+            if(reco.user_id == User_payload.user_id){
+                cmt_wrap.innerHTML +=`
+                <div class="recomment_box horizontal_alignment">
+                    <div class="reco_user horizontal_alignment">  
+                        <div class="reco_nickname">┗ ${reco.user}</div>
+                        <div class="reco_recomment">${reco.recomment}</div>
+                    </div>
+                    <div class="reco_delete_button" onclick="deleteRecomment(${comt.pk}, ${reco.pk})">X</div>
+                </div>
+                `
+            } else {
+                cmt_wrap.innerHTML +=`
+                <div class="recomment_box horizontal_alignment">
+                    <div class="reco_user horizontal_alignment">  
+                        <div class="reco_nickname">┗ ${reco.user}</div>
+                        <div class="reco_recomment">${reco.recomment}</div>
+                    </div>
+                </div>
+                `
+            }
         })
         })
         // 좋아요 부분
         if(feed.like.length == 0){
-            console.log("좋아요 한 유저가 없을때")
             like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
             }
             else{
@@ -259,7 +372,6 @@ window.onload = async function getIndexDetail_API(){
             }
         //싫어요 부분
         if(feed.unlike.length == 0){
-            console.log("싫어요 한 유저가 없을때")
             unlike_wrap.innerHTML +=`<img class="feed_umji_view" src="/static/img/unlike.png" onclick="handleUnLike()"/>`
             }
             else{
@@ -316,6 +428,77 @@ window.onload = async function getIndexDetail_API(){
             word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
             word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
         }
+
+
+        // NAV 브랜드 리스트 조회
+        brand_list = await getNavBrandList()
+        console.log(brand_list)
+        alphabet = location.search.replace('?key=', '')
+        if(alphabet.length == 0){
+            brand_list = brand_list.slice(0, 20)
+        }
+        var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
+        brand_list.forEach(br => {
+            if(br.brand_name_en.startsWith(alphabet, 1)){
+            brand_wrap.innerHTML += `
+            <div class="brand_box">
+                <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+                <div class="brand_name_kr">${br.brand_name_kr}</div>
+            </div>
+            `
+            }
+        })
+
+        // NAV 카테고리 리스트 조회
+        category_list = await getCategorylist()
+        
+        // 메인 카테고리명 중복 제거 및 정렬
+        let unique_category = [];
+        category_list.forEach(category => {
+            if(!unique_category.includes(category.main_category_name)) {
+                unique_category.push({"main":category.main_category_name, "number":category.main_category_number});
+            }
+        });
+
+        let main_category_list = unique_category.filter((thing, index) => {
+            const cate = JSON.stringify(thing);
+            return index === unique_category.findIndex(obj => {
+            return JSON.stringify(obj) === cate;
+            });
+        });
+        
+        main_category = main_category_list.sort((a, b) => a.number - b.number)
+        var category_wrap = document.getElementsByClassName('nav_category_area')[0];
+
+        main_category_list.forEach(main => {
+            category_wrap.innerHTML += `
+            <div class="main_category_section horizontal_alignment">
+                <div class="main_info">
+                    <div class="main_name">
+                        ${main.main}
+                    </div>
+                </div>
+                <div class="main_info_button">
+                    +
+                </div>
+            </div>
+            `
+            category_list.forEach(cate => {
+                if(main.main == cate.main_category_name) {
+                    category_wrap.innerHTML += `
+                    <div class="sub_category_section horizontal_alignment">
+                        <div class="sub_info horizontal_alignment">
+                            <div class="sub_category_name">
+                                ${cate.sub_category_name}
+                            </div>
+                            <div class="sub_count">
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }
+            })
+        })
     }
 }
 

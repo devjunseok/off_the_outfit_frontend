@@ -133,6 +133,10 @@ body {
 .left_section .nf_tag {
     height: 30px;
     line-height: 30px;
+    width: 290px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .new_feed_box .right_section {
@@ -273,6 +277,10 @@ body {
 
 .info_bottom_section .sub_tags {
     font-size: 9pt;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .info_bottom_section .sub_created_at {
