@@ -15,7 +15,16 @@
             <div data-include-path="/nav.html"></div>
             <div class="main_body_area">
                 <div class="top_section">
-                    <div class="info_bar"></div>
+                    <div class="info_bar horizontal_alignment">
+                        <div></div>
+                        <div class="etc_dropbox">
+                        <div class="etc_button">...</div>
+                        <div class="etc_list">
+                            <a class="feed_update_go">수정</a>
+                            <a onclick="deleteFeed()" >삭제</a>
+                        </div>
+                        </div>
+                    </div>
                     <div class="detail_area horizontal_alignment">
                         <div class="ua_left_section">
                             
@@ -34,13 +43,10 @@
                                             <div class="nickname"></div>
                                         </div>
                                         <div class="like_box horizontal_alignment">
-                                            <div><a class = "feed_update_go">게시글수정</a></div>
-                                            <div><button onclick="deleteFeed()">게시글삭제</button></div>
                                             <div class ="like_button">
                                                 <!-- 상세 페이지 좋아요 버튼 -->
                                             </div>
                                             <div class="feed_like">234</div>
-                                            <div class="feed_unlike">143</div>
                                             <div class="unlike_button">
                                                 <!-- 상세 페이지 싫어요 버튼 -->
                                             </div>

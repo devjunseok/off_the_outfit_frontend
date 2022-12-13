@@ -201,7 +201,6 @@ window.onload = async function getIndexDetail_API(){
         var profile_image = document.getElementsByClassName('profile_image')[0];
         var nickname = document.getElementsByClassName('nickname')[0];
         var feed_like = document.getElementsByClassName('feed_like')[0];
-        var feed_unlike = document.getElementsByClassName('feed_unlike')[0];
         var feed_content = document.getElementsByClassName('feed_content')[0];
         var feed_tags = document.getElementsByClassName('feed_tags')[0];
         var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
@@ -214,10 +213,9 @@ window.onload = async function getIndexDetail_API(){
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
-        // profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
+        profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
         nickname.innerText = `${feed.user}`
         feed_like.innerText = `${feed.like_count}`
-        feed_unlike.innerText = `${feed.unlike_count}`
         feed_content.innerText = `${feed.content}`
         feed_tags.innerText = `${feed.tags}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
