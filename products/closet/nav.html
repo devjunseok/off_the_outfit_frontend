@@ -15,7 +15,14 @@
             <li onclick="location.href=''">상의</li>
             <li onclick="location.href=''">하의</li>
         </ul>
-        <div class="mypage_main_title">네임태그</div>
+        <div class="horizontal_alignment">
+            <div class="mypage_main_title">네임태그</div>
+            <div class="name_tag_add_button" onclick="recommentInputFlex()">+</div>
+        </div>
+        <div class="nametag_input_box horizontal_alignment" style="display: none;">
+            <input class="nametag_input" id="name_tag" type="text" placeholder="네임태그..." />
+            <button class="nametag_create_button" type="submit" onclick="closetNametagCreate()">생성</button>
+        </div>
         <ul class="mypage_list">
             <li onclick="location.href=''">데일리룩</li>
             <li onclick="location.href=''">OOTD</li>

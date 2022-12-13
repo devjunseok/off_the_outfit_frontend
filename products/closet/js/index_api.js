@@ -31,6 +31,21 @@ async function getUser(){
     return response_json
 }
 
+// 옷장 사용자 정보 가져오기
+async function getUser(){
+    user_id = location.search.replace("?user_id=", "")
+    const response = await fetch(`${backEndBaseUrl}/users/${user_id}/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    return response_json
+}
+
 
 // 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
 function timeForToday(value) {
@@ -121,6 +136,49 @@ async function closetProductDelete(product_id, closet_id) {
     }
 }
 
+
+// 네임태그 입력 박스
+async function recommentInputFlex() {
+    let con = document.querySelector('.nametag_input_box');
+
+    if(con.style.display == 'none'){
+        con.style.display = 'flex';
+        }else{
+        con.style.display = 'none';
+    }
+}
+
+// 네임 태그 입력 API
+async function closetNametagCreate() {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+        
+    } else {
+
+        name_tag = document.getElementById("name_tag").value;
+
+        const response = await fetch(`${backEndBaseUrl}/products/product/nametag/`, {
+            headers: {
+                'content-type': 'application/json',
+                "Authorization":"Bearer " + localStorage.getItem("access")
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                "tag_name":name_tag
+            })
+        })
+        const response_json = await response.json()
+    
+        if (response.status == 200){
+            alert(response_json["message"])
+        }
+        window.location.reload()   
+        return response_json
+    }
+}
+    
 
 
 
