@@ -1,5 +1,22 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+return response_json
+}
 
 // 게시글 전체 리스트 조회
 async function getIndexFeedList(){
@@ -87,71 +104,104 @@ window.onload = async function getIndex_API(){
         if (best_feed_list.length > 3 ) {
             best_feed_list = best_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
         }
-        
 
         //인기 게시글 출력 반복문 부분
         var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];
 
         best_feed_list.forEach(best_feed => {
             //태그 출력 반복문
+            tag_list = [];
             best_feed.tags.forEach(tag => {
-                
-                best_wrap.innerHTML += `
-                <div class="new_feed_box vertical_alignment">
-                    <div class="nf_image_box">
-                        <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.id}'"/>
+                tag = `#${tag}`
+                tag_list.push(tag)
+            })
+
+            if(tag_list.length == 0){
+                tag_list = []
+            } else if(tag_list.length == 1){
+                tag_list = tag_list
+            } else if(tag_list.length == 2){
+                tag_list = `${tag_list[0]} ${tag_list[1]}`
+            } else if(tag_list.length == 3){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]}`
+            } else if(tag_list.length == 4){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]}`
+            } else {
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
+            }
+            best_wrap.innerHTML += `
+            <div class="new_feed_box vertical_alignment">
+                <div class="nf_image_box">
+                    <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.pk}'"/>
+                </div>
+                <div class="nf_info_box horizontal_alignment">
+                    <div class="left_section vertical_alignment">
+                        <div class="nf_nickname" onclick="location.href='/products/closet/?user_id=${best_feed.user_id}'">${best_feed.user}</div>
+                        <div class="nf_content">${best_feed.content}</div>
+                        <div class="nf_tag">${tag_list}</div>
                     </div>
-                    <div class="nf_info_box horizontal_alignment">
-                        <div class="left_section vertical_alignment">
-                            <div class="nf_nickname">${best_feed.user}</div>
-                            <div class="nf_content">${best_feed.content}</div>
-                            <div class="nf_tag">${tag}</div>
+                    <div class="right_section vertical_alignment">
+                        <div class="like_box horizontal_alignment">
+                            <div class="nf_like">${best_feed.like_count}</div>
+                            <div class="nf_unlike">${best_feed.unlike_count}</div>
                         </div>
-                        <div class="right_section vertical_alignment">
-                            <div class="like_box horizontal_alignment">
-                                <div class="nf_like">${best_feed.like_count}</div>
-                                <div class="nf_unlike">${best_feed.unlike_count}</div>
-                            </div>
-                            <div class="right_section_middle"></div>
-                            <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
-                        </div>
+                        <div class="right_section_middle"></div>
+                        <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
                     </div>
                 </div>
-                `
-            })    
-        })
+            </div>
+            `
+        })    
+
 
         // 전체 게시글 출력 반복문 부분
         wrap = document.getElementsByClassName('sub_feed_list_box')[0];
 
         feed_list.forEach(feed => {
-            // 태그 출력 반복문
+            //태그 출력 반복문
+            tag_list = [];
             feed.tags.forEach(tag => {
-                
+                tag = `#${tag}`
+                tag_list.push(tag)
+            })
+
+            if(tag_list.length == 0){
+                tag_list = []
+            } else if(tag_list.length == 1){
+                tag_list = tag_list
+            } else if(tag_list.length == 2){
+                tag_list = `${tag_list[0]} ${tag_list[1]}`
+            } else if(tag_list.length == 3){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]}`
+            } else if(tag_list.length == 4){
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]}`
+            } else {
+                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
+            }
+                console.log(feed)
                 wrap.innerHTML += `
                 <div class="sub_feed_box vertical_alignment">
                     <div class="sub_feed_image_box">
-                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.id}'"/>
+                        <img class="feed_image" src="${backEndBaseUrl}${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.pk}'"/>
                     </div>
                     <div class="sub_feed_info_box">
                         <div class="info_top_section horizontal_alignment">
-                            <div class="sub_nickname">${feed.user}</div>
+                            <div class="sub_nickname" onclick="location.href='/products/closet/?user_id=${feed.user_id}'">${feed.user}</div>
                             <div class="sub_like">${feed.like_count}</div>
                         </div>
                         <div class="info_middle_section">
                             <div class="sub_content">${feed.content}</div>
                         </div>
                         <div class="info_bottom_section horizontal_alignment">
-                            <div class="sub_tags">${tag}</div>
+                            <div class="sub_tags">${tag_list}</div>
                             <div class="sub_created_at">${timeForToday(feed.updated_at)}</div>
                         </div>
                     </div>
                 </div>
                 `
             })
-        })
 
-
+    // HEADER 부분
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()
     if (search_word_list.length > 9) {
@@ -179,7 +229,10 @@ window.onload = async function getIndex_API(){
         word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
         word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
     }
-    
+
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
     // NAV 브랜드 리스트 조회
     brand_list = await getNavBrandList()
@@ -200,6 +253,10 @@ window.onload = async function getIndex_API(){
         }
     })
 
+    //출석하기 출력문
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+ 
 
     // NAV 카테고리 리스트 조회
     category_list = await getCategorylist()

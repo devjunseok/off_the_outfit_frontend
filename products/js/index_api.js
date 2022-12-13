@@ -1,6 +1,24 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+return response_json
+}
+
 // 상품 브랜드별 리스트 조회
 async function getIndexProductList(){
     id = location.search.replace('?key=', '').replace('?brand_id=', '').split('&')
@@ -97,7 +115,7 @@ async function closetProductAdd(product_id) {
         }); 
         if (response.status == 200) {
         alert("옷장 상품 등록");
-        window.location.replace(`${frontEndBaseUrl}/products/closet/`);
+        window.location.replace(`${frontEndBaseUrl}/products/closet/?user_id=${User_payload.user_id}`);
         }
     }
 }
@@ -176,6 +194,13 @@ window.onload = async function getIndex_API(){
         word_rank_09.innerText = `9등 : ${search_word_list[8]['word']}`
         word_rank_10.innerText = `10등 : ${search_word_list[9]['word']}`
     }
+    //출석하기 출력문
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+    
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
 
     // key 값 가져오기

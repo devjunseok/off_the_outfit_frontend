@@ -53,19 +53,19 @@
                     <div class="horizontal_alignment">
                         <div class="vertical_alignment">
                             <div class="summary_title">팔로우</div>
-                            <div class="summary_value">43</div>
+                            <div class="summary_value"id="follow_value_count">43</div>
                         </div>
                         <div class="vertical_alignment">
                             <div class="summary_title ">팔로워</div>
-                            <div class="summary_value">25</div>
+                            <div class="summary_value"id="follower_value_count">25</div>
                         </div>
                         <div class="vertical_alignment">
                             <div class="summary_title ">피드</div>
-                            <div class="summary_value">34</div>
+                            <div class="summary_value"id ="feed_value_count">34</div>
                         </div>
                         <div class="vertical_alignment">
                             <div class="summary_title ">옷장</div>
-                            <div class="summary_value">65</div>
+                            <div class="summary_value" id="closet_value_count">65</div>
                         </div>
                     </div>
                 </div>
@@ -77,13 +77,17 @@
                 <div class="header-link-line">|</div>
                 <a class="header-link" href="#">최근 본 상품</a>
                 <div class="header-link-line">|</div>
-                <a class="header-link" href="#">옷장</a>
+                <a class="header-link" id="header_closet_button">옷장</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link" href="/recommend/?city=서울특별시">내일 뭐입지?</a>
                 <div class="header-link-line">|</div>
                 <a class="header-link" href="">좋아요</a>
                 <div class="header-link-line">|</div>
-                <a class="header-link" type="submit"onclick="handleLogout()">로그아웃</a>
+                <a class="header-link"type="submit"onclick="handleLogout()">로그아웃</a>
                 <div class="header-link-line">|</div>
                 <a class="header-link" href="/communities/upload.html" >글 작성하기</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link"id="AttendanceCheck" onclick="AttendanceCheck()" >출석하기</a>
                 
             </div>
         </div>
