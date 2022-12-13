@@ -17,6 +17,25 @@ async function getUserDetailInfo(){
     return response_json
 }
 
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+return response_json
+}
+
+
 
 // 닉네임 변경 API
 async function updateNickname(value){
@@ -97,6 +116,7 @@ async function getHeaderSearchWordRanking(){
 window.onload = async function getProfile_API(){
     
     profile_list = await getUserDetailInfo()
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
 
     //마이페이지 HAEDER 부분 출력
     var main_profile_image = document.getElementsByClassName('main_profile_image')[0];
@@ -134,6 +154,14 @@ window.onload = async function getProfile_API(){
     if(profile_list.point >= 201){
         profile_tier_info.innerText =`LV.5 VIP`
     }
+
+    //출석하기 출력문
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+    
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
 
     // 검색어 랭킹 조회
