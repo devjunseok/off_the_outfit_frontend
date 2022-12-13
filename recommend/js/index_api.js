@@ -1,6 +1,24 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+    return response_json
+}
+
 // 지역 추천 상품 리스트 조회
 async function getIndexProductList(city){
 
@@ -162,6 +180,11 @@ window.onload = async function getIndex_API(){
         `
         bottom_view.innerText = `${prod.category[0].sub_category_name}`
         });
+
+        
+    //출석하기 출력문
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
 
 
 

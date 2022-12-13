@@ -1,6 +1,23 @@
 const frontEndBaseUrl = "http://127.0.0.1:5500"
 const backEndBaseUrl = "http://127.0.0.1:8000"
 
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+    return response_json
+}
 
 // 회원 정보 조회 API
 async function getUserDetailInfo(){
@@ -305,6 +322,7 @@ async function getHeaderSearchWordRanking(){
 window.onload = async function getProfile_API(){
     //회원정보 리스트 조회
     profile_list = await getUserDetailInfo()
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
     console.log(profile_list.closet_set_count)
     
     //회원정보 출력 반복문 부분
@@ -364,6 +382,11 @@ window.onload = async function getProfile_API(){
     if(profile_list.point >= 201){
         profile_tier_info.innerText =`LV.5 VIP`
     }
+    //출석하기 출력문
+
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
     
     
 
