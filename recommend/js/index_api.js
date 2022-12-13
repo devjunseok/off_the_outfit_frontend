@@ -186,7 +186,9 @@ window.onload = async function getIndex_API(){
     var AttendanceCheck = document.getElementById('AttendanceCheck')
     AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
 
-
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
 
     // 검색어 랭킹 조회
