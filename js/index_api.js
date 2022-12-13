@@ -100,7 +100,6 @@ window.onload = async function getIndex_API(){
                 tag_list.push(tag)
             })
 
-            console.log(tag_list.length)
             if(tag_list.length == 0){
                 tag_list = []
             } else if(tag_list.length == 1){
@@ -150,7 +149,6 @@ window.onload = async function getIndex_API(){
                 tag_list.push(tag)
             })
 
-            console.log(tag_list.length)
             if(tag_list.length == 0){
                 tag_list = []
             } else if(tag_list.length == 1){
