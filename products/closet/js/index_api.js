@@ -217,7 +217,7 @@ window.onload = async function getIndex_API(){
             </div>
             `
         })
-        
+
         } else {
 
         product_list.forEach(prod => {
@@ -301,6 +301,12 @@ window.onload = async function getIndex_API(){
             <li onclick="location.href='/products/closet/?user_id=${user_info.pk}&?name_tag=${name_tag.tag_name}'">${name_tag.tag_name}</li>
             `
         })
+        
+        // 네임 태그 본인 옷장에서만 생성
+        var name_tag_add_button = document.getElementsByClassName('name_tag_add_button')[0];
+        if(search[0] != User_payload.user_id) {
+            name_tag_add_button.innerText = ''
+        }
 
         // 검색어 랭킹 조회
         search_word_list = await getHeaderSearchWordRanking()
