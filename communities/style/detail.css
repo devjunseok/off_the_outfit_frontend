@@ -403,3 +403,33 @@ body {
 .etc_dropbox:hover .etc_list {
     display: block;
 }
+
+#detail_follow {
+    font-size: 10pt;
+    width: 60px;
+    height: 25px;
+    margin: 5px 0 0 5px;
+    border: solid 1px #c0c0c0;
+    background-color: #ffffff;
+}
+
+#detail_follow:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+#detail_following {
+    font-size: 10pt;
+    width: 60px;
+    height: 25px;
+    margin: 5px 0 0 5px;
+    border: solid 1px #000000;
+    background-color: #c0c0c0;
+
+}
+
+
+#detail_following:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
