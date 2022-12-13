@@ -68,6 +68,34 @@ async function handleUnLike(){
         window.location.reload()
 
 }
+//댓글 등록
+async function postComment(feed_id){
+
+    console.log(feed_id)
+    const comment = document.getElementById('comment_content').value;
+    console.log(comment)
+    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            "comment":comment
+        })
+    })
+    const response_json = await response.json()
+
+    if (response.status == 200){
+        alert(response_json["message"])
+    }else {
+        alert(response_json["detail"])
+    }
+    window.location.reload()   
+    
+    return response_json
+}
+
 
 
 
@@ -115,6 +143,18 @@ async function deleteFeed(){
     }
 }
 
+async function recommentInputFlex() {
+    console.log("클릭")
+
+    let con = document.querySelector('.recomment_input_box');
+
+    if(con.style.display == 'none'){
+        con.style.display = 'block';
+        }else{
+        con.style.display = 'none';
+    }
+}
+
 
 
 // 게시글 상세보기 출력 부분
@@ -127,7 +167,7 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
-        console.log(feed)
+        console.log(feed.comments)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -140,7 +180,10 @@ window.onload = async function getIndexDetail_API(){
         var feed_update_go = document.getElementsByClassName('feed_update_go')[0];
         var like_wrap = document.getElementsByClassName('like_button')[0];
         var unlike_wrap = document.getElementsByClassName('unlike_button')[0];
+        var cmt_wrap = document.getElementsByClassName('comment_middle_section')[0];
+        var comment_onclick = document.getElementsByClassName('comment_create_button')[0];
 
+        comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
         // profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
@@ -152,6 +195,39 @@ window.onload = async function getIndexDetail_API(){
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
         // 업데이트 html로 id값 같이 보내기
         feed_update_go.setAttribute("href",`${frontEndBaseUrl}/communities/update.html?id=${feed_id}`)
+
+        // 댓글 닉네임과 내용 반복문
+        feed.comments.forEach(comt=>{
+            console.log(comt)
+        cmt_wrap.innerHTML += `
+        <div class="vertical_alignment">
+            <div class="comment_box horizontal_alignment">
+                <div class="cmt_user horizontal_alignment">  
+                    <div class="cmt_nickname">${comt.user}</div>
+                    <div class="cmt_comment">${comt.comment}</div>
+                </div>
+                <div class="cmt_button_box horizontal_alignment">
+                    <div class="cmt_reco_button" onclick="recommentInputFlex()">대댓글</div>
+                    <div class="cmt_like_button">O</div>
+                </div>
+            </div>
+            <div class="recomment_input_box" id="recomment_input_box" style="display: none;">
+                <textarea class="reco_input" id="recomment_content" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="">댓글작성</button>
+            </div>
+        </div>
+        `
+        comt.recomment.forEach(reco=>{
+            cmt_wrap.innerHTML +=`
+            <div class="recomment_box horizontal_alignment">
+                <div class="reco_user horizontal_alignment">  
+                    <div class="reco_nickname">┗ ${reco.user}</div>
+                    <div class="reco_recomment">${reco.recomment}</div>
+                </div>
+            </div>
+            `
+        })
+        })
         // 좋아요 부분
         if(feed.like.length == 0){
             console.log("좋아요 한 유저가 없을때")
@@ -210,6 +286,8 @@ window.onload = async function getIndexDetail_API(){
                     unlike_wrap.innerHTML +=`<img class="feed_umji_view" src="/static/img/unlike.png" onclick="handleUnLike()"/>`
                 }
             }
+
+        
         
         // 검색어 랭킹 조회
         search_word_list = await getHeaderSearchWordRanking()

@@ -227,8 +227,8 @@ async function updateProfileImage(){
     const formData = new FormData();
     
     formData.append("profile_image", profile_Image);
-
-    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`, {
+    console.log(formData)
+    const response = await fetch(`${backEndBaseUrl}/users/`, {
         headers: {
         "Authorization":"Bearer " + localStorage.getItem("access"),
         },
@@ -273,7 +273,7 @@ function handleUpdateConfirm_profile_image(){
     const updateInputProfileImage = document.getElementById('update-InputProfileImage')
     const id_profile_image = document.getElementById("id_profile_image")
     
-    updateNickname()
+    updateProfileImage()
     
     id_profile_image.style.visibility = "visible"
     id_profile_image.style.width = "400px"

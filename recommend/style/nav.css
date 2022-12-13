@@ -1,0 +1,83 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-12 ]
+________________________________________________________________
+
+= Users table of Css
+
+2. /recommend/nav.html
+
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* _______________________________________________________________  */
+/* 2. recommend/nav.html */
+/* _______________________________________________________________  */
+
+.left_area {
+    background-color: #ffffff;
+    width: 300px;
+    padding: 10px;
+}
+
+.left_area .mypage_main_title {
+    font-size: 15pt;
+    font-weight: bold;
+    margin-left: 35px;
+}
+
+.left_area .mypage_list {
+    list-style: none;
+}
+
+.left_area .mypage_list li {
+    margin-top: 10px;
+    font-size: 10pt;
+    cursor: pointer;
+
+}
+
+
+
+
+
+/* _______________________________________________________________  */
+/* 3. footer.html */
+/* _______________________________________________________________  */
