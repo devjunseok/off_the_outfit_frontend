@@ -433,3 +433,33 @@ body {
     background-color: #000000;
     color: #ffffff;
 }
+
+.reportBox {
+    background-color: #ffffff;
+    position: absolute;
+    margin: 200px 0 0 300px;
+    width: 400px;
+    height: 200px;
+    border: solid 2px #c0c0c0;
+}
+
+.reportBox .report_input {
+    width: 360px;
+    height: 140px;
+    resize: none;
+    border: none;
+    padding: 20px;
+}
+
+.reportBox .reportButtonBox {
+    text-align: right;
+}
+.reportButtonBox .report_button {
+    border: solid 1px #c0c0c0;
+    background-color: #ffffff;
+}
+
+.reportButtonBox .report_button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
