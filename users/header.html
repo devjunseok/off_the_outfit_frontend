@@ -12,8 +12,8 @@
         <div class="main-wrapper">
             <div class="main-title" onclick="location.href='/'">off the outfit</div> 
             <div class="search-wrapper">
-                <input class="search-box" type="text" placeholder="검색어를 입력해주세요.">
-                <button class="search-button"></button>
+                <input class="search-box" type="text" placeholder="검색어를 입력해주세요." id="search" name="search">
+                <button class="search-button" onclick="searchButton()"></button>
             </div>
             <!-- 실시간 검색어 부분 -->
             <div class="rolling_box">
@@ -39,12 +39,12 @@
                     <img class="main_profile_image" src="/static/img/default.png" id="profile_image" />
                 </div>
                 <div class="right_main_profile_info_box vertical_alignment">
-                    <div class="profile_nickname" id="intro">닉네임</div>
+                    <div class="profile_nickname" id="intro"></div>
                     <div class="horizontal_alignment">
-                        <div class="profile_tier_info">LV.1 브론즈</div>
-                        <div class="profile_created_at">가입일 : 2022. 11. 30</div>
+                        <div class="profile_tier_info"></div>
+                        <div class="profile_created_at"></div>
                     </div>
-                    <div class="profile_next_tier_info" >`${}`님 다음 등급까지 0000점 남았습니다.</div>
+                    <div class="profile_next_tier_info" ></div>
                 </div>
             </div>
             <div class="info_right_area vertical_alignment">
@@ -53,19 +53,19 @@
                     <div class="horizontal_alignment">
                         <div class="vertical_alignment">
                             <div class="summary_title">팔로우</div>
-                            <div class="summary_value">43</div>
+                            <div class="summary_value"id="follow_value_count"></div>
                         </div>
                         <div class="vertical_alignment">
                             <div class="summary_title ">팔로워</div>
-                            <div class="summary_value">25</div>
+                            <div class="summary_value"id="follower_value_count"></div>
                         </div>
                         <div class="vertical_alignment">
                             <div class="summary_title ">피드</div>
-                            <div class="summary_value">34</div>
+                            <div class="summary_value"id ="feed_value_count"></div>
                         </div>
                         <div class="vertical_alignment">
                             <div class="summary_title ">옷장</div>
-                            <div class="summary_value">65</div>
+                            <div class="summary_value" id="closet_value_count"></div>
                         </div>
                     </div>
                 </div>
@@ -74,16 +74,19 @@
         <div class="header-member">
             <div class="header-links">
                 <a class="header-link" href="/users/account_edit.html">마이페이지</a>
+                <!-- <div class="header-link-line">|</div>
+                <a class="header-link" href="#">최근 본 상품</a> -->
                 <div class="header-link-line">|</div>
-                <a class="header-link" href="#">최근 본 상품</a>
+
+                <a class="header-link" id="header_closet_button">옷장</a>
                 <div class="header-link-line">|</div>
-                <a class="header-link" href="#">옷장</a>
+                <a class="header-link" href="/recommend/?city=서울특별시">내일 뭐입지?</a>
                 <div class="header-link-line">|</div>
-                <a class="header-link" href="">좋아요</a>
-                <div class="header-link-line">|</div>
-                <a class="header-link" type="submit"onclick="handleLogout()">로그아웃</a>
+                <a class="header-link"type="submit"onclick="handleLogout()">로그아웃</a>
                 <div class="header-link-line">|</div>
                 <a class="header-link" href="/communities/upload.html" >글 작성하기</a>
+                <div class="header-link-line">|</div>
+                <a class="header-link"id="AttendanceCheck" onclick="AttendanceCheck()" >출석하기</a>
                 
             </div>
         </div>

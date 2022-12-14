@@ -7,15 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 상세보기</title>
     <link rel="stylesheet" href="/communities/style/detail.css">
+    <link rel="stylesheet" href="/style/header.css">
 </head>
 <body>
     <body>
         <div data-include-path="/header.html"></div>
         <div class="horizontal_alignment">
-            <div data-include-path="/nav.html"></div>
+            <div data-include-path="/communities/nav.html"></div>
             <div class="main_body_area">
                 <div class="top_section">
-                    <div class="info_bar"></div>
+                    <div class="info_bar horizontal_alignment">
+                        <div></div>
+                        <div class="etc_dropbox">
+                        <div class="etc_button">...</div>
+                        <div class="etc_list">
+                            <!-- ... 수정, 삭제 메뉴 -->
+                        </div>
+                        </div>
+                    </div>
+                    <div class="reportBox vertical_alignment" style="display: none;">
+                        <textarea class="report_input" id="report_content" type="text" placeholder="신고내용..." cols="5"rows="5"></textarea>
+                        <div class="reportButtonBox">
+                            <button class="report_button" id="report_button_done" type="submit">신고</button>
+                            <button class="report_button" onclick="reportInputFlex()">닫기</button>
+                        </div>
+                    </div>
                     <div class="detail_area horizontal_alignment">
                         <div class="ua_left_section">
                             
@@ -31,34 +47,35 @@
                                     <div class="horizontal_alignment">
                                         <div class="user_profile_info horizontal_alignment">
                                             <img class="profile_image" src="/static/img/default.png" id="profile_image" />
-                                            <div class="nickname">nickname</div>
+                                            <div class="nickname"></div>
+                                            <div class="detail_follow_box">
+                                            <!-- 상세페이지 팔로우 버튼 -->
+                                        </div>
                                         </div>
                                         <div class="like_box horizontal_alignment">
-                                            <div><a class = "feed_update_go">게시글수정</a></div>
-                                            <div><button onclick="deleteFeed()">게시글삭제</button></div>
                                             <div class ="like_button">
                                                 <!-- 상세 페이지 좋아요 버튼 -->
                                             </div>
-                                            <div class="feed_like">234</div>
-                                            <div class="feed_unlike">143</div>
                                             <div class="unlike_button">
                                                 <!-- 상세 페이지 싫어요 버튼 -->
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="feed_content">off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.</div>
+                                    <div class="feed_content"></div>
+                                    <div class="feed_tags"></div>
                                     <div class="horizontal_alignment">
-                                        <div class="feed_tags">#이건 #태그 #인척</div>
-                                        <div class="feed_create_at">몇분전</div>
+                                        <div class="like_info">몇명이 좋아하는 중입니다.</div>
+                                        <div class="feed_create_at"></div>
                                     </div>
                                 </div>
                                 <!-- 댓글 목록 부분 -->
                                 <div class="comment_middle_section vertical_alignment">
-
+                                <!-- 댓글 반복문 출력 부분 -->
                                 </div>
                                 <!-- 댓글 작성 버튼 -->
-                                <div class="comment_bottom_section">
-
+                                <div class="comment_bottom_section horizontal_alignment">
+                                    <textarea class="comment_input_box" id="comment_content" type="text" placeholder="댓글 내용 입력" cols="5"rows="5"></textarea>
+                                    <button class="comment_create_button" type="submit">댓글작성</button>
                                 </div>
                             </div>
                         </div>
@@ -70,5 +87,10 @@
         
         <script src="/communities/js/detail_api.js"></script>
         <script src="/communities/js/detail.js"></script>
+        <script src="/js/header_api.js"></script>
+        <script src="/js/header.js"></script>  
+        <script src="/js/nav_api.js"></script>  
+        <script src="/js/base_url.js"></script>
+        
 </body>
 </html>

@@ -1,10 +1,4 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 
-
-window.onload = () => {
-    console.log('로딩되었음')
-}
 
 async function handleSignup() {
     const password = document.getElementById("password").value
@@ -18,10 +12,6 @@ async function handleSignup() {
     const weight = document.getElementById("weight").value
     const date_of_birth = document.getElementById("date_of_birth").value
     const term_agree = document.getElementById("term_agree").value
-
-    console.log(email, nickname, password, password2,username,address,gender,height,weight,date_of_birth,)
-
-    console.log('로딩되었음1')
 
     const response = await fetch(`${backEndBaseUrl}/users/`, {
         
@@ -48,15 +38,12 @@ async function handleSignup() {
     })
 
     const response_json = await response.json()
-    console.log('로딩되었음3')
 
-    console.log(response)
     if (response.status == 201){
         alert(response_json["message"])
             window.location.replace(`${frontEndBaseUrl}/users/login.html`);
     }else{
         alert(response_json["username"])
-        console.log(username)
         alert(response_json["username"])
 
 

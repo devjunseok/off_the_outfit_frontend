@@ -167,7 +167,7 @@ body {
 
 
 /* _______________________________________________________________  */
-/* 2. nav.html */
+/* 2. nav.html -- 브랜드 메뉴 */
 /* _______________________________________________________________  */
 
 .left_area {
@@ -202,7 +202,6 @@ body {
 .left_area .nav_main_bt_right {
     width: 140px;
     height: 60px;
-
     border: solid 1px #c0c0c0;
     text-align: center;
     line-height: 60px;
@@ -221,11 +220,18 @@ body {
     color: #ffffff;
 }
 
+.nav_main_brand_right {
+    display: flex;
+}
+
+
 .nav_alphabet_area {
     width: 280px;
     height: 100px;
     margin: 10px;
 }
+
+
 
 .nav_alphabet_area .top_section {
     display: grid;
@@ -304,17 +310,102 @@ body {
     color: #c0c0c0;
 }
 
+
+
+/* _______________________________________________________________  */
+/* 2. nav.html -- 품목 메뉴 */
+/* _______________________________________________________________  */
+
 .left_area .nav_main_category_left {
-    display: none;
     position: absolute;
+    display: none;
+}
+
+.nav_category_area {
+    width: 300px;
+}
+
+.nav_category_box .main_category_section {
+    width: 280px;
+    height: 40px;
+    margin: 10px auto 10px auto;
+    border: solid 2px #c0c0c0;
+    
+}
+
+.main_category_section .main_info {
+    width: 240px;
+    height: 40px;
+}
+
+.main_info .main_name {
+    margin-left: 10px;
+    font-size: 12pt;
+    line-height: 40px;
+    font-weight: bold;
+}
+
+
+
+.main_category_section .main_info_button {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    line-height: 40px;
+    font-size: 18pt;
+    font-weight: bold;
+    text-align: right;
+    cursor: pointer;
+}
+
+.nav_category_area .sub_category_section {
+    width: 280px;
+
+}
+
+.sub_info {
+    width: 120px;
+    height: 30px;
+    margin: 0 10px 0 20px;
+}
+
+.sub_info .sub_category_name {
+    font-size: 8pt;
+    cursor: pointer;
+}
+.sub_info .sub_category_name:hover {
+    font-weight: bold;
+    font-size: 10pt;
+}
+.sub_info .sub_count {
+    font-size: 10pt;
+    color: #c0c0c0;
+    margin-left: 5px;
+}
+
+.nav_category_area .nav_section_dividing_line {
+    width: 280px;
+    margin: 0 10px 0 10px;
+    border-bottom: solid 1px #000000;
+}
+
+#sub_category_area_outer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#sub_category_area_top {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#sub_category_area_bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 
 /* _______________________________________________________________  */
 /* 3. footer.html */
 /* _______________________________________________________________  */
-
-
-
-
 

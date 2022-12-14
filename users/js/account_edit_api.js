@@ -1,6 +1,21 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+    return response_json
+}
 
 // 회원 정보 조회 API
 async function getUserDetailInfo(){
@@ -34,7 +49,6 @@ async function updateNickname(value){
         })
     })
     const response_json = await response.json()
-    console.log(response_json["nickname"])
 
     if (response.status == 200){
         var divNickname= document.getElementById("edit_nickname")
@@ -227,8 +241,7 @@ async function updateProfileImage(){
     const formData = new FormData();
     
     formData.append("profile_image", profile_Image);
-
-    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`, {
+    const response = await fetch(`${backEndBaseUrl}/users/`, {
         headers: {
         "Authorization":"Bearer " + localStorage.getItem("access"),
         },
@@ -273,7 +286,7 @@ function handleUpdateConfirm_profile_image(){
     const updateInputProfileImage = document.getElementById('update-InputProfileImage')
     const id_profile_image = document.getElementById("id_profile_image")
     
-    updateNickname()
+    updateProfileImage()
     
     id_profile_image.style.visibility = "visible"
     id_profile_image.style.width = "400px"
@@ -305,7 +318,7 @@ async function getHeaderSearchWordRanking(){
 window.onload = async function getProfile_API(){
     //회원정보 리스트 조회
     profile_list = await getUserDetailInfo()
-    console.log(profile_list.profile_image)
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
     
     //회원정보 출력 반복문 부분
     var edit_image_view = document.getElementsByClassName('edit_image_view')[0];
@@ -327,6 +340,52 @@ window.onload = async function getProfile_API(){
     edit_view_body_height.innerText =`${profile_list.height}`
     edit_view_body_weight.innerText =`${profile_list.weight}`
     edit_view_address.innerText = `${profile_list.address}`
+
+    //마이페이지 HAEDER 부분 출력
+    var main_profile_image = document.getElementsByClassName('main_profile_image')[0];
+    var profile_nickname = document.getElementsByClassName('profile_nickname')[0];
+    var profile_tier_info = document.getElementsByClassName('profile_tier_info')[0];
+    var profile_created_at = document.getElementsByClassName('profile_created_at')[0];
+    var profile_next_tier_info = document.getElementsByClassName('profile_next_tier_info')[0];
+    var follow_value = document.getElementById('follow_value_count')
+    var follower_value = document.getElementById('follower_value_count')
+    var feed_value = document.getElementById('feed_value_count')
+    var closet_count_value = document.getElementById('closet_value_count')
+
+    main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+    profile_nickname.innerText = `${profile_list.nickname}`
+    // profile_created_at.innerText = `${profile_list.created_at}`
+    profile_next_tier_info.innerText = `현재 ${profile_list.nickname}님의 포인트는 ${profile_list.point} 포인트 입니다`
+    follow_value.innerText = `${profile_list.followings_count}`
+    follower_value.innerText = `${profile_list.followers_count}`
+    feed_value.innerText = `${profile_list.feeds_count}`
+    closet_count_value.innerText = `${profile_list.closet_set_count}`
+    
+    //마이페이지 등급 조건문
+    if(0<=profile_list.point||profile_list.point < 31){
+        profile_tier_info.innerText =`LV.1 브론즈`
+    }
+    if(31<=profile_list.point||profile_list.point < 51){
+        profile_tier_info.innerText =`LV.2 실버`
+    }
+    if(51<=profile_list.point||profile_list.point <101){
+        profile_tier_info.innerText =`LV.3 골드`
+    }
+    if(101<=profile_list.point||profile_list.point <201){
+        profile_tier_info.innerText =`LV.4 플레티넘`
+    }
+    if(profile_list.point >= 201){
+        profile_tier_info.innerText =`LV.5 VIP`
+    }
+    //출석하기 출력문
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
+    
+    
 
 
     // 검색어 랭킹 조회
