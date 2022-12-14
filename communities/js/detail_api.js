@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 출석 하기
 async function AttendanceCheck(user_id){
@@ -314,7 +312,6 @@ async function categoryNavMenu(Input_Box) {
 
 // 품목, 브랜드 온/오프
 function brandOn(){
-    console.log("brandOn 클릭")
     if($("#nav_main_brand_right").is(":visible")){
         // 브랜드 오프
         $("#nav_main_brand_right").css("display", "none");
@@ -338,7 +335,6 @@ function brandOn(){
 
 // 품목, 브랜드 온/오프
 function categoryOn(){
-    console.log("categoryOn 클릭")
     if($("#nav_main_category_left").is(":visible")){
         // 카테고리 오프
         $("#nav_main_category_left").css("display", "none");
@@ -404,10 +400,8 @@ window.onload = async function getIndexDetail_API(){
         if(feed.user_id != User_payload.user_id){
 
             follower_list.forEach(follower=>{
-                console.log(follower)
                 if(follower.length != 0){
                     if(follower.pk == User_payload.user_id){
-                        console.log("내가 팔로우 하고 있을 때")
                         Fcount +=1
                         }
                     }
@@ -417,7 +411,6 @@ window.onload = async function getIndexDetail_API(){
                     detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
                 }
                 else if(Fcount == 1){
-                    console.log("내가 팔로우 하고 있지 않을 때")
                     detail_follow.innerHTML += `<button id ="detail_following" onclick="handleFollow(${feed.user_id})">팔로잉</button>`
                 }
             }

@@ -1,6 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
-
 
 // 회원 정보 조회 API
 async function getUserHeaderInfo(){
@@ -18,10 +15,7 @@ async function getUserHeaderInfo(){
 }
 
 window.onload = async function getUserHeader_API(){
-    console.log("hi")
     feed_list = await getUserHeaderInfo()
-
-    console.log(header_user)
 
     var profile_nickname = document.getElementsByClassName('profile_nickname')[0];
     var profile_tier_info = document.getElementsByClassName('profile_tier_info')[0];

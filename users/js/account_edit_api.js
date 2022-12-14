@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 출석 하기
 async function AttendanceCheck(user_id){
@@ -51,7 +49,6 @@ async function updateNickname(value){
         })
     })
     const response_json = await response.json()
-    console.log(response_json["nickname"])
 
     if (response.status == 200){
         var divNickname= document.getElementById("edit_nickname")
@@ -244,7 +241,6 @@ async function updateProfileImage(){
     const formData = new FormData();
     
     formData.append("profile_image", profile_Image);
-    console.log(formData)
     const response = await fetch(`${backEndBaseUrl}/users/`, {
         headers: {
         "Authorization":"Bearer " + localStorage.getItem("access"),
@@ -323,7 +319,6 @@ window.onload = async function getProfile_API(){
     //회원정보 리스트 조회
     profile_list = await getUserDetailInfo()
     let User_payload = JSON.parse(localStorage.getItem('payload'))
-    console.log(profile_list.closet_set_count)
     
     //회원정보 출력 반복문 부분
     var edit_image_view = document.getElementsByClassName('edit_image_view')[0];

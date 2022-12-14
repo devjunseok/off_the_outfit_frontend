@@ -1,6 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
-
 
 // 인기 검색어 랭킹 조회
 async function getHeaderSearchWordRanking(){
@@ -28,7 +25,6 @@ async function createPost() {
     } else {
         const payload = localStorage.getItem("payload");
         const parsed_payload = await JSON.parse(payload);
-        console.log(parsed_payload);
 
         content = document.getElementById("content").value;
         tags = document.getElementById("tags").value;

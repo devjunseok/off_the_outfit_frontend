@@ -1,6 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
-
 // 게시글 상세보기 API
 async function getIndexFeedDetail(feed_id){
     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/`,{
