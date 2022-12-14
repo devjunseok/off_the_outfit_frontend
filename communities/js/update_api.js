@@ -30,6 +30,54 @@ async function getHeaderSearchWordRanking(){
     return response_json
 }
 
+// 텍스트 미리보기
+$(document).ready(function(){
+
+    $("#content").keyup(function(){
+        $("#out_content").text($("#content").val());
+    });
+
+    $("#tags").keyup(function(){
+        $("#out_tags").text($("#tags").val());
+    });
+});
+
+
+// 이미지 미리보기
+let fileTag = document.querySelector("input[name=feed_image]");
+
+fileTag.onchange = function() {
+
+    let imgTag = document.querySelector("#PreviewImg");
+
+    if(fileTag.files.length > 0) {
+        let reader = new FileReader();
+        reader.onload = function(data) {
+            imgTag.src = data.target.result;
+        }
+        reader.readAsDataURL(fileTag.files[0]);
+    }
+    else {
+        imgTag.src = "/static/img/default.png"
+    }
+}
+
+// 로그인 사용자 정보 가져오기
+async function getUser(){
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    return response_json
+}
+
+
 
 //  게시글 수정
 async function updatePost() {
@@ -64,6 +112,14 @@ async function updatePost() {
 
 
 window.onload = async function getUpdate_API(){
+
+    // 사용자 정보 가져오기
+    user_info = await getUser()
+    var user_nickname = document.getElementsByClassName('nickname')[0];
+    var user_profile_image = document.getElementById('profile_image');
+    user_nickname.innerText = `${user_info.nickname}`
+    user_profile_image.setAttribute('src', `${backEndBaseUrl}${user_info.profile_image}`)
+
 
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()
