@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="left_area">
+        <!-- <div class="closet_main_title">옷장 목록</div>
+        <ul class="closet_list">
+            <li onclick="location.href=''">전체</li>
+            <li onclick="location.href=''">아우터</li>
+            <li onclick="location.href=''">상의</li>
+            <li onclick="location.href=''">하의</li>
+        </ul> -->
+        <div class="horizontal_alignment">
+            <div class="closet_main_title">네임태그</div>
+            <div class="name_tag_add_button" onclick="recommentInputFlex()">+</div>
+        </div>
+        <div class="nametag_input_box horizontal_alignment" style="display: none;">
+            <input class="nametag_input" id="name_tag" type="text" placeholder="네임태그..." />
+            <button class="nametag_create_button" type="submit" onclick="closetNametagCreate()">생성</button>
+        </div>
+        <ul class="closet_list_name_tag">
+            <!-- 네임태그 반복 -->
+        </ul>
+    </nav>
+</body>
+</html>

@@ -1,8 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
-
-
-
 
 async function handleLogin() {
 
@@ -24,7 +19,7 @@ async function handleLogin() {
 
     const response_json = await response.json()    // responser 값을 json 화
 
-    console.log(response_json)
+
     if (response.status == 200){
         localStorage.setItem("access", response_json.access);  // 로컬스토리지안에 access값 저장
         localStorage.setItem("refresh", response_json.refresh); // 로컬스토리지안에 refresh값 저장

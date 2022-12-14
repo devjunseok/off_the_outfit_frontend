@@ -46,6 +46,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+.vertical_alignment .follow_value{
+    display: flex;
+
+}
 
 /* _______________________________________________________________  */
 /* 1. /users/header.html */

@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500";
-const backEndBaseUrl = "http://127.0.0.1:8000";
 
 // 브랜드 업데이트
 async function brandUpdate() {
