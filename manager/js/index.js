@@ -130,7 +130,7 @@ window.onload = async function loadReports() {
             </td>
         </tr>
         `
-        
+        console.log(rt)
 
     })
 

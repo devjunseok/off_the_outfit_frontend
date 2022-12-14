@@ -39,7 +39,7 @@ async function handleLogin() {
     }else {
         //로그인 실패시
         alert(response_json["non_field_errors"])
-        // window.location.reload();
+        
     }
 }
 
