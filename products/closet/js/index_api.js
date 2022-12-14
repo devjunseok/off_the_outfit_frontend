@@ -134,7 +134,7 @@ async function closetProductDelete(product_id, closet_id) {
 
     if(response.status == 204){
         alert("옷장 상품 제거 완료!")
-        window.location.replace(`${frontEndBaseUrl}/products/closet/`); // 삭제가 되고나면 인덱스로 다시 이동하게함
+        window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
     }
     else {
         alert(response.status);

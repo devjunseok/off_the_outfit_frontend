@@ -27,14 +27,14 @@
                                 <div class="input_top_section">
                                     <div class="user_profile_info horizontal_alignment">
                                         <img class="profile_image" src="/static/img/default.png" id="profile_image" />
-                                        <div class="nickname">nickname</div>
+                                        <div class="nickname"></div>
                                     </div>
-                                    <div class="user_content">off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.  off the outfit ex post descriptions.</div>
-                                    <div class="input_top_info"></div>
+                                    <div class="user_content" id="out_content"></div>
+                                    <div class="input_top_info" id="out_tags"></div>
                                 </div>
                                 <!-- 게시글 수정 부분 -->
                                 <div class="input_middle_section vertical_alignment">
-                                    <input id="feed_image" class="image_upload_button" type="file" required="required" value="image" />
+                                    <input id="feed_image" class="image_upload_button" type="file" required="required" value="image" name="feed_image"/>
                                     <textarea id="content" class="feed_content" type="text" name="content" placeholder="내용 입력..." cols="20" rows="10" ></textarea>
                                     <textarea id="tags" class="feed_tags" type="text" name="tags" placeholder="태그 입력..." cols="20" rows="10" ></textarea>
                                 </div>
@@ -48,7 +48,8 @@
                 </div>
             </div>
         </div>
-    
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="/communities/js/update.js"></script>
         <script src="/communities/js/update_api.js"></script>
         <script src="/js/base_url.js"></script>
