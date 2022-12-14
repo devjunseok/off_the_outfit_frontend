@@ -173,6 +173,43 @@ async function postRecomment(feed_id, comment_id, Input_Box){
     return response_json
 }
 
+//신고 접수
+async function postReport(feed_id){
+
+    const report = document.getElementById('report_content').value
+    const response = await fetch(`${backEndBaseUrl}/communities/report/${feed_id}/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            "report":report
+        })
+    })
+    const response_json = await response.json()
+
+    if (response.status == 200){
+        alert(response_json["message"])
+    }else {
+        alert(response_json["detail"])
+    }
+    window.location.reload()   
+    
+    return response_json
+}
+
+
+// 신고 접수 박스
+async function reportInputFlex() {
+    let con = document.querySelector('.reportBox');
+
+    if(con.style.display == 'none'){
+        con.style.display = 'flex';
+        }else{
+        con.style.display = 'none';
+    }
+}
 
 // 대댓글 입력 박스
 async function recommentInputFlex(Input_Box) {
@@ -386,6 +423,9 @@ window.onload = async function getIndexDetail_API(){
         var like_info = document.getElementsByClassName('like_info')[0];
         var etc_list = document.getElementsByClassName('etc_list')[0];
         var detail_follow = document.getElementsByClassName('detail_follow_box')[0];
+        var report_button = document.getElementById('report_button_done');
+
+        report_button.setAttribute('onclick', `postReport(${feed.pk}, '#report_content')`)
 
         // folo = []
         // follower_list.forEach(follower=>{
@@ -422,12 +462,20 @@ window.onload = async function getIndexDetail_API(){
                 }
             }
 
+        // 더보기 메뉴
         if(feed.user_id == User_payload.user_id){
             etc_list.innerHTML += `
             <a href="${frontEndBaseUrl}/communities/update.html?id=${feed_id}">수정</a>
             <a onclick="deleteFeed()" >삭제</a>
             `
+        } else {
+            etc_list.innerHTML += `
+            <a onclick="reportInputFlex()">신고</a>
+            `
         }
+
+
+
         like_info.innerText = `좋아요 ${feed.like_count}개`
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
