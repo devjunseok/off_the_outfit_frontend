@@ -1,5 +1,21 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
+
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+return response_json
+}
 
 //팔로우 하기,취소하기
 async function handleFollow(user_id){
@@ -155,6 +171,43 @@ async function postRecomment(feed_id, comment_id, Input_Box){
     return response_json
 }
 
+//신고 접수
+async function postReport(feed_id){
+
+    const report = document.getElementById('report_content').value
+    const response = await fetch(`${backEndBaseUrl}/communities/report/${feed_id}/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            "report":report
+        })
+    })
+    const response_json = await response.json()
+
+    if (response.status == 200){
+        alert(response_json["message"])
+    }else {
+        alert(response_json["detail"])
+    }
+    window.location.reload()   
+    
+    return response_json
+}
+
+
+// 신고 접수 박스
+async function reportInputFlex() {
+    let con = document.querySelector('.reportBox');
+
+    if(con.style.display == 'none'){
+        con.style.display = 'flex';
+        }else{
+        con.style.display = 'none';
+    }
+}
 
 // 대댓글 입력 박스
 async function recommentInputFlex(Input_Box) {
@@ -254,7 +307,91 @@ async function deleteRecomment(comment_id, recomment_id){
     }
 }
 
+// 브랜드 리스트 조회
+async function getNavBrandList(){
+    const response = await fetch(`${backEndBaseUrl}/products/brand/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
 
+    response_json = await response.json()
+    return response_json
+}
+
+// 카테고리 리스트 조회
+async function getCategorylist(){
+    const response = await fetch(`${backEndBaseUrl}/products/category/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
+// NAV 카테고리 + 메뉴 버튼 
+async function categoryNavMenu(Input_Box) {
+    let con = document.querySelector(Input_Box);
+
+    if(con.style.display == 'none'){
+        con.style.display = 'grid';
+        }else{
+        con.style.display = 'none';
+    }
+}
+
+
+// 품목, 브랜드 온/오프
+function brandOn(){
+    if($("#nav_main_brand_right").is(":visible")){
+        // 브랜드 오프
+        $("#nav_main_brand_right").css("display", "none");
+        $("#nav_main_bt_right").css("background-color", "#ffffff");
+        $("#nav_main_bt_right").css("color", "#000000");
+
+        $("#nav_main_category_left").css("display", "flex");
+        $("#nav_main_bt_left").css("background-color", "#000000");
+        $("#nav_main_bt_left").css("color", "#ffffff");
+    }else{
+        // 브랜드 온
+        $("#nav_main_brand_right").css("display", "flex");
+        $("#nav_main_bt_right").css("background-color", "#000000");
+        $("#nav_main_bt_right").css("color", "#ffffff");
+
+        $("#nav_main_category_left").css("display", "none");
+        $("#nav_main_bt_left").css("background-color", "#ffffff");
+        $("#nav_main_bt_left").css("color", "#000000");
+    }
+}
+
+// 품목, 브랜드 온/오프
+function categoryOn(){
+    if($("#nav_main_category_left").is(":visible")){
+        // 카테고리 오프
+        $("#nav_main_category_left").css("display", "none");
+        $("#nav_main_bt_left").css("background-color", "#ffffff");
+        $("#nav_main_bt_left").css("color", "#000000");
+
+        $("#nav_main_brand_right").css("display", "flex");
+        $("#nav_main_bt_right").css("background-color", "#000000");
+        $("#nav_main_bt_right").css("color", "#ffffff");
+    }else{
+        // 카테고리 온
+        $("#nav_main_category_left").css("display", "flex");
+        $("#nav_main_bt_left").css("background-color", "#000000");
+        $("#nav_main_bt_left").css("color", "#ffffff");
+
+        $("#nav_main_brand_right").css("display", "none");
+        $("#nav_main_bt_right").css("background-color", "#ffffff");
+        $("#nav_main_bt_right").css("color", "#000000");
+    }
+}
 
 // 게시글 상세보기 출력 부분
 window.onload = async function getIndexDetail_API(){
@@ -267,7 +404,6 @@ window.onload = async function getIndexDetail_API(){
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
         follower_list = await getFollowerUserInfo(feed.user_id)
-        console.log(feed)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -283,6 +419,9 @@ window.onload = async function getIndexDetail_API(){
         var like_info = document.getElementsByClassName('like_info')[0];
         var etc_list = document.getElementsByClassName('etc_list')[0];
         var detail_follow = document.getElementsByClassName('detail_follow_box')[0];
+        var report_button = document.getElementById('report_button_done');
+
+        report_button.setAttribute('onclick', `postReport(${feed.pk}, '#report_content')`)
 
         // folo = []
         // follower_list.forEach(follower=>{
@@ -301,10 +440,8 @@ window.onload = async function getIndexDetail_API(){
         if(feed.user_id != User_payload.user_id){
 
             follower_list.forEach(follower=>{
-                console.log(follower)
                 if(follower.length != 0){
                     if(follower.pk == User_payload.user_id){
-                        console.log("내가 팔로우 하고 있을 때")
                         Fcount +=1
                         }
                     }
@@ -314,17 +451,24 @@ window.onload = async function getIndexDetail_API(){
                     detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
                 }
                 else if(Fcount == 1){
-                    console.log("내가 팔로우 하고 있지 않을 때")
-                    detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우취소</button>`
+                    detail_follow.innerHTML += `<button id ="detail_following" onclick="handleFollow(${feed.user_id})">팔로잉</button>`
                 }
             }
 
+        // 더보기 메뉴
         if(feed.user_id == User_payload.user_id){
             etc_list.innerHTML += `
             <a href="${frontEndBaseUrl}/communities/update.html?id=${feed_id}">수정</a>
             <a onclick="deleteFeed()" >삭제</a>
             `
+        } else {
+            etc_list.innerHTML += `
+            <a onclick="reportInputFlex()">신고</a>
+            `
         }
+
+
+
         like_info.innerText = `좋아요 ${feed.like_count}개`
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
@@ -520,6 +664,34 @@ window.onload = async function getIndexDetail_API(){
             }
         })
 
+        // 옷장 버튼
+        var hd_closet_button = document.getElementById('header_closet_button')
+        hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
+
+        // NAV 브랜드 리스트 조회
+        brand_list = await getNavBrandList()
+
+        alphabet = location.search.replace('?key=', '')
+        if(alphabet.length == 0){
+            brand_list = brand_list.slice(0, 20)
+        }
+        var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
+        brand_list.forEach(br => {
+            if(br.brand_name_en.startsWith(alphabet, 1)){
+            brand_wrap.innerHTML += `
+            <div class="brand_box">
+                <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+                <div class="brand_name_kr">${br.brand_name_kr}</div>
+            </div>
+        `
+        }
+    })
+
+        //출석하기 출력문
+        var AttendanceCheck = document.getElementById('AttendanceCheck')
+        AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+    
+
         // NAV 카테고리 리스트 조회
         category_list = await getCategorylist()
         
@@ -539,36 +711,41 @@ window.onload = async function getIndexDetail_API(){
         });
         
         main_category = main_category_list.sort((a, b) => a.number - b.number)
-        var category_wrap = document.getElementsByClassName('nav_category_area')[0];
-
-        main_category_list.forEach(main => {
-            category_wrap.innerHTML += `
-            <div class="main_category_section horizontal_alignment">
-                <div class="main_info">
-                    <div class="main_name">
-                        ${main.main}
+        var sub_category_outer = document.getElementById('sub_category_area_outer')
+        var sub_category_top = document.getElementById('sub_category_area_top')
+        var sub_category_bottom = document.getElementById('sub_category_area_bottom')
+        category_list.forEach(cate => {
+            if('아우터' == cate.main_category_name) {
+                sub_category_outer.innerHTML += `
+                <div class="sub_info horizontal_alignment">
+                    <div class="sub_category_name" onclick="location.href='/products/category/?category_id=${cate.id}'">
+                        ${cate.sub_category_name}
+                    </div>
+                    <div class="sub_count">
                     </div>
                 </div>
-                <div class="main_info_button">
-                    +
-                </div>
-            </div>
-            `
-            category_list.forEach(cate => {
-                if(main.main == cate.main_category_name) {
-                    category_wrap.innerHTML += `
-                    <div class="sub_category_section horizontal_alignment">
-                        <div class="sub_info horizontal_alignment">
-                            <div class="sub_category_name">
-                                ${cate.sub_category_name}
-                            </div>
-                            <div class="sub_count">
-                            </div>
-                        </div>
+                `
+            } else if ('상의' == cate.main_category_name){
+                sub_category_top.innerHTML += `
+                <div class="sub_info horizontal_alignment">
+                    <div class="sub_category_name" onclick="location.href='/products/category/?category_id=${cate.id}'">
+                        ${cate.sub_category_name}
                     </div>
-                    `
-                }
-            })
+                    <div class="sub_count">
+                    </div>
+                </div>
+                `
+            } else if ('바지' == cate.main_category_name){
+                sub_category_bottom.innerHTML += `
+                <div class="sub_info horizontal_alignment">
+                    <div class="sub_category_name" onclick="location.href='/products/category/?category_id=${cate.id}'">
+                        ${cate.sub_category_name}
+                    </div>
+                    <div class="sub_count">
+                    </div>
+                </div>
+                `
+            }
         })
     }
 }

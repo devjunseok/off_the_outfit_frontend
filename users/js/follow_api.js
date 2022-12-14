@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 출석 하기
 async function AttendanceCheck(user_id){
@@ -80,7 +78,6 @@ async function handleFollow(user_id){
     })
     
     const response_json = await response.json()
-    console.log(response_json)
     window.location.reload();
 
     return response_json
@@ -99,7 +96,6 @@ window.onload = async function getUserInfo_API(){
     var follow_wrap = document.getElementsByClassName('follow_list')[0];
 
     follow_list.forEach(user => {
-        console.log(user)
         follow_wrap.innerHTML += `
         <div class="user_box_main horizontal_alignment">
             <div class="left_info_section horizontal_alignment">

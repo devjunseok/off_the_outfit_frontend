@@ -329,7 +329,7 @@ body {
     width: 280px;
     height: 40px;
     margin: 10px auto 10px auto;
-
+    border: solid 2px #c0c0c0;
     
 }
 
@@ -340,7 +340,7 @@ body {
 
 .main_info .main_name {
     margin-left: 10px;
-    font-size: 13pt;
+    font-size: 12pt;
     line-height: 40px;
     font-weight: bold;
 }
@@ -360,16 +360,21 @@ body {
 
 .nav_category_area .sub_category_section {
     width: 280px;
-    display: none;
+
 }
 
-.sub_category_section .sub_info {
+.sub_info {
     width: 120px;
     height: 30px;
-    margin: 0 10px 0 10px;
+    margin: 0 10px 0 20px;
 }
 
 .sub_info .sub_category_name {
+    font-size: 8pt;
+    cursor: pointer;
+}
+.sub_info .sub_category_name:hover {
+    font-weight: bold;
     font-size: 10pt;
 }
 .sub_info .sub_count {
@@ -384,6 +389,20 @@ body {
     border-bottom: solid 1px #000000;
 }
 
+#sub_category_area_outer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#sub_category_area_top {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#sub_category_area_bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
 
 
 /* _______________________________________________________________  */

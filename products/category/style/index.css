@@ -10,7 +10,6 @@ ________________________________________________________________
 = table of Css
 
 1. /products/index.html
-2. /closet/nav.html
 
 = color code
 
@@ -56,7 +55,6 @@ body {
 }
 
 .main_body_area .section_dividing_line {
-    height: 40px;
     border-bottom: solid 2px #c0c0c0;
 }
 
@@ -68,7 +66,6 @@ body {
 
 .top_section_menu {
     width: 1260px;
-    height: 40px;
 }
 
 .top_section_menu .ts_menu_title {
@@ -282,106 +279,4 @@ body {
 
 .info_bottom_section .product_number {
     font-size: 5pt;
-}
-
-/* _______________________________________________________________  */
-/* 2. nav.html  */
-/* _______________________________________________________________  */
-
-
-.name_tag_add_button {
-    height: 20px;
-    margin-left: 10px;
-    font-size: 15pt;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.name_tag_add_button:hover {
-    font-size: 16pt;
-    font-weight: bolder;
-}
-
-.nametag_input_box {
-    margin: 10px 0 0 30px;
-}
-
-.nametag_input_box .nametag_input {
-    border: solid 1px #c0c0c0;
-}
-
-.nametag_input_box .nametag_create_button {
-    background-color: #ffffff;
-    border: solid 1px #c0c0c0;
-}
-
-.nametag_input_box .nametag_create_button:hover {
-    background-color: #000000;
-    color: #ffffff;
-    border: solid 1px #c0c0c0;
-}
-
-.left_area {
-    background-color: #ffffff;
-    width: 300px;
-    padding: 10px;
-}
-
-.left_area .closet_main_title {
-    font-size: 15pt;
-    font-weight: bold;
-    margin-left: 35px;
-}
-
-.left_area .closet_list {
-    list-style: none;
-}
-
-.left_area .closet_list li {
-    margin-top: 10px;
-    font-size: 10pt;
-    cursor: pointer;
-
-}
-
-.left_area .closet_list_name_tag {
-    list-style: none;
-}
-
-.left_area .closet_list_name_tag li {
-    margin-top: 10px;
-    font-size: 10pt;
-    cursor: pointer;
-
-}
-
-.name_tag_add_prod {
-    font-size: 7pt;
-    cursor: pointer;
-}
-
-.name_tag_add_prod:hover {
-    font-weight: bold;
-}
-
-.closet_delete_button {
-    font-size: 7pt;
-    margin-left: 5px;
-    cursor: pointer;
-    color: red;
-}
-
-.closet_delete_button:hover {
-    font-weight: bold;
-}
-
-.info_Input_section {
-    display: none;
-    width: 222px;
-    height: 20px;
-    justify-content: space-between;
-
-    color: #606060;
-    margin: 0 10px 0 10px;
-    line-height: 20px;
 }

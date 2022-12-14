@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 // 출석 하기
 async function AttendanceCheck(user_id){
 
@@ -85,6 +83,18 @@ async function getHeaderSearchWordRanking(){
 
     response_json = await response.json()
     return response_json
+}
+
+
+// NAV 카테고리 + 메뉴 버튼 
+async function categoryNavMenu(Input_Box) {
+    let con = document.querySelector(Input_Box);
+
+    if(con.style.display == 'none'){
+        con.style.display = 'grid';
+        }else{
+        con.style.display = 'none';
+    }
 }
 
 
@@ -178,7 +188,6 @@ window.onload = async function getIndex_API(){
             } else {
                 tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
             }
-                console.log(feed)
                 wrap.innerHTML += `
                 <div class="sub_feed_box vertical_alignment">
                     <div class="sub_feed_image_box">
@@ -277,36 +286,41 @@ window.onload = async function getIndex_API(){
     });
     
     main_category = main_category_list.sort((a, b) => a.number - b.number)
-    var category_wrap = document.getElementsByClassName('nav_category_area')[0];
-
-    main_category_list.forEach(main => {
-        category_wrap.innerHTML += `
-        <div class="main_category_section horizontal_alignment">
-            <div class="main_info">
-                <div class="main_name">
-                    ${main.main}
-                </div>
-            </div>
-            <div class="main_info_button">
-                +
-            </div>
-        </div>
-        `
+    var sub_category_outer = document.getElementById('sub_category_area_outer')
+    var sub_category_top = document.getElementById('sub_category_area_top')
+    var sub_category_bottom = document.getElementById('sub_category_area_bottom')
         category_list.forEach(cate => {
-            if(main.main == cate.main_category_name) {
-                category_wrap.innerHTML += `
-                <div class="sub_category_section horizontal_alignment">
-                    <div class="sub_info horizontal_alignment">
-                        <div class="sub_category_name">
-                            ${cate.sub_category_name}
-                        </div>
-                        <div class="sub_count">
-                        </div>
+            if('아우터' == cate.main_category_name) {
+                sub_category_outer.innerHTML += `
+                <div class="sub_info horizontal_alignment">
+                    <div class="sub_category_name" onclick="location.href='/products/category/?category_id=${cate.id}'">
+                        ${cate.sub_category_name}
+                    </div>
+                    <div class="sub_count">
+                    </div>
+                </div>
+                `
+            } else if ('상의' == cate.main_category_name){
+                sub_category_top.innerHTML += `
+                <div class="sub_info horizontal_alignment">
+                    <div class="sub_category_name" onclick="location.href='/products/category/?category_id=${cate.id}'">
+                        ${cate.sub_category_name}
+                    </div>
+                    <div class="sub_count">
+                    </div>
+                </div>
+                `
+            } else if ('바지' == cate.main_category_name){
+                sub_category_bottom.innerHTML += `
+                <div class="sub_info horizontal_alignment">
+                    <div class="sub_category_name" onclick="location.href='/products/category/?category_id=${cate.id}'">
+                        ${cate.sub_category_name}
+                    </div>
+                    <div class="sub_count">
                     </div>
                 </div>
                 `
             }
         })
-    })
-}
+    }
 }

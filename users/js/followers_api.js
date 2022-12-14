@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 // 출석 하기
 async function AttendanceCheck(user_id){
 
@@ -92,7 +90,6 @@ async function handleFollow(user_id){
     })
     
     const response_json = await response.json()
-    console.log(response_json)
     window.location.reload();
 
     return response_json
@@ -112,8 +109,6 @@ window.onload = async function getUserInfo_API(){
     var follow_wrap = document.getElementsByClassName('follow_list')[0];
     follower_list.forEach(user =>{
         follow_list.forEach(Fuser =>{
-            console.log(Fuser.pk)
-            console.log(user.pk)
             if(Fuser.pk==user.pk){
                 counts=1
             }
@@ -123,8 +118,6 @@ window.onload = async function getUserInfo_API(){
 
         })
         if(counts == 1){
-            console.log(`${user.pk}번 유저`)
-            console.log("팔로우 중 입니다")
         follow_wrap.innerHTML += `
         <div class="user_box_main horizontal_alignment">
             <div class="left_info_section horizontal_alignment">
@@ -157,7 +150,6 @@ window.onload = async function getUserInfo_API(){
         `
         }
         else{
-            console.log("팔로우 중이 아닙니다")
             follow_wrap.innerHTML += `
         <div class="user_box_main horizontal_alignment">
             <div class="left_info_section horizontal_alignment">

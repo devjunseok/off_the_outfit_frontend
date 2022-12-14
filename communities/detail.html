@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 상세보기</title>
     <link rel="stylesheet" href="/communities/style/detail.css">
+    <link rel="stylesheet" href="/style/header.css">
 </head>
 <body>
     <body>
         <div data-include-path="/header.html"></div>
         <div class="horizontal_alignment">
-            <div data-include-path="/nav.html"></div>
+            <div data-include-path="/communities/nav.html"></div>
             <div class="main_body_area">
                 <div class="top_section">
                     <div class="info_bar horizontal_alignment">
@@ -22,6 +23,13 @@
                         <div class="etc_list">
                             <!-- ... 수정, 삭제 메뉴 -->
                         </div>
+                        </div>
+                    </div>
+                    <div class="reportBox vertical_alignment" style="display: none;">
+                        <textarea class="report_input" id="report_content" type="text" placeholder="신고내용..." cols="5"rows="5"></textarea>
+                        <div class="reportButtonBox">
+                            <button class="report_button" id="report_button_done" type="submit">신고</button>
+                            <button class="report_button" onclick="reportInputFlex()">닫기</button>
                         </div>
                     </div>
                     <div class="detail_area horizontal_alignment">
@@ -79,5 +87,10 @@
         
         <script src="/communities/js/detail_api.js"></script>
         <script src="/communities/js/detail.js"></script>
+        <script src="/js/header_api.js"></script>
+        <script src="/js/header.js"></script>  
+        <script src="/js/nav_api.js"></script>  
+        <script src="/js/base_url.js"></script>
+        
 </body>
 </html>
