@@ -14,6 +14,7 @@ async function getUserHeaderInfo(){
     return response_json
 }
 
+
 // 로그아웃 버튼
 async function handleLogout() {
     localStorage.removeItem("access");
@@ -21,4 +22,5 @@ async function handleLogout() {
     localStorage.removeItem("payload");
     alert("로그아웃 되었습니다");
     window.location.replace(`${frontEndBaseUrl}/users/login.html`);
+
 }

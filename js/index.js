@@ -30,7 +30,6 @@ $(document).ready(function(){
 
 // 품목, 브랜드 온/오프
 function brandOn(){
-    console.log("brandOn 클릭")
     if($("#nav_main_brand_right").is(":visible")){
         // 브랜드 오프
         $("#nav_main_brand_right").css("display", "none");
@@ -54,7 +53,6 @@ function brandOn(){
 
 // 품목, 브랜드 온/오프
 function categoryOn(){
-    console.log("categoryOn 클릭")
     if($("#nav_main_category_left").is(":visible")){
         // 카테고리 오프
         $("#nav_main_category_left").css("display", "none");

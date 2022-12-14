@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 출석 하기
 async function AttendanceCheck(user_id){
@@ -103,7 +101,6 @@ window.onload = async function getIndex_API(){
         // 지역 추천 상품 리스트 조회
 
         product_list = await getIndexProductList(city)
-        console.log(product_list)
 
         // 지역 추천 상품 리스트 조회
         var outer_wrap = document.getElementById('outer')

@@ -1,5 +1,3 @@
-const frontEndBaseUrl = "http://127.0.0.1:5500"
-const backEndBaseUrl = "http://127.0.0.1:8000"
 
 // 출석 하기
 async function AttendanceCheck(user_id){
@@ -242,7 +240,6 @@ window.onload = async function getIndex_API(){
         
         // 전체 상품 조회
         product_list = await getClosetProductList()
-        console.log(product_list)
 
         search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
         user_id = search[0];
@@ -389,7 +386,6 @@ window.onload = async function getIndex_API(){
         // NAV 네임태그 반복
         user_info = await getUser()
         name_tag_list = user_info.nametag_set
-        console.log(name_tag_list)
 
         var closet_list_name_tag = document.getElementsByClassName('closet_list_name_tag')[0];
         name_tag_list.forEach(name_tag => {
