@@ -57,6 +57,44 @@ async function productUpdate() {
   return response_json;
 }
 
+// 날씨 정보 업데이트
+async function weatherUpdate() {
+  const response = await fetch(`${backEndBaseUrl}/weather/`, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("access"),
+    },
+    method: "GET",
+
+  });
+
+  response_json = await response.json();
+
+  if (response.status == 200) {
+    alert(response_json["message"]);
+  }
+  return response_json;
+}
+
+//휴면 계정 삭제
+
+async function SleepUserDelete(){
+    
+  const response = await fetch(`${backEndBaseUrl}/manager/userdelete/`, {
+      headers: {
+      Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+      method: "DELETE",
+  });
+
+  if(response.status == 204){
+      alert("휴면계정 삭제완료!")
+      window.location.reload; // 삭제가 되고나면 인덱스로 다시 이동하게함
+  }
+  else {
+      alert(response.status);
+  }
+}
+
 // 신고된 글 전체 리스트 조회
 
 async function getIndexReportList() {
@@ -148,8 +186,6 @@ async function loadUsers() {
     };
     
 
-    loadUsers()
-
 
     
 async function deleteReport(feed_id){
@@ -173,7 +209,7 @@ async function deleteReport(feed_id){
 
 
 // 유저 삭제
-async function deleteUser(user_id){
+async function deleteUser(){
     
     const response = await fetch(`${backEndBaseUrl}/manager/usermanage/${user_id}/`, {
         headers: {
