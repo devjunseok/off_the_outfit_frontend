@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/manager/style/index.css">
     <title>관리자 페이지</title>
 </head>
 <body>
-    
-</body>
+  <!-- header -->
+    <ul>
+        <li><a href="#">Off The OutFit</a></li>
+        <li><a href="#" >관리자 페이지</a></li>
+        <li><a href="#" onclick=" brandUpdate()">브랜드 정보 업데이트</a></li>
+        <li><a href="#" onclick="categoryUpdate()">카테고리 정보 업데이트</a></li>
+        <li><a href="#" onclick="productUpdate()">상품 정보 업데이트</a></li>
+    </ul>
+    <br><br><br>
+    <div>
+      <h2>신고 당한 게시글</h2>
+<div class="table_id" >
+<table class="table"> 
+    <th class='fixedHeader'>신고 내용</th>
+    <th class='fixedHeader'>신고 유저 아이디</th>
+    <th class='fixedHeader'>신고 시간</th>
+</div>
+
+</table>
+
+</div>
+    </div>
+    <br><br><br>
+    <h2>전체 유저 보기</h2>
+    <div class="table_id">
+      <table class="table_user" id="table_user">
+          <th>아이디</th>
+          <th>닉네임</th>
+          <th>생년월일</th>
+      </table>
+          </div>
+    </div>
+  </div>
+
+    <div id='wrap'>
+    <section>
+        <!-- 대충 뭐 요소들이 가득차있음 -->
+        </section>
+        <footer>
+          <nav>
+              <a href='https://tistory.com' target='_blank'>Blog</a> |
+              <a href='https://github.com/' target='_blank'>Github</a>
+          </nav>
+          <p>
+              <span>저자 : Off The OutFit</span><br/>
+              <span>이메일 : offtheoutfit@offtheoutfit.com</span><br/>
+              <span>Copyright 2022. off the outfit. All Rights Reserved.</span>
+          </p>
+      </footer>
+    </div>
+  </body>
+  <script src="/manager/js/index.js"></script>
 </html>
