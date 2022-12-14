@@ -57,6 +57,7 @@ async function productUpdate() {
 
 // 날씨 정보 업데이트
 async function weatherUpdate() {
+  console.log("hi")
   const response = await fetch(`${backEndBaseUrl}/weather/`, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("access"),
@@ -68,7 +69,7 @@ async function weatherUpdate() {
   response_json = await response.json();
 
   if (response.status == 200) {
-    alert(response_json["message"]);
+    alert("날씨 정보가 업데이트 되었습니다");
   }
   return response_json;
 }
