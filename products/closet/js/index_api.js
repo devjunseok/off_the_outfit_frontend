@@ -244,12 +244,12 @@ window.onload = async function getIndex_API(){
         search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
         user_id = search[0];
         name_tag = search[1];
-        
 
         // 전체 상품 반복 출력
         var product_wrap = document.getElementsByClassName('product_list_box')[0];
 
         if(name_tag == undefined){
+
             if(user_id == User_payload.user_id){
             product_list.forEach(prod => {
                 product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
@@ -340,6 +340,16 @@ window.onload = async function getIndex_API(){
 
         //회원정보 리스트 조회
         profile_list = await getUser()
+
+        // 옷장 타이틀 출력
+        var closet_name_tag_title = document.getElementsByClassName("ts_menu_title")[0];
+        
+        if (name_tag == undefined){
+            closet_name_tag_title.innerText = `${profile_list.nickname}님의 옷장입니다.`
+        } else {
+            closet_name_tag_title.innerText = `${decodeURI(name_tag)}`
+        }
+
 
         //마이페이지 HAEDER 부분 출력
         var main_profile_image = document.getElementsByClassName('main_profile_image')[0];
