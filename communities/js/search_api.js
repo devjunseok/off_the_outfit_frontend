@@ -91,10 +91,12 @@ search_list.forEach(feed => {
     } else {
         tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
     }
+
+        server_feed_image = feed.image.replace("http://backend:8000/", "https://api.offtheoutfit.com/")
         wrap.innerHTML += `
         <div class="sub_feed_box vertical_alignment">
             <div class="sub_feed_image_box">
-                <img class="feed_image" src="${feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.pk}'"/>
+                <img class="feed_image" src="${server_feed_image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${feed.pk}'"/>
             </div>
             <div class="sub_feed_info_box">
                 <div class="info_top_section horizontal_alignment">
