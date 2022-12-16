@@ -26,7 +26,7 @@ $(document).ready(function(){
 });
 
 
-// 이미지 미리보기
+// 게시글 작성 이미지 미리보기
 let fileTag = document.querySelector("input[name=feed_image]");
 
 fileTag.onchange = function() {

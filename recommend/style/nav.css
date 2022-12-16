@@ -55,6 +55,7 @@ body {
     background-color: #ffffff;
     width: 300px;
     padding: 10px;
+    min-width: 300px;
 }
 
 .left_area .mypage_main_title {
