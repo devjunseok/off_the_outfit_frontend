@@ -2,11 +2,16 @@
 
 // 로그아웃 버튼
 async function handleLogout() {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
-    localStorage.removeItem("payload");
-    alert("로그아웃 되었습니다");
-    window.location.replace(`${frontEndBaseUrl}/users/login.html`);
+    if (!confirm("로그아웃 하시겠습니까?")) {
+        alert("로그아웃이 취소되었습니다");
+    } else {
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("payload");
+        alert("로그아웃 되었습니다");
+        window.location.replace(`${frontEndBaseUrl}/users/login.html`);
+
+    }
 }
 
 
