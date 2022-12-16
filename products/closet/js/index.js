@@ -16,13 +16,3 @@ window.addEventListener('load', function() {
     });
 });
 
-
-$(document).ready(function(){
-	$("#view_button_01").click(function(){
-		if($("#main_view_content_01").is(":visible")){
-			$("#main_view_content_01").css("display", "none");
-		}else{
-			$("#main_view_content_01").css("display", "flex");
-		}
-	});
-});

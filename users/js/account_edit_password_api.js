@@ -217,7 +217,7 @@ window.onload = async function getProfile_API(){
     const response_json = await response.json()
     if (response.status == 200){
         alert(response_json["message"])
-        window.location.replace(`http://127.0.0.1:5500/users/account_edit.html`);
+        window.location.reload();
     }else {
         alert(response_json["password"])     
     }

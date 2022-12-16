@@ -58,6 +58,8 @@ body {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
+    min-width: 1280px;
+    min-height: 70px;
 }
 
 .main-wrapper .main-title {
@@ -65,6 +67,14 @@ body {
     padding: 15px 0 0 30px;
     cursor: pointer;
 }
+
+.main-wrapper .main-title img {
+    margin-top: 3px;
+    height: 35px;
+    min-height: 35px;
+    cursor: pointer;
+}
+
 
 .main-wrapper .search-wrapper {
     padding: 20px 0 0 30px;

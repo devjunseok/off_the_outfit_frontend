@@ -60,7 +60,7 @@ body {
 }
 .signup_box {
     width: 500px;
-    height: 760px;
+    height: 850px;
 }
 .main_logo {
     width: 500px;
@@ -68,6 +68,9 @@ body {
     font-size: 30pt;
     line-height: 60px;
     text-align: center;
+}
+.main_logo img {
+    width: 450px;
 }
 .signup_title {
     width: 450px;
