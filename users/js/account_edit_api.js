@@ -417,3 +417,20 @@ window.onload = async function getProfile_API(){
     }
 
  }
+
+
+ // 회원탈퇴
+async function userDelete(){  
+    const response = await fetch(`${backEndBaseUrl}/users/`,{
+        headers:{
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'DELETE',
+    })
+    if (response.status ==204){
+        alert("회원탈퇴 완료!")
+        window.location.replace(`${frontEndBaseUrl}/users/login.html`);
+    }
+}
+
+console.log('nav_api 연결 완료')
