@@ -101,6 +101,7 @@ window.onload = async function getIndex_API(){
         // 지역 추천 상품 리스트 조회
 
         product_list = await getIndexProductList(city)
+        console.log(product_list)
 
         // 지역 추천 상품 리스트 조회
         var outer_wrap = document.getElementById('outer')
@@ -109,8 +110,12 @@ window.onload = async function getIndex_API(){
         var outer_view = document.getElementById('view_outer_button_01')
         var top_view = document.getElementById('view_top_button_02')
         var bottom_view = document.getElementById('view_bottom_button_03')
+        var recommend_info = document.getElementById('recommend_info_section')
 
-    
+        recommend_info.innerHTML = `
+            <div class="temps_info">내일  <b>${product_list.info.city}</b> 평균 온도는 <b>${product_list.info.temps_data.temperature}</b> 이며,</div>
+            <div class="recommend_category_info">추천 아웃핏은 <b>${product_list.info.outer_name}</b>, <b>${product_list.info.top_name}</b>, <b>${product_list.info.bottom_name}</b> 입니다.</div>
+        `;
 
         product_list.outer.forEach(prod => {
             product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
