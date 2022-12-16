@@ -60,6 +60,7 @@ body {
     width: 500px;
     height: 600px;
 }
+
 .main_logo {
     width: 500px;
     height: 60px;
@@ -67,10 +68,16 @@ body {
     line-height: 60px;
     text-align: center;
 }
+
+.main_logo img {
+    width: 450px;
+}
+
 .login_title {
     width: 450px;
     margin: 10px auto 10px auto;
 }
+
 .social_login {
     width: 450px;
     height: 60px;

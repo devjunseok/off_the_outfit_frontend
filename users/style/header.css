@@ -62,11 +62,20 @@ body {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
+    min-width: 1300px;
+    min-height: 70px;
 }
 
 .main-wrapper .main-title {
     font-size: 30pt;
     padding: 15px 0 0 30px;
+    cursor: pointer;
+}
+
+.main-wrapper .main-title img {
+    margin-top: 3px;
+    height: 35px;
+    min-height: 35px;
     cursor: pointer;
 }
 
@@ -100,11 +109,13 @@ body {
     width: 100vw;
     height: 200px;
     background-color: black;
+    min-width: 1340px;
 }
 
 .header-profile_info .info_left_area {
     width: 50vw;
     height: 200px;
+    min-width: 640px;
 }
 
 .info_left_area .main_profile_image {
@@ -118,6 +129,7 @@ body {
     width: 400px;
     height: 120px;
     margin: 40px;
+    min-width: 400px;
 }
 
 .right_main_profile_info_box .profile_nickname {
@@ -147,11 +159,13 @@ body {
 .header-profile_info .info_right_area {
     width: 50vw;
     height: 200px;
+    min-width: 400px;
 }
 
 .info_right_area .profile_summary_box {
     width: 30vw;
     height: 120px;
+    min-width: 400px;
 }
 
 .profile_summary_box .summary_title {
@@ -249,6 +263,7 @@ body {
     background-color: #ffffff;
     width: 300px;
     padding: 10px;
+    min-width: 300px;
 }
 
 .left_area .mypage_main_title {
