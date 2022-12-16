@@ -110,11 +110,14 @@ window.onload = async function getIndex_API(){
         var top_view = document.getElementById('view_top_button_02')
         var bottom_view = document.getElementById('view_bottom_button_03')
 
+    
+
         product_list.outer.forEach(prod => {
+            product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
             outer_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${prod.product_image}" alt="">
+                    <img src="${product_image_500}" alt="">
                 </div>
                 <div class="info_top_section horizontal_alignment">
                     <div class="product_brand">${prod.brand_name_en}</div>
@@ -130,53 +133,55 @@ window.onload = async function getIndex_API(){
                 </div>
             </div>
             `
-        outer_view.innerText = `${prod.category[0].sub_category_name}`
+            outer_view.innerText = `${prod.category[0].sub_category_name}`
             
         });
         product_list.top.forEach(prod =>{
-        top_wrap.innerHTML += `
-        <div class="product_box">
-            <div class="product_image_box">
-                <img src="${prod.product_image}" alt="">
+            product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
+            top_wrap.innerHTML += `
+            <div class="product_box">
+                <div class="product_image_box">
+                    <img src="${product_image_500}" alt="">
+                </div>
+                <div class="info_top_section horizontal_alignment">
+                    <div class="product_brand">${prod.brand_name_en}</div>
+                    <div class="product_review">review:${prod.review_count}</div>
+                </div>
+                <div class="info_middle_section">
+                    <div class="product_name">${prod.product_name}</div>
+                    <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                </div>
+                <div class="info_bottom_section horizontal_alignment">
+                    <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                    <div class="product_number">No.${prod.product_number}</div>
+                </div>
             </div>
-            <div class="info_top_section horizontal_alignment">
-                <div class="product_brand">${prod.brand_name_en}</div>
-                <div class="product_review">review:${prod.review_count}</div>
-            </div>
-            <div class="info_middle_section">
-                <div class="product_name">${prod.product_name}</div>
-                <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
-            </div>
-            <div class="info_bottom_section horizontal_alignment">
-                <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
-                <div class="product_number">No.${prod.product_number}</div>
-            </div>
-        </div>
-        `
-        top_view.innerText = `${prod.category[0].sub_category_name}`
+            `
+            top_view.innerText = `${prod.category[0].sub_category_name}`
         });
         product_list.bottom.forEach(prod =>{
-        bottom_wrap.innerHTML += `
-        <div class="product_box">
-            <div class="product_image_box">
-                <img src="${prod.product_image}" alt="">
+            product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
+            bottom_wrap.innerHTML += `
+            <div class="product_box">
+                <div class="product_image_box">
+                    <img src="${product_image_500}" alt="">
+                </div>
+                <div class="info_top_section horizontal_alignment">
+                    <div class="product_brand">${prod.brand_name_en}</div>
+                    <div class="product_review">review:${prod.review_count}</div>
+                </div>
+                <div class="info_middle_section">
+                    <div class="product_name">${prod.product_name}</div>
+                    <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                </div>
+                <div class="info_bottom_section horizontal_alignment">
+                    <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                    <div class="product_number">No.${prod.product_number}</div>
+                </div>
             </div>
-            <div class="info_top_section horizontal_alignment">
-                <div class="product_brand">${prod.brand_name_en}</div>
-                <div class="product_review">review:${prod.review_count}</div>
-            </div>
-            <div class="info_middle_section">
-                <div class="product_name">${prod.product_name}</div>
-                <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
-            </div>
-            <div class="info_bottom_section horizontal_alignment">
-                <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
-                <div class="product_number">No.${prod.product_number}</div>
-            </div>
-        </div>
-        `
-        bottom_view.innerText = `${prod.category[0].sub_category_name}`
-        });
+            `
+            bottom_view.innerText = `${prod.category[0].sub_category_name}`
+            });
 
         
     //출석하기 출력문

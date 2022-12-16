@@ -252,39 +252,41 @@ window.onload = async function getIndex_API(){
         if(name_tag == undefined){
             if(user_id == User_payload.user_id){
             product_list.forEach(prod => {
-            product_wrap.innerHTML += `
-            <div class="product_box">
-                <div class="product_image_box">
-                    <img src="${prod.product.product_image}">
-                </div>
-                <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.product.brand_name_en}</div>
-                    <div class="product_review">review:${prod.product.review_count}</div>
-                </div>
-                <div class="info_middle_section">
-                    <div class="product_name">${prod.product.product_name}</div>
-                    <div class="horizontal_alignment">
-                        <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
-                        <div class="name_tag_add_prod" onclick="nametagProdInputFlex('#info_Input_section_${prod.pk}')">Add</div>
-                        <div class="closet_delete_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
-                    </div>
-                </div>
-                <div class="info_bottom_section horizontal_alignment">
-                    <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
-                    <div class="product_number">No.${prod.product.product_number}</div>
-                </div>
-                <div class="info_Input_section horizontal_alignment" id="info_Input_section_${prod.pk}" style="display:none;">
-                    <input class="nametag_prod_input" id="tag_name_${prod.pk}" type="text" placeholder="네임태그..." />
-                    <button class="nametag_prod_add_button" type="submit" onclick="NametagProdCreate(${prod.product.product_number}, ${prod.pk}, 'tag_name_${prod.pk}')">등록</button>
-                </div>
-            </div>
-            `
-        })} else {
-            product_list.forEach(prod => {
+                product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
                 product_wrap.innerHTML += `
                 <div class="product_box">
                     <div class="product_image_box">
-                        <img src="${prod.product.product_image}">
+                        <img src="${product_image_500}">
+                    </div>
+                    <div class="info_top_section horizontal_alignment">
+                        <div class="product_brand">${prod.product.brand_name_en}</div>
+                        <div class="product_review">review:${prod.product.review_count}</div>
+                    </div>
+                    <div class="info_middle_section">
+                        <div class="product_name">${prod.product.product_name}</div>
+                        <div class="horizontal_alignment">
+                            <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                            <div class="name_tag_add_prod" onclick="nametagProdInputFlex('#info_Input_section_${prod.pk}')">Add</div>
+                            <div class="closet_delete_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                        </div>
+                    </div>
+                    <div class="info_bottom_section horizontal_alignment">
+                        <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                        <div class="product_number">No.${prod.product.product_number}</div>
+                    </div>
+                    <div class="info_Input_section horizontal_alignment" id="info_Input_section_${prod.pk}" style="display:none;">
+                        <input class="nametag_prod_input" id="tag_name_${prod.pk}" type="text" placeholder="네임태그..." />
+                        <button class="nametag_prod_add_button" type="submit" onclick="NametagProdCreate(${prod.product.product_number}, ${prod.pk}, 'tag_name_${prod.pk}')">등록</button>
+                    </div>
+                </div>
+                `
+        })} else {
+            product_list.forEach(prod => {
+                product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
+                product_wrap.innerHTML += `
+                <div class="product_box">
+                    <div class="product_image_box">
+                        <img src="${product_image_500}">
                     </div>
                     <div class="info_top_section horizontal_alignment">
                         <div class="product_brand">${prod.product.brand_name_en}</div>
@@ -305,32 +307,33 @@ window.onload = async function getIndex_API(){
         })}
 
         } else {
-
-        product_list.forEach(prod => {
+            product_list.forEach(prod => {
             if(prod.name_tag != null){
             if(prod.name_tag.tag_name == decodeURI(name_tag)){
-            product_wrap.innerHTML += `
-            <div class="product_box">
-                <div class="product_image_box">
-                    <img src="${prod.product.product_image}">
-                </div>
-                <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.product.brand_name_en}</div>
-                    <div class="product_review">review:${prod.product.review_count}</div>
-                </div>
-                <div class="info_middle_section">
-                    <div class="product_name">${prod.product.product_name}</div>
-                    <div class="horizontal_alignment">
-                        <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
-                        <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                
+                product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
+                product_wrap.innerHTML += `
+                <div class="product_box">
+                    <div class="product_image_box">
+                        <img src="${product_image_500}">
+                    </div>
+                    <div class="info_top_section horizontal_alignment">
+                        <div class="product_brand">${prod.product.brand_name_en}</div>
+                        <div class="product_review">review:${prod.product.review_count}</div>
+                    </div>
+                    <div class="info_middle_section">
+                        <div class="product_name">${prod.product.product_name}</div>
+                        <div class="horizontal_alignment">
+                            <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                            <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                        </div>
+                    </div>
+                    <div class="info_bottom_section horizontal_alignment">
+                        <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                        <div class="product_number">No.${prod.product.product_number}</div>
                     </div>
                 </div>
-                <div class="info_bottom_section horizontal_alignment">
-                    <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
-                    <div class="product_number">No.${prod.product.product_number}</div>
-                </div>
-            </div>
-            `
+                `
             }}
         });
     }
