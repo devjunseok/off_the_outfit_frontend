@@ -469,6 +469,7 @@ window.onload = async function getIndex_API(){
         for_count = 0
         if(closet_user_list.length == 1){
             all_user_list.forEach(closet_user => {
+                // 목록 리스트 제한
                 if(for_count < 10){
                     if(closet_user.pk != user_id && closet_user.closet_set_count != 0){
                         closet_recommend_list.innerHTML += `
@@ -486,6 +487,7 @@ window.onload = async function getIndex_API(){
             })
         } else {
             closet_user_list.forEach(closet_user => {
+                // 목록 리스트 제한
                 if(for_count < 10){
                     if(closet_user.pk != user_id){
                         closet_recommend_list.innerHTML += `
