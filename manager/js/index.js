@@ -124,9 +124,12 @@ async function getIndexReportList() {
     report_feed.reports.forEach(rt =>{
         report_list_box_wrap.innerHTML +=` 
         <tr class="report-body" id="report-list">
+            <td class="content" id="content">${report_feed.content}</td>
             <td class="report" id="report">${rt.report}</td>
             <td class="user" id="user">${rt.user}</td>
             <td class="create_time" id="create_time">${rt.created_at}<a class="header-link"  href="#" onclick="deleteReport(${rt.feed})">삭제</a>
+            <a class="header-link"  href="#" onclick="resetReport(${rt.feed})">초기화</a>
+            
             </td>
         </tr>
         `
@@ -139,7 +142,7 @@ async function getIndexReportList() {
 
 
 };
-
+console.log(getIndexReportList())
     
 
 // 유저 전체 조회
@@ -183,7 +186,8 @@ window.onload = async function loadUsers() {
     
   };
 
-    
+  
+  
 
 
     
@@ -227,6 +231,24 @@ async function deleteUser(user_id){
 }
 
 
+async function resetReport(feed_id){
+
+
+  const response = await fetch(`${backEndBaseUrl}/manager/feedmanage/${feed_id}/`, {
+      headers: {
+      Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+      method: "POST",
+  });
+
+  if(response.status == 200){
+      alert("신고 초기화!")
+      window.location.reload();
+  }
+  else {
+      alert(response.status);
+  }
+}
 
 
 
