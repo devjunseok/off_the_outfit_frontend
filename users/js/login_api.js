@@ -36,12 +36,20 @@ async function handleLogin() {
         alert("로그인 성공!")
             window.location.replace(`${frontEndBaseUrl}`);
 
-    }else {
-        //로그인 실패시
-        alert(response_json["non_field_errors"])
-        
+    } else if(response.status == 400){
+        if(Object.keys(response_json).includes('username')){
+            message = '아이디를 입력해주세요.'
+        } else if(Object.keys(response_json).includes('password')){
+            message = '비밀번호를 입력해주세요.'
+        }
+        alert(message)
+    } else if(response.status == 401){
+        if(Object.keys(response_json).includes('detail')){
+            message = response_json['detail']
+        }
+        alert(message)
     }
-}
+} 
 
 
 

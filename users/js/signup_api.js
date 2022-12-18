@@ -42,11 +42,31 @@ async function handleSignup() {
     if (response.status == 201){
         alert(response_json["message"])
             window.location.replace(`${frontEndBaseUrl}/users/login.html`);
-    }else{
-        alert(response_json["username"])
-        alert(response_json["username"])
-
-
+    }else if(response.status == 400){
+        if(Object.keys(response_json).includes('username')){
+            message = response_json['username']
+        } else if (Object.keys(response_json).includes('password')){
+            message = response_json['password']
+        } else if (Object.keys(response_json).includes('password2')){
+            message = '비밀번호 재입력을 확인해주세요.'
+        } else if (Object.keys(response_json).includes('email')){
+            message = response_json['email']
+        } else if (Object.keys(response_json).includes('nickname')){
+            message = response_json['nickname']
+        } else if (Object.keys(response_json).includes('address')){
+            message = response_json['address']
+        } else if (Object.keys(response_json).includes('gender')){
+            message = '성별을 선택해주세요.'
+        } else if (Object.keys(response_json).includes('date_of_birth')){
+            message = response_json['date_of_birth'] 
+        } else if (Object.keys(response_json).includes('height')){
+            message = response_json['height']
+        } else if (Object.keys(response_json).includes('weight')){
+            message = response_json['weight']
+        } else if (Object.keys(response_json).includes('term_agree')){
+            message = response_json['term_agree']
+        }
+        alert(message)
     }
 }
 

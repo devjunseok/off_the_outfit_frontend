@@ -137,10 +137,11 @@ window.onload = async function getIndex_API(){
         // 전체 상품 반복 출력
         var product_wrap = document.getElementsByClassName('product_list_box')[0];
         product_list.forEach(prod => {
+            product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
             product_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${prod.product_image}">
+                    <img src="${product_image_500}">
                 </div>
                 <div class="info_top_section horizontal_alignment">
                     <div class="product_brand">${prod.brand_name_en}</div>
@@ -214,7 +215,7 @@ window.onload = async function getIndex_API(){
         if(br.brand_name_en.startsWith(alphabet, 1)){
         brand_wrap.innerHTML += `
         <div class="brand_box">
-            <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+            <div class="brand_name_en"style = "cursor:pointer;" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
             <div class="brand_name_kr">${br.brand_name_kr}</div>
         </div>
         `

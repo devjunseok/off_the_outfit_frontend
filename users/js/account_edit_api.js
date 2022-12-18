@@ -312,6 +312,22 @@ async function getHeaderSearchWordRanking(){
     response_json = await response.json()
     return response_json
 }
+
+ // 회원탈퇴
+async function userDelete(){  
+    if (!confirm("정말 회원을 탈퇴 하시겠습니까?")) {
+        alert("회원탈퇴를 취소하셨습니다");
+    } else {
+        const response = await fetch(`${backEndBaseUrl}/users/`,{
+            headers:{
+                "Authorization":"Bearer " + localStorage.getItem("access")
+            },
+            method:'DELETE',
+        })
+        alert("회원탈퇴를 성공하셨습니다");
+        window.location.replace(`${frontEndBaseUrl}/users/login.html`);
+    }
+}
                 
 
 // 회원 정보 출력 API
@@ -330,6 +346,7 @@ window.onload = async function getProfile_API(){
     var edit_view_gender = document.getElementsByClassName('edit_view_gender')[0];
     var edit_view_address = document.getElementsByClassName('edit_view_address')[0];
     var edit_view_email = document.getElementsByClassName('edit_view_email')[0];
+
 
     edit_view_email.innerText = `${profile_list.email}`
     edit_image_view.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
@@ -417,3 +434,4 @@ window.onload = async function getProfile_API(){
     }
 
  }
+
