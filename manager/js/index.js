@@ -113,7 +113,7 @@ async function getIndexReportList() {
 }
 
 // 신고된 글 상세 조회
-window.onload = async function loadReports() {
+  async function loadReports() {
     report_feed_list = await getIndexReportList();
     // console.log(report_feed_list[0].reports);
 
@@ -130,21 +130,21 @@ window.onload = async function loadReports() {
             </td>
         </tr>
         `
-        console.log(rt)
+        
 
     })
 
     });
     
 
-    
-
 
 };
+
     
 
 // 유저 전체 조회
 async function getAdminUser() {
+    loadReports()
     const response = await fetch(`${backEndBaseUrl}/manager/usermanage/`, {
     headers: {
         "content-type": "application/json",
@@ -162,10 +162,8 @@ async function getAdminUser() {
 
 
 // 유저 정보 
-async function loadUsers() {
+window.onload = async function loadUsers() {
     whole_user = await getAdminUser();
-    console.log(whole_user);
-
     const user_list_box_wrap = document.getElementsByClassName("table_user")[0];
 
     
@@ -182,7 +180,9 @@ async function loadUsers() {
     })
     
 
-    };
+    
+  };
+
     
 
 
@@ -208,7 +208,7 @@ async function deleteReport(feed_id){
 
 
 // 유저 삭제
-async function deleteUser(){
+async function deleteUser(user_id){
     
     const response = await fetch(`${backEndBaseUrl}/manager/usermanage/${user_id}/`, {
         headers: {
