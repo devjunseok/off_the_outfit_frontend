@@ -52,13 +52,34 @@ body {
 .main_body_area {
     width: 1280px;
     margin: 10px;
+    min-width: 1280px;
 }
+
+.main_body_area .recommend_info_section {
+    width: 1280px;
+    height: 80px;
+}
+
+.recommend_info_section .temps_info {
+    font-size: 12pt;
+}
+
+.recommend_info_section .recommend_category_info b {
+    font-size: 15pt;
+}
+
+.recommend_info_section .recommend_category_info {
+    font-size: 12pt;
+}
+
+.recommend_info_section .temps_info b {
+    font-size: 15pt;
+}
+
 
 .main_body_area .section_dividing_line {
     border-bottom: solid 2px #c0c0c0;
 }
-
-
 
 .top_section .main_feed_list_box {
     background-color: #ffffff;
