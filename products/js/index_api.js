@@ -215,7 +215,7 @@ window.onload = async function getIndex_API(){
         if(br.brand_name_en.startsWith(alphabet, 1)){
         brand_wrap.innerHTML += `
         <div class="brand_box">
-            <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
+            <div class="brand_name_en"style = "cursor:pointer;" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
             <div class="brand_name_kr">${br.brand_name_kr}</div>
         </div>
         `

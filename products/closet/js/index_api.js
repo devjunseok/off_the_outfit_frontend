@@ -372,19 +372,19 @@ window.onload = async function getIndex_API(){
         closet_count_value.innerText = `${profile_list.closet_set_count}`
         
         //마이페이지 등급 조건문
-        if(0<=profile_list.point||profile_list.point < 31){
+        if(profile_list.point>=0&&profile_list.point <31){
             profile_tier_info.innerText =`LV.1 브론즈`
         }
-        if(31<=profile_list.point||profile_list.point < 51){
+        if(profile_list.point>=31&&profile_list.point <51){
             profile_tier_info.innerText =`LV.2 실버`
         }
-        if(51<=profile_list.point||profile_list.point <101){
+        if(profile_list.point>=51&&profile_list.point <101){
             profile_tier_info.innerText =`LV.3 골드`
         }
-        if(101<=profile_list.point||profile_list.point <201){
+        if(profile_list.point>=101&&profile_list.point <201){
             profile_tier_info.innerText =`LV.4 플레티넘`
         }
-        if(profile_list.point >= 201){
+        if(profile_list.point >=201){
             profile_tier_info.innerText =`LV.5 VIP`
         }
         //출석하기 출력문
