@@ -16,6 +16,7 @@ async function AttendanceCheck(user_id){
     }   
 return response_json
 }
+
 // 유저 기준 옷장 조회
 async function getClosetProductList(){
     search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
@@ -33,6 +34,7 @@ async function getClosetProductList(){
     return response_json
 }
 
+
 // 옷장 사용자 정보 가져오기
 async function getUser(){
     search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
@@ -40,6 +42,43 @@ async function getUser(){
     name_tag = search[1];
 
     const response = await fetch(`${backEndBaseUrl}/users/${user_id}/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    return response_json
+}
+
+
+// 옷장 기반 유저 추천
+async function getClosetRecommendUser(){
+    search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
+    user_id = search[0];
+    name_tag = search[1];
+
+    const response = await fetch(`${backEndBaseUrl}/recommend/closet/user/${user_id}/`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    return response_json
+}
+
+// 옷장 기반 유저 추천
+async function getAllUserList(){
+    search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
+    user_id = search[0];
+    name_tag = search[1];
+
+    const response = await fetch(`${backEndBaseUrl}/users/`, {
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
@@ -229,7 +268,6 @@ async function nametagProdInputFlex(nametagProdInput) {
 }
 
 
-
 window.onload = async function getIndex_API(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     if (User_payload === undefined ||  User_payload === null){
@@ -248,8 +286,9 @@ window.onload = async function getIndex_API(){
         // 전체 상품 반복 출력
         var product_wrap = document.getElementsByClassName('product_list_box')[0];
 
+        // 네임태그가 선택 안된경우
         if(name_tag == undefined){
-
+            // 유저 아이디가 본인 아이디인 경우
             if(user_id == User_payload.user_id){
             product_list.forEach(prod => {
                 product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
@@ -280,6 +319,7 @@ window.onload = async function getIndex_API(){
                     </div>
                 </div>
                 `
+        // 유저 아이디가 본인 유저가 아닌 경우 
         })} else {
             product_list.forEach(prod => {
                 product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
@@ -305,7 +345,7 @@ window.onload = async function getIndex_API(){
                 </div>
                 `
         })}
-
+        // 네임태그가 선택된 경우
         } else {
             product_list.forEach(prod => {
             if(prod.name_tag != null){
@@ -411,6 +451,56 @@ window.onload = async function getIndex_API(){
         var name_tag_add_button = document.getElementsByClassName('name_tag_add_button')[0];
         if(search[0] != User_payload.user_id) {
             name_tag_add_button.innerText = ''
+        }
+
+        // NAV 옷장 추천
+        closet_user_list = await getClosetRecommendUser()
+        if(closet_user_list['message'] != undefined ){
+            closet_user_list = [user_id]
+        }
+        closet_user_list = closet_user_list.slice(0,2);
+        // 전체 유저 불러오기
+        all_user_list = await getAllUserList()
+
+        // 전체 유저 랜덤 리스트 제작
+        all_user_list.sort(function(){return Math.random() - Math.random();})
+
+        var closet_recommend_list = document.getElementById('closet_recommend_user_list')
+        for_count = 0
+        if(closet_user_list.length == 1){
+            all_user_list.forEach(closet_user => {
+                if(for_count < 10){
+                    if(closet_user.pk != user_id && closet_user.closet_set_count != 0){
+                        closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${backEndBaseUrl}${closet_user.profile_image}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                    }
+                }
+            })
+        } else {
+            closet_user_list.forEach(closet_user => {
+                if(for_count < 10){
+                    if(closet_user.pk != user_id){
+                        closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${backEndBaseUrl}${closet_user.profile_image}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                    }
+                }
+            })
         }
 
         // 검색어 랭킹 조회

@@ -385,3 +385,40 @@ body {
     margin: 0 10px 0 10px;
     line-height: 20px;
 }
+
+.closet_recommend_user_box {
+    width: 230px;
+    height: 40px;
+    margin: 10px 0 0 30px;
+}
+
+#closet_recommend_user_list .nav_mini_profile_image {
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    margin-top: 2.5px;
+}
+
+#closet_recommend_user_list .nav_mini_box {
+    width: 200px;
+    height: 40px;
+    margin-left: 10px;
+    
+}
+
+.nav_mini_box .nav_mini_nickname {
+    font-size: 10pt;
+    cursor: pointer;
+    height: 20px;
+    line-height: 20px;
+}
+.nav_mini_box .nav_mini_nickname:hover {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.nav_mini_box .nav_mini_info {
+    font-size: 10pt;
+    height: 20px;
+    line-height: 20px;
+}
