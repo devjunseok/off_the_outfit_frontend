@@ -403,6 +403,8 @@ window.onload = async function getIndexDetail_API(){
         
         var recommend_area = document.getElementById('recommend_area');
         reco_prods.forEach(prod => {
+            brand_name = prod.brand_name_en.trim().toLowerCase().replace(' ', '')
+            brand_name_first = brand_name.substr(0, 1).toUpperCase()
             product_image_500 = prod.product_image.replace('_125.jpg', '_500.jpg')
             recommend_area.innerHTML += `
                 <div class="product_box">
@@ -410,7 +412,7 @@ window.onload = async function getIndexDetail_API(){
                         <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'"/>
                     </div>
                     <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand">${prod.brand_name_en}</div>
+                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.brand_name_en}</div>
                         <div class="product_review">review:${prod.review_count}</div>
                     </div>
                     <div class="info_middle_section">
@@ -421,7 +423,7 @@ window.onload = async function getIndexDetail_API(){
                         </div>
                     </div>
                     <div class="info_bottom_section horizontal_alignment">
-                        <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.category[0].id}'">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
                         <div class="product_number">No.${prod.product_number}</div>
                     </div>
                 </div>
