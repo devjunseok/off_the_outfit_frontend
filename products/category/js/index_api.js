@@ -17,7 +17,7 @@ async function AttendanceCheck(user_id){
 return response_json
 }
 
-// 상품 브랜드별 리스트 조회
+// 상품 카테고리별 리스트 조회
 async function getIndexProductList(){
     category_id = location.search.replace('?category_id=', '')
 
@@ -178,14 +178,16 @@ window.onload = async function getIndex_API(){
         // 전체 상품 반복 출력
         var product_wrap = document.getElementsByClassName('product_list_box')[0];
         product_list.forEach(prod => {
+            brand_name = prod.brand_name_en.trim().toLowerCase().replace(' ', '')
+            brand_name_first = brand_name.substr(0, 1).toUpperCase()
             product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
             product_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${product_image_500}">
+                    <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">
                 </div>
                 <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.brand_name_en}</div>
+                    <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.brand_name_en}</div>
                     <div class="product_review">review:${prod.review_count}</div>
                 </div>
                 <div class="info_middle_section">
@@ -196,7 +198,7 @@ window.onload = async function getIndex_API(){
                     </div>
                 </div>
                 <div class="info_bottom_section horizontal_alignment">
-                    <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                    <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.category[0].id}'">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
                     <div class="product_number">No.${prod.product_number}</div>
                 </div>
             </div>
