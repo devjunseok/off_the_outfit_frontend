@@ -291,6 +291,8 @@ window.onload = async function getIndex_API(){
             // 유저 아이디가 본인 아이디인 경우
             if(user_id == User_payload.user_id){
             product_list.forEach(prod => {
+                brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
+                brand_name_first = brand_name.substr(0, 1).toUpperCase()
                 product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
                 product_wrap.innerHTML += `
                 <div class="product_box">
@@ -298,7 +300,7 @@ window.onload = async function getIndex_API(){
                         <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
                     </div>
                     <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand">${prod.product.brand_name_en}</div>
+                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
                         <div class="product_review">review:${prod.product.review_count}</div>
                     </div>
                     <div class="info_middle_section">
@@ -310,7 +312,7 @@ window.onload = async function getIndex_API(){
                         </div>
                     </div>
                     <div class="info_bottom_section horizontal_alignment">
-                        <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
                         <div class="product_number">No.${prod.product.product_number}</div>
                     </div>
                     <div class="info_Input_section horizontal_alignment" id="info_Input_section_${prod.pk}" style="display:none;">
@@ -322,6 +324,8 @@ window.onload = async function getIndex_API(){
         // 유저 아이디가 본인 유저가 아닌 경우 
         })} else {
             product_list.forEach(prod => {
+                brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
+                brand_name_first = brand_name.substr(0, 1).toUpperCase()
                 product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
                 product_wrap.innerHTML += `
                 <div class="product_box">
@@ -329,7 +333,7 @@ window.onload = async function getIndex_API(){
                         <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
                     </div>
                     <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand">${prod.product.brand_name_en}</div>
+                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
                         <div class="product_review">review:${prod.product.review_count}</div>
                     </div>
                     <div class="info_middle_section">
@@ -339,7 +343,7 @@ window.onload = async function getIndex_API(){
                         </div>
                     </div>
                     <div class="info_bottom_section horizontal_alignment">
-                        <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
                         <div class="product_number">No.${prod.product.product_number}</div>
                     </div>
                 </div>
@@ -350,7 +354,8 @@ window.onload = async function getIndex_API(){
             product_list.forEach(prod => {
             if(prod.name_tag != null){
             if(prod.name_tag.tag_name == decodeURI(name_tag)){
-                
+                brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
+                brand_name_first = brand_name.substr(0, 1).toUpperCase()
                 product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
                 product_wrap.innerHTML += `
                 <div class="product_box">
@@ -358,7 +363,7 @@ window.onload = async function getIndex_API(){
                         <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
                     </div>
                     <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand">${prod.product.brand_name_en}</div>
+                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
                         <div class="product_review">review:${prod.product.review_count}</div>
                     </div>
                     <div class="info_middle_section">
@@ -369,7 +374,7 @@ window.onload = async function getIndex_API(){
                         </div>
                     </div>
                     <div class="info_bottom_section horizontal_alignment">
-                        <div class="product_category">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
                         <div class="product_number">No.${prod.product.product_number}</div>
                     </div>
                 </div>
