@@ -144,7 +144,7 @@ window.onload = async function getUserInfo_API(){
             </div>
             <div class="right_info_section vertical_alignment">
                 <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
-                <div class="feed_list_button"><button>피드 보기</button></div>
+                <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
             </div>
         </div>
         `
@@ -176,7 +176,7 @@ window.onload = async function getUserInfo_API(){
             </div>
             <div class="right_info_section vertical_alignment">
                 <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
-                <div class="feed_list_button"><button>피드 보기</button></div>
+                <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
             </div>
         </div>
         `

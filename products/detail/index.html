@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 상세 정보</title>
+    <link rel="stylesheet" href="/products/detail/style/index.css">
+    <link rel="stylesheet" href="/style/header.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
+</head>
+
+<body>
+    <div data-include-path="/header.html"></div>
+    <div class="horizontal_alignment">
+        <div data-include-path="/nav.html"></div>
+        <div class="vertical_alignment">
+            <div class="main_body_area">
+                <div class="top_section">
+                    <div class="info_bar horizontal_alignment">
+                        <!-- 브랜드 이미지 -->
+                        <div class="prod_info horizontal_alignment" >
+                            <img class="brand_image" id="brand_image" />
+                            <div class="prod_name" id="prod_name"></div>
+                        </div>
+                        <div class="horizontal_alignment">
+                            <div class="musinsa_button">MUSINSA</div>
+                            <div class="etc_dropbox">
+                                <div class="etc_button">...</div>
+                                <div class="etc_list">
+                                    <!-- ... 수정, 삭제 메뉴 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 신고 BOX -->
+                    <div class="reportBox vertical_alignment" style="display: none;">
+                        <textarea class="report_input" id="report_content" type="text" placeholder="신고내용..." cols="5"rows="5"></textarea>
+                        <div class="reportButtonBox">
+                            <button class="report_button" id="report_button_done" type="submit">신고</button>
+                            <button class="report_button" onclick="reportInputFlex()">닫기</button>
+                        </div>
+                    </div>
+                    <div class="detail_area horizontal_alignment">
+                        <div class="ua_left_section">
+                            <!-- 상품 이미지 -->
+                            <div class="product_image_box">
+                                <img id="image" class="product_image" />
+                            </div>
+                        </div>
+                        <div class="ua_right_section">
+                            <div class="right_title_box horizontal_alignment">
+                                <div class="section_title_en">Product Info</div>
+                                <div class="section_title_kr">상품 정보</div>
+                            </div>
+                            <div class="prod_detail_info_box horizontal_alignment">
+                                <div class="prod_info_title">브랜드</div>
+                                <div class="prod_info_desc" id="brand_name_top"></div>
+                            </div>
+                            <div class="prod_detail_info_box horizontal_alignment">
+                                <div class="prod_info_title">상품번호</div>
+                                <div class="prod_info_desc" id="product_number_top"></div>
+                            </div>
+                            <div class="prod_detail_info_box horizontal_alignment">
+                                <div class="prod_info_title">카테고리</div>
+                                <div class="prod_info_desc" id="category_info_top"></div>
+                            </div>
+                            <div class="info_dividing_line"><!-- 구분선 --></div>
+                            <div class="right_title_box horizontal_alignment">
+                                <div class="section_title_en">Price Info</div>
+                                <div class="section_title_kr">가격 정보</div>
+                            </div>
+                            <div class="prod_detail_info_box horizontal_alignment">
+                                <div class="prod_info_title">판매가</div>
+                                <div class="prod_info_desc" id="prod_original_price"></div>
+                            </div>
+                            <div class="prod_detail_info_box horizontal_alignment">
+                                <div class="prod_info_title">할인가</div>
+                                <div class="prod_info_desc" id="prod_discount_price"></div>
+                                <div class="prod_info_sub_desc" id="prod_discount_rate"></div>
+                            </div>
+                            <div class="info_dividing_line"><!-- 구분선 --></div>
+                            <div class="review_list_box">
+                                <div class="review_box_title">상품 후기 / Q & A</div>
+                                <div class="review_box_desc">해당 상품 후기 및 문의는 OFF THE OUTFIT 자체 사이트에서 작성된 내용입니다. 이용하는 데 참고해주시기 바랍니다.</div>
+                                <div class="review_main_area" id="review_main_area">
+                                    <!-- 상품 후기 + Q & A 반복문 -->
+                                </div>
+                            </div>
+                            <div class="button_box horizontal_alignment">
+                                <div class="buy_button" id="buy_button">바로구매</div>
+                                <div class="like_button vertical_alignment" id="like_button">
+                                    <img src="/static/img/heart.png" />
+                                    <span class="like_count">656</span>
+                                </div>
+                                <div class="closet_button" id="closet_button">옷장</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recommend_title">이런 상품은 어때요?</div>
+            <div class="recommend_area horizontal_alignment" id="recommend_area">
+
+            </div>
+        </div>
+    </div>
+
+
+    
+    <script src="/products/detail/js/index_api.js"></script>
+    <script src="/products/detail/js/index.js"></script>
+    <script src="/js/header_api.js"></script>
+    <script src="/js/header.js"></script>  
+    <script src="/js/nav_api.js"></script>  
+    <script src="/js/base_url.js"></script>
+    
+</body>
+</html>
