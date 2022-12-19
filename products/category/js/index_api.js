@@ -17,7 +17,7 @@ async function AttendanceCheck(user_id){
 return response_json
 }
 
-// 상품 브랜드별 리스트 조회
+// 상품 카테고리별 리스트 조회
 async function getIndexProductList(){
     category_id = location.search.replace('?category_id=', '')
 
