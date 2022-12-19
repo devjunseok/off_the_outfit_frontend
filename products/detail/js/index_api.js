@@ -61,6 +61,21 @@ async function getRecommendClosetProducts(){
     return response_json
 }
 
+// 상품 카테고리별 리스트 조회 API
+async function getIndexProductList(category_id){
+    
+    const response = await fetch(`${backEndBaseUrl}/products/product/category/${category_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
 
 // 옷장 상품 등록
 async function closetProductAdd(product_number) {
@@ -237,7 +252,6 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const product_number = location.search.replace('?product_number=', '')
         product_info = await getIndexProductDetail(product_number)
-
         // 브랜드 정보 - top_info
         var brand_image = document.getElementById('brand_image');
         brand_name = product_info.brand_name_en.trim().toLowerCase().replace(' ', '')
@@ -380,7 +394,13 @@ window.onload = async function getIndexDetail_API(){
 
         // 상품 추천 기능
         recommend_products = await getRecommendClosetProducts()
-        reco_prods = recommend_products.sort(function(){return Math.random() - Math.random();})
+        category_products = await getIndexProductList(product_info.category[0].id)
+        if(recommend_products['message'] != undefined ){
+            reco_prods = category_products.sort(function(){return Math.random() - Math.random();})
+        } else {
+            reco_prods = recommend_products.sort(function(){return Math.random() - Math.random();})
+        }
+        
         var recommend_area = document.getElementById('recommend_area');
         reco_prods.forEach(prod => {
             product_image_500 = prod.product_image.replace('_125.jpg', '_500.jpg')
