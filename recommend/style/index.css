@@ -172,6 +172,11 @@ body {
 .info_top_section .product_brand {
     font-size: 10pt;
     line-height: 25px;
+    cursor: pointer;
+}
+
+.info_top_section .product_brand:hover {
+    font-weight: bold;
 }
 
 .info_top_section .product_review {
@@ -220,8 +225,23 @@ body {
 
 .info_bottom_section .product_category {
     font-size: 9pt;
+    cursor: pointer;
+}
+
+.info_bottom_section .product_category:hover {
+    font-weight: bold;
 }
 
 .info_bottom_section .product_number {
     font-size: 5pt;
+}
+
+.info_middle_section .closet_add_button {
+    font-size: 10pt;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.info_middle_section .closet_add_button:hover {
+    font-weight: bold;
 }

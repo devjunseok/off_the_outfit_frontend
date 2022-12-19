@@ -118,6 +118,8 @@ window.onload = async function getIndex_API(){
         `;
 
         product_list.outer.forEach(prod => {
+            brand_name = prod.brand_name_en.trim().toLowerCase().replace(' ', '')
+            brand_name_first = brand_name.substr(0, 1).toUpperCase()
             product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
             outer_wrap.innerHTML += `
             <div class="product_box">
@@ -125,7 +127,7 @@ window.onload = async function getIndex_API(){
                     <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">
                 </div>
                 <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.brand_name_en}</div>
+                    <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.brand_name_en}</div>
                     <div class="product_review">review:${prod.review_count}</div>
                 </div>
                 <div class="info_middle_section">
@@ -142,6 +144,8 @@ window.onload = async function getIndex_API(){
             
         });
         product_list.top.forEach(prod =>{
+            brand_name = prod.brand_name_en.trim().toLowerCase().replace(' ', '')
+            brand_name_first = brand_name.substr(0, 1).toUpperCase()
             product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
             top_wrap.innerHTML += `
             <div class="product_box">
@@ -149,7 +153,7 @@ window.onload = async function getIndex_API(){
                     <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">
                 </div>
                 <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.brand_name_en}</div>
+                    <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.brand_name_en}</div>
                     <div class="product_review">review:${prod.review_count}</div>
                 </div>
                 <div class="info_middle_section">
@@ -165,6 +169,8 @@ window.onload = async function getIndex_API(){
             top_view.innerText = `${prod.category[0].sub_category_name}`
         });
         product_list.bottom.forEach(prod =>{
+            brand_name = prod.brand_name_en.trim().toLowerCase().replace(' ', '')
+            brand_name_first = brand_name.substr(0, 1).toUpperCase()
             product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
             bottom_wrap.innerHTML += `
             <div class="product_box">
@@ -172,7 +178,7 @@ window.onload = async function getIndex_API(){
                     <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">
                 </div>
                 <div class="info_top_section horizontal_alignment">
-                    <div class="product_brand">${prod.brand_name_en}</div>
+                    <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.brand_name_en}</div>
                     <div class="product_review">review:${prod.review_count}</div>
                 </div>
                 <div class="info_middle_section">

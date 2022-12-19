@@ -294,13 +294,14 @@ window.onload = async function getIndex_API(){
                 brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
                 brand_name_first = brand_name.substr(0, 1).toUpperCase()
                 product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
+                console.log(brand_name)
                 product_wrap.innerHTML += `
                 <div class="product_box">
                     <div class="product_image_box">
                         <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
                     </div>
                     <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
+                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.product.brand}'">${prod.product.brand_name_en}</div>
                         <div class="product_review">review:${prod.product.review_count}</div>
                     </div>
                     <div class="info_middle_section">
