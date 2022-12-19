@@ -281,6 +281,7 @@ window.onload = async function getIndexDetail_API(){
         // 카테고리
         var category_info_top = document.getElementById('category_info_top');
         category_info_top.innerText = `${product_info.category[0].main_category_name} > ${product_info.category[0].sub_category_name}`
+        category_info_top.setAttribute('onclick', `location.href='/products/category/?category_id=${product_info.category[0].id}'`)
 
         // 가격 정보 - right_info - middle
         // 판매가

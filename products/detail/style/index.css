@@ -160,8 +160,14 @@ body {
     margin-left: 15px;
     color: #c0c0c0;
     text-decoration: line-through;
-
 }
+
+.prod_detail_info_box #category_info_top:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
 
 .prod_detail_info_box .prod_info_sub_desc {
     font-size: 10pt;
