@@ -104,8 +104,8 @@ body {
     width: 740px;
     height: 740px;
     border-style: none;
-    object-fit: cover;
-    background-color: black;
+    object-fit: contain;
+    background-color: #ffffff;
 }
 
 
@@ -160,6 +160,7 @@ body {
     margin-left: 15px;
     color: #c0c0c0;
     text-decoration: line-through;
+
 }
 
 .prod_detail_info_box .prod_info_sub_desc {
@@ -313,10 +314,16 @@ body {
     cursor: pointer;
 }
 
-.button_box .like_button img {
+/* .button_box .like_button img {
     width: 30px;
     height: 30px;
     margin: 7px auto 5px auto;
+} */
+
+.like_button .star_image {
+    font-size: 20pt;
+    text-align: center;
+    margin-top: 7px;
 }
 
 .like_button .like_count {
@@ -335,6 +342,37 @@ body {
     cursor: pointer;
     font-weight: bold;
 }
+
+/* 상품 후기 + Q & A 이미지 null 인 경우 */
+
+.review_box .re_left_section_null {
+    display: none;
+}
+
+.review_box .re_right_section_null {
+    width: 400px;
+    height: 110px;
+    margin: 10px;
+}
+
+.re_right_section_null .re_right_top {
+    width: 400px;
+    height: 30px;
+    justify-content: space-between;
+}
+
+.re_right_section_null .re_right_middle {
+    width: 400px;
+    height: 50px;
+    margin: 5px 0 5px 0;
+}
+
+.re_right_section_null .re_right_bottom {
+    width: 400px;
+    height: 20px;
+    justify-content: space-between;
+}
+
 
 .recomment_input_box {
     width: 460px;
@@ -451,12 +489,20 @@ body {
 
 
 /* 추천 기능 부분 */
+.recommend_title {
+    font-size: 15pt;
+    font-weight: bold;
+    margin: 10px 0 0 20px;
+}
 
 .recommend_area {
     width: 1260px;
     display: grid;
     margin: 10px;
     grid-template-columns: repeat(5, 1fr);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
 }
 
 .recommend_area .product_box {
@@ -469,12 +515,13 @@ body {
     width: 242px;
     height: 280px;
     background-color: #ffffff;
+    cursor: pointer;
 }
 
 .product_box .product_image_box img {
     width: 242px;
     height: 280px;
-    object-fit: cover;
+    object-fit:cover;
 }
 
 .product_box .info_top_section {

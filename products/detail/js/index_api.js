@@ -46,79 +46,41 @@ async function getHeaderSearchWordRanking(){
     return response_json
 }
 
-
-//좋아요 실행
-async function handleLike(){
-
-    feed_id = location.search.replace("?id=","")
-    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
+// 상품 추천 API
+async function getRecommendClosetProducts(){
+    product_number = location.search.replace('?product_number=', '')
+    const response = await fetch(`${backEndBaseUrl}/recommend/closet/product/${product_number}/`,{
         headers: {
             'content-type': 'application/json',
             "Authorization":"Bearer " + localStorage.getItem("access")
         },
-        method: 'POST',
-        body: JSON.stringify({
-    
-            })
-        })
-        window.location.reload()
+        method:'GET',
+    })
 
+    response_json = await response.json()
+    return response_json
 }
 
 
-// //댓글 등록
-// async function createPost(porduct_id){
+// 옷장 상품 등록
+async function closetProductAdd(product_number) {
 
-//     const comment = document.getElementById('comment_content').value;
-//     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/`, {
-//         headers: {
-//             'content-type': 'application/json',
-//             "Authorization":"Bearer " + localStorage.getItem("access")
-//         },
-//         method: 'POST',
-//         body: JSON.stringify({
-//             "comment":comment
-//         })
-//     })
-//     const response_json = await response.json()
-
-//     if (response.status == 200){
-//         alert(response_json["message"])
-//     }else {
-//         alert(response_json["detail"])
-//     }
-//     window.location.reload()   
-    
-//     return response_json
-// }
-
-
-// //대댓글 등록
-// async function postRecomment(feed_id, comment_id, Input_Box){
-
-//     const recomment = document.getElementById(Input_Box).value;
-//     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/`, {
-//         headers: {
-//             'content-type': 'application/json',
-//             "Authorization":"Bearer " + localStorage.getItem("access")
-//         },
-//         method: 'POST',
-//         body: JSON.stringify({
-//             "recomment":recomment
-//         })
-//     })
-//     const response_json = await response.json()
-
-//     if (response.status == 200){
-//         alert(response_json["message"])
-//     }else {
-//         alert(response_json["detail"])
-//     }
-//     window.location.reload()   
-    
-//     return response_json
-// }
-
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+    } else {
+        const response = await fetch(`${backEndBaseUrl}/products/product/${product_number}/closet/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        }); 
+        if (response.status == 200) {
+        alert("옷장 상품 등록");
+        window.location.reload;
+        }
+    }
+}
 
 
 // // 대댓글 입력 박스
@@ -178,46 +140,6 @@ function timeForToday(value) {
 //     }
 // }
 
-// // 댓글 삭제
-// async function deleteComment(comment_id){
-    
-//     feed_id =location.search.replace("?id=","")
-//     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}`, {
-//         headers: {
-//         Authorization: "Bearer " + localStorage.getItem("access"),
-//         },
-//         method: "DELETE",
-//     });
-
-//     if(response.status == 204){
-//         alert("댓글 삭제완료!")
-//         window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
-//     }
-//     else {
-//         alert(response.status);
-//     }
-// }
-
-
-// // 대댓글 삭제
-// async function deleteRecomment(comment_id, recomment_id){
-    
-//     feed_id =location.search.replace("?id=","")
-//     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/recomment/${recomment_id}/`, {
-//         headers: {
-//         Authorization: "Bearer " + localStorage.getItem("access"),
-//         },
-//         method: "DELETE",
-//     });
-
-//     if(response.status == 204){
-//         alert("대댓글 삭제완료!")
-//         window.location.reload(); // 삭제가 되고나면 인덱스로 다시 이동하게함
-//     }
-//     else {
-//         alert(response.status);
-//     }
-// }
 
 // 브랜드 리스트 조회
 async function getNavBrandList(){
@@ -315,11 +237,10 @@ window.onload = async function getIndexDetail_API(){
     } else {
         const product_number = location.search.replace('?product_number=', '')
         product_info = await getIndexProductDetail(product_number)
-        console.log(product_info)
 
         // 브랜드 정보 - top_info
         var brand_image = document.getElementById('brand_image');
-        brand_name = product_info.brand_name_en.trim().toLowerCase()
+        brand_name = product_info.brand_name_en.trim().toLowerCase().replace(' ', '')
         brand_name_first = brand_name.substr(0, 1).toUpperCase()
         brand_image.setAttribute('src', `https://image.msscdn.net/mfile_s01/_brand/free_medium/${brand_name}.png`)
         brand_image.setAttribute('onclick', `location.href='/products/?key=${brand_name_first}&?brand_id=${product_info.brand}'`)
@@ -335,7 +256,158 @@ window.onload = async function getIndexDetail_API(){
         product_image.setAttribute('src', `${product_image_500}`)
 
         // 상품 정보 - right_info - top
-        var
+        // 브랜드
+        var brand_name_top = document.getElementById('brand_name_top');
+        brand_name_top.innerText = `${product_info.brand_name_en} / ${product_info.brand_name_kr}`
+
+        // 상품번호
+        var product_number_top = document.getElementById('product_number_top');
+        product_number_top.innerText = `${product_info.product_number}`
+
+        // 카테고리
+        var category_info_top = document.getElementById('category_info_top');
+        category_info_top.innerText = `${product_info.category[0].main_category_name} > ${product_info.category[0].sub_category_name}`
+
+        // 가격 정보 - right_info - middle
+        // 판매가
+        var original_price_middle = document.getElementById('prod_original_price');
+        prod_original_price = product_info.original_price.toLocaleString('ko-KR');
+        original_price_middle.innerText = `${prod_original_price}원`
+
+        // 할인가
+        var discount_price_middle = document.getElementById('prod_discount_price');
+        prod_discount_price = product_info.discount_price.toLocaleString('ko-KR');
+        discount_price_middle.innerText = `${prod_discount_price}원`
+
+        // 할인율
+        var discount_rate_middle = document.getElementById('prod_discount_rate');
+        prod_discount_rate_middle = Math.floor((1 - (product_info.discount_price / product_info.original_price)) * 100)
+        discount_rate_middle.innerText = `${prod_discount_rate_middle}% 이상 할인`
+
+        // 상품 후기 + Q & A
+        all_review_rating = 0
+        var review_main_area = document.getElementById('review_main_area');
+        product_info.products.forEach(review => {
+            // 상품 후기 별점
+            if(review.rating < 1) {
+                review_rating = ''
+            } else if (review.rating < 2) {
+                review_rating = '★'
+            } else if (review.rating < 3) {
+                review_rating = '★★'
+            } else if (review.rating < 4) {
+                review_rating = '★★★'
+            } else if (review.rating < 5) {
+                review_rating = '★★★★'
+            } else {
+                review_rating = '★★★★★'
+            }
+            all_review_rating += review.rating
+
+            // 이미지 null 처리
+            if (review.image == null) {
+                review_main_area.innerHTML += `
+                <div class="review_box horizontal_alignment">
+                    <div class="re_left_section_null">
+                        <img src="${backEndBaseUrl}${review.image}" class="review_image" id="review_image">
+                    </div>
+                    <div class="re_right_section_null">
+                        <div class="re_right_top horizontal_alignment">
+                            <div class="top_nickname">${review.user}</div>
+                            <div class="top_button_section horizontal_alignment">
+                                <div class="top_rating">${review_rating}</div>
+                            </div>
+                        </div>
+                        <div class="re_right_middle">
+                            <div class="middle_content">${review.content}</div>
+                        </div>
+                        <div class="re_right_bottom horizontal_alignment">
+                            <div class="bottom_type">${review.post_type}</div>
+                            <div class="bottom_created_at">${timeForToday(review.created_at)}</div>
+                        </div>
+                    </div>
+                </div>
+            `
+            } else {
+                review_main_area.innerHTML += `
+                    <div class="review_box horizontal_alignment">
+                        <div class="re_left_section">
+                            <img src="${backEndBaseUrl}${review.image}" class="review_image" id="review_image">
+                        </div>
+                        <div class="re_right_section">
+                            <div class="re_right_top horizontal_alignment">
+                                <div class="top_nickname">${review.user}</div>
+                                <div class="top_button_section horizontal_alignment">
+                                    <div class="top_rating">${review_rating}</div>
+                                </div>
+                            </div>
+                            <div class="re_right_middle">
+                                <div class="middle_content">${review.content}</div>
+                            </div>
+                            <div class="re_right_bottom horizontal_alignment">
+                                <div class="bottom_type">${review.post_type}</div>
+                                <div class="bottom_created_at">${timeForToday(review.created_at)}</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        })
+        // 바로 구매 버튼
+        var buy_button = document.getElementById('buy_button');
+        buy_button.setAttribute('onclick', `location.href='https://www.musinsa.com/app/goods/${product_number}'`)
+        
+        // 별점 버튼
+        product_rating = all_review_rating / product_info.products_count
+        var like_button = document.getElementById('like_button');
+        // 리뷰 작성 유무 판단
+        if(isNaN(product_rating)){
+            like_button.innerHTML = `
+                <span class="star_image">★</span>
+                <span class="like_count">리뷰 작성</span>
+            `
+        } else {
+            like_button.innerHTML = `
+                <span class="star_image">★</span>
+                <span class="like_count">${product_rating}</span>
+            `
+        }
+
+        // 옷장 버튼
+        var closet_button = document.getElementById('closet_button');
+        closet_button.setAttribute('onclick', `closetProductAdd(${product_info.product_number})`)
+
+
+        // 상품 추천 기능
+        recommend_products = await getRecommendClosetProducts()
+        reco_prods = recommend_products.sort(function(){return Math.random() - Math.random();})
+        var recommend_area = document.getElementById('recommend_area');
+        reco_prods.forEach(prod => {
+            product_image_500 = prod.product_image.replace('_125.jpg', '_500.jpg')
+            recommend_area.innerHTML += `
+                <div class="product_box">
+                    <div class="product_image_box">
+                        <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'"/>
+                    </div>
+                    <div class="info_top_section horizontal_alignment">
+                        <div class="product_brand">${prod.brand_name_en}</div>
+                        <div class="product_review">review:${prod.review_count}</div>
+                    </div>
+                    <div class="info_middle_section">
+                        <div class="product_name">${prod.product_name}</div>
+                        <div class="horizontal_alignment">
+                            <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                            <div class="closet_add_button" onclick="closetProductAdd(${prod.product_number})">closet</div>
+                        </div>
+                    </div>
+                    <div class="info_bottom_section horizontal_alignment">
+                        <div class="product_category">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                        <div class="product_number">No.${prod.product_number}</div>
+                    </div>
+                </div>
+            `
+        })
+
 
 
         // 검색어 랭킹 조회
