@@ -122,7 +122,7 @@ window.onload = async function getIndex_API(){
             outer_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${product_image_500}" alt="">
+                    <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">
                 </div>
                 <div class="info_top_section horizontal_alignment">
                     <div class="product_brand">${prod.brand_name_en}</div>
@@ -146,7 +146,7 @@ window.onload = async function getIndex_API(){
             top_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${product_image_500}" alt="">
+                    <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">
                 </div>
                 <div class="info_top_section horizontal_alignment">
                     <div class="product_brand">${prod.brand_name_en}</div>
@@ -169,7 +169,7 @@ window.onload = async function getIndex_API(){
             bottom_wrap.innerHTML += `
             <div class="product_box">
                 <div class="product_image_box">
-                    <img src="${product_image_500}" alt="">
+                    <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">
                 </div>
                 <div class="info_top_section horizontal_alignment">
                     <div class="product_brand">${prod.brand_name_en}</div>
