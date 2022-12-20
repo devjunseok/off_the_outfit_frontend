@@ -96,6 +96,20 @@ async function createPost() {
     }
 }
 
+// 상품 검색 박스
+async function prodSearchInputFlex() {
+    let search = document.querySelector('.search_prod_box');
+    let image = document.querySelector('.feed_image_box');
+
+    if(search.style.display == 'none'){
+        search.style.display = 'flex';
+        image.style.display = 'none';
+    }else{
+        search.style.display = 'none';
+        image.style.display = 'flex';
+    }
+}
+
 
 window.onload = async function getUpload_API(){
 
