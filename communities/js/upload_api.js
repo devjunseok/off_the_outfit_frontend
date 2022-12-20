@@ -125,13 +125,13 @@ async function getProdSearchAPI(search){
     })
 
     const response_json = await response.json()
-    console.log(response_json)
     var result_section = document.getElementsByClassName('result_section')[0];
-    response_json.forEach(prod => {
+    response_json.slice(0, 100).forEach(prod => {
+        product_image_500 = prod.product_image.replace('_125.jpg', '_500.jpg')
         result_section.innerHTML += `
             <div class="result_box horizontal_alignment" id="result_box">
                 <div class="left_image_section">
-                    <img src="${prod.product_image}">
+                    <img src="${product_image_500}">
                 </div>
                 <div class="center_info_section">
                     <div class="info_title_box horizontal_alignment">
@@ -143,7 +143,8 @@ async function getProdSearchAPI(search){
                         <div class="prod_info_desc">${prod.brand_name_en} / ${prod.brand_name_kr}</div>
                     </div>
                     <div class="prod_detail_info_box horizontal_alignment">
-                        <div class="prod_info_title">${prod.product_number}</div>
+                        <div class="prod_info_title">상품번호</div>
+                        <div class="prod_info_desc">${prod.product_number}</div>
                     </div>
                     <div class="prod_detail_info_box horizontal_alignment">
                         <div class="prod_info_title">상품명</div>
@@ -157,7 +158,7 @@ async function getProdSearchAPI(search){
                 <div class="right_button_section vertical_alignment">
                     <button class="result_buttons">상품 보기</button>
                     <button class="result_buttons">옷장 추가</button>
-                    <button class="result_buttons">선택</button>
+                    <button class="result_buttons" onclick="prodSelectButton('${prod.product_number}')">선택</button>
                 </div>
             </div>
         `
@@ -165,12 +166,23 @@ async function getProdSearchAPI(search){
     return response_json
 }
 
-
+// 검색시 div 새로고침 
 async function refrashSearch(){
     $("#result_section").load(location.href+' #result_box');
     search = document.getElementById('search_prod').value;
     getProdSearchAPI(search)
 }
+
+// 상품 선택시 input에 값 넣어주기
+async function prodSelectButton(product_number){
+    var value_input = document.getElementById('product').value;
+    if(value_input == ''){
+        $("#product").attr('value', `${product_number}`);
+    } else {
+        $("#product").attr('value', `${value_input}, ${product_number}`);
+    }
+}
+
 
 window.onload = async function getUpload_API(){
 
