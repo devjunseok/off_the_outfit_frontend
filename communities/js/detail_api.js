@@ -84,20 +84,44 @@ async function getHeaderSearchWordRanking(){
 
 //좋아요 실행
 async function handleLike(){
-
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
     feed_id = location.search.replace("?id=","")
-    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method: 'POST',
-        body: JSON.stringify({
-    
+    feeds = await getIndexFeedDetail(feed_id)
+    if(feeds.unlike.length==0){
+        const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
+            headers: {
+                'content-type': 'application/json',
+                "Authorization":"Bearer " + localStorage.getItem("access")
+            },
+            method: 'POST',
+            body: JSON.stringify({
+        
+                })
             })
-        })
-        window.location.reload()
+            window.location.reload()
+    }
+    else{
+        feeds.unlike.forEach(unliker=>{
+            if(unliker==User_payload.user_id){
+                alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
+            }
+            else{
+                const response =  fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
+                    headers: {
+                        'content-type': 'application/json',
+                        "Authorization":"Bearer " + localStorage.getItem("access")
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                
+                        })
+                    })
+                    window.location.reload()
 
+            }
+        })
+    }
+    
 }
 
 //싫어요 실행
@@ -105,19 +129,47 @@ async function handleLike(){
 async function handleUnLike(){
 
     feed_id = location.search.replace("?id=","")
-    const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method: 'POST',
-        body: JSON.stringify({
-    
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    feeds = await getIndexFeedDetail(feed_id)
+    if(feeds.like.length==0){
+        const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
+            headers: {
+                'content-type': 'application/json',
+                "Authorization":"Bearer " + localStorage.getItem("access")
+            },
+            method: 'POST',
+            body: JSON.stringify({
+        
+                })
             })
-        })
-        window.location.reload()
+            window.location.reload()
+        }
+    else{
+        feeds.like.forEach(liker=>{
+            if(liker==User_payload.user_id){
+                alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
+            }
+            else{
+                const response = fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
+                    headers: {
+                        'content-type': 'application/json',
+                        "Authorization":"Bearer " + localStorage.getItem("access")
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                
+                        })
+                    })
+                    window.location.reload()
 
+            }
+        })
+        
+    }
 }
+
+
+
 //댓글 등록
 async function postComment(feed_id){
 
@@ -404,6 +456,7 @@ window.onload = async function getIndexDetail_API(){
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
         follower_list = await getFollowerUserInfo(feed.user_id)
+        console.log(feed.unlike)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -559,33 +612,34 @@ window.onload = async function getIndexDetail_API(){
         })
         })
         // 좋아요 부분
-        if(feed.like.length == 0){
-            like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
-            }
-            else{
-                // console.log("좋아요 한 유저가 있을때")
-                counts = 0
-            // 게시물 좋아요 유무를 체크하는 조건문 부분
-                feed.like.forEach(liker => {
-    
-                    if(liker==User_payload.user_id){
-                    // console.log(`${liker}유저가 이 게시물을 좋아요 중입니다`)
-                    counts = +1
-                }
-                    else{
-                    // console.log(`${liker}유저가 이 게시물을 좋아요 중이 아닙니다`)
-                    }
-                })
-            // 체크한 부분을 토대로 출력해주는 부분
-                if(counts==1){
-                    // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중입니다`)
-                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handleLike()">`
+            if(feed.like.length == 0){
+                like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
                 }
                 else{
-                    // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중이 아닙니다`)
-                    like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
+                    // console.log("좋아요 한 유저가 있을때")
+                    counts = 0
+                // 게시물 좋아요 유무를 체크하는 조건문 부분
+                    feed.like.forEach(liker => {
+        
+                        if(liker==User_payload.user_id){
+                        // console.log(`${liker}유저가 이 게시물을 좋아요 중입니다`)
+                        counts = +1
+                    }
+                        else{
+                        // console.log(`${liker}유저가 이 게시물을 좋아요 중이 아닙니다`)
+                        }
+                    })
+                // 체크한 부분을 토대로 출력해주는 부분
+                    if(counts==1){
+                        // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중입니다`)
+                        like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart_bk.png" onclick="handleLike()">`
+                    }
+                    else{
+                        // console.log(`${like_List.pk}번 게시물을 이 유저가 좋아요 중이 아닙니다`)
+                        like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
+                    }
                 }
-            }
+
         //싫어요 부분
         if(feed.unlike.length == 0){
             unlike_wrap.innerHTML +=`<img class="feed_umji_view" src="/static/img/unlike.png" onclick="handleUnLike()"/>`

@@ -1,0 +1,616 @@
+@charset "utf-8";
+/*
+________________________________________________________________
+project : off_the_outfit website for last team sparta
+
+Edited by gicheol. ( hanmari.code@gmail.com )
+[ Last Edited 2022-12-18 ]
+________________________________________________________________
+
+= table of Css
+
+1. /products/detail/index.html
+
+= color code
+
+1. main color : 
+2. based color :
+3. light gray :
+4. point color :
+
+= font
+
+1. 
+2. 
+3. 
+4. 
+
+*/
+
+/* _______________________________________________________________  */
+/* 0. Public use */
+/* _______________________________________________________________  */
+
+body {
+    margin: 0;
+}
+
+.horizontal_alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical_alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+/* _______________________________________________________________  */
+/* 1. /products/detail/index.html */
+/* _______________________________________________________________  */
+
+.main_body_area {
+    width: 1220px;
+    height: 840px;
+    margin: 10px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+.main_body_area .top_section {
+    width: 1200px;
+    height: 800px;
+    background-color: #ffffff;
+    margin: 10px;
+}
+
+.top_section .info_bar {
+    width: 1200px;
+    height: 60px;
+    justify-content: space-between;
+    border-bottom: solid 2px #c0c0c0;
+}
+.info_bar .musinsa_button {
+    cursor: pointer;
+    line-height: 50px;
+}
+.info_bar .musinsa_button:hover {
+    font-weight: bold;
+}
+
+.info_bar .brand_image {
+    height: 30px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.info_bar .prod_name {
+    line-height: 60px;
+    font-size: 15pt;
+}
+
+.top_section .detail_area {
+    background-color: #ffffff;
+    width: 1200px;
+    height: 740px;
+}
+
+.detail_area .ua_left_section {
+    background-color: #ffffff;
+    width: 740px;
+    height: 700px;
+}
+
+.ua_left_section .product_image {
+    width: 740px;
+    height: 740px;
+    border-style: none;
+    object-fit: contain;
+    background-color: #ffffff;
+}
+
+
+.detail_area .ua_right_section {
+    width: 460px;
+    height: 740px;
+}
+
+.ua_right_section .right_title_box {
+    width: 460px;
+    height: 40px;
+    margin: 10px 0 10px 0;
+}
+
+.right_title_box .section_title_en {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-left: 20px;
+    line-height: 40px;
+}
+
+.right_title_box .section_title_kr {
+    font-size: 10pt;
+    font-weight: 400;
+    margin-left: 5px;
+    line-height: 40px;
+    color: #606060;
+}
+
+.ua_right_section .prod_detail_info_box {
+    width: 440px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 0 0 20px;
+}
+
+.prod_detail_info_box .prod_info_title {
+    width: 80px;
+    font-size: 10pt;
+}
+
+.prod_detail_info_box .prod_info_desc {
+    font-size: 10pt;
+    font-weight: 600;
+    margin-left: 15px;
+    color: #000000;
+}
+
+.prod_detail_info_box #prod_original_price {
+    font-size: 10pt;
+    font-weight: 600;
+    margin-left: 15px;
+    color: #c0c0c0;
+    text-decoration: line-through;
+}
+
+.prod_detail_info_box #category_info_top:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+
+.prod_detail_info_box .prod_info_sub_desc {
+    font-size: 10pt;
+    font-weight: 600;
+    margin-left: 15px;
+    color: #ff0000;
+}
+
+.info_dividing_line {
+    width: 440px;
+    height: 10px;
+    border-bottom: solid 1px #c0c0c0;
+    margin-left: 20px;
+}
+
+.ua_right_section .review_list_box {
+    width: 420px;
+    height: 340px;
+    margin: 10px 0 0 20px;
+    background-color: #f0f0f0;
+    border: solid 1px #c0c0c0;
+    padding: 10px;
+}
+
+.review_list_box .review_box_title {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.review_list_box .review_box_desc {
+    font-size: 9pt;
+    color: #c0c0c0;
+    margin-top: 5px;
+}
+
+.review_list_box .review_main_area {
+    width: 420px;
+    height: 280px;
+    background-color: #ffffff;
+    margin-top: 7px;
+    border: solid 1px #c0c0c0;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+}
+
+.review_main_area .review_box {
+    width: 420px;
+    height: 130px;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+.review_box .re_left_section  {
+    width: 160px;
+    height: 110px;
+    margin: 10px;
+    border: solid 1px #c0c0c0;
+}
+
+.review_box .re_left_section img {
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+}
+
+.review_box .re_right_section {
+    width: 230px;
+    height: 110px;
+    margin: 10px 10px 10px 0;
+}
+
+.re_right_section .re_right_top {
+    width: 230px;
+    height: 30px;
+    justify-content: space-between;
+}
+
+.re_right_top .top_nickname {
+    font-size: 13pt;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.re_right_top .top_rating {
+    font-size: 13pt;
+    line-height: 30px;
+    color: yellow;
+}
+
+.re_right_section .re_right_middle {
+    width: 230px;
+    height: 50px;
+    margin: 5px 0 5px 0;
+}
+
+.re_right_middle .middle_content {
+    width: 230px;
+    height: 50px;
+    font-size: 10pt;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.re_right_section .re_right_bottom {
+    width: 230px;
+    height: 20px;
+    justify-content: space-between;
+}
+
+.re_right_bottom .bottom_type {
+    font-size: 10pt;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
+.re_right_bottom .bottom_created_at {
+    font-size: 10pt;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
+
+.ua_right_section .button_box {
+    width: 440px;
+    height: 65px;
+    margin: 10px 0 0 20px;
+}
+
+.button_box .buy_button {
+    width: 290px;
+    height: 65px;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: center;
+    line-height: 65px;
+    color: #ffffff;
+    background-color: #000000;
+    cursor: pointer;
+}
+
+.button_box .like_button {
+    width: 63px;
+    height: 63px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+    margin: 0 10px 0 10px;
+    cursor: pointer;
+}
+
+/* .button_box .like_button img {
+    width: 30px;
+    height: 30px;
+    margin: 7px auto 5px auto;
+} */
+
+.like_button .star_image {
+    font-size: 20pt;
+    text-align: center;
+    margin-top: 7px;
+}
+
+.like_button .like_count {
+    font-size: 10pt;
+    text-align: center;
+}
+
+
+.button_box .closet_button {
+    width: 63px;
+    height: 63px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+    text-align: center;
+    line-height: 63px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 상품 후기 + Q & A 이미지 null 인 경우 */
+
+.review_box .re_left_section_null {
+    display: none;
+}
+
+.review_box .re_right_section_null {
+    width: 400px;
+    height: 110px;
+    margin: 10px;
+}
+
+.re_right_section_null .re_right_top {
+    width: 400px;
+    height: 30px;
+    justify-content: space-between;
+}
+
+.re_right_section_null .re_right_middle {
+    width: 400px;
+    height: 50px;
+    margin: 5px 0 5px 0;
+}
+
+.re_right_section_null .re_right_bottom {
+    width: 400px;
+    height: 20px;
+    justify-content: space-between;
+}
+
+
+.recomment_input_box {
+    width: 460px;
+    height: 45px;
+}
+
+.recomment_input_box .reco_input {
+    width: 300px;
+    height: 32px;
+    margin-left: 20px;
+    resize: none;
+    border: solid 1px #c0c0c0;
+    padding: 5px;
+}
+
+.recomment_input_box .recomment_create_button {
+    width: 70px;
+    height: 44px;
+    font-size: 9pt;
+    border-radius: 0px;
+    border-style: none;
+    padding: 5px 5px 5px 5px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+    
+}
+
+.recomment_input_box .recomment_create_button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.info_bar .etc_button {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 15pt;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.etc_dropbox{
+    position : relative;
+    display : inline-block;
+}
+
+.etc_button{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 15pt;
+    font-weight: bold;
+    cursor: pointer;
+}
+.etc_list{
+    display : none;
+    position : absolute;
+    z-index : 1;
+    font-weight: bold;
+    background-color: #ffffff;
+    min-width : 100px;
+    right: 0;
+}
+
+.etc_list a {
+    display : block;
+    text-decoration : none;
+    font-size: 12px;
+    padding : 12px 20px;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+.etc_list a:hover {
+    background-color : #000000;
+    color: #ffffff;
+}
+
+.etc_dropbox:hover .etc_list {
+    display: block;
+}
+
+.reportBox {
+    background-color: #ffffff;
+    position: absolute;
+    margin: 200px 0 0 300px;
+    width: 400px;
+    height: 200px;
+    border: solid 2px #c0c0c0;
+}
+
+.reportBox .report_input {
+    width: 360px;
+    height: 140px;
+    resize: none;
+    border: none;
+    padding: 20px;
+}
+
+.reportBox .reportButtonBox {
+    text-align: right;
+}
+.reportButtonBox .report_button {
+    border: solid 1px #c0c0c0;
+    background-color: #ffffff;
+}
+
+.reportButtonBox .report_button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+
+/* 추천 기능 부분 */
+.recommend_title {
+    font-size: 15pt;
+    font-weight: bold;
+    margin: 10px 0 0 20px;
+}
+
+.recommend_area {
+    width: 1260px;
+    display: grid;
+    margin: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+}
+
+.recommend_area .product_box {
+    width: 242px;
+    height: 370px;
+    margin: 10px;
+}
+
+.product_box .product_image_box {
+    width: 242px;
+    height: 280px;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.product_box .product_image_box img {
+    width: 242px;
+    height: 280px;
+    object-fit:cover;
+}
+
+.product_box .info_top_section {
+    width: 222px;
+    height: 25px;
+    justify-content: space-between;
+
+    margin: 0 10px 0 10px;
+}
+
+.info_top_section .product_brand {
+    font-size: 10pt;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.info_top_section .product_brand:hover {
+    font-weight: bold;
+}
+
+.info_top_section .product_review {
+    font-size: 10pt;
+    margin-top: 5px;
+    line-height: 20px;
+}
+
+
+.product_box .info_middle_section {
+    width: 242px;
+    height: 45px;
+    background-color: #ffffff;
+}
+
+.info_middle_section .product_name {
+    width: 222px;
+    height: 25px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info_middle_section .product_price {
+    width: 222px;
+    height: 20px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.product_box .info_bottom_section {
+    width: 222px;
+    height: 20px;
+    justify-content: space-between;
+
+    color: #606060;
+    margin: 0 10px 0 10px;
+    line-height: 20px;
+}
+
+.info_bottom_section .product_category {
+    font-size: 9pt;
+    cursor: pointer;
+}
+
+.info_bottom_section .product_category:hover {
+    font-weight: bold;
+}
+
+.info_bottom_section .product_number {
+    font-size: 5pt;
+}
+
+.info_middle_section .closet_add_button {
+    font-size: 10pt;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.info_middle_section .closet_add_button:hover {
+    font-weight: bold;
+}
