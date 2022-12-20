@@ -1,3 +1,55 @@
+async function handleKakao() {
+    let code = new URL(window.location.href).searchParams.get('code')
+    if (code) {
+        const response = await fetch('http://127.0.0.1:8000/users/kakao/callback/', {
+            
+            headers: {
+                'content-type': 'application/json',
+            },
+            method: "POST",
+            body: JSON.stringify({
+                "code": code
+            })
+        })
+        const response_json = await response.json()
+
+        localStorage.setItem("access", response_json.access_token);
+        localStorage.setItem("refresh", response_json.refresh_token);
+
+        const base64Url = response_json.access_token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+
+        }).join(''));
+
+        localStorage.setItem("payload", jsonPayload);
+        window.location.href = '/index.html'
+        }
+    }
+window.onload  = function(){
+    handleKakao()
+}
+
+async function kakaologin() {
+
+    KAKAO_CONFIG = {
+        "KAKAO_REST_API_KEY": "75756f04ae592ba908cfcfcdac87df17",
+        "KAKAO_REDIRECT_URI": `${frontEndBaseUrl}/users/login.html`
+    };
+  
+      kakao_login_uri = "https://kauth.kakao.com/oauth/authorize"
+      kakao_token_uri = "https://kauth.kakao.com/oauth/token"
+  
+      client_key = KAKAO_CONFIG["KAKAO_REST_API_KEY"]
+      redirect_uri = KAKAO_CONFIG["KAKAO_REDIRECT_URI"]
+  
+      uri = `${kakao_login_uri}?client_id=${client_key}&redirect_uri=${redirect_uri}&response_type=code`
+  
+      location.replace(uri)
+  
+  }
+
 
 async function handleLogin() {
 
