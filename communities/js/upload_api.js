@@ -76,12 +76,14 @@ async function createPost() {
         content = document.getElementById("content").value;
         tags = document.getElementById("tags").value;
         feed_image = document.getElementById("feed_image").files[0];
+        product = document.getElementById("product").value;
 
         const formData = new FormData();
 
         formData.append("tags", tags);
         formData.append("content", content);
         formData.append("image", feed_image);
+        formData.append("product", product);
         const response = await fetch(`${backEndBaseUrl}/communities/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access"),
@@ -92,6 +94,118 @@ async function createPost() {
         if (response.status == 200) {
         alert("게시물 등록");
         window.location.replace(`${frontEndBaseUrl}/`);
+        }
+    }
+}
+
+// 상품 검색 박스
+async function prodSearchInputFlex() {
+    let search = document.querySelector('.search_prod_box');
+    let image = document.querySelector('.feed_image_box');
+
+    if(search.style.display == 'none'){
+        search.style.display = 'flex';
+        image.style.display = 'none';
+    }else{
+        search.style.display = 'none';
+        image.style.display = 'flex';
+    }
+}
+
+// 상품 검색 API
+async function getProdSearchAPI(search){
+    
+    console.log(search)
+    const response = await fetch(`${backEndBaseUrl}/products/search/?search=${search}`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    var result_section = document.getElementsByClassName('result_section')[0];
+    response_json.slice(0, 100).forEach(prod => {
+        product_image_500 = prod.product_image.replace('_125.jpg', '_500.jpg')
+        result_section.innerHTML += `
+            <div class="result_box horizontal_alignment" id="result_box">
+                <div class="left_image_section">
+                    <img src="${product_image_500}">
+                </div>
+                <div class="center_info_section">
+                    <div class="info_title_box horizontal_alignment">
+                        <div class="section_title_en">Product Info</div>
+                        <div class="section_title_kr">상품 정보</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">브랜드</div>
+                        <div class="prod_info_desc">${prod.brand_name_en} / ${prod.brand_name_kr}</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">상품번호</div>
+                        <div class="prod_info_desc">${prod.product_number}</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">상품명</div>
+                        <div class="prod_info_desc">${prod.product_name}</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">카테고리</div>
+                        <div class="prod_info_desc">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                    </div>
+                </div>
+                <div class="right_button_section vertical_alignment">
+                    <button class="result_buttons" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">상품 보기</button>
+                    <button class="result_buttons" onclick="closetProductAdd(${prod.product_number})">옷장 추가</button>
+                    <button class="result_buttons" onclick="prodSelectButton('${prod.product_number}')">선택</button>
+                </div>
+            </div>
+        `
+    })
+    return response_json
+}
+
+// 검색시 div 새로고침 
+async function refrashSearch(){
+    $("#result_section").load(location.href+' #result_box');
+    search = document.getElementById('search_prod').value;
+    getProdSearchAPI(search)
+}
+
+// 상품 선택시 input에 값 넣어주기
+async function prodSelectButton(product_number){
+    var value_input = document.getElementById('product').value;
+    if(value_input == ''){
+        $("#product").attr('value', `${product_number}`);
+    } else {
+        $("#product").attr('value', `${value_input}, ${product_number}`);
+    }
+}
+
+// input 초기화
+async function refrashInput(){
+    var prod_input = document.getElementById('product');
+    $("#product").attr('value', ``);
+}
+
+// 옷장 상품 등록
+async function closetProductAdd(product_number) {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+        
+        
+    } else {
+        const response = await fetch(`${backEndBaseUrl}/products/product/${product_number}/closet/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        }); 
+        if (response.status == 200) {
+        alert("옷장 상품 등록");
         }
     }
 }

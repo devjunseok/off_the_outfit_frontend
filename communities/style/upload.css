@@ -85,6 +85,7 @@ body {
     width: 740px;
     height: 740px;
     border-style: none;
+    object-fit: cover;
 }
 
 
@@ -147,8 +148,12 @@ body {
     margin: 5px;
 }
 
+.input_middle_section .prod_select_input {
+    margin: 5px;
+}
+
 .input_middle_section .feed_content {
-    height: 300px;
+    height: 265px;
     padding: 5px;
     border-style: none;
     resize: none;
@@ -190,3 +195,141 @@ body {
 }
 
 
+/* 상품 검색 박스 */
+.ua_left_section .search_prod_box {
+    width: 700px;
+    height: 715px;
+    background-color: #f0f0f0;
+    border: solid 1px #c0c0c0;
+    padding: 10px;
+    position:absolute;
+}
+
+.search_prod_box .search_section {
+    width: 700px;
+    height: 80px;
+}
+
+.search_section .section_title {
+    font-size: 15pt;
+    font-weight: bold;
+    margin: 5px 0 0 5px;
+}
+
+.search_section .section_input {
+    height: 40px;
+    margin-top: 10px;
+}
+
+.section_input .prod_search_input {
+    width: 300px;
+    height: 35px;
+    border: solid 1px #c0c0c0;
+    padding-left: 10px;
+}
+
+
+
+.section_input .prod_search_button {
+    width: 80px;
+    height: 39px;
+    border: solid 1px #c0c0c0;
+    position: absolute;
+}
+
+.section_input .prod_search_button:hover {
+    background-color: black;
+    color: #ffffff;
+}
+
+.search_prod_box .result_section {
+    width: 698px;
+    height: 620px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+    margin-top: 10px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+}
+
+.result_section .result_box {
+    width: 698px;
+    height: 200px;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+.result_box .left_image_section {
+    width: 150px;
+    height: 180px;
+    margin: 10px 10px 10px 20px;
+}
+
+.result_box .left_image_section img {
+    width: 150px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.result_box .center_info_section {
+    margin-left: 20px;
+}
+
+.center_info_section .info_title_box {
+    width: 200px;
+    height: 40px;
+    margin: 10px 0 10px 0;
+}
+
+.info_title_box .section_title_en {
+    font-size: 15pt;
+    font-weight: bold;
+    margin-left: 20px;
+    line-height: 40px;
+}
+
+.info_title_box .section_title_kr {
+    font-size: 7pt;
+    font-weight: 400;
+    margin-left: 5px;
+    line-height: 40px;
+    color: #606060;
+}
+
+.center_info_section .prod_detail_info_box {
+    width: 320px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 0 0 20px;
+}
+
+.prod_detail_info_box .prod_info_title {
+    width: 80px;
+    font-size: 10pt;
+}
+
+.prod_detail_info_box .prod_info_desc {
+    font-size: 10pt;
+    font-weight: 600;
+    margin-left: 15px;
+    color: #000000;
+}
+
+.result_box .right_button_section {
+    width: 280px;
+    height: 200px;
+    margin-left: 20px;
+}
+
+.right_button_section .result_buttons {
+    width: 100px;
+    height: 30px;
+    margin: 30px 0 0 0;
+    border: solid 1px #c0c0c0;
+}
+
+.right_button_section .result_buttons:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
