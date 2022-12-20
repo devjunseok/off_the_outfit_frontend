@@ -156,8 +156,8 @@ async function getProdSearchAPI(search){
                     </div>
                 </div>
                 <div class="right_button_section vertical_alignment">
-                    <button class="result_buttons">상품 보기</button>
-                    <button class="result_buttons">옷장 추가</button>
+                    <button class="result_buttons" onclick="location.href='/products/detail/?product_number=${prod.product_number}'">상품 보기</button>
+                    <button class="result_buttons" onclick="closetProductAdd(${prod.product_number})">옷장 추가</button>
                     <button class="result_buttons" onclick="prodSelectButton('${prod.product_number}')">선택</button>
                 </div>
             </div>
@@ -180,6 +180,33 @@ async function prodSelectButton(product_number){
         $("#product").attr('value', `${product_number}`);
     } else {
         $("#product").attr('value', `${value_input}, ${product_number}`);
+    }
+}
+
+// input 초기화
+async function refrashInput(){
+    var prod_input = document.getElementById('product');
+    $("#product").attr('value', ``);
+}
+
+// 옷장 상품 등록
+async function closetProductAdd(product_number) {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+        
+        
+    } else {
+        const response = await fetch(`${backEndBaseUrl}/products/product/${product_number}/closet/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        }); 
+        if (response.status == 200) {
+        alert("옷장 상품 등록");
+        }
     }
 }
 

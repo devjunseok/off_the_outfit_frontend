@@ -39,8 +39,8 @@
                                 <!-- 게시글 작성시 미리보기 -->
                                 <div class="input_top_section">
                                     <div class="user_profile_info horizontal_alignment">
-                                        <img class="profile_image" src="/static/img/default.png" id="profile_image" />
-                                        <div class="nickname">nickname</div>
+                                        <img class="profile_image" id="profile_image" />
+                                        <div class="nickname"></div>
                                     </div>
                                     <div class="user_content" id="out_content"></div>
                                     <div class="input_top_info" id="out_tags"></div>
@@ -49,8 +49,9 @@
                                 <div class="input_middle_section vertical_alignment">
                                     <input id="feed_image" class="image_upload_button" type="file" required="required" value="image" name="feed_image" />
                                     <div class="prod_select_input">
-                                        <button onclick="prodSearchInputFlex()">검색</button>
+                                        <button onclick="prodSearchInputFlex()">상품 검색</button>
                                         <input id="product" type="text" placeholder="상품번호 입력..."/>
+                                        <button onclick="refrashInput()">X</button>
                                     </div>
                                     <textarea id="content" class="feed_content" type="text" name="content" placeholder="내용 입력..." cols="20" rows="10" ></textarea>
                                     <textarea id="tags" class="feed_tags" type="text" name="tags" placeholder="태그 입력..." cols="20" rows="10" ></textarea>
