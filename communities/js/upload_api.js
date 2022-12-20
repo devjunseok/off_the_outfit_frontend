@@ -76,12 +76,14 @@ async function createPost() {
         content = document.getElementById("content").value;
         tags = document.getElementById("tags").value;
         feed_image = document.getElementById("feed_image").files[0];
+        product = document.getElementById("product").value;
 
         const formData = new FormData();
 
         formData.append("tags", tags);
         formData.append("content", content);
         formData.append("image", feed_image);
+        formData.append("product", product);
         const response = await fetch(`${backEndBaseUrl}/communities/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access"),
@@ -110,6 +112,65 @@ async function prodSearchInputFlex() {
     }
 }
 
+// 상품 검색 API
+async function getProdSearchAPI(search){
+    
+    console.log(search)
+    const response = await fetch(`${backEndBaseUrl}/products/search/?search=${search}`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    console.log(response_json)
+    var result_section = document.getElementsByClassName('result_section')[0];
+    response_json.forEach(prod => {
+        result_section.innerHTML += `
+            <div class="result_box horizontal_alignment" id="result_box">
+                <div class="left_image_section">
+                    <img src="${prod.product_image}">
+                </div>
+                <div class="center_info_section">
+                    <div class="info_title_box horizontal_alignment">
+                        <div class="section_title_en">Product Info</div>
+                        <div class="section_title_kr">상품 정보</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">브랜드</div>
+                        <div class="prod_info_desc">${prod.brand_name_en} / ${prod.brand_name_kr}</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">${prod.product_number}</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">상품명</div>
+                        <div class="prod_info_desc">${prod.product_name}</div>
+                    </div>
+                    <div class="prod_detail_info_box horizontal_alignment">
+                        <div class="prod_info_title">카테고리</div>
+                        <div class="prod_info_desc">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                    </div>
+                </div>
+                <div class="right_button_section vertical_alignment">
+                    <button class="result_buttons">상품 보기</button>
+                    <button class="result_buttons">옷장 추가</button>
+                    <button class="result_buttons">선택</button>
+                </div>
+            </div>
+        `
+    })
+    return response_json
+}
+
+
+async function refrashSearch(){
+    $("#result_section").load(location.href+' #result_box');
+    search = document.getElementById('search_prod').value;
+    getProdSearchAPI(search)
+}
 
 window.onload = async function getUpload_API(){
 

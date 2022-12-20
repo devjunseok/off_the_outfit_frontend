@@ -18,50 +18,19 @@
                     <div class="info_bar"></div>
                     <div class="upload_area horizontal_alignment">
                         <div class="ua_left_section">
-                            <div class="feed_image_box" style="display: none;">
-                                <img id="PreviewImg" src="/static/img/default.png" class="PreviewImg" />
+                            <div class="feed_image_box" style="display: flex;">
+                                <img id="PreviewImg" src="/static/img/offtheoutfit.png" class="PreviewImg" />
                             </div>
-                            <div class="search_prod_box vertical_alignment" style="display: flex;">
+                            <div class="search_prod_box vertical_alignment" style="display: none;">
                                 <div class="search_section">
                                     <div class="section_title">상품 검색</div>
                                     <div class="section_input">
-                                        <input class="prod_search_input" type="text" placeholder="브랜드, 상품명, 상품번호, 카테고리..." id="prod_search" name="prod_search">
-                                        <button class="prod_search_button" onclick="">검색</button>
+                                        <input class="prod_search_input" type="text" placeholder="브랜드, 상품명, 상품번호, 카테고리..." id="search_prod" name="prod_search">
+                                        <button class="prod_search_button" onclick="refrashSearch()">검색</button>
                                     </div>
                                 </div>
-                                <div class="result_section">
-                                    <div class="result_box horizontal_alignment">
-                                        <div class="left_image_section">
-                                            <img src="/static/img/title.png">
-                                        </div>
-                                        <div class="center_info_section">
-                                            <div class="info_title_box horizontal_alignment">
-                                                <div class="section_title_en">Product Info</div>
-                                                <div class="section_title_kr">상품 정보</div>
-                                            </div>
-                                            <div class="prod_detail_info_box horizontal_alignment">
-                                                <div class="prod_info_title">브랜드</div>
-                                                <div class="prod_info_desc">TOFFEE</div>
-                                            </div>
-                                            <div class="prod_detail_info_box horizontal_alignment">
-                                                <div class="prod_info_title">상품번호</div>
-                                                <div class="prod_info_desc">4434355</div>
-                                            </div>
-                                            <div class="prod_detail_info_box horizontal_alignment">
-                                                <div class="prod_info_title">상품명</div>
-                                                <div class="prod_info_desc">무슨무슨 데님팬츠</div>
-                                            </div>
-                                            <div class="prod_detail_info_box horizontal_alignment">
-                                                <div class="prod_info_title">카테고리</div>
-                                                <div class="prod_info_desc">바지 > 데님 팬츠</div>
-                                            </div>
-                                        </div>
-                                        <div class="right_button_section vertical_alignment">
-                                            <button class="result_buttons">상품 보기</button>
-                                            <button class="result_buttons">옷장 추가</button>
-                                            <button class="result_buttons">선택</button>
-                                        </div>
-                                    </div>
+                                <div class="result_section" id="result_section">
+                                    
                                 </div>       
                             </div>
                         </div>
@@ -81,7 +50,7 @@
                                     <input id="feed_image" class="image_upload_button" type="file" required="required" value="image" name="feed_image" />
                                     <div class="prod_select_input">
                                         <button onclick="prodSearchInputFlex()">검색</button>
-                                        <input type="text" placeholder="상품번호 입력..."/>
+                                        <input id="product" type="text" placeholder="상품번호 입력..."/>
                                     </div>
                                     <textarea id="content" class="feed_content" type="text" name="content" placeholder="내용 입력..." cols="20" rows="10" ></textarea>
                                     <textarea id="tags" class="feed_tags" type="text" name="tags" placeholder="태그 입력..." cols="20" rows="10" ></textarea>
