@@ -1,3 +1,5 @@
+
+
 // 출석 하기
 async function AttendanceCheck(user_id){
 
@@ -29,7 +31,6 @@ async function getIndexFeedList(){
     response_json = await response.json()
     return response_json
 }
-
 
 // 로그인 사용자 정보 가져오기
 async function getUser(){
@@ -103,71 +104,10 @@ window.onload = async function getIndex_API(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     if (User_payload === undefined ||  User_payload === null){
         location.href=`${frontEndBaseUrl}/users/login.html`;
-    
+        
         
     } else {
-       
-
-
-        feed_list = await getIndexFeedList()
-
-        // 인기 게시글
-        my_feed_list = await getIndexFeedList()
-        if (my_feed_list.length > 3 ) {
-            my_feed_list = my_feed_list.sort((a, b) => b.like_count - a.like_count).slice(0,3);
-        }
-
-        //인기 게시글 출력 반복문 부분
-        var best_wrap = document.getElementsByClassName('main_feed_list_box')[0];
-
-        my_feed_list.forEach(best_feed => {
-            //태그 출력 반복문
-            tag_list = [];
-            best_feed.tags.forEach(tag => {
-                tag = `#${tag}`
-                tag_list.push(tag)
-            })
-
-            if(tag_list.length == 0){
-                tag_list = []
-            } else if(tag_list.length == 1){
-                tag_list = tag_list
-            } else if(tag_list.length == 2){
-                tag_list = `${tag_list[0]} ${tag_list[1]}`
-            } else if(tag_list.length == 3){
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]}`
-            } else if(tag_list.length == 4){
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]}`
-            } else {
-                tag_list = `${tag_list[0]} ${tag_list[1]} ${tag_list[2]} ${tag_list[3]} ${tag_list[4]}`
-            }
-            best_wrap.innerHTML += `
-            <div class="new_feed_box vertical_alignment">
-                <div class="nf_image_box">
-                    <img class="nf_image" src="${backEndBaseUrl}${best_feed.image}" onclick="location.href='${frontEndBaseUrl}/communities/detail.html?id=${best_feed.pk}'"/>
-                </div>
-                <div class="nf_info_box horizontal_alignment">
-                    <div class="left_section vertical_alignment">
-                        <div class="nf_nickname" onclick="location.href='/products/closet/?user_id=${best_feed.user_id}'">${best_feed.user}</div>
-                        <div class="nf_content">${best_feed.content}</div>
-                        <div class="nf_tag">${tag_list}</div>
-                    </div>
-                    <div class="right_section vertical_alignment">
-                        <div class="like_box horizontal_alignment">
-                            <div class="nf_like">${best_feed.like_count}</div>
-                            <div class="nf_unlike">${best_feed.unlike_count}</div>
-                        </div>
-                        <div class="right_section_middle"></div>
-                        <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
-                    </div>
-                </div>
-            </div>
-            `
-        })   
-
-
-
-        // test
+  
         //게시글 전체 리스트 조회
         feed_list = await getIndexFeedList()
 
