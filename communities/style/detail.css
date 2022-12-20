@@ -463,3 +463,126 @@ body {
     background-color: #000000;
     color: #ffffff;
 }
+
+
+
+/* 상품 태그 조회 부분 */
+.product_tag_title {
+    font-size: 15pt;
+    font-weight: bold;
+    margin: 10px 0 0 20px;
+}
+
+.product_tag_area {
+    width: 1260px;
+    display: grid;
+    margin: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+}
+
+.product_tag_area .product_box {
+    width: 242px;
+    height: 370px;
+    margin: 10px;
+}
+
+.product_box .product_image_box {
+    width: 242px;
+    height: 280px;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.product_box .product_image_box img {
+    width: 242px;
+    height: 280px;
+    object-fit:cover;
+}
+
+.product_box .info_top_section {
+    width: 222px;
+    height: 25px;
+    justify-content: space-between;
+
+    margin: 0 10px 0 10px;
+}
+
+.info_top_section .product_brand {
+    font-size: 10pt;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.info_top_section .product_brand:hover {
+    font-weight: bold;
+}
+
+.info_top_section .product_review {
+    font-size: 10pt;
+    margin-top: 5px;
+    line-height: 20px;
+}
+
+
+.product_box .info_middle_section {
+    width: 242px;
+    height: 45px;
+    background-color: #ffffff;
+}
+
+.info_middle_section .product_name {
+    width: 222px;
+    height: 25px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info_middle_section .product_price {
+    width: 222px;
+    height: 20px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.product_box .info_bottom_section {
+    width: 222px;
+    height: 20px;
+    justify-content: space-between;
+
+    color: #606060;
+    margin: 0 10px 0 10px;
+    line-height: 20px;
+}
+
+.info_bottom_section .product_category {
+    font-size: 9pt;
+    cursor: pointer;
+}
+
+.info_bottom_section .product_category:hover {
+    font-weight: bold;
+}
+
+.info_bottom_section .product_number {
+    font-size: 5pt;
+}
+
+.info_middle_section .closet_add_button {
+    font-size: 10pt;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.info_middle_section .closet_add_button:hover {
+    font-weight: bold;
+}

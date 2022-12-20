@@ -456,7 +456,7 @@ window.onload = async function getIndexDetail_API(){
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
         follower_list = await getFollowerUserInfo(feed.user_id)
-        console.log(feed.unlike)
+        console.log(feed)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -464,7 +464,6 @@ window.onload = async function getIndexDetail_API(){
         var feed_content = document.getElementsByClassName('feed_content')[0];
         var feed_tags = document.getElementsByClassName('feed_tags')[0];
         var feed_create_at = document.getElementsByClassName('feed_create_at')[0];
-        var feed_update_go = document.getElementsByClassName('feed_update_go')[0];
         var like_wrap = document.getElementsByClassName('like_button')[0];
         var unlike_wrap = document.getElementsByClassName('unlike_button')[0];
         var cmt_wrap = document.getElementsByClassName('comment_middle_section')[0];
@@ -476,18 +475,6 @@ window.onload = async function getIndexDetail_API(){
 
         report_button.setAttribute('onclick', `postReport(${feed.pk}, '#report_content')`)
 
-        // folo = []
-        // follower_list.forEach(follower=>{
-        //     folo.push(follower.pk)
-        // })
-        // console.log(folo)
-        //     if(folo.includes(User_payload.user_id)) {
-        //         detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우취소</button>`
-
-        //     }
-        //     else if(!folo.includes(User_payload.user_id)){
-        //         detail_follow.innerHTML += `<button id ="detail_follow" onclick="handleFollow(${feed.user_id})">팔로우</button>`
-        //     }
         Fcount = 0
 
         if(feed.user_id != User_payload.user_id){
@@ -670,7 +657,42 @@ window.onload = async function getIndexDetail_API(){
             }
 
         
+        // 상품 태그 반복 부분 (상품 태그가 있을경우에만 출력)
+        if(feed.product.length != 0){
+            var product_tag_title = document.getElementById('product_tag_title');
+            product_tag_title.innerText = `${feed.user}님이 태그하신 상품 목록`
+
+            var product_tag_area = document.getElementsByClassName('product_tag_area')[0];
+            feed.product.forEach(prod => {
+                brand_name = prod.brand_name_en.trim().toLowerCase().replace(' ', '')
+                brand_name_first = brand_name.substr(0, 1).toUpperCase()
+                product_image_500 = prod.product_image.replace('_125.jpg', '_500.jpg')
+                product_tag_area.innerHTML += `
+                <div class="product_box">
+                    <div class="product_image_box">
+                        <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'"/>
+                    </div>
+                    <div class="info_top_section horizontal_alignment">
+                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.brand_name_en}</div>
+                        <div class="product_review">review:${prod.review_count}</div>
+                    </div>
+                    <div class="info_middle_section">
+                        <div class="product_name">${prod.product_name}</div>
+                        <div class="horizontal_alignment">
+                            <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                            <div class="closet_add_button" onclick="closetProductAdd(${prod.product_number})">closet</div>
+                        </div>
+                    </div>
+                    <div class="info_bottom_section horizontal_alignment">
+                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.category[0].id}'">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                        <div class="product_number">No.${prod.product_number}</div>
+                    </div>
+                </div>
+                `
+            })
+        }
         
+
         // 검색어 랭킹 조회
         search_word_list = await getHeaderSearchWordRanking()
         if (search_word_list.length > 9) {
