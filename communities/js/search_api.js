@@ -51,6 +51,48 @@ async function getHeaderSearchWordRanking(){
     return response_json
 }
 
+// 상품 검색 API
+async function getProdSearchAPI(search){
+    
+    const response = await fetch(`${backEndBaseUrl}/products/search/?search=${search}`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    return response_json
+}
+
+// 브랜드 리스트 조회
+async function getNavBrandList(){
+    const response = await fetch(`${backEndBaseUrl}/products/brand/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
+
+// 카테고리 리스트 조회
+async function getCategorylist(){
+    const response = await fetch(`${backEndBaseUrl}/products/category/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method:'GET',
+    })
+
+    response_json = await response.json()
+    return response_json
+}
 
 window.onload = async function getSearch_api(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
@@ -61,7 +103,8 @@ window.onload = async function getSearch_api(){
     } else {
         const search_word = location.search.replace('?search=', '')
         search_list = await getSearch(search_word)
-        console.log(search_list)
+        prod_search_list = await getProdSearchAPI(search_word)
+        console.log(prod_search_list)
 
         //검색어 확인
         var search_word_box = document.getElementById('search_word_box');
@@ -114,6 +157,36 @@ search_list.forEach(feed => {
         </div>
         `
     })
+
+    // 전체 상품 반복 출력
+    var product_wrap = document.getElementsByClassName('product_list_box')[0];
+    prod_search_list.forEach(prod => {
+        brand_name = prod.brand_name_en.trim().toLowerCase().replace(' ', '')
+        brand_name_first = brand_name.substr(0, 1).toUpperCase()
+        product_image_500 = prod.product_image.replace("_125.jpg", "_500.jpg")
+        product_wrap.innerHTML += `
+            <div class="product_box">
+                <div class="product_image_box">
+                    <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product_number}'"/>
+                </div>
+                <div class="info_top_section horizontal_alignment">
+                    <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.brand_name_en}</div>
+                    <div class="product_review">review:${prod.review_count}</div>
+                </div>
+                <div class="info_middle_section">
+                    <div class="product_name">${prod.product_name}</div>
+                    <div class="horizontal_alignment">
+                        <div class="product_price">${prod.discount_price} ~ ${prod.original_price}</div>
+                        <div class="closet_add_button" onclick="closetProductAdd(${prod.product_number})">closet</div>
+                    </div>
+                </div>
+                <div class="info_bottom_section horizontal_alignment">
+                    <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.category[0].id}'">${prod.category[0].main_category_name} > ${prod.category[0].sub_category_name}</div>
+                    <div class="product_number">No.${prod.product_number}</div>
+                </div>
+            </div>
+        `
+    });
 
 // HEADER 부분
 // 검색어 랭킹 조회
