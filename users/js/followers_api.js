@@ -120,6 +120,7 @@ window.onload = async function getUserInfo_API(){
             }
 
         })
+        user_profile_image_default = user.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
         user_kakao_check = user.username.substr(0, 2);
         user_image_kakao = user.profile_image.replace('/media/http%3A/', 'https://');
         if(user_kakao_check == "k@"){
@@ -189,6 +190,73 @@ window.onload = async function getUserInfo_API(){
                     `
 
                 }
+        } else if(user.profile_image == '/media/imgs/default.png') {
+            if(counts == 1){
+                follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${user_profile_image_default}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
+                </div>
+                `
+                }
+                else{
+                    follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${user_profile_image_default}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
+                </div>
+                `
+    
+                }
+
         } else {
             if(counts == 1){
                 follow_wrap.innerHTML += `
@@ -277,14 +345,19 @@ window.onload = async function getUserInfo_API(){
     feed_value.innerText = `${profile_list.feeds_count}`
     closet_count_value.innerText = `${profile_list.closet_set_count}`
     
+
     // 일반 or 소셜 유저 프로필 이미지 처리
+    profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
     kakao_check = profile_list.username.substr(0, 2);
-    profile_image_kakao = profile_list.profile_image.replace('/media/http%3A/', 'https://');
     if(kakao_check == "k@"){
+        profile_image_kakao = profile_list.profile_image.replace('/media/http%3A/', 'https://');
         main_profile_image.setAttribute("src", `${profile_image_kakao}`)
+    } else if (profile_list.profile_image == '/media/imgs/default.png') {
+        main_profile_image.setAttribute("src", `${profile_image_default}`)
     } else {
         main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
     }
+
 
      //마이페이지 등급 조건문
      if(profile_list.point>=0&&profile_list.point <31){

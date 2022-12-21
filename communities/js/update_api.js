@@ -230,11 +230,15 @@ window.onload = async function getUpdate_API(){
     var user_profile_image = document.getElementById('profile_image');
     user_nickname.innerText = `${user_info.nickname}`
     
+
     // 일반 or 소셜 유저 프로필 이미지 처리
+    profile_image_default = user_info.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
     kakao_check = user_info.username.substr(0, 2);
-    profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
     if(kakao_check == "k@"){
+        profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
         user_profile_image.setAttribute("src", `${profile_image_kakao}`)
+    } else if (user_info.profile_image == '/media/imgs/default.png') {
+        user_profile_image.setAttribute("src", `${profile_image_default}`)
     } else {
         user_profile_image.setAttribute("src", `${backEndBaseUrl}${user_info.profile_image}`)
     }

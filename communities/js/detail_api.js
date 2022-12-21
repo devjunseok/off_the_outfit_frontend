@@ -531,16 +531,20 @@ window.onload = async function getIndexDetail_API(){
         feed_content.innerText = `${feed.content}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
 
-        console.log(feed)
+
 
         // 일반 or 소셜 유저 프로필 이미지 처리
         user_info = await getUserInfo(feed.user_id)
+        profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
         kakao_check = user_info.username.substr(0, 2);
+        
         if(kakao_check == "k@"){
             profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
-            profile_image.setAttribute('src', `${profile_image_kakao}`)
+            profile_image.setAttribute("src", `${profile_image_kakao}`)
+        } else if (feed.profile_image == '/media/imgs/default.png') {
+            profile_image.setAttribute("src", `${profile_image_default}`)
         } else {
-            profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
+            profile_image.setAttribute("src", `${backEndBaseUrl}${feed.profile_image}`)
         }
         
 
