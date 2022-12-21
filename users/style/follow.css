@@ -95,6 +95,7 @@ body {
     height: 70px;
     border-radius: 35px;
     margin: 15px 0 15px 0;
+    object-fit: cover;
 }
 
 .left_info_section .user_profile_nickname {

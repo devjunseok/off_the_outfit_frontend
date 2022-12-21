@@ -105,8 +105,11 @@ window.onload = async function getUserInfo_API(){
     follow_list = await getUserFollowInfo()
     //회원정보 상세 조회
     profile_list = await getUserDetailInfo()
+
+
     //회원정보 출력 반복문 부분
     var follow_wrap = document.getElementsByClassName('follow_list')[0];
+    counts = 0
     follower_list.forEach(user =>{
         follow_list.forEach(Fuser =>{
             if(Fuser.pk==user.pk){
@@ -117,69 +120,141 @@ window.onload = async function getUserInfo_API(){
             }
 
         })
-        if(counts == 1){
-        follow_wrap.innerHTML += `
-        <div class="user_box_main horizontal_alignment">
-            <div class="left_info_section horizontal_alignment">
-                <div class="user_profile_image"><img class="image_view" src="${backEndBaseUrl}${user.profile_image}"></div>
-                <div class="user_profile_nickname">${user.nickname}</div>
-            </div>
-            <div class="middle_info_section horizontal_alignment">
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title">팔로우</div>
-                    <div class="summary_value">${user.followings_count}</div>
-                </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">팔로워</div>
-                    <div class="summary_value">${user.followers_count}</div>
-                </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">피드</div>
-                    <div class="summary_value">${user.feeds_count}</div>
-                </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">옷장</div>
-                    <div class="summary_value">${user.closet_set_count}</div>
-                </div>
-            </div>
-            <div class="right_info_section vertical_alignment">
-                <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
-                <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
-            </div>
-        </div>
-        `
-        }
-        else{
+        user_kakao_check = user.username.substr(0, 2);
+        user_image_kakao = user.profile_image.replace('/media/http%3A/', 'https://');
+        if(user_kakao_check == "k@"){
+
+            if(counts == 0 || counts == []){
             follow_wrap.innerHTML += `
-        <div class="user_box_main horizontal_alignment">
-            <div class="left_info_section horizontal_alignment">
-                <div class="user_profile_image"><img class="image_view" src="${backEndBaseUrl}${user.profile_image}"></div>
-                <div class="user_profile_nickname">${user.nickname}</div>
+            <div class="user_box_main horizontal_alignment">
+                <div class="left_info_section horizontal_alignment">
+                    <div class="user_profile_image"><img class="image_view" src="${user_image_kakao}"></div>
+                    <div class="user_profile_nickname">${user.nickname}</div>
+                </div>
+                <div class="middle_info_section horizontal_alignment">
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title">팔로우</div>
+                        <div class="summary_value">${user.followings_count}</div>
+                    </div>
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title ">팔로워</div>
+                        <div class="summary_value">${user.followers_count}</div>
+                    </div>
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title ">피드</div>
+                        <div class="summary_value">${user.feeds_count}</div>
+                    </div>
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title ">옷장</div>
+                        <div class="summary_value">${user.closet_set_count}</div>
+                    </div>
+                </div>
+                <div class="right_info_section vertical_alignment">
+                    <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
+                    <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                </div>
             </div>
-            <div class="middle_info_section horizontal_alignment">
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title">팔로우</div>
-                    <div class="summary_value">${user.followings_count}</div>
+            `
+            } else {
+            
+                follow_wrap.innerHTML += `
+                    <div class="user_box_main horizontal_alignment">
+                        <div class="left_info_section horizontal_alignment">
+                            <div class="user_profile_image"><img class="image_view" src="${user_image_kakao}"></div>
+                            <div class="user_profile_nickname">${user.nickname}</div>
+                        </div>
+                        <div class="middle_info_section horizontal_alignment">
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title">팔로우</div>
+                                <div class="summary_value">${user.followings_count}</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">팔로워</div>
+                                <div class="summary_value">${user.followers_count}</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">피드</div>
+                                <div class="summary_value">${user.feeds_count}</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">옷장</div>
+                                <div class="summary_value">${user.closet_set_count}</div>
+                            </div>
+                        </div>
+                        <div class="right_info_section vertical_alignment">
+                            <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
+                            <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                        </div>
+                    </div>
+                    `
+
+                }
+        } else {
+            if(counts == 1){
+                follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${backEndBaseUrl}${user.profile_image}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
                 </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">팔로워</div>
-                    <div class="summary_value">${user.followers_count}</div>
+                `
+                }
+                else{
+                    follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${backEndBaseUrl}${user.profile_image}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
                 </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">피드</div>
-                    <div class="summary_value">${user.feeds_count}</div>
-                </div>
-                <div class="summary_box vertical_alignment">
-                    <div class="summary_title ">옷장</div>
-                    <div class="summary_value">${user.closet_set_count}</div>
-                </div>
-            </div>
-            <div class="right_info_section vertical_alignment">
-                <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
-                <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
-            </div>
-        </div>
-        `
+                `
+    
+                }
 
         }
     })
@@ -188,14 +263,12 @@ window.onload = async function getUserInfo_API(){
     var main_profile_image = document.getElementsByClassName('main_profile_image')[0];
     var profile_nickname = document.getElementsByClassName('profile_nickname')[0];
     var profile_tier_info = document.getElementsByClassName('profile_tier_info')[0];
-    var profile_created_at = document.getElementsByClassName('profile_created_at')[0];
     var profile_next_tier_info = document.getElementsByClassName('profile_next_tier_info')[0];
     var follow_value = document.getElementById('follow_value_count')
     var follower_value = document.getElementById('follower_value_count')
     var feed_value = document.getElementById('feed_value_count')
     var closet_count_value = document.getElementById('closet_value_count')
 
-    main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
     profile_nickname.innerText = `${profile_list.nickname}`
     // profile_created_at.innerText = `${profile_list.created_at}`
     profile_next_tier_info.innerText = `현재 ${profile_list.nickname}님의 포인트는 ${profile_list.point} 포인트 입니다`
@@ -204,6 +277,15 @@ window.onload = async function getUserInfo_API(){
     feed_value.innerText = `${profile_list.feeds_count}`
     closet_count_value.innerText = `${profile_list.closet_set_count}`
     
+    // 일반 or 소셜 유저 프로필 이미지 처리
+    kakao_check = profile_list.username.substr(0, 2);
+    profile_image_kakao = profile_list.profile_image.replace('/media/http%3A/', 'https://');
+    if(kakao_check == "k@"){
+        main_profile_image.setAttribute("src", `${profile_image_kakao}`)
+    } else {
+        main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+    }
+
      //마이페이지 등급 조건문
      if(profile_list.point>=0&&profile_list.point <31){
         profile_tier_info.innerText =`LV.1 브론즈`
