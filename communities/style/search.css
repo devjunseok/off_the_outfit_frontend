@@ -55,7 +55,7 @@ body {
 }
 
 .main_body_area .section_dividing_line {
-    height: 40px;
+    height: 10px;
     border-bottom: solid 2px #c0c0c0;
 }
 
@@ -67,6 +67,8 @@ body {
 
 .top_section_menu {
     width: 1260px;
+    height: 40px;
+    margin: 20px 0 20px 0;
 }
 
 .top_section_menu .ts_menu_title {
@@ -196,6 +198,7 @@ body {
     width: 1260px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    margin-top: 10px;
 }
 
 .sub_feed_list_box .sub_feed_box {
@@ -276,4 +279,219 @@ body {
 
 .info_bottom_section .sub_created_at {
     font-size: 5pt;
+}
+
+/* _______________________________________________________________  */
+/* 1. index.html  -- 전체 상품 */
+/* _______________________________________________________________  */
+
+.bottom_section .product_list_box {
+    width: 1260px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 10px;
+}
+
+.product_list_box .product_box {
+    width: 242px;
+    height: 370px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.product_box .product_image_box {
+    width: 242px;
+    height: 280px;
+    background-color: #000000;
+}
+
+.product_box .product_image_box img {
+    width: 242px;
+    height: 280px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.product_box .info_top_section {
+    width: 222px;
+    height: 25px;
+    justify-content: space-between;
+
+    margin: 0 10px 0 10px;
+}
+
+.info_top_section .product_brand {
+    font-size: 10pt;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.info_top_section .product_brand:hover {
+    font-weight: bold;
+}
+
+.info_top_section .product_review {
+    font-size: 10pt;
+    margin-top: 5px;
+    line-height: 20px;
+}
+
+
+.product_box .info_middle_section {
+    width: 242px;
+    height: 45px;
+    background-color: #ffffff;
+}
+
+.info_middle_section .product_name {
+    width: 222px;
+    height: 25px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info_middle_section .product_price {
+    width: 222px;
+    height: 20px;
+    font-size: 10pt;
+    margin: 0 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.product_box .info_bottom_section {
+    width: 222px;
+    height: 20px;
+    justify-content: space-between;
+
+    color: #606060;
+    margin: 0 10px 0 10px;
+    line-height: 20px;
+}
+
+.info_bottom_section .product_category {
+    font-size: 9pt;
+    cursor: pointer;
+}
+
+.info_bottom_section .product_category:hover {
+    font-weight: bold;
+}
+
+.info_bottom_section .product_number {
+    font-size: 5pt;
+}
+
+.info_middle_section .closet_add_button {
+    font-size: 10pt;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.info_middle_section .closet_add_button:hover {
+    font-weight: bold;
+}
+
+.result_title {
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+
+/* _______________________________________________________________  */
+/* 1. follow.html */
+/* _______________________________________________________________  */
+
+.main_body_area .bottom_section {
+    background-color: #ffffff;
+    width: 1000px;
+    margin-top: 10px;
+}
+
+/* 팔로우 목록 */
+.bottom_section .user_box_main {
+    background-color: #ffffff;
+    width: 1000px;
+    height: 100px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+
+/* 팔로우 목록 유저 정보 */
+.user_box_main .left_info_section {
+    width: 400px;
+}
+
+.user_box_main .user_profile_image {
+    text-align: left;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    font-weight: bold;
+    object-fit: cover;
+}
+
+.user_profile_image .image_view {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    margin: 15px 0 15px 0;
+    object-fit: cover;
+}
+
+.left_info_section .user_profile_nickname {
+    font-size: 15pt;
+    margin: auto 0 auto 0;
+}
+
+
+/* 팔로우 목록 활동 요약 부분 */
+.user_box_main .middle_info_section {
+    width: 400px;
+    height: 100px;
+    text-align: center;
+}
+
+.middle_info_section .summary_box {
+    margin: 0 5px 0 5px;
+    width: 60px;
+    margin: auto 0 auto 0;
+    text-align: center;
+}
+
+.summary_box .summary_title {
+    font-size: 12pt;
+}
+
+.summary_box .summary_value {
+    font-size: 10pt;
+}
+
+
+
+/* 팔로우 목록 버튼 부분 */
+.user_box_main .right_info_section {
+    width: 200px;
+    text-align: left;
+    margin: auto 0 auto 0;
+}
+
+.user_box_main .right_info_section button {
+    border-radius: 0px;
+    border-style: none;
+    margin: 5px 0 5px 0;
+    padding: 5px 15px 5px 15px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+}
+
+.user_box_main .right_info_section button:hover {
+    background-color: #000000;
+    color: #ffffff;
 }

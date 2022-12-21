@@ -123,6 +123,7 @@ body {
     height: 160px;
     border-radius: 80px;
     margin: 20px 20px 20px 150px;
+    object-fit: cover;
 }
 
 .info_left_area .right_main_profile_info_box {
