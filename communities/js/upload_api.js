@@ -218,8 +218,16 @@ window.onload = async function getUpload_API(){
     var user_nickname = document.getElementsByClassName('nickname')[0];
     var user_profile_image = document.getElementById('profile_image');
     user_nickname.innerText = `${user_info.nickname}`
-    user_profile_image.setAttribute('src', `${backEndBaseUrl}${user_info.profile_image}`)
 
+
+    // 일반 or 소셜 유저 프로필 이미지 처리
+    kakao_check = user_info.username.substr(0, 2);
+    profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
+    if(kakao_check == "k@"){
+        user_profile_image.setAttribute("src", `${profile_image_kakao}`)
+    } else {
+        user_profile_image.setAttribute("src", `${backEndBaseUrl}${user_info.profile_image}`)
+    }
 
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()

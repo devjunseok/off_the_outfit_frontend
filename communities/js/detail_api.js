@@ -50,6 +50,20 @@ async function getFollowerUserInfo(feed_user_id){
     return response_json
 }
 
+// 유저 정보 조회
+async function getUserInfo(feed_user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/${feed_user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
 
 
 // 게시글 상세보기 API
@@ -513,12 +527,22 @@ window.onload = async function getIndexDetail_API(){
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
-        profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
         nickname.innerText = `${feed.user}`
         feed_content.innerText = `${feed.content}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
 
+        console.log(feed)
 
+        // 일반 or 소셜 유저 프로필 이미지 처리
+        user_info = await getUserInfo(feed.user_id)
+        kakao_check = user_info.username.substr(0, 2);
+        if(kakao_check == "k@"){
+            profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
+            profile_image.setAttribute('src', `${profile_image_kakao}`)
+        } else {
+            profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
+        }
+        
 
 
 
