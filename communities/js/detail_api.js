@@ -540,7 +540,7 @@ window.onload = async function getIndexDetail_API(){
             profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
             profile_image.setAttribute("src", `${profile_image_kakao}`)
         } else if (feed.profile_image == '/media/imgs/default.png') {
-            profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+            profile_image_default = user_info.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
             profile_image.setAttribute("src", `${profile_image_default}`)
         } else {
             profile_image.setAttribute("src", `${backEndBaseUrl}${feed.profile_image}`)
