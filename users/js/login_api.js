@@ -1,7 +1,7 @@
 async function handleKakao() {
     let code = new URL(window.location.href).searchParams.get('code')
     if (code) {
-        const response = await fetch('http://127.0.0.1:8000/users/kakao/callback/', {
+        const response = await fetch('https://api.offtheoutfit.com/users/kakao/callback/', {
             
             headers: {
                 'content-type': 'application/json',
@@ -102,7 +102,3 @@ async function handleLogin() {
         alert(message)
     }
 } 
-
-
-
-
