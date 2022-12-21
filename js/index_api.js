@@ -1,3 +1,5 @@
+
+
 // 출석 하기
 async function AttendanceCheck(user_id){
 
