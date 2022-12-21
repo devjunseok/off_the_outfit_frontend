@@ -53,7 +53,7 @@ body {
 .main_body_area .top_section {
     background-color: #ffffff;
     width: 1000px;
-    height: 600px;
+    height: 800px;
     margin-top: 10px;
 }
 
@@ -255,70 +255,7 @@ body {
 
 /* 탈퇴 버튼 */
 
-
-.main_body_area .top_section {
-    background-color: #ffffff;
-    width: 1000px;
-    height: 600px;
-    margin-top: 10px;
-}
-
-.top_section .basic_account_info {
-    font-size: 14pt;
-    font-weight: 600;
-}
-
-.top_section .info_line {
-    border-bottom: solid 3px black;
-    margin-top: 3px;
-}
-
-.top_section .edit_box_main {
-    background-color: #ffffff;
-    width: 1000px;
-    height: 150px;
-    border-bottom: solid 2px #c0c0c0;
-}
-
-.top_section .edit_box_sub {
-    background-color: #ffffff;
-    width: 1000px;
-    height: 60px;
-    border-bottom: solid 2px #c0c0c0;
-}
-
-.edit_box_main .edit_name {
-    color: #c0c0c0;
-    text-align: left;
-    line-height: 150px;
-    margin: 0 20px 0 20px;
-    width: 80px;
-}
-
-.edit_box_sub .edit_name {
-    color: #c0c0c0;
-    text-align: left;
-    line-height: 60px;
-    margin: 0 20px 0 20px;
-    width: 80px;
-}
-
-.edit_box_main .edit_view {
-    text-align: left;
-    line-height: 150px;
-    width: 400px;
-    margin-left: 20px;
-    font-weight: bold;
-}
-
-.edit_view .edit_image_view {
-    width: 110px;
-    height: 110px;
-    border-radius: 55px;
-    margin: 20px 0 20px 0;
-}
-
-.edit_box_sub .edit_view {
+.edit_box_sub .edit_view_delete {
     text-align: left;
     line-height: 60px;
     width: 400px;
@@ -367,20 +304,133 @@ body {
 }
 
 
-.edit_box_main input {
-    border-style: none;
+/* _______________________________________________________________  */
+/* 1. account_edit.html --- 소셜 유저 회원 정보 */
+/* _______________________________________________________________  */
+
+.social_body_area .social_section {
+    background-color: #ffffff;
+    width: 1000px;
+    height: 800px;
+    margin-top: 10px;
 }
 
-.edit_box_sub input {
-    border-style: none;
-    width: 380px;
-    margin-left: 16px;
+.social_section .social_account_info {
+    font-size: 14pt;
+    font-weight: 600;
 }
 
-.edit_view input {
-    border-style: none;
-    width: 280px;
-    height: 38px;
+.social_section .info_line {
+    border-bottom: solid 3px black;
+    margin-top: 3px;
+}
+
+.social_section .edit_box_main {
+    background-color: #ffffff;
+    width: 1000px;
+    height: 150px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+.social_section .edit_box_sub {
+    background-color: #ffffff;
+    width: 1000px;
+    height: 60px;
+    border-bottom: solid 2px #c0c0c0;
+}
+
+.edit_box_main .edit_name {
+    color: #c0c0c0;
+    text-align: left;
+    line-height: 150px;
+    margin: 0 20px 0 20px;
+    width: 80px;
+}
+
+.edit_box_sub .edit_name {
+    color: #c0c0c0;
+    text-align: left;
+    line-height: 60px;
+    margin: 0 20px 0 20px;
+    width: 80px;
+}
+
+.edit_box_main .edit_view {
+    text-align: left;
+    line-height: 150px;
+    width: 400px;
     margin-left: 20px;
-    padding: 10px;
+    font-weight: bold;
+}
+
+.edit_box_main .social_edit_profile_image {
+    text-align: left;
+    line-height: 150px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_main input {
+    text-align: left;
+    line-height: 150px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.social_edit_profile_image .social_edit_image_view {
+    width: 110px;
+    height: 110px;
+    border-radius: 55px;
+    margin: 20px 0 20px 0;
+    object-fit: cover;
+}
+
+.edit_box_sub .social_edit_view_nickname {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .social_edit_view_email {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+
+/* 탈퇴 버튼 */
+
+.edit_box_sub .social_edit_view_delete {
+    text-align: left;
+    line-height: 60px;
+    width: 400px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.edit_box_sub .social_edit_button_delete {
+    color: #c0c0c0;
+    text-align: center;
+    line-height: 60px;
+}
+
+.edit_box_sub .social_edit_button_delete button {
+    border-radius: 0px;
+    border-style: none;
+    padding: 5px 15px 5px 15px;
+    background-color: #ffffff;
+    border: solid 1px #c0c0c0;
+    position: absolute;
+    margin-top: 15px;
+}
+
+.edit_box_sub .social_edit_button_delete button:hover {
+    background-color:red;
+    color: #ffffff;
 }
