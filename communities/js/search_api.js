@@ -1,5 +1,3 @@
-
-
 async function getSearch(search){
     const response = await fetch(`${backEndBaseUrl}/communities/search/?search=${search}`,{
         headers: {
@@ -66,6 +64,21 @@ async function getProdSearchAPI(search){
     return response_json
 }
 
+// 유저 검색 API
+async function getUserSearchAPI(search){
+    
+    const response = await fetch(`${backEndBaseUrl}/users/search/?search=${search}`, {
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+
+    const response_json = await response.json()
+    return response_json
+}
+
 // 브랜드 리스트 조회
 async function getNavBrandList(){
     const response = await fetch(`${backEndBaseUrl}/products/brand/`,{
@@ -94,6 +107,71 @@ async function getCategorylist(){
     return response_json
 }
 
+// 나를 팔로우한 유저 조회
+async function getFollowerUserInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followers/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
+// 내가 팔로우 한 유저 조회
+async function getUserFollowInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followings/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
+//팔로우 하기,취소하기
+async function handleFollow(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/follow/${user_id}/`, {
+    headers: {
+        'content-type': 'application/json',
+        "Authorization":"Bearer " + localStorage.getItem("access")
+    },
+    method: 'POST',
+    body: JSON.stringify({
+
+        })
+    })
+    
+    const response_json = await response.json()
+    window.location.reload();
+
+    return response_json
+}
+   
+// 회원 상세 정보 조회 API
+async function getUserDetailInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
 window.onload = async function getSearch_api(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     if (User_payload === undefined ||  User_payload === null){
@@ -104,7 +182,14 @@ window.onload = async function getSearch_api(){
         const search_word = location.search.replace('?search=', '')
         search_list = await getSearch(search_word)
         prod_search_list = await getProdSearchAPI(search_word)
-        console.log(prod_search_list)
+        user_search_list = await getUserSearchAPI(search_word)
+        console.log(user_search_list)
+
+        //팔로우,팔로워 회원정보 리스트 조회
+        follower_list = await getFollowerUserInfo()
+        follow_list = await getUserFollowInfo()
+        //회원정보 상세 조회
+        profile_list = await getUserDetailInfo()
 
         //검색어 확인
         var search_word_box = document.getElementById('search_word_box');
@@ -187,6 +272,232 @@ search_list.forEach(feed => {
             </div>
         `
     });
+
+
+    //회원정보 출력 반복문 부분
+    var follow_wrap = document.getElementsByClassName('follow_list')[0];
+    counts = 0
+    user_search_list.forEach(user =>{
+        follow_list.forEach(Fuser =>{
+            if(Fuser.pk==user.pk){
+                counts=1
+            }
+            else{
+                counts=0
+            }
+
+        })
+        if(User_payload.user_id != user.pk){
+            console.log(user)
+        user_profile_image_default = user.profile_image.replace(`${backEndBaseUrl}/media/imgs/default.png`, `/static/img/default.png`)
+        console.log()
+        user_kakao_check = user.username.substr(0, 2);
+        user_image_kakao = user.profile_image.replace('http://127.0.0.1:8000/media/http%3A/', 'https://');
+        if(user_kakao_check == "k@"){
+            if(counts == 0 || counts == []){
+            follow_wrap.innerHTML += `
+            <div class="user_box_main horizontal_alignment">
+                <div class="left_info_section horizontal_alignment">
+                    <div class="user_profile_image"><img class="image_view" src="${user_image_kakao}"></div>
+                    <div class="user_profile_nickname">${user.nickname}</div>
+                </div>
+                <div class="middle_info_section horizontal_alignment">
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title">팔로우</div>
+                        <div class="summary_value">${user.followings_count}</div>
+                    </div>
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title ">팔로워</div>
+                        <div class="summary_value">${user.followers_count}</div>
+                    </div>
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title ">피드</div>
+                        <div class="summary_value">${user.feeds_count}</div>
+                    </div>
+                    <div class="summary_box vertical_alignment">
+                        <div class="summary_title ">옷장</div>
+                        <div class="summary_value">${user.closet_set_count}</div>
+                    </div>
+                </div>
+                <div class="right_info_section vertical_alignment">
+                    <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
+                    <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                </div>
+            </div>
+            `
+            } else {
+            
+                follow_wrap.innerHTML += `
+                    <div class="user_box_main horizontal_alignment">
+                        <div class="left_info_section horizontal_alignment">
+                            <div class="user_profile_image"><img class="image_view" src="${user_image_kakao}"></div>
+                            <div class="user_profile_nickname">${user.nickname}</div>
+                        </div>
+                        <div class="middle_info_section horizontal_alignment">
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title">팔로우</div>
+                                <div class="summary_value">${user.followings_count}</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">팔로워</div>
+                                <div class="summary_value">${user.followers_count}</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">피드</div>
+                                <div class="summary_value">${user.feeds_count}</div>
+                            </div>
+                            <div class="summary_box vertical_alignment">
+                                <div class="summary_title ">옷장</div>
+                                <div class="summary_value">${user.closet_set_count}</div>
+                            </div>
+                        </div>
+                        <div class="right_info_section vertical_alignment">
+                            <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
+                            <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                        </div>
+                    </div>
+                    `
+
+                }
+        } else if(user.profile_image == `${backEndBaseUrl}/media/imgs/default.png`) {
+            if(counts == 1){
+                follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${user_profile_image_default}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
+                </div>
+                `
+                }
+                else{
+                    follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${user_profile_image_default}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
+                </div>
+                `
+    
+                }
+
+        } else {
+            if(counts == 1){
+                follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${user.profile_image}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 취소</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
+                </div>
+                `
+                }
+                else{
+                    follow_wrap.innerHTML += `
+                <div class="user_box_main horizontal_alignment">
+                    <div class="left_info_section horizontal_alignment">
+                        <div class="user_profile_image"><img class="image_view" src="${user.profile_image}"></div>
+                        <div class="user_profile_nickname">${user.nickname}</div>
+                    </div>
+                    <div class="middle_info_section horizontal_alignment">
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title">팔로우</div>
+                            <div class="summary_value">${user.followings_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">팔로워</div>
+                            <div class="summary_value">${user.followers_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">피드</div>
+                            <div class="summary_value">${user.feeds_count}</div>
+                        </div>
+                        <div class="summary_box vertical_alignment">
+                            <div class="summary_title ">옷장</div>
+                            <div class="summary_value">${user.closet_set_count}</div>
+                        </div>
+                    </div>
+                    <div class="right_info_section vertical_alignment">
+                        <div class="follow_button"><button onclick="handleFollow(${user.pk})">팔로우 하기</button></div>
+                        <div class="feed_list_button"><button onclick="location.href='/products/closet/?user_id=${user.pk}'">옷장 보기</button></div>
+                    </div>
+                </div>
+                `
+                }
+        } 
+    }
+    })
+
+
+
+
 
 // HEADER 부분
 // 검색어 랭킹 조회
