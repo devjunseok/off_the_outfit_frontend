@@ -102,7 +102,3 @@ async function handleLogin() {
         alert(message)
     }
 } 
-
-
-
-
