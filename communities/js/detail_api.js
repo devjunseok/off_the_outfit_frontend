@@ -470,7 +470,6 @@ window.onload = async function getIndexDetail_API(){
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
         follower_list = await getFollowerUserInfo(feed.user_id)
-        console.log(feed)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -535,13 +534,13 @@ window.onload = async function getIndexDetail_API(){
 
         // 일반 or 소셜 유저 프로필 이미지 처리
         user_info = await getUserInfo(feed.user_id)
-        profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
         kakao_check = user_info.username.substr(0, 2);
         
         if(kakao_check == "k@"){
             profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
             profile_image.setAttribute("src", `${profile_image_kakao}`)
         } else if (feed.profile_image == '/media/imgs/default.png') {
+            profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
             profile_image.setAttribute("src", `${profile_image_default}`)
         } else {
             profile_image.setAttribute("src", `${backEndBaseUrl}${feed.profile_image}`)

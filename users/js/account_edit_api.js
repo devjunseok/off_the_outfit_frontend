@@ -353,7 +353,7 @@ window.onload = async function getProfile_API(){
     profile_list = await getUserDetailInfo()
     let User_payload = JSON.parse(localStorage.getItem('payload'))
 
-    profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+    
     kakao_check = profile_list.username.substr(0, 2);
     if(kakao_check == "k@"){
         // 소셜 로그인 유저 회원 정보 출력
@@ -399,6 +399,7 @@ window.onload = async function getProfile_API(){
 
 
         if (profile_list.profile_image == '/media/imgs/default.png') {
+            profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
             edit_image_view.setAttribute("src", `${profile_image_default}`)
         } else {
             edit_image_view.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
@@ -427,6 +428,7 @@ window.onload = async function getProfile_API(){
     if(kakao_check == "k@"){
         main_profile_image.setAttribute("src", `${profile_image_kakao}`)
     } else if (profile_list.profile_image == '/media/imgs/default.png') {
+        profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
         main_profile_image.setAttribute("src", `${profile_image_default}`)
     } else {
         main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)

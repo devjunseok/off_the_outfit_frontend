@@ -506,12 +506,39 @@ window.onload = async function getIndex_API(){
 
         var closet_recommend_list = document.getElementById('closet_recommend_user_list')
         for_count = 0
+
         if(closet_user_list.length == 1){
             all_user_list.forEach(closet_user => {
                 // 목록 리스트 제한
                 if(for_count < 10){
                     if(closet_user.pk != user_id && closet_user.closet_set_count != 0){
+                        kakao_check = closet_user.username.substr(0, 2);
+                        if(kakao_check == "k@"){
+                            profile_image_kakao = closet_user.profile_image.replace('/media/http%3A/', 'https://');
                         closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_kakao}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else if (closet_user.profile_image == '/media/imgs/default.png'){
+                            profile_image_default = closet_user.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+                            closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_default}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else {
+                            closet_recommend_list.innerHTML += `
                         <div class="closet_recommend_user_box horizontal_alignment">
                             <img src="${backEndBaseUrl}${closet_user.profile_image}" class="nav_mini_profile_image">
                             <div class="nav_mini_box vertical_alignment">
@@ -521,6 +548,7 @@ window.onload = async function getIndex_API(){
                         </div>
                         `
                         for_count += 1
+                        }
                     }
                 }
             })
@@ -529,7 +557,33 @@ window.onload = async function getIndex_API(){
                 // 목록 리스트 제한
                 if(for_count < 10){
                     if(closet_user.pk != user_id){
+                        kakao_check = closet_user.username.substr(0, 2);
+                        if(kakao_check == "k@"){
+                            profile_image_kakao = closet_user.profile_image.replace('/media/http%3A/', 'https://');
                         closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_kakao}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else if (closet_user.profile_image == '/media/imgs/default.png'){
+                            profile_image_default = closet_user.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+                            closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_default}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else {
+                            closet_recommend_list.innerHTML += `
                         <div class="closet_recommend_user_box horizontal_alignment">
                             <img src="${backEndBaseUrl}${closet_user.profile_image}" class="nav_mini_profile_image">
                             <div class="nav_mini_box vertical_alignment">
@@ -539,6 +593,7 @@ window.onload = async function getIndex_API(){
                         </div>
                         `
                         for_count += 1
+                        }
                     }
                 }
             })
