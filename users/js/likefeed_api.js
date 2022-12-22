@@ -16,6 +16,21 @@ async function AttendanceCheck(user_id){
 return response_json
 }
 
+// 회원 상세 정보 조회 API
+async function getUserDetailInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
 // 로그인 전체 정보 가져오기
 async function getUser(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
@@ -94,6 +109,8 @@ window.onload = async function getIndex_API(){
         
         
     } else {
+        //전체유저 상세 조회
+        profile_list = await getUserDetailInfo()
 
         //유저상세정보 조회
         User_list = await getUser()
@@ -160,29 +177,29 @@ window.onload = async function getIndex_API(){
     var feed_value = document.getElementById('feed_value_count')
     var closet_count_value = document.getElementById('closet_value_count')
 
-    main_profile_image.setAttribute("src", `${backEndBaseUrl}${User_list.profile_image}`)
-    profile_nickname.innerText = `${User_list.nickname}`
+    main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+    profile_nickname.innerText = `${profile_list.nickname}`
     // profile_created_at.innerText = `${profile_list.created_at}`
-    profile_next_tier_info.innerText = `현재 ${User_list.nickname}님의 포인트는 ${User_list.point} 포인트 입니다`
-    follow_value.innerText = `${User_list.followings_count}`
-    follower_value.innerText = `${User_list.followers_count}`
-    feed_value.innerText = `${User_list.feeds_count}`
-    closet_count_value.innerText = `${User_list.closet_set_count}`
+    profile_next_tier_info.innerText = `현재 ${profile_list.nickname}님의 포인트는 ${profile_list.point} 포인트 입니다`
+    follow_value.innerText = `${profile_list.followings_count}`
+    follower_value.innerText = `${profile_list.followers_count}`
+    feed_value.innerText = `${profile_list.feeds_count}`
+    closet_count_value.innerText = `${profile_list.closet_set_count}`
     
      //마이페이지 등급 조건문
-     if(User_list.point>=0&&User_list.point <31){
+     if(profile_list.point>=0&&profile_list.point <31){
         profile_tier_info.innerText =`LV.1 브론즈`
     }
-    if(User_list.point>=31&&User_list.point <51){
+    if(profile_list.point>=31&&profile_list.point <51){
         profile_tier_info.innerText =`LV.2 실버`
     }
-    if(User_list.point>=51&&User_list.point <101){
+    if(profile_list.point>=51&&profile_list.point <101){
         profile_tier_info.innerText =`LV.3 골드`
     }
-    if(User_list.point>=101&&User_list.point <201){
+    if(profile_list.point>=101&&profile_list.point <201){
         profile_tier_info.innerText =`LV.4 플레티넘`
     }
-    if(User_list.point >=201){
+    if(profile_list.point >=201){
         profile_tier_info.innerText =`LV.5 VIP`
     }
 
