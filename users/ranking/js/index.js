@@ -16,10 +16,9 @@ window.addEventListener('load', function() {
     });
 });
 
-
 // 품목, 브랜드 온/오프
 function brandOn(){
-    if($("#nav_main_brand_right").css(":visible")){
+    if($("#nav_main_brand_right").is(":visible")){
         // 브랜드 오프
         $("#nav_main_brand_right").css("display", "none");
         $("#nav_main_bt_right").css("background-color", "#ffffff");

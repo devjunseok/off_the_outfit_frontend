@@ -373,33 +373,6 @@ async function deleteRecomment(comment_id, recomment_id){
     }
 }
 
-// 브랜드 리스트 조회
-async function getNavBrandList(){
-    const response = await fetch(`${backEndBaseUrl}/products/brand/`,{
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method:'GET',
-    })
-
-    response_json = await response.json()
-    return response_json
-}
-
-// 카테고리 리스트 조회
-async function getCategorylist(){
-    const response = await fetch(`${backEndBaseUrl}/products/category/`,{
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method:'GET',
-    })
-
-    response_json = await response.json()
-    return response_json
-}
 
 // NAV 카테고리 + 메뉴 버튼 
 async function categoryNavMenu(Input_Box) {
@@ -413,51 +386,6 @@ async function categoryNavMenu(Input_Box) {
 }
 
 
-// 품목, 브랜드 온/오프
-function brandOn(){
-    if($("#nav_main_brand_right").is(":visible")){
-        // 브랜드 오프
-        $("#nav_main_brand_right").css("display", "none");
-        $("#nav_main_bt_right").css("background-color", "#ffffff");
-        $("#nav_main_bt_right").css("color", "#000000");
-
-        $("#nav_main_category_left").css("display", "flex");
-        $("#nav_main_bt_left").css("background-color", "#000000");
-        $("#nav_main_bt_left").css("color", "#ffffff");
-    }else{
-        // 브랜드 온
-        $("#nav_main_brand_right").css("display", "flex");
-        $("#nav_main_bt_right").css("background-color", "#000000");
-        $("#nav_main_bt_right").css("color", "#ffffff");
-
-        $("#nav_main_category_left").css("display", "none");
-        $("#nav_main_bt_left").css("background-color", "#ffffff");
-        $("#nav_main_bt_left").css("color", "#000000");
-    }
-}
-
-// 품목, 브랜드 온/오프
-function categoryOn(){
-    if($("#nav_main_category_left").is(":visible")){
-        // 카테고리 오프
-        $("#nav_main_category_left").css("display", "none");
-        $("#nav_main_bt_left").css("background-color", "#ffffff");
-        $("#nav_main_bt_left").css("color", "#000000");
-
-        $("#nav_main_brand_right").css("display", "flex");
-        $("#nav_main_bt_right").css("background-color", "#000000");
-        $("#nav_main_bt_right").css("color", "#ffffff");
-    }else{
-        // 카테고리 온
-        $("#nav_main_category_left").css("display", "flex");
-        $("#nav_main_bt_left").css("background-color", "#000000");
-        $("#nav_main_bt_left").css("color", "#ffffff");
-
-        $("#nav_main_brand_right").css("display", "none");
-        $("#nav_main_bt_right").css("background-color", "#ffffff");
-        $("#nav_main_bt_right").css("color", "#000000");
-    }
-}
 
 // 게시글 상세보기 출력 부분
 window.onload = async function getIndexDetail_API(){
@@ -749,23 +677,6 @@ window.onload = async function getIndexDetail_API(){
         }
 
 
-        // NAV 브랜드 리스트 조회
-        brand_list = await getNavBrandList()
-        alphabet = location.search.replace('?key=', '')
-        if(alphabet.length == 0){
-            brand_list = brand_list.slice(0, 20)
-        }
-        var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
-        brand_list.forEach(br => {
-            if(br.brand_name_en.startsWith(alphabet, 1)){
-            brand_wrap.innerHTML += `
-            <div class="brand_box">
-                <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-                <div class="brand_name_kr">${br.brand_name_kr}</div>
-            </div>
-            `
-            }
-        })
 
         // 옷장 버튼
         var hd_closet_button = document.getElementById('header_closet_button')
@@ -775,19 +686,17 @@ window.onload = async function getIndexDetail_API(){
         brand_list = await getNavBrandList()
 
         alphabet = location.search.replace('?key=', '')
-        if(alphabet.length == 0){
-            brand_list = brand_list.slice(0, 20)
-        }
+
+        brand_list = brand_list.slice(0, 20).sort(function(){return Math.random() - Math.random();})
+
         var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
         brand_list.forEach(br => {
-            if(br.brand_name_en.startsWith(alphabet, 1)){
             brand_wrap.innerHTML += `
             <div class="brand_box">
                 <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-                <div class="brand_name_kr">${br.brand_name_kr}</div>
+                <div class="brand_name_kr">${br.brand_name_kr} (${br.product_set_count})</div>
             </div>
         `
-        }
     })
 
         //출석하기 출력문

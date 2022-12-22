@@ -49,6 +49,10 @@ body {
 /* 1. upload.html */
 /* _______________________________________________________________  */
 
+.body_area {
+    border-left: solid 2px #c0c0c0;
+}
+
 .main_body_area {
     width: 1220px;
     height: 840px;

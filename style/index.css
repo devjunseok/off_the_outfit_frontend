@@ -45,35 +45,39 @@ body {
     flex-direction: column;
 }
 
+
 /* _______________________________________________________________  */
 /* 1. index.html  -- 인기 게시글 */
 /* _______________________________________________________________  */
 
 .main_body_area {
     width: 1280px;
-    margin: 10px;
+    border-left: solid 2px #c0c0c0;
 }
 
 .main_body_area .section_dividing_line {
-    height: 40px;
+    height: 10px;
     border-bottom: solid 2px #c0c0c0;
 }
 
 .main_body_area .top_section {
     width: 1260px;
     height: 600px;
-    margin: 10px;
+    margin: 20px;
 }
 
 .top_section_menu {
     width: 1260px;
-    height: 40px;
+    height: 30px;
+    margin: 20px 0 0 20px;
 }
 
 .top_section_menu .ts_menu_title {
     width: 100px;
     font-size: 15pt;
     font-weight: bold;
+    cursor: pointer;
+
 }
 
 .top_section .main_feed_list_box {
@@ -200,8 +204,7 @@ body {
 
 .main_body_area .bottom_section {
     width: 1260px;
-    height: 100%;
-    margin: 10px;
+    margin: 20px;
 }
 
 .bottom_section .sub_feed_list_box {

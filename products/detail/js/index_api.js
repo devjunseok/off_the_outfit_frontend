@@ -98,6 +98,11 @@ async function closetProductAdd(product_number) {
 }
 
 
+// 무신사 페이지 이동 버튼
+async function musinsa_page_open(product_number) {
+    window.open(`https://www.musinsa.com/app/goods/${product_number}`, '', '')
+}
+
 // // 대댓글 입력 박스
 // async function recommentInputFlex(Input_Box) {
 //     let con = document.querySelector(Input_Box);
@@ -133,27 +138,6 @@ function timeForToday(value) {
 
     return `${Math.floor(betweenTimeDay / 365)}년전`;
 }
-
-
-// // 게시글 삭제
-// async function deleteFeed(){
-    
-//     feed_id =location.search.replace("?id=","")
-//     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/`, {
-//         headers: {
-//         Authorization: "Bearer " + localStorage.getItem("access"),
-//         },
-//         method: "DELETE",
-//     });
-
-//     if(response.status == 204){
-//         alert("게시글삭제완료!")
-//         window.location.replace(`${frontEndBaseUrl}/`); // 삭제가 되고나면 인덱스로 다시 이동하게함
-//     }
-//     else {
-//         alert(response.status);
-//     }
-// }
 
 
 // 브랜드 리스트 조회
@@ -370,7 +354,10 @@ window.onload = async function getIndexDetail_API(){
         })
         // 바로 구매 버튼
         var buy_button = document.getElementById('buy_button');
-        buy_button.setAttribute('onclick', `location.href='https://www.musinsa.com/app/goods/${product_number}'`)
+        buy_button.setAttribute('onclick', `musinsa_page_open(${product_info.product_number})`)
+
+        var musinsa_button = document.getElementById('musinsa_button');
+        musinsa_button.setAttribute('onclick', `musinsa_page_open(${product_info.product_number})`)
         
         // 별점 버튼
         product_rating = all_review_rating / product_info.products_count
