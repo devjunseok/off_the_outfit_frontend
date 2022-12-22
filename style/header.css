@@ -88,14 +88,20 @@ body {
 }
 
 .main-wrapper .search-wrapper .search-button {
-    width: 33px;
+    width: 45px;
     height: 33px;
     margin-left: 0;
     border: solid 3px black;
     background-color: black;
     position: absolute;
     cursor: pointer;
+    color: #ffffff;
 }
+
+.main-wrapper .search-wrapper .search-button:hover {
+    font-weight: bold;
+}
+
 
 .main-wrapper .search-word-ranking {
     font-size: 0.8em;
@@ -114,14 +120,14 @@ body {
     padding: 10px 0 0 0;
     margin-left: 30px;
     display: flex;
-    flex-direction: row;
-    cursor:pointer;
+    flex-direction: row; 
 }
 
 .header-member .header-link {
     color: #ffffff;
     font-size: 10pt;
     text-decoration: none;
+    cursor:pointer;
 }
 
 .header-member .header-link-line {
