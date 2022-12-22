@@ -13,52 +13,54 @@
         <div data-include-path="/header.html"></div>
         <div class="horizontal_alignment">
             <div data-include-path="/nav.html"></div>
-            <div class="main_body_area">
-                <div class="top_section">
-                    <div class="info_bar"></div>
-                    <div class="upload_area horizontal_alignment">
-                        <div class="ua_left_section">
-                            <div class="feed_image_box" style="display: flex;">
-                                <img id="PreviewImg" src="/static/img/offtheoutfit.png" class="PreviewImg" />
+            <div class="body_area">
+                <div class="main_body_area">
+                    <div class="top_section">
+                        <div class="info_bar"></div>
+                        <div class="upload_area horizontal_alignment">
+                            <div class="ua_left_section">
+                                <div class="feed_image_box" style="display: flex;">
+                                    <img id="PreviewImg" src="/static/img/offtheoutfit.png" class="PreviewImg" />
+                                </div>
+                                <div class="search_prod_box vertical_alignment" style="display: none;">
+                                    <div class="search_section">
+                                        <div class="section_title">상품 검색</div>
+                                        <div class="section_input">
+                                            <input class="prod_search_input" type="text" placeholder="브랜드, 상품명, 상품번호, 카테고리..." id="search_prod" name="prod_search">
+                                            <button class="prod_search_button" onclick="refrashSearch()">검색</button>
+                                        </div>
+                                    </div>
+                                    <div class="result_section" id="result_section">
+                                        
+                                    </div>       
+                                </div>
                             </div>
-                            <div class="search_prod_box vertical_alignment" style="display: none;">
-                                <div class="search_section">
-                                    <div class="section_title">상품 검색</div>
-                                    <div class="section_input">
-                                        <input class="prod_search_input" type="text" placeholder="브랜드, 상품명, 상품번호, 카테고리..." id="search_prod" name="prod_search">
-                                        <button class="prod_search_button" onclick="refrashSearch()">검색</button>
+                            <div class="ua_right_section">
+                                <div class="feed_input_box vertical_alignment">
+                                    <!-- 게시글 작성시 미리보기 -->
+                                    <div class="input_top_section">
+                                        <div class="user_profile_info horizontal_alignment">
+                                            <img class="profile_image" src="/static/img/default.png" id="profile_image" />
+                                            <div class="nickname"></div>
+                                        </div>
+                                        <div class="user_content" id="out_content"></div>
+                                        <div class="input_top_info" id="out_tags"></div>
                                     </div>
-                                </div>
-                                <div class="result_section" id="result_section">
-                                    
-                                </div>       
-                            </div>
-                        </div>
-                        <div class="ua_right_section">
-                            <div class="feed_input_box vertical_alignment">
-                                <!-- 게시글 작성시 미리보기 -->
-                                <div class="input_top_section">
-                                    <div class="user_profile_info horizontal_alignment">
-                                        <img class="profile_image" src="/static/img/default.png" id="profile_image" />
-                                        <div class="nickname"></div>
+                                    <!-- 게시글 수정 부분 -->
+                                    <div class="input_middle_section vertical_alignment">
+                                        <input id="feed_image" class="image_upload_button" type="file" required="required" value="image" name="feed_image" />
+                                        <div class="prod_select_input">
+                                            <!-- <button onclick="prodSearchInputFlex()">상품 검색</button>
+                                            <input id="product" type="text" placeholder="상품번호 입력..."/>
+                                            <button onclick="refrashInput()">X</button> -->
+                                        </div>
+                                        <textarea id="content" class="feed_content" type="text" name="content" placeholder="내용 입력..." cols="20" rows="10" ></textarea>
+                                        <textarea id="tags" class="feed_tags" type="text" name="tags" placeholder="태그 입력..." cols="20" rows="10" ></textarea>
                                     </div>
-                                    <div class="user_content" id="out_content"></div>
-                                    <div class="input_top_info" id="out_tags"></div>
-                                </div>
-                                <!-- 게시글 수정 부분 -->
-                                <div class="input_middle_section vertical_alignment">
-                                    <input id="feed_image" class="image_upload_button" type="file" required="required" value="image" name="feed_image" />
-                                    <div class="prod_select_input">
-                                        <!-- <button onclick="prodSearchInputFlex()">상품 검색</button>
-                                        <input id="product" type="text" placeholder="상품번호 입력..."/>
-                                        <button onclick="refrashInput()">X</button> -->
+                                    <!-- 게시글 수정 버튼 -->
+                                    <div class="input_bottom_section">
+                                        <button class="feed_create_button" type="submit" onclick="updatePost()">수정하기</button>
                                     </div>
-                                    <textarea id="content" class="feed_content" type="text" name="content" placeholder="내용 입력..." cols="20" rows="10" ></textarea>
-                                    <textarea id="tags" class="feed_tags" type="text" name="tags" placeholder="태그 입력..." cols="20" rows="10" ></textarea>
-                                </div>
-                                <!-- 게시글 수정 버튼 -->
-                                <div class="input_bottom_section">
-                                    <button class="feed_create_button" type="submit" onclick="updatePost()">수정하기</button>
                                 </div>
                             </div>
                         </div>

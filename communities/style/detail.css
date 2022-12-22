@@ -49,22 +49,26 @@ body {
 /* 1. detail.html */
 /* _______________________________________________________________  */
 
+.body_area {
+    border-left: solid 2px #c0c0c0;
+}
+
 .main_body_area {
-    width: 1220px;
+    width: 1280px;
     height: 840px;
     margin: 10px;
     border-bottom: solid 2px #c0c0c0;
 }
 
 .main_body_area .top_section {
-    width: 1200px;
+    width: 1280px;
     height: 800px;
     background-color: #ffffff;
     margin: 10px;
 }
 
 .top_section .info_bar {
-    width: 1200px;
+    width: 1280px;
     height: 40px;
     justify-content: space-between;
     border-bottom: solid 2px #c0c0c0;
@@ -72,18 +76,18 @@ body {
 
 .top_section .detail_area {
     background-color: #ffffff;
-    width: 1200px;
+    width: 1280px;
     height: 740px;
 }
 
 .detail_area .ua_left_section {
     background-color: #ffffff;
-    width: 740px;
+    width: 800px;
     height: 740px;
 }
 
 .ua_left_section .feed_image {
-    width: 740px;
+    width: 800px;
     height: 740px;
     border-style: none;
     object-fit: cover;
