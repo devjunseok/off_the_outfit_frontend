@@ -95,6 +95,9 @@ async function createPost() {
         alert("게시물 등록");
         window.location.replace(`${frontEndBaseUrl}/`);
         }
+        else if (response.status == 400){
+            alert("사진, 내용, 태그를 전부 입력해주세요!")
+        }
     }
 }
 
