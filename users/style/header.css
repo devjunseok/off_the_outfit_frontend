@@ -91,13 +91,18 @@ body {
 }
 
 .main-wrapper .search-wrapper .search-button {
-    width: 33px;
+    width: 45px;
     height: 33px;
     margin-left: 0;
     border: solid 3px black;
     background-color: black;
     position: absolute;
     cursor: pointer;
+    color: #ffffff;
+}
+
+.main-wrapper .search-wrapper .search-button:hover {
+    font-weight: bold;
 }
 
 .main-wrapper .search-word-ranking {
@@ -109,7 +114,7 @@ body {
     width: 100vw;
     height: 200px;
     background-color: black;
-    min-width: 1340px;
+    min-width: 1650px;
 }
 
 .header-profile_info .info_left_area {
@@ -123,6 +128,7 @@ body {
     height: 160px;
     border-radius: 80px;
     margin: 20px 20px 20px 150px;
+    object-fit: cover;
 }
 
 .info_left_area .right_main_profile_info_box {
@@ -285,9 +291,34 @@ body {
 }
 
 
-
-
-
 /* _______________________________________________________________  */
 /* 3. footer.html */
 /* _______________________________________________________________  */
+
+footer {
+    background-color: #000000;
+    width: 100vw;
+    min-width: 1620px;
+    height: 400px;
+}
+
+.footer_area .footer_box {
+    width: 1000px;
+    height: 180px;
+    margin: 0 0 0 50px;
+    padding: 10px;
+    color: #ffffff;
+}
+
+.footer_box .icon_box {
+    margin-bottom: 20px;
+}
+
+.footer_box .icon_box img {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    border: solid 2px #ffffff;
+    margin: 20px 0 0 20px;
+    cursor: pointer;
+}

@@ -51,7 +51,7 @@ body {
 
 .main_body_area {
     width: 1280px;
-    margin: 10px;
+    border-left: solid 2px #c0c0c0;
 }
 
 .main_body_area .section_dividing_line {
@@ -66,6 +66,7 @@ body {
 
 .top_section_menu {
     width: 1260px;
+    margin: 20px 0 20px 20px;
 }
 
 .top_section_menu .ts_menu_title {

@@ -50,6 +50,20 @@ async function getFollowerUserInfo(feed_user_id){
     return response_json
 }
 
+// 유저 정보 조회
+async function getUserInfo(feed_user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/${feed_user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
 
 
 // 게시글 상세보기 API
@@ -98,39 +112,22 @@ async function handleLike(){
         
                 })
             })
-            window.location.reload()
-    }
+            window.location.reload();
+        }
     else{
-        feeds.unlike.forEach(unliker=>{
-            if(unliker==User_payload.user_id){
-                alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
+    alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
             }
-            else{
-                const response =  fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
-                    headers: {
-                        'content-type': 'application/json',
-                        "Authorization":"Bearer " + localStorage.getItem("access")
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({
-                
-                        })
-                    })
-                    window.location.reload()
-
-            }
-        })
-    }
-    
 }
+
 
 //싫어요 실행
 
 async function handleUnLike(){
 
-    feed_id = location.search.replace("?id=","")
     let User_payload = JSON.parse(localStorage.getItem('payload'))
+    feed_id = location.search.replace("?id=","")
     feeds = await getIndexFeedDetail(feed_id)
+    console.log(feeds)
     if(feeds.like.length==0){
         const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
             headers: {
@@ -142,32 +139,13 @@ async function handleUnLike(){
         
                 })
             })
-            window.location.reload()
+            window.location.reload();
         }
     else{
-        feeds.like.forEach(liker=>{
-            if(liker==User_payload.user_id){
-                alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
-            }
-            else{
-                const response = fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
-                    headers: {
-                        'content-type': 'application/json',
-                        "Authorization":"Bearer " + localStorage.getItem("access")
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({
-                
-                        })
-                    })
-                    window.location.reload()
-
-            }
-        })
-        
-    }
+    alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
+        }
 }
-
+        
 
 
 //댓글 등록
@@ -189,7 +167,7 @@ async function postComment(feed_id){
     if (response.status == 200){
         alert(response_json["message"])
     }else {
-        alert(response_json["detail"])
+        alert("댓글을 입력해주세요!")
     }
     window.location.reload()   
     
@@ -359,33 +337,6 @@ async function deleteRecomment(comment_id, recomment_id){
     }
 }
 
-// 브랜드 리스트 조회
-async function getNavBrandList(){
-    const response = await fetch(`${backEndBaseUrl}/products/brand/`,{
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method:'GET',
-    })
-
-    response_json = await response.json()
-    return response_json
-}
-
-// 카테고리 리스트 조회
-async function getCategorylist(){
-    const response = await fetch(`${backEndBaseUrl}/products/category/`,{
-        headers: {
-            'content-type': 'application/json',
-            "Authorization":"Bearer " + localStorage.getItem("access")
-        },
-        method:'GET',
-    })
-
-    response_json = await response.json()
-    return response_json
-}
 
 // NAV 카테고리 + 메뉴 버튼 
 async function categoryNavMenu(Input_Box) {
@@ -399,51 +350,6 @@ async function categoryNavMenu(Input_Box) {
 }
 
 
-// 품목, 브랜드 온/오프
-function brandOn(){
-    if($("#nav_main_brand_right").is(":visible")){
-        // 브랜드 오프
-        $("#nav_main_brand_right").css("display", "none");
-        $("#nav_main_bt_right").css("background-color", "#ffffff");
-        $("#nav_main_bt_right").css("color", "#000000");
-
-        $("#nav_main_category_left").css("display", "flex");
-        $("#nav_main_bt_left").css("background-color", "#000000");
-        $("#nav_main_bt_left").css("color", "#ffffff");
-    }else{
-        // 브랜드 온
-        $("#nav_main_brand_right").css("display", "flex");
-        $("#nav_main_bt_right").css("background-color", "#000000");
-        $("#nav_main_bt_right").css("color", "#ffffff");
-
-        $("#nav_main_category_left").css("display", "none");
-        $("#nav_main_bt_left").css("background-color", "#ffffff");
-        $("#nav_main_bt_left").css("color", "#000000");
-    }
-}
-
-// 품목, 브랜드 온/오프
-function categoryOn(){
-    if($("#nav_main_category_left").is(":visible")){
-        // 카테고리 오프
-        $("#nav_main_category_left").css("display", "none");
-        $("#nav_main_bt_left").css("background-color", "#ffffff");
-        $("#nav_main_bt_left").css("color", "#000000");
-
-        $("#nav_main_brand_right").css("display", "flex");
-        $("#nav_main_bt_right").css("background-color", "#000000");
-        $("#nav_main_bt_right").css("color", "#ffffff");
-    }else{
-        // 카테고리 온
-        $("#nav_main_category_left").css("display", "flex");
-        $("#nav_main_bt_left").css("background-color", "#000000");
-        $("#nav_main_bt_left").css("color", "#ffffff");
-
-        $("#nav_main_brand_right").css("display", "none");
-        $("#nav_main_bt_right").css("background-color", "#ffffff");
-        $("#nav_main_bt_right").css("color", "#000000");
-    }
-}
 
 // 게시글 상세보기 출력 부분
 window.onload = async function getIndexDetail_API(){
@@ -456,7 +362,6 @@ window.onload = async function getIndexDetail_API(){
         const feed_id = location.search.replace('?id=', '')
         feed = await getIndexFeedDetail(feed_id)
         follower_list = await getFollowerUserInfo(feed.user_id)
-        console.log(feed)
 
         var feed_image = document.getElementsByClassName('feed_image')[0];
         var profile_image = document.getElementsByClassName('profile_image')[0];
@@ -513,12 +418,26 @@ window.onload = async function getIndexDetail_API(){
         comment_onclick.setAttribute('onclick', `postComment(${feed.pk})`)
         // 피드 상세보기 프로필 이미지, 싫어요 카운트, 
         feed_image.setAttribute('src', `${backEndBaseUrl}${feed.image}`)
-        profile_image.setAttribute('src', `${backEndBaseUrl}${feed.profile_image}`)
         nickname.innerText = `${feed.user}`
         feed_content.innerText = `${feed.content}`
         feed_create_at.innerText = `${timeForToday(feed.updated_at)}`
 
 
+
+        // 일반 or 소셜 유저 프로필 이미지 처리
+        user_info = await getUserInfo(feed.user_id)
+        kakao_check = user_info.username.substr(0, 2);
+        
+        if(kakao_check == "k@"){
+            profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
+            profile_image.setAttribute("src", `${profile_image_kakao}`)
+        } else if (feed.profile_image == '/media/imgs/default.png') {
+            profile_image_default = user_info.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+            profile_image.setAttribute("src", `${profile_image_default}`)
+        } else {
+            profile_image.setAttribute("src", `${backEndBaseUrl}${feed.profile_image}`)
+        }
+        
 
 
 
@@ -722,23 +641,6 @@ window.onload = async function getIndexDetail_API(){
         }
 
 
-        // NAV 브랜드 리스트 조회
-        brand_list = await getNavBrandList()
-        alphabet = location.search.replace('?key=', '')
-        if(alphabet.length == 0){
-            brand_list = brand_list.slice(0, 20)
-        }
-        var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
-        brand_list.forEach(br => {
-            if(br.brand_name_en.startsWith(alphabet, 1)){
-            brand_wrap.innerHTML += `
-            <div class="brand_box">
-                <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-                <div class="brand_name_kr">${br.brand_name_kr}</div>
-            </div>
-            `
-            }
-        })
 
         // 옷장 버튼
         var hd_closet_button = document.getElementById('header_closet_button')
@@ -748,19 +650,17 @@ window.onload = async function getIndexDetail_API(){
         brand_list = await getNavBrandList()
 
         alphabet = location.search.replace('?key=', '')
-        if(alphabet.length == 0){
-            brand_list = brand_list.slice(0, 20)
-        }
+
+        brand_list = brand_list.slice(0, 20).sort(function(){return Math.random() - Math.random();})
+
         var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
         brand_list.forEach(br => {
-            if(br.brand_name_en.startsWith(alphabet, 1)){
             brand_wrap.innerHTML += `
             <div class="brand_box">
                 <div class="brand_name_en" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-                <div class="brand_name_kr">${br.brand_name_kr}</div>
+                <div class="brand_name_kr">${br.brand_name_kr} (${br.product_set_count})</div>
             </div>
         `
-        }
     })
 
         //출석하기 출력문

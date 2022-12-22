@@ -1,3 +1,5 @@
+
+
 // 출석 하기
 async function AttendanceCheck(user_id){
 
@@ -151,9 +153,9 @@ window.onload = async function getIndex_API(){
                         <div class="nf_tag">${tag_list}</div>
                     </div>
                     <div class="right_section vertical_alignment">
-                        <div class="like_box horizontal_alignment">
-                            <div class="nf_like">${best_feed.like_count}</div>
-                            <div class="nf_unlike">${best_feed.unlike_count}</div>
+                        <div class="like_box vertical_alignment">
+                            <div class="nf_like">좋아요 ${best_feed.like_count}개</div>
+                            <div class="nf_unlike">싫어요 ${best_feed.unlike_count}개</div>
                         </div>
                         <div class="right_section_middle"></div>
                         <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
@@ -196,7 +198,7 @@ window.onload = async function getIndex_API(){
                     <div class="sub_feed_info_box">
                         <div class="info_top_section horizontal_alignment">
                             <div class="sub_nickname" onclick="location.href='/products/closet/?user_id=${feed.user_id}'">${feed.user}</div>
-                            <div class="sub_like">${feed.like_count}</div>
+                            <div class="sub_like">좋아요 ${feed.like_count}개</div>
                         </div>
                         <div class="info_middle_section">
                             <div class="sub_content">${feed.content}</div>
@@ -248,7 +250,7 @@ window.onload = async function getIndex_API(){
 
     alphabet = location.search.replace('?key=', '')
     if(alphabet.length == 0){
-        brand_list = brand_list.slice(0, 20)
+        brand_list = brand_list.slice(0, 20).sort(function(){return Math.random() - Math.random();})
     }
     var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
     brand_list.forEach(br => {
@@ -256,7 +258,7 @@ window.onload = async function getIndex_API(){
         brand_wrap.innerHTML += `
         <div class="brand_box">
             <div class="brand_name_en" style = "cursor:pointer;" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-            <div class="brand_name_kr">${br.brand_name_kr}</div>
+            <div class="brand_name_kr">${br.brand_name_kr} (${br.product_set_count})</div>
         </div>
         `
         }

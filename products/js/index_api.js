@@ -134,7 +134,14 @@ window.onload = async function getIndex_API(){
         // 브랜드명 출력
         var brand_name_title = document.getElementById('view_button_01');
 
-        brand_name_title.innerText += `${product_list[0].brand_name_en}`
+        if(product_list == [] || product_list.length == 0){
+            brand_name_title.innerText += `브랜드의 상품이 없습니다.
+                관리자에게 문의해주세요.
+            `
+        } else {
+            brand_name_title.innerText += `${product_list[0].brand_name_en}`
+        }
+        
 
 
         // 전체 상품 반복 출력
@@ -213,7 +220,7 @@ window.onload = async function getIndex_API(){
     brand_list = await getNavBrandList()
 
     if(alphabet.length == 0){
-        brand_list = brand_list.slice(0, 20)
+        brand_list = brand_list.slice(0, 20).sort(function(){return Math.random() - Math.random();})
     }
     var brand_wrap = document.getElementsByClassName('nav_brand_list_area')[0];
     brand_list.forEach(br => {
@@ -221,7 +228,7 @@ window.onload = async function getIndex_API(){
         brand_wrap.innerHTML += `
         <div class="brand_box">
             <div class="brand_name_en"style = "cursor:pointer;" onclick="location.href='${frontEndBaseUrl}/products/?key=${alphabet}&?brand_id=${br.id}'">${br.brand_name_en}</div>
-            <div class="brand_name_kr">${br.brand_name_kr}</div>
+            <div class="brand_name_kr">${br.brand_name_kr} (${br.product_set_count})</div>
         </div>
         `
         }

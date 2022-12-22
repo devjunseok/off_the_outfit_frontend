@@ -16,7 +16,7 @@
             </div> 
             <div class="search-wrapper">
                 <input class="search-box" type="text" placeholder="검색어를 입력해주세요." id="search" name="search">
-                <button class="search-button" onclick="searchButton()"></button>
+                <button class="search-button" onclick="searchButton()">검색</button>
             </div>
             <!-- 실시간 검색어 부분 -->
             <div class="rolling_box">
@@ -43,6 +43,9 @@
                 </div>
                 <div class="right_main_profile_info_box vertical_alignment">
                     <div class="profile_nickname" id="intro"></div>
+                    <div class="follow_box">
+                    <!-- 팔로우 부분 -->
+                    </div>
                     <div class="horizontal_alignment">
                         <div class="profile_tier_info"></div>
                         <div class="profile_created_at"></div>
@@ -77,10 +80,7 @@
         <div class="header-member">
             <div class="header-links">
                 <a class="header-link" href="/users/account_edit.html">마이페이지</a>
-                <!-- <div class="header-link-line">|</div>
-                <a class="header-link" href="#">최근 본 상품</a> -->
                 <div class="header-link-line">|</div>
-
                 <a class="header-link" id="header_closet_button">옷장</a>
                 <div class="header-link-line">|</div>
                 <a class="header-link" href="/recommend/?city=서울특별시">내일 뭐입지?</a>

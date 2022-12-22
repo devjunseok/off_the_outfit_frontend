@@ -15,7 +15,7 @@
     <div data-include-path="/header.html"></div>
     <div class="horizontal_alignment">
         <div data-include-path="/nav.html"></div>
-        <div class="vertical_alignment">
+        <div class="body_area vertical_alignment">
             <div class="main_body_area">
                 <div class="top_section">
                     <div class="info_bar horizontal_alignment">
@@ -25,7 +25,7 @@
                             <div class="prod_name" id="prod_name"></div>
                         </div>
                         <div class="horizontal_alignment">
-                            <div class="musinsa_button">MUSINSA</div>
+                            <div class="musinsa_button" id="musinsa_button">MUSINSA</div>
                             <div class="etc_dropbox">
                                 <div class="etc_button">...</div>
                                 <div class="etc_list">
@@ -81,18 +81,38 @@
                                 <div class="prod_info_sub_desc" id="prod_discount_rate"></div>
                             </div>
                             <div class="info_dividing_line"><!-- 구분선 --></div>
-                            <div class="review_list_box">
+                            <div class="review_list_box vertical_alignment" style="display: flex;">
                                 <div class="review_box_title">상품 후기 / Q & A</div>
                                 <div class="review_box_desc">해당 상품 후기 및 문의는 OFF THE OUTFIT 자체 사이트에서 작성된 내용입니다. 이용하는 데 참고해주시기 바랍니다.</div>
                                 <div class="review_main_area" id="review_main_area">
                                     <!-- 상품 후기 + Q & A 반복문 -->
                                 </div>
                             </div>
+                            <div class="review_create_box vertical_alignment" style="display: none;">
+                                <div class="review_create_inner_box">
+                                    <textarea id="content" type="text" class="review_create_input" placeholder="상품에 대한 후기를 작성해 주세요."></textarea>
+                                    <div class="inner_box_dividing_line"><!-- 구분선 --></div>
+                                    <div class="review_create_etc horizontal_alignment">
+                                        <div class="filebox horizontal_alignment">
+                                            <label for="ex_file">사진 선택</label>
+                                            <input type="file" id="ex_file" name="ex_file"> 
+                                        <img src="/static/img/default.png" class="inputPr" id="inputPr" style="object-fit: cover;"/>
+                                        </div>
+                                        <span class="star">
+                                            ★★★★★
+                                        <span>★★★★★</span>
+                                        <input id="review_rating" type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="5">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="review_create_button horizontal_alignment">
+                                    <button type="submit" onclick="createReview()">후기 작성</button>
+                                    <button onclick="reviewclose()">닫기</button>
+                                </div>
+                            </div>
                             <div class="button_box horizontal_alignment">
                                 <div class="buy_button" id="buy_button">바로구매</div>
-                                <div class="like_button vertical_alignment" id="like_button">
-                                    <img src="/static/img/heart.png" />
-                                    <span class="like_count">656</span>
+                                <div class="like_button vertical_alignment" id="like_button" onclick="reviewInputFlex()">
                                 </div>
                                 <div class="closet_button" id="closet_button">옷장</div>
                             </div>
@@ -102,7 +122,7 @@
             </div>
             <div class="recommend_title">이런 상품은 어때요?</div>
             <div class="recommend_area horizontal_alignment" id="recommend_area">
-
+                <!-- 상품 추천 반복문 (1)같은 카테고리 or (2)현재 상품을 가지고있는 옷장속 상품 -->
             </div>
         </div>
     </div>

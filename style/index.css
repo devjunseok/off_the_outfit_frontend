@@ -45,35 +45,39 @@ body {
     flex-direction: column;
 }
 
+
 /* _______________________________________________________________  */
 /* 1. index.html  -- 인기 게시글 */
 /* _______________________________________________________________  */
 
 .main_body_area {
     width: 1280px;
-    margin: 10px;
+    border-left: solid 2px #c0c0c0;
 }
 
 .main_body_area .section_dividing_line {
-    height: 40px;
+    height: 10px;
     border-bottom: solid 2px #c0c0c0;
 }
 
 .main_body_area .top_section {
     width: 1260px;
     height: 600px;
-    margin: 10px;
+    margin: 20px;
 }
 
 .top_section_menu {
     width: 1260px;
-    height: 40px;
+    height: 30px;
+    margin: 20px 0 0 20px;
 }
 
 .top_section_menu .ts_menu_title {
     width: 100px;
     font-size: 15pt;
     font-weight: bold;
+    cursor: pointer;
+
 }
 
 .top_section .main_feed_list_box {
@@ -157,27 +161,21 @@ body {
 }
 
 .like_box .nf_like {
-    width: 20px;
+    width: 100px;
     height: 20px;
-    border-radius: 10px;
-    color: #ffffff;
-    background-color: #c0c0c0;
     text-align: center;
     line-height: 25px;
-    margin: 5px;
-    font-size: 10pt;
+    margin: 0 5px 5px 5px;
+    font-size: 9pt;
 }
 
 .like_box .nf_unlike {
-    width: 20px;
+    width: 100px;
     height: 20px;
-    border-radius: 10px;
-    color: #ffffff;
-    background-color: #c0c0c0;
     text-align: center;
     line-height: 25px;
     margin: 5px;
-    font-size: 10pt;
+    font-size: 9pt;
 }
 
 .right_section .right_section_middle {
@@ -200,8 +198,7 @@ body {
 
 .main_body_area .bottom_section {
     width: 1260px;
-    height: 100%;
-    margin: 10px;
+    margin: 20px;
 }
 
 .bottom_section .sub_feed_list_box {
@@ -248,15 +245,12 @@ body {
 }
 
 .info_top_section .sub_like {
-    font-size: 10pt;
-    width: 20px;
+    width: 60px;
     height: 20px;
-    background-color: #c0c0c0;
-    color: #ffffff;
-    border-radius: 10px;
-    margin-top: 5px;
     text-align: center;
-    line-height: 20px;
+    line-height: 25px;
+    margin: 0 0 5px 15px;
+    font-size: 9pt;
 }
 
 
@@ -297,4 +291,11 @@ body {
 
 .info_bottom_section .sub_created_at {
     font-size: 5pt;
+}
+
+.like_feed_box {
+    width: 1260px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
 }

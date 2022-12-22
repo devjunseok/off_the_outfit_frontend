@@ -23,7 +23,7 @@
                 <input id="username" class="login_id" placeholder="아이디" />
                 <input type="password" id="password" class="password" placeholder="비밀번호" />
                 <button type="submit" class="login_button"  onclick="handleLogin()">로그인</button>
-                <div class="password_find">비밀번호 찾기</div>
+                <a class="password_find" id = "password_find"  onclick="handlePasswordFind()">비밀번호 찾기</a>
             </div>
             <hr class="dividing_bottom_line">
             <div class="signup_button_box">
@@ -36,6 +36,7 @@
     <script src="js/login_api.js"></script>
     <script src="js/api.js"></script>
     <script src="/js/base_url.js"></script>
+    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
     
 </body>

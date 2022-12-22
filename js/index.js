@@ -16,21 +16,10 @@ window.addEventListener('load', function() {
     });
 });
 
-// BEST 부분 온/오프
-$(document).ready(function(){
-	$("#view_button_01").click(function(){
-		if($("#main_view_content_01").is(":visible")){
-			$("#main_view_content_01").css("display", "none");
-		}else{
-			$("#main_view_content_01").css("display", "flex");
-		}
-	});
-});
-
 
 // 품목, 브랜드 온/오프
 function brandOn(){
-    if($("#nav_main_brand_right").is(":visible")){
+    if($("#nav_main_brand_right").css(":visible")){
         // 브랜드 오프
         $("#nav_main_brand_right").css("display", "none");
         $("#nav_main_bt_right").css("background-color", "#ffffff");
