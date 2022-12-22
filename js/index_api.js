@@ -247,7 +247,6 @@ window.onload = async function getIndex_API(){
 
     // NAV 브랜드 리스트 조회
     brand_list = await getNavBrandList()
-    console.log(brand_list)
 
     alphabet = location.search.replace('?key=', '')
     if(alphabet.length == 0){

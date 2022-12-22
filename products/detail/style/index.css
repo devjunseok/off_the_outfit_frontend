@@ -628,3 +628,112 @@ body {
     border: solid 1px #c0c0c0;
     padding: 10px;
 }
+
+.review_create_box .review_create_inner_box {
+    width: 418px;
+    height: 290px;
+    background-color: #ffffff;
+    margin-top: 7px;
+    border: solid 1px #c0c0c0;
+}
+
+.review_create_box .review_create_button button {
+    width: 210px;
+    height: 40px;
+    border: solid 1px #c0c0c0;
+    cursor: pointer;
+}
+
+.review_create_box .review_create_button button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.review_create_box .inner_box_dividing_line {
+    width: 418px;
+    border-bottom: solid 1px #c0c0c0;
+}
+
+.review_create_inner_box .review_create_input {
+    width: 390px;
+    border: none;
+    height: 200px;
+    resize: none;
+    padding: 10px;
+}
+
+.review_create_inner_box .review_create_input:focus {
+    outline: none;
+}
+
+.review_create_etc .review_image {
+    width: 205px;
+    border-right: solid 1px #c0c0c0;
+}
+.review_create_etc .filebox {
+    width: 208px;
+    height: 65px;
+    border-right: solid 1px #c0c0c0;
+}
+
+.review_create_etc .filebox label {
+    padding: .5em .75em;
+    color: #000000;
+    font-size: inherit;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    width: 60px;
+    height: 20px;
+    margin: 10px 5px 0 10px;
+  }
+
+.review_create_etc .filebox label:hover {
+    color: #ffffff;
+    background-color: #000000;
+  }
+  
+.review_create_etc .filebox input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+  }
+
+.review_create_etc .inputPr {
+    width: 80px;
+    height: 50px;
+    margin: 5px 0 5px 10px;
+}
+
+/* 상품 리뷰 별점 */
+.review_create_etc .star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;
+    margin: 15px 0 0 35px;
+  }
+  
+.review_create_etc .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+.review_create_etc .star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: #000000;
+    overflow: hidden;
+    pointer-events: none;
+  }

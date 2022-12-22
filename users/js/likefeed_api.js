@@ -97,7 +97,6 @@ window.onload = async function getIndex_API(){
 
         //유저상세정보 조회
         User_list = await getUser()
-        console.log(User_list)
 
 
         like_feed_wrap = document.getElementsByClassName('like_feed_box')[0];

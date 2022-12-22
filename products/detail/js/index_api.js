@@ -103,17 +103,6 @@ async function musinsa_page_open(product_number) {
     window.open(`https://www.musinsa.com/app/goods/${product_number}`, '', '')
 }
 
-// // 대댓글 입력 박스
-// async function recommentInputFlex(Input_Box) {
-//     let con = document.querySelector(Input_Box);
-
-//     if(con.style.display == 'none'){
-//         con.style.display = 'flex';
-//         }else{
-//         con.style.display = 'none';
-//     }
-// }
-
 
 // 시간 변형 코드 (value 시간을 현재 시간이랑 비교하여 '~ 전' 출력)
 function timeForToday(value) {
@@ -226,6 +215,94 @@ function categoryOn(){
     }
 }
 
+
+//상품 후기 생성
+async function createReview() {
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    if (User_payload === undefined ||  User_payload === null){
+        location.href=`${frontend_base_url}/users/login.html`;
+        
+        
+    } else {
+        product_number = location.search.replace('?product_number=', '')
+
+        content = document.getElementById("content").value;
+        review_image = document.getElementById("ex_file").files[0];
+        rating = document.getElementById("review_rating").value;
+
+        const formData = new FormData();
+
+        if(review_image == undefined) {
+            formData.append("content", content);
+            formData.append("rating", rating);
+        } else {
+            formData.append("content", content);
+            formData.append("image", review_image);
+            formData.append("rating", rating);
+        }
+        const response = await fetch(`${backEndBaseUrl}/products/product/${product_number}/board/`, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("access"),
+        },
+        method: "POST",
+        body: formData,
+        }); 
+        if (response.status == 200) {
+        alert("후기 등록");
+        window.location.reload();
+        }
+    }
+}
+
+// 후기 입력 박스
+async function reviewInputFlex() {
+    let review_list = document.querySelector('.review_list_box');
+    let review_input = document.querySelector('.review_create_box');
+
+    if(review_list.style.display == 'none'){
+        review_list.style.display = 'flex';
+        review_input.style.display = 'none';
+    }else{
+        review_list.style.display = 'none';
+        review_input.style.display = 'flex';
+    }
+}
+
+// 후기 입력 박스
+async function reviewclose() {
+    let review_list = document.querySelector('.review_list_box');
+    let review_input = document.querySelector('.review_create_box');
+
+    if(review_list.style.display == 'none'){
+        review_list.style.display = 'flex';
+        review_input.style.display = 'none';
+    }else{
+        review_list.style.display = 'none';
+        review_input.style.display = 'flex';
+    }
+}
+
+// 게시글 작성 이미지 미리보기
+let fileTag = document.querySelector("input[name=ex_file]");
+
+fileTag.onchange = function() {
+
+    let imgTag = document.querySelector("#inputPr");
+
+    if(fileTag.files.length > 0) {
+        let reader = new FileReader();
+        reader.onload = function(data) {
+            imgTag.src = data.target.result;
+        }
+        reader.readAsDataURL(fileTag.files[0]);
+    }
+    else {
+        imgTag.src = "/static/img/offtheoutfit.png"
+    }
+}
+
+
 // 게시글 상세보기 출력 부분
 window.onload = async function getIndexDetail_API(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
@@ -302,7 +379,6 @@ window.onload = async function getIndexDetail_API(){
                 review_rating = '★★★★★'
             }
             all_review_rating += review.rating
-
             // 이미지 null 처리
             if (review.image == null) {
                 review_main_area.innerHTML += `
@@ -371,7 +447,7 @@ window.onload = async function getIndexDetail_API(){
         } else {
             like_button.innerHTML = `
                 <span class="star_image">★</span>
-                <span class="like_count">${product_rating}</span>
+                <span class="like_count">${product_rating.toFixed(1)}</span>
             `
         }
 
