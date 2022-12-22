@@ -112,6 +112,9 @@ async function createPost() {
         alert("게시물 등록");
         window.location.replace(`${frontEndBaseUrl}/`);
         }
+        else if (response.status == 400){
+            alert("사진, 내용, 태그를 전부 입력해주세요!")
+        }
     }
 }
 
@@ -237,7 +240,6 @@ window.onload = async function getUpload_API(){
     var user_nickname = document.getElementsByClassName('nickname')[0];
     var user_profile_image = document.getElementById('profile_image');
     user_nickname.innerText = `${user_info.nickname}`
-    user_profile_image.setAttribute('src', `${backEndBaseUrl}${user_info.profile_image}`)
 
     //출석하기 출력문
     var AttendanceCheck = document.getElementById('AttendanceCheck')
@@ -247,6 +249,19 @@ window.onload = async function getUpload_API(){
     var hd_closet_button = document.getElementById('header_closet_button')
     hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
+
+    // 일반 or 소셜 유저 프로필 이미지 처리
+    
+    kakao_check = user_info.username.substr(0, 2);
+    if(kakao_check == "k@"){
+        profile_image_kakao = user_info.profile_image.replace('/media/http%3A/', 'https://');
+        user_profile_image.setAttribute("src", `${profile_image_kakao}`)
+    } else if (user_info.profile_image == '/media/imgs/default.png') {
+        profile_image_default = user_info.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+        user_profile_image.setAttribute("src", `${profile_image_default}`)
+    } else {
+        user_profile_image.setAttribute("src", `${backEndBaseUrl}${user_info.profile_image}`)
+    }
 
     // 검색어 랭킹 조회
     search_word_list = await getHeaderSearchWordRanking()

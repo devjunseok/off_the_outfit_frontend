@@ -126,14 +126,27 @@ window.onload = async function getProfile_API(){
     var feed_value = document.getElementById('feed_value_count')
     var closet_count_value = document.getElementById('closet_value_count')
 
-    main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+    
     profile_nickname.innerText = `${profile_list.nickname}`
-    // profile_created_at.innerText = `${profile_list.created_at}`
     profile_next_tier_info.innerText = `현재 ${profile_list.nickname}님의 포인트는 ${profile_list.point} 포인트 입니다`
     follow_value.innerText = `${profile_list.followings_count}`
     follower_value.innerText = `${profile_list.followers_count}`
     feed_value.innerText = `${profile_list.feeds_count}`
     closet_count_value.innerText = `${profile_list.closet_set_count}`
+
+
+    // 일반 or 소셜 유저 프로필 이미지 처리
+    profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+    kakao_check = profile_list.username.substr(0, 2);
+    if(kakao_check == "k@"){
+        profile_image_kakao = profile_list.profile_image.replace('/media/http%3A/', 'https://');
+        main_profile_image.setAttribute("src", `${profile_image_kakao}`)
+    } else if (profile_list.profile_image == '/media/imgs/default.png') {
+        main_profile_image.setAttribute("src", `${profile_image_default}`)
+    } else {
+        main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+    }
+
     
      //마이페이지 등급 조건문
      if(profile_list.point>=0&&profile_list.point <31){

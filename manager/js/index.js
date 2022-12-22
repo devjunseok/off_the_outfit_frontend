@@ -189,7 +189,7 @@ window.onload = async function loadUsers() {
   
   
 
-
+// 신고된 게시글 삭제
     
 async function deleteReport(feed_id){
 
@@ -230,7 +230,7 @@ async function deleteUser(user_id){
     }
 }
 
-
+// 신고된 게시글 초기화
 async function resetReport(feed_id){
 
 
@@ -249,9 +249,3 @@ async function resetReport(feed_id){
       alert(response.status);
   }
 }
-
-
-
-
-
-

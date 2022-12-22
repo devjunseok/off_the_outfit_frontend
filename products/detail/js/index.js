@@ -15,3 +15,10 @@ window.addEventListener('load', function() {
         }
     });
 });
+
+
+
+// 상품 후기 별점 드래그
+const drawStar = (target) => {
+    document.querySelector(`.star span`).style.width = `${target.value * 20}%`;
+  }

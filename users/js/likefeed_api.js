@@ -114,7 +114,6 @@ window.onload = async function getIndex_API(){
 
         //유저상세정보 조회
         User_list = await getUser()
-        console.log(User_list)
 
 
         like_feed_wrap = document.getElementsByClassName('like_feed_box')[0];
@@ -151,7 +150,7 @@ window.onload = async function getIndex_API(){
             <div class="sub_feed_info_box">
                 <div class="info_top_section horizontal_alignment">
                     <div class="sub_nickname" onclick="location.href='/products/closet/?user_id=${feed.user_id}'">${feed.user}</div>
-                    <div class="sub_like">${feed.like_count}</div>
+                    <div class="sub_like">좋아요 ${feed.like_count}개</div>
                 </div>
                 <div class="info_middle_section">
                     <div class="sub_content">${feed.content}</div>
