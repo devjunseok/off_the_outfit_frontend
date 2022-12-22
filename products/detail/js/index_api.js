@@ -283,6 +283,25 @@ async function reviewclose() {
     }
 }
 
+// 게시글 작성 이미지 미리보기
+let fileTag = document.querySelector("input[name=ex_file]");
+
+fileTag.onchange = function() {
+
+    let imgTag = document.querySelector("#inputPr");
+
+    if(fileTag.files.length > 0) {
+        let reader = new FileReader();
+        reader.onload = function(data) {
+            imgTag.src = data.target.result;
+        }
+        reader.readAsDataURL(fileTag.files[0]);
+    }
+    else {
+        imgTag.src = "/static/img/offtheoutfit.png"
+    }
+}
+
 
 // 게시글 상세보기 출력 부분
 window.onload = async function getIndexDetail_API(){
