@@ -1,7 +1,7 @@
 async function handleKakao() {
     let code = new URL(window.location.href).searchParams.get('code')
     if (code) {
-        const response = await fetch('https://api.offtheoutfit.com/users/kakao/callback/', {
+        const response = await fetch(`${backEndBaseUrl}/users/kakao/callback/`, {
             
             headers: {
                 'content-type': 'application/json',
@@ -13,20 +13,28 @@ async function handleKakao() {
         })
         const response_json = await response.json()
 
-        localStorage.setItem("access", response_json.access_token);
-        localStorage.setItem("refresh", response_json.refresh_token);
+        if(response.status == 200){
 
-        const base64Url = response_json.access_token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            localStorage.setItem("access", response_json.access_token);
+            localStorage.setItem("refresh", response_json.refresh_token);
 
-        }).join(''));
+            const base64Url = response_json.access_token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 
-        localStorage.setItem("payload", jsonPayload);
-        window.location.href = '/index.html'
+            }).join(''));
+
+            localStorage.setItem("payload", jsonPayload);
+
+            alert("카카오 로그인 성공!")
+                window.location.href = '/index.html'
+        } else if(response.status == 400){
+            alert("이미 가입된 이메일 입니다.")
+            window.location.replace(`${frontEndBaseUrl}/users/login.html`);
         }
     }
+}
 window.onload  = function(){
     handleKakao()
 }
