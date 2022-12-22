@@ -145,3 +145,8 @@ body {
     line-height: 50px;
     border-style: none;
 }
+.password_find{
+
+    cursor: pointer;
+
+}

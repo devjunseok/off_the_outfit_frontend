@@ -51,7 +51,8 @@ body {
 
 .main_body_area {
     width: 1280px;
-    margin: 10px;
+    min-height: 1000px;
+    border-left: solid 2px #c0c0c0;
 }
 
 .main_body_area .section_dividing_line {
@@ -66,6 +67,7 @@ body {
 
 .top_section_menu {
     width: 1260px;
+    margin: 20px 0 20px 20px;
 }
 
 .top_section_menu .ts_menu_title {
@@ -194,4 +196,36 @@ body {
 
 .info_middle_section .closet_add_button:hover {
     font-weight: bold;
+}
+
+/* _______________________________________________________________  */
+/* 3. footer.html */
+/* _______________________________________________________________  */
+
+footer {
+    background-color: #000000;
+    width: 100vw;
+    min-width: 1620px;
+    height: 400px;
+}
+
+.footer_area .footer_box {
+    width: 1000px;
+    height: 180px;
+    margin: 0 0 0 50px;
+    padding: 10px;
+    color: #ffffff;
+}
+
+.footer_box .icon_box {
+    margin-bottom: 20px;
+}
+
+.footer_box .icon_box img {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    border: solid 2px #ffffff;
+    margin: 20px 0 0 20px;
+    cursor: pointer;
 }

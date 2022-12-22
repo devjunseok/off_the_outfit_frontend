@@ -1,4 +1,40 @@
 
+
+// 내가 팔로우 한 유저 조회
+async function getUserFollowInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followings/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
+
+//팔로우 하기,취소하기
+async function handleFollow(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/follow/${user_id}/`, {
+    headers: {
+        'content-type': 'application/json',
+        "Authorization":"Bearer " + localStorage.getItem("access")
+    },
+    method: 'POST',
+    body: JSON.stringify({
+
+        })
+    })
+    
+    const response_json = await response.json()
+    window.location.reload();
+
+    return response_json
+}
 // 출석 하기
 async function AttendanceCheck(user_id){
 
@@ -275,117 +311,161 @@ window.onload = async function getIndex_API(){
         
         
     } else {
+        //회원정보 리스트 조회
+        profile_list = await getUser()
+        //팔로우 회원정보 리스트 조회
+        follow_list = await getUserFollowInfo()
+        console.log(follow_list)
+        console.log(profile_list.pk)
+        if(User_payload.user_id != profile_list.pk){
+            
+        //팔로우 출력
+        var follow_wrap = document.getElementsByClassName('follow_box')[0];
+
+        //팔로우 버튼 반복 출력
+        counts =0
+        follow_list.forEach(user=>{
+            console.log(user.pk)
+            
+
+            if(user.pk == profile_list.pk){
+                counts = 1   
+            }
+            else{
+                counts = 0
+            }
+            })
+            if(counts ==1){
+                follow_wrap.innerHTML += `<button class="profile_follow" id ="profile_follow" onclick="handleFollow(${profile_list.pk})">팔로우 취소</button>`
+            }
+            else{
+                follow_wrap.innerHTML += `<button class="profile_follow" id ="profile_follow" onclick="handleFollow(${profile_list.pk})">팔로우</button>`
+            }
+
+        }
+        
+
+        
+        
+            
+        
+
         
         // 전체 상품 조회
         product_list = await getClosetProductList()
 
-        search = location.search.replace("?user_id=", "").replace("?name_tag=", "").split("&")
+        search = location.search.replace("?user_id=", "").replace("?name_tag=", "").replace("?category=", "").split("&")
         user_id = search[0];
         name_tag = search[1];
+        category = search[2];
 
         // 전체 상품 반복 출력
         var product_wrap = document.getElementsByClassName('product_list_box')[0];
 
         // 네임태그가 선택 안된경우
-        if(name_tag == undefined){
+        if(name_tag == undefined || name_tag == ""){
             // 유저 아이디가 본인 아이디인 경우
             if(user_id == User_payload.user_id){
-            product_list.forEach(prod => {
-                brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
-                brand_name_first = brand_name.substr(0, 1).toUpperCase()
-                product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
-                console.log(brand_name)
-                product_wrap.innerHTML += `
-                <div class="product_box">
-                    <div class="product_image_box">
-                        <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
-                    </div>
-                    <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.product.brand}'">${prod.product.brand_name_en}</div>
-                        <div class="product_review">review:${prod.product.review_count}</div>
-                    </div>
-                    <div class="info_middle_section">
-                        <div class="product_name">${prod.product.product_name}</div>
-                        <div class="horizontal_alignment">
-                            <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
-                            <div class="name_tag_add_prod" onclick="nametagProdInputFlex('#info_Input_section_${prod.pk}')">Add</div>
-                            <div class="closet_delete_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                product_list.forEach(prod => {
+                    if(category == undefined || decodeURI(category) == "" || decodeURI(category) == "전체" || decodeURI(category) == prod.product.category[0].main_category_name){
+                    brand_name = prod.product.brand_name_en
+                    brand_name_first = brand_name.substr(0, 1).toUpperCase()
+                    product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
+                    product_wrap.innerHTML += `
+                    <div class="product_box">
+                        <div class="product_image_box">
+                            <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
+                        </div>
+                        <div class="info_top_section horizontal_alignment">
+                            <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.product.brand}'">${prod.product.brand_name_en}</div>
+                            <div class="product_review">review:${prod.product.review_count}</div>
+                        </div>
+                        <div class="info_middle_section">
+                            <div class="product_name">${prod.product.product_name}</div>
+                            <div class="horizontal_alignment">
+                                <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                                <div class="name_tag_add_prod" onclick="nametagProdInputFlex('#info_Input_section_${prod.pk}')">Add</div>
+                                <div class="closet_delete_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                            </div>
+                        </div>
+                        <div class="info_bottom_section horizontal_alignment">
+                            <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                            <div class="product_number">No.${prod.product.product_number}</div>
+                        </div>
+                        <div class="info_Input_section horizontal_alignment" id="info_Input_section_${prod.pk}" style="display:none;">
+                            <input class="nametag_prod_input" id="tag_name_${prod.pk}" type="text" placeholder="네임태그..." />
+                            <button class="nametag_prod_add_button" type="submit" onclick="NametagProdCreate(${prod.product.product_number}, ${prod.pk}, 'tag_name_${prod.pk}')">등록</button>
                         </div>
                     </div>
-                    <div class="info_bottom_section horizontal_alignment">
-                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
-                        <div class="product_number">No.${prod.product.product_number}</div>
-                    </div>
-                    <div class="info_Input_section horizontal_alignment" id="info_Input_section_${prod.pk}" style="display:none;">
-                        <input class="nametag_prod_input" id="tag_name_${prod.pk}" type="text" placeholder="네임태그..." />
-                        <button class="nametag_prod_add_button" type="submit" onclick="NametagProdCreate(${prod.product.product_number}, ${prod.pk}, 'tag_name_${prod.pk}')">등록</button>
-                    </div>
-                </div>
-                `
-        // 유저 아이디가 본인 유저가 아닌 경우 
-        })} else {
-            product_list.forEach(prod => {
-                brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
-                brand_name_first = brand_name.substr(0, 1).toUpperCase()
-                product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
-                product_wrap.innerHTML += `
-                <div class="product_box">
-                    <div class="product_image_box">
-                        <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
-                    </div>
-                    <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
-                        <div class="product_review">review:${prod.product.review_count}</div>
-                    </div>
-                    <div class="info_middle_section">
-                        <div class="product_name">${prod.product.product_name}</div>
-                        <div class="horizontal_alignment">
-                            <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                    `
+                }
+            // 유저 아이디가 본인 유저가 아닌 경우 
+            })} else {
+                product_list.forEach(prod => {
+                    if(category == undefined || decodeURI(category) == "" || decodeURI(category) == "전체" || decodeURI(category) == prod.product.category[0].main_category_name){
+                        brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
+                        brand_name_first = brand_name.substr(0, 1).toUpperCase()
+                        product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
+                        product_wrap.innerHTML += `
+                        <div class="product_box">
+                            <div class="product_image_box">
+                                <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
+                            </div>
+                            <div class="info_top_section horizontal_alignment">
+                                <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
+                                <div class="product_review">review:${prod.product.review_count}</div>
+                            </div>
+                            <div class="info_middle_section">
+                                <div class="product_name">${prod.product.product_name}</div>
+                                <div class="horizontal_alignment">
+                                    <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                                </div>
+                            </div>
+                            <div class="info_bottom_section horizontal_alignment">
+                                <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                                <div class="product_number">No.${prod.product.product_number}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info_bottom_section horizontal_alignment">
-                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
-                        <div class="product_number">No.${prod.product.product_number}</div>
-                    </div>
-                </div>
-                `
-        })}
+                        `
+                    }
+            })}
         // 네임태그가 선택된 경우
         } else {
             product_list.forEach(prod => {
             if(prod.name_tag != null){
             if(prod.name_tag.tag_name == decodeURI(name_tag)){
-                brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
-                brand_name_first = brand_name.substr(0, 1).toUpperCase()
-                product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
-                product_wrap.innerHTML += `
-                <div class="product_box">
-                    <div class="product_image_box">
-                        <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
-                    </div>
-                    <div class="info_top_section horizontal_alignment">
-                        <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
-                        <div class="product_review">review:${prod.product.review_count}</div>
-                    </div>
-                    <div class="info_middle_section">
-                        <div class="product_name">${prod.product.product_name}</div>
-                        <div class="horizontal_alignment">
-                            <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
-                            <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                if(category == undefined || decodeURI(category) == "" || decodeURI(category) == "전체" || decodeURI(category) == prod.product.category[0].main_category_name){
+                    brand_name = prod.product.brand_name_en.trim().toLowerCase().replace(' ', '')
+                    brand_name_first = brand_name.substr(0, 1).toUpperCase()
+                    product_image_500 = prod.product.product_image.replace("_125.jpg", "_500.jpg")
+                    product_wrap.innerHTML += `
+                    <div class="product_box">
+                        <div class="product_image_box">
+                            <img src="${product_image_500}" onclick="location.href='/products/detail/?product_number=${prod.product.product_number}'">
+                        </div>
+                        <div class="info_top_section horizontal_alignment">
+                            <div class="product_brand" onclick="location.href='/products/?key=${brand_name_first}&?brand_id=${prod.brand}'">${prod.product.brand_name_en}</div>
+                            <div class="product_review">review:${prod.product.review_count}</div>
+                        </div>
+                        <div class="info_middle_section">
+                            <div class="product_name">${prod.product.product_name}</div>
+                            <div class="horizontal_alignment">
+                                <div class="product_price">${prod.product.discount_price} ~ ${prod.product.original_price}</div>
+                                <div class="closet_add_button" onclick="closetProductDelete(${prod.product.product_number}, ${prod.pk})">Delete</div>
+                            </div>
+                        </div>
+                        <div class="info_bottom_section horizontal_alignment">
+                            <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
+                            <div class="product_number">No.${prod.product.product_number}</div>
                         </div>
                     </div>
-                    <div class="info_bottom_section horizontal_alignment">
-                        <div class="product_category" onclick="location.href='/products/category/?category_id=${prod.product.category[0].id}'">${prod.product.category[0].main_category_name} > ${prod.product.category[0].sub_category_name}</div>
-                        <div class="product_number">No.${prod.product.product_number}</div>
-                    </div>
-                </div>
-                `
+                    `
+                }
             }}
         });
     }
 
-        //회원정보 리스트 조회
-        profile_list = await getUser()
+        
 
         // 옷장 타이틀 출력
         var closet_name_tag_title = document.getElementsByClassName("ts_menu_title")[0];
@@ -401,21 +481,35 @@ window.onload = async function getIndex_API(){
         var main_profile_image = document.getElementsByClassName('main_profile_image')[0];
         var profile_nickname = document.getElementsByClassName('profile_nickname')[0];
         var profile_tier_info = document.getElementsByClassName('profile_tier_info')[0];
-        var profile_created_at = document.getElementsByClassName('profile_created_at')[0];
         var profile_next_tier_info = document.getElementsByClassName('profile_next_tier_info')[0];
         var follow_value = document.getElementById('follow_value_count')
         var follower_value = document.getElementById('follower_value_count')
         var feed_value = document.getElementById('feed_value_count')
         var closet_count_value = document.getElementById('closet_value_count')
 
-        main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+        
         profile_nickname.innerText = `${profile_list.nickname}`
-        // profile_created_at.innerText = `${profile_list.created_at}`
         profile_next_tier_info.innerText = `현재 ${profile_list.nickname}님의 포인트는 ${profile_list.point} 포인트 입니다`
         follow_value.innerText = `${profile_list.followings_count}`
         follower_value.innerText = `${profile_list.followers_count}`
         feed_value.innerText = `${profile_list.feeds_count}`
         closet_count_value.innerText = `${profile_list.closet_set_count}`
+
+
+
+
+        // 일반 or 소셜 유저 프로필 이미지 처리
+        profile_image_default = profile_list.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+        kakao_check = profile_list.username.substr(0, 2);
+        if(kakao_check == "k@"){
+            profile_image_kakao = profile_list.profile_image.replace('/media/http%3A/', 'https://');
+            main_profile_image.setAttribute("src", `${profile_image_kakao}`)
+        } else if (profile_list.profile_image == '/media/imgs/default.png') {
+            main_profile_image.setAttribute("src", `${profile_image_default}`)
+        } else {
+            main_profile_image.setAttribute("src", `${backEndBaseUrl}${profile_list.profile_image}`)
+        }
+
         
         //마이페이지 등급 조건문
         if(profile_list.point>=0&&profile_list.point <31){
@@ -441,6 +535,19 @@ window.onload = async function getIndex_API(){
         var hd_closet_button = document.getElementById('header_closet_button')
         hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
+        // 옷장 카테고리 목록
+        var closet_all = document.getElementById('closet_all');
+        var closet_outer = document.getElementById('closet_outer');
+        var closet_top = document.getElementById('closet_top');
+        var closet_bottom = document.getElementById('closet_bottom');
+        var closet_sneakers = document.getElementById('closet_sneakers');
+
+        closet_all.setAttribute('onclick', `location.href='/products/closet/?user_id=${user_id}&?name_tag=&?category=전체'`);
+        closet_outer.setAttribute('onclick', `location.href='/products/closet/?user_id=${user_id}&?name_tag=&?category=아우터'`);
+        closet_top.setAttribute('onclick', `location.href='/products/closet/?user_id=${user_id}&?name_tag=&?category=상의'`);
+        closet_bottom.setAttribute('onclick', `location.href='/products/closet/?user_id=${user_id}&?name_tag=&?category=바지'`);
+        closet_sneakers.setAttribute('onclick', `location.href='/products/closet/?user_id=${user_id}&?name_tag=&?category=스니커즈'`);
+
 
         // NAV 네임태그 반복
         user_info = await getUser()
@@ -464,7 +571,7 @@ window.onload = async function getIndex_API(){
         if(closet_user_list['message'] != undefined ){
             closet_user_list = [user_id]
         }
-        closet_user_list = closet_user_list.slice(0,2);
+        closet_user_list.sort(function(){return Math.random() - Math.random();})
         // 전체 유저 불러오기
         all_user_list = await getAllUserList()
 
@@ -473,12 +580,39 @@ window.onload = async function getIndex_API(){
 
         var closet_recommend_list = document.getElementById('closet_recommend_user_list')
         for_count = 0
+
         if(closet_user_list.length == 1){
             all_user_list.forEach(closet_user => {
                 // 목록 리스트 제한
                 if(for_count < 10){
                     if(closet_user.pk != user_id && closet_user.closet_set_count != 0){
+                        kakao_check = closet_user.username.substr(0, 2);
+                        if(kakao_check == "k@"){
+                            profile_image_kakao = closet_user.profile_image.replace('/media/http%3A/', 'https://');
                         closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_kakao}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else if (closet_user.profile_image == '/media/imgs/default.png'){
+                            profile_image_default = closet_user.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+                            closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_default}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else {
+                            closet_recommend_list.innerHTML += `
                         <div class="closet_recommend_user_box horizontal_alignment">
                             <img src="${backEndBaseUrl}${closet_user.profile_image}" class="nav_mini_profile_image">
                             <div class="nav_mini_box vertical_alignment">
@@ -488,6 +622,7 @@ window.onload = async function getIndex_API(){
                         </div>
                         `
                         for_count += 1
+                        }
                     }
                 }
             })
@@ -496,7 +631,33 @@ window.onload = async function getIndex_API(){
                 // 목록 리스트 제한
                 if(for_count < 10){
                     if(closet_user.pk != user_id){
+                        kakao_check = closet_user.username.substr(0, 2);
+                        if(kakao_check == "k@"){
+                            profile_image_kakao = closet_user.profile_image.replace('/media/http%3A/', 'https://');
                         closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_kakao}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else if (closet_user.profile_image == '/media/imgs/default.png'){
+                            profile_image_default = closet_user.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
+                            closet_recommend_list.innerHTML += `
+                        <div class="closet_recommend_user_box horizontal_alignment">
+                            <img src="${profile_image_default}" class="nav_mini_profile_image">
+                            <div class="nav_mini_box vertical_alignment">
+                                <span class="nav_mini_nickname" onclick="location.href='/products/closet/?user_id=${closet_user.pk}'">${closet_user.nickname}님의 옷장</span>
+                                <span class="nav_mini_info">보유 상품 수 : ${closet_user.closet_set_count}</span>
+                            </div>
+                        </div>
+                        `
+                        for_count += 1
+                        } else {
+                            closet_recommend_list.innerHTML += `
                         <div class="closet_recommend_user_box horizontal_alignment">
                             <img src="${backEndBaseUrl}${closet_user.profile_image}" class="nav_mini_profile_image">
                             <div class="nav_mini_box vertical_alignment">
@@ -506,6 +667,7 @@ window.onload = async function getIndex_API(){
                         </div>
                         `
                         for_count += 1
+                        }
                     }
                 }
             })

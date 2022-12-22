@@ -45,24 +45,15 @@
                     <input value="True" class="signup_date_of_birth" id="date_of_birth" type="date" required pattern="\d{4}-\d{2}-\d{2}" />
             </div>
                 <div class="horizontal_alignment between">
-                    <input class="signup_height" id="height" placeholder="키" />
-                    <input class="signup_weight" id="weight" placeholder="몸무게" />
+                    <input class="signup_height" id="height" placeholder="키(숫자만 입력)" />
+                    <input class="signup_weight" id="weight" placeholder="몸무게(숫자만 입력)" />
                 </div>
             </div>
             <hr class="dividing_bottom_line">
             <div class="signup_button_box">
 
                 <button type="submit" class="signup_button" onclick="showPopup()">약관 읽기</button>
-                <select class="signup_button" name="cars" id="term_agree">
-        
-                    <option type="button" value="팝업창 호출" onclick="showPopup();">약관 동의(필수)</option>
-                    <option value="True">동의</option>
-                    
-
-                
-                    
-                </select>
-                
+                 <input type="checkbox" name="term_agree" value="term_agree">약관 동의
                 <p></p>
                 <p></p>
                 <button type="submit" class="signup_button" onclick="handleSignup()">회원가입</button>

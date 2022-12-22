@@ -249,9 +249,3 @@ async function resetReport(feed_id){
       alert(response.status);
   }
 }
-
-
-
-
-
-
