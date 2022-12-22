@@ -203,7 +203,7 @@ async function postComment(feed_id){
     if (response.status == 200){
         alert(response_json["message"])
     }else {
-        alert(response_json["detail"])
+        alert("댓글을 입력해주세요!")
     }
     window.location.reload()   
     
