@@ -271,6 +271,7 @@ body {
     width: 300px;
     padding: 10px;
     min-width: 300px;
+    min-height: 1500px;
 }
 
 .left_area .mypage_main_title {
