@@ -51,13 +51,14 @@ body {
 
 .main_body_area {
     width: 1280px;
-    margin: 10px;
     min-width: 1280px;
+    border-left: solid 2px #c0c0c0;
 }
 
 .main_body_area .recommend_info_section {
     width: 1280px;
-    height: 80px;
+    height: 60px;
+    margin: 20px 0 0 20px;
 }
 
 .recommend_info_section .temps_info {
@@ -89,30 +90,33 @@ body {
 .main_body_area .outer_section {
     width: 1260px;
     height: 400px;
-    margin: 10px;
+    margin: 10px 0 0 20px;
 }
 .main_body_area .top_section {
     width: 1260px;
     height: 400px;
-    margin: 10px;
+    margin: 10px 0 0 20px;
 }
 .main_body_area .bottom_section {
     width: 1260px;
     height: 400px;
-    margin: 10px;
+    margin: 10px 0 0 20px;
 }
 
 
 .outer_section_menu {
     width: 1260px;
+    margin: 10px 0 0 20px;
 
 }
 .top_section_menu {
     width: 1260px;
+    margin: 10px 0 0 20px;
 
 }
 .bottom_section_menu {
     width: 1260px;
+    margin: 10px 0 0 20px;
 
 }
 
