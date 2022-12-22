@@ -192,6 +192,7 @@ body {
     width: 300px;
     height: 100vh;
     padding: 10px;
+    min-height: 2000px;
 }
 
 .left_area .nav_main_bt {

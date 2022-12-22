@@ -616,3 +616,15 @@ body {
 .info_middle_section .closet_add_button:hover {
     font-weight: bold;
 }
+
+
+/* 상품 후기 작성 박스 */
+
+.ua_right_section .review_create_box {
+    width: 420px;
+    height: 340px;
+    margin: 10px 0 0 20px;
+    background-color: #f0f0f0;
+    border: solid 1px #c0c0c0;
+    padding: 10px;
+}
