@@ -58,6 +58,22 @@ async function kakaologin() {
   
   }
 
+async function handlePasswordFind(){
+
+    var url = `${backEndBaseUrl}/users/password_reset/`;
+    var name = "popup test";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+    const response = await fetch(`${backEndBaseUrl}/users/password_reset/`, { 
+        headers: {
+            'content-type': 'application/json'
+        },
+        method: 'GET',
+        
+    })
+    window.open(url, name, option);
+        
+}
+
 
 async function handleLogin() {
 

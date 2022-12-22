@@ -1,4 +1,40 @@
 
+
+// 내가 팔로우 한 유저 조회
+async function getUserFollowInfo(){
+
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+    const response = await fetch(`${backEndBaseUrl}/users/${User_payload.user_id}/followings/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'GET',
+    })
+    response_json = await response.json()
+    return response_json
+}
+
+
+//팔로우 하기,취소하기
+async function handleFollow(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/follow/${user_id}/`, {
+    headers: {
+        'content-type': 'application/json',
+        "Authorization":"Bearer " + localStorage.getItem("access")
+    },
+    method: 'POST',
+    body: JSON.stringify({
+
+        })
+    })
+    
+    const response_json = await response.json()
+    window.location.reload();
+
+    return response_json
+}
 // 출석 하기
 async function AttendanceCheck(user_id){
 
@@ -275,6 +311,45 @@ window.onload = async function getIndex_API(){
         
         
     } else {
+        //회원정보 리스트 조회
+        profile_list = await getUser()
+        //팔로우 회원정보 리스트 조회
+        follow_list = await getUserFollowInfo()
+        console.log(follow_list)
+        console.log(profile_list.pk)
+        if(User_payload.user_id != profile_list.pk){
+            
+        //팔로우 출력
+        var follow_wrap = document.getElementsByClassName('follow_box')[0];
+
+        //팔로우 버튼 반복 출력
+        counts =0
+        follow_list.forEach(user=>{
+            console.log(user.pk)
+            
+
+            if(user.pk == profile_list.pk){
+                counts = 1   
+            }
+            else{
+                counts = 0
+            }
+            })
+            if(counts ==1){
+                follow_wrap.innerHTML += `<button class="profile_follow" id ="profile_follow" onclick="handleFollow(${profile_list.pk})">팔로우 취소</button>`
+            }
+            else{
+                follow_wrap.innerHTML += `<button class="profile_follow" id ="profile_follow" onclick="handleFollow(${profile_list.pk})">팔로우</button>`
+            }
+
+        }
+        
+
+        
+        
+            
+        
+
         
         // 전체 상품 조회
         product_list = await getClosetProductList()
@@ -390,8 +465,7 @@ window.onload = async function getIndex_API(){
         });
     }
 
-        //회원정보 리스트 조회
-        profile_list = await getUser()
+        
 
         // 옷장 타이틀 출력
         var closet_name_tag_title = document.getElementsByClassName("ts_menu_title")[0];
