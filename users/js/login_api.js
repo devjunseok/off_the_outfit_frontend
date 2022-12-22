@@ -52,7 +52,6 @@ async function kakaologin() {
 
 async function handlePasswordFind(){
 
-    const password_find = document.getElementById("password_find").value
 
     const response = await fetch(`${backEndBaseUrl}/users/password_reset/`, { 
         headers: {
