@@ -151,9 +151,9 @@ window.onload = async function getIndex_API(){
                         <div class="nf_tag">${tag_list}</div>
                     </div>
                     <div class="right_section vertical_alignment">
-                        <div class="like_box horizontal_alignment">
-                            <div class="nf_like">${best_feed.like_count}</div>
-                            <div class="nf_unlike">${best_feed.unlike_count}</div>
+                        <div class="like_box vertical_alignment">
+                            <div class="nf_like">좋아요 ${best_feed.like_count}개</div>
+                            <div class="nf_unlike">싫어요 ${best_feed.unlike_count}개</div>
                         </div>
                         <div class="right_section_middle"></div>
                         <div class="nf_create_at">${timeForToday(best_feed.created_at)}</div>
@@ -196,7 +196,7 @@ window.onload = async function getIndex_API(){
                     <div class="sub_feed_info_box">
                         <div class="info_top_section horizontal_alignment">
                             <div class="sub_nickname" onclick="location.href='/products/closet/?user_id=${feed.user_id}'">${feed.user}</div>
-                            <div class="sub_like">${feed.like_count}</div>
+                            <div class="sub_like">좋아요 ${feed.like_count}개</div>
                         </div>
                         <div class="info_middle_section">
                             <div class="sub_content">${feed.content}</div>
