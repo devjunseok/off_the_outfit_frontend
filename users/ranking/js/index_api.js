@@ -147,8 +147,6 @@ window.onload = async function getIndex_API(){
                 }
 
             })
-            console.log(user)
-            console.log(counts)
             user_profile_image_default = user.profile_image.replace('/media/imgs/default.png', `/static/img/default.png`)
             user_kakao_check = user.username.substr(0, 2);
             user_image_kakao = user.profile_image.replace('/media/http%3A/', 'https://');

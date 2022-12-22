@@ -176,18 +176,13 @@ async function closetProductAdd(product_id) {
         
         
     } else {
-        // name_tag = document.getElementById("name_tag").value;
-        // console.log(name_tag)
-        // const formData = new FormData();
 
-        // formData.append("name_tag", name_tag);
 
         const response = await fetch(`${backEndBaseUrl}/products/product/${product_id}/closet/`, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("access"),
         },
         method: "POST",
-        // body: formData,
         }); 
         if (response.status == 200) {
         alert("옷장 상품 등록");
@@ -315,8 +310,7 @@ window.onload = async function getIndex_API(){
         profile_list = await getUser()
         //팔로우 회원정보 리스트 조회
         follow_list = await getUserFollowInfo()
-        console.log(follow_list)
-        console.log(profile_list.pk)
+
         if(User_payload.user_id != profile_list.pk){
             
         //팔로우 출력
@@ -325,7 +319,7 @@ window.onload = async function getIndex_API(){
         //팔로우 버튼 반복 출력
         counts =0
         follow_list.forEach(user=>{
-            console.log(user.pk)
+
             
 
             if(user.pk == profile_list.pk){

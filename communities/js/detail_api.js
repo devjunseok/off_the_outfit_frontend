@@ -127,7 +127,6 @@ async function handleUnLike(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     feed_id = location.search.replace("?id=","")
     feeds = await getIndexFeedDetail(feed_id)
-    console.log(feeds)
     if(feeds.like.length==0){
         const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
             headers: {
