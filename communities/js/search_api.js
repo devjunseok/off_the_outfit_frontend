@@ -183,7 +183,6 @@ window.onload = async function getSearch_api(){
         search_list = await getSearch(search_word)
         prod_search_list = await getProdSearchAPI(search_word)
         user_search_list = await getUserSearchAPI(search_word)
-        console.log(user_search_list)
 
         //팔로우,팔로워 회원정보 리스트 조회
         follower_list = await getFollowerUserInfo()
@@ -288,7 +287,6 @@ search_list.forEach(feed => {
 
         })
         if(User_payload.user_id != user.pk){
-            console.log(user)
         user_profile_image_default = user.profile_image.replace(`${backEndBaseUrl}/media/imgs/default.png`, `/static/img/default.png`)
         console.log()
         user_kakao_check = user.username.substr(0, 2);
