@@ -10,8 +10,8 @@ async function handleSignup() {
     const gender = document.getElementById("gender").value
     const height = document.getElementById("height").value
     const weight = document.getElementById("weight").value
-    const date_of_birth = document.getElementById("date_of_birth").value
-    const term_agree = document.getElementById("term_agree").value
+    const date_of_birth = document.getElementById("date_of_birth").value    
+    var term_agree = document.querySelector("input[name=term_agree]").checked
 
     const response = await fetch(`${backEndBaseUrl}/users/`, {
         

@@ -167,9 +167,11 @@ window.onload = async function getIndex_API(){
         
     } else {
         
+        
         // 전체 상품 조회
         product_list = await getIndexProductList()
         product_list = product_list.slice(0, 30)
+        
 
         // 카테고리명 출력
         var category_name = document.getElementsByClassName('ts_menu_title')[0];

@@ -1,3 +1,21 @@
+// 출석 하기
+async function AttendanceCheck(user_id){
+
+    const response = await fetch(`${backEndBaseUrl}/users/point/${user_id}/`,{
+        headers: {
+            'content-type': 'application/json',
+            "Authorization":"Bearer " + localStorage.getItem("access")
+        },
+        method: 'POST',
+    })
+    if (response.status == 200){
+        alert("출석이 완료 되었습니다. 5 포인트 획득!")
+    }else {
+        alert("이미 출석 하셨습니다")
+    }   
+return response_json
+}
+
 // 게시글 상세보기 API
 async function getIndexFeedDetail(feed_id){
     const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/`,{
@@ -26,6 +44,7 @@ async function getHeaderSearchWordRanking(){
     response_json = await response.json()
     return response_json
 }
+
 
 // 텍스트 미리보기
 $(document).ready(function(){
@@ -224,6 +243,8 @@ async function closetProductAdd(product_number) {
 
 window.onload = async function getUpdate_API(){
 
+    let User_payload = JSON.parse(localStorage.getItem('payload'))
+
     // 사용자 정보 가져오기
     user_info = await getUser()
     var user_nickname = document.getElementsByClassName('nickname')[0];
@@ -244,6 +265,15 @@ window.onload = async function getUpdate_API(){
         user_profile_image.setAttribute("src", `${backEndBaseUrl}${user_info.profile_image}`)
     }
 
+
+
+    //출석하기 출력문
+    var AttendanceCheck = document.getElementById('AttendanceCheck')
+    AttendanceCheck.setAttribute('onclick',`AttendanceCheck(${User_payload.user_id})`)
+
+    // 옷장 버튼
+    var hd_closet_button = document.getElementById('header_closet_button')
+    hd_closet_button.setAttribute('href', `/products/closet/?user_id=${User_payload.user_id}`)
 
 
     // 검색어 랭킹 조회

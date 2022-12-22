@@ -112,39 +112,22 @@ async function handleLike(){
         
                 })
             })
-            window.location.reload()
-    }
+            window.location.reload();
+        }
     else{
-        feeds.unlike.forEach(unliker=>{
-            if(unliker==User_payload.user_id){
-                alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
+    alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
             }
-            else{
-                const response =  fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
-                    headers: {
-                        'content-type': 'application/json',
-                        "Authorization":"Bearer " + localStorage.getItem("access")
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({
-                
-                        })
-                    })
-                    window.location.reload()
-
-            }
-        })
-    }
-    
 }
+
 
 //싫어요 실행
 
 async function handleUnLike(){
 
-    feed_id = location.search.replace("?id=","")
     let User_payload = JSON.parse(localStorage.getItem('payload'))
+    feed_id = location.search.replace("?id=","")
     feeds = await getIndexFeedDetail(feed_id)
+    console.log(feeds)
     if(feeds.like.length==0){
         const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
             headers: {
@@ -156,32 +139,13 @@ async function handleUnLike(){
         
                 })
             })
-            window.location.reload()
+            window.location.reload();
         }
     else{
-        feeds.like.forEach(liker=>{
-            if(liker==User_payload.user_id){
-                alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
-            }
-            else{
-                const response = fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
-                    headers: {
-                        'content-type': 'application/json',
-                        "Authorization":"Bearer " + localStorage.getItem("access")
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({
-                
-                        })
-                    })
-                    window.location.reload()
-
-            }
-        })
-        
-    }
+    alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
+        }
 }
-
+        
 
 
 //댓글 등록
@@ -203,7 +167,7 @@ async function postComment(feed_id){
     if (response.status == 200){
         alert(response_json["message"])
     }else {
-        alert(response_json["detail"])
+        alert("댓글을 입력해주세요!")
     }
     window.location.reload()   
     
