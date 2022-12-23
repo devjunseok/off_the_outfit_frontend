@@ -143,7 +143,6 @@ async function prodSearchInputFlex() {
 // 상품 검색 API
 async function getProdSearchAPI(search){
     
-    console.log(search)
     const response = await fetch(`${backEndBaseUrl}/products/search/?search=${search}`, {
         headers: {
             'content-type': 'application/json',
