@@ -30,13 +30,13 @@
     margin: 10px;
 }
 
-.bottom_section .myfeed_list_box {
+.bottom_section .like_feed_box {
     width: 1260px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
 
-.myfeed_list_box .sub_feed_box {
+.like_feed_box .sub_feed_box {
     width: 242px;
     height: 370px;
     margin-right: 10px;
