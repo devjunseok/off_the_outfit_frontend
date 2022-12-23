@@ -101,7 +101,6 @@ window.onload = async function getIndex_API(){
         // 지역 추천 상품 리스트 조회
 
         product_list = await getIndexProductList(city)
-        console.log(product_list)
 
         // 지역 추천 상품 리스트 조회
         var outer_wrap = document.getElementById('outer')
