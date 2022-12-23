@@ -30,13 +30,13 @@
     margin: 10px;
 }
 
-.bottom_section .myfeed_list_box {
+.bottom_section .like_feed_box {
     width: 1260px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
 
-.myfeed_list_box .sub_feed_box {
+.like_feed_box .sub_feed_box {
     width: 242px;
     height: 370px;
     margin-right: 10px;
@@ -74,12 +74,15 @@
 }
 
 .info_top_section .sub_like {
-    width: 60px;
+    font-size: 10pt;
+    width: 20px;
     height: 20px;
+    background-color: #c0c0c0;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-top: 5px;
     text-align: center;
-    line-height: 25px;
-    margin: 0 0 5px 15px;
-    font-size: 9pt;
+    line-height: 20px;
 }
 
 
