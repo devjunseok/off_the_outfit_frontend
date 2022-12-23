@@ -288,7 +288,6 @@ search_list.forEach(feed => {
         })
         if(User_payload.user_id != user.pk){
         user_profile_image_default = user.profile_image.replace(`${backEndBaseUrl}/media/imgs/default.png`, `/static/img/default.png`)
-        console.log()
         user_kakao_check = user.username.substr(0, 2);
         user_image_kakao = user.profile_image.replace('http://127.0.0.1:8000/media/http%3A/', 'https://');
         if(user_kakao_check == "k@"){
