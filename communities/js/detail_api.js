@@ -114,10 +114,29 @@ async function handleLike(){
             })
             window.location.reload();
         }
-    else{
-    alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
-            }
-}
+        else{
+            feeds.unlike.forEach(unliker=>{
+                if(unliker==User_payload.user_id){
+                    alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
+                }
+                else{
+                    const response =  fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
+                        headers: {
+                            'content-type': 'application/json',
+                            "Authorization":"Bearer " + localStorage.getItem("access")
+                        },
+                        method: 'POST',
+                        body: JSON.stringify({
+                    
+                            })
+                        })
+                        window.location.reload()
+    
+                }
+            })
+        }
+        
+    }
 
 
 //싫어요 실행
@@ -140,10 +159,29 @@ async function handleUnLike(){
             })
             window.location.reload();
         }
-    else{
-    alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
+        else{
+            feeds.like.forEach(liker=>{
+                if(liker==User_payload.user_id){
+                    alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
+                }
+                else{
+                    const response = fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
+                        headers: {
+                            'content-type': 'application/json',
+                            "Authorization":"Bearer " + localStorage.getItem("access")
+                        },
+                        method: 'POST',
+                        body: JSON.stringify({
+                    
+                            })
+                        })
+                        window.location.reload()
+    
+                }
+            })
+            
         }
-}
+    }
         
 
 
