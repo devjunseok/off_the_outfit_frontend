@@ -11,9 +11,6 @@ async function checkLogin() {
 }
 
 
-checkLogin();
-
-
 
 
 
