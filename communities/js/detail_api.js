@@ -101,23 +101,39 @@ async function handleLike(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     feed_id = location.search.replace("?id=","")
     feeds = await getIndexFeedDetail(feed_id)
-    if(feeds.unlike.length==0){
-        const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
-            headers: {
-                'content-type': 'application/json',
-                "Authorization":"Bearer " + localStorage.getItem("access")
-            },
-            method: 'POST',
-            body: JSON.stringify({
-        
-                })
-            })
-            window.location.reload();
+    count =0
+    
+    feeds.unlike.forEach(unliker=>{
+        if(unliker==User_payload.user_id){
+            count = 1
+            
         }
-    else{
-    alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
-            }
-}
+        else{
+            count = 0
+            
+
+        }})
+
+        if(count == 1){
+            alert("싫어요와 좋아요를 같이 할 순 없습니다 싫어요를 취소하고 눌러주세요")
+        }else{
+            const response =  fetch(`${backEndBaseUrl}/communities/${feed_id}/like/`,{
+                headers: {
+                    'content-type': 'application/json',
+                    "Authorization":"Bearer " + localStorage.getItem("access")
+                },
+                method: 'POST',
+                body: JSON.stringify({
+            
+                    })
+                })
+                window.location.reload()
+
+        }
+    }
+
+        
+    
 
 
 //싫어요 실행
@@ -127,8 +143,44 @@ async function handleUnLike(){
     let User_payload = JSON.parse(localStorage.getItem('payload'))
     feed_id = location.search.replace("?id=","")
     feeds = await getIndexFeedDetail(feed_id)
-    if(feeds.like.length==0){
-        const response = await fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
+    count = 0
+            feeds.like.forEach(liker=>{
+                if(liker==User_payload.user_id){
+                    count = 1   
+                }
+                else{
+                    count = 0
+                    
+    
+                }
+            })
+            if(count ==1){
+                alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
+            }else{
+                const response = fetch(`${backEndBaseUrl}/communities/${feed_id}/unlike/`,{
+                    headers: {
+                        'content-type': 'application/json',
+                        "Authorization":"Bearer " + localStorage.getItem("access")
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                
+                        })
+                    })
+                    window.location.reload()
+
+            }
+        }
+
+
+//댓글 좋아요
+
+async function handleCommentLike(comment_id){
+
+    feed_id = location.search.replace("?id=","")
+
+
+        const response =  fetch(`${backEndBaseUrl}/communities/${feed_id}/comment/${comment_id}/like/`,{
             headers: {
                 'content-type': 'application/json',
                 "Authorization":"Bearer " + localStorage.getItem("access")
@@ -138,15 +190,10 @@ async function handleUnLike(){
         
                 })
             })
-            window.location.reload();
+            window.location.reload()
+
         }
-    else{
-    alert("좋아요와 싫어요를 같이 할 순 없습니다 좋아요를 취소하고 눌러주세요")
-        }
-}
         
-
-
 //댓글 등록
 async function postComment(feed_id){
 
@@ -376,6 +423,8 @@ window.onload = async function getIndexDetail_API(){
         var etc_list = document.getElementsByClassName('etc_list')[0];
         var detail_follow = document.getElementsByClassName('detail_follow_box')[0];
         var report_button = document.getElementById('report_button_done');
+        var cmt_like_button =document.getElementsByClassName('cmt_like_button');
+
 
         report_button.setAttribute('onclick', `postReport(${feed.pk}, '#report_content')`)
 
@@ -448,74 +497,164 @@ window.onload = async function getIndexDetail_API(){
         })
         
 
-        // 댓글 닉네임과 내용 반복문
-        feed.comments.forEach(comt=>{
-            // 댓글 삭제 유무
-            if(comt.user_id == User_payload.user_id){
-            cmt_wrap.innerHTML += `
-            <div class="vertical_alignment">
-                <div class="comment_box horizontal_alignment">
-                    <div class="cmt_user horizontal_alignment">  
-                        <div class="cmt_nickname">${comt.user}</div>
-                        <div class="cmt_comment">${comt.comment}</div>
-                    </div>
-                    <div class="cmt_button_box horizontal_alignment">
-                        <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
-                        <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick=""></div>
-                        <div class="cmt_delete_button" onclick="deleteComment(${comt.pk})">X</div>
-                    </div>
+       // 댓글 닉네임과 내용 반복문
+       feed.comments.forEach(comt=>{
+        count = 0
+        // 댓글 좋아요 체크
+        comt.comment_like.forEach(liker=>{
+
+            if(liker == User_payload.user_id){
+                count +=1
+            }
+            else{
+
+            }
+        })
+
+        if(count == 0){
+
+
+        
+        // 댓글 삭제 유무
+        if(comt.user_id == User_payload.user_id){
+        cmt_wrap.innerHTML += `
+        <div class="vertical_alignment">
+            <div class="comment_box horizontal_alignment">
+                <div class="cmt_user horizontal_alignment">  
+                    <div class="cmt_nickname">${comt.user}</div>
+                    <div class="cmt_comment">${comt.comment}</div>
                 </div>
-                <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
-                    <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
-                    <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+                <div class="cmt_button_box horizontal_alignment">
+                    <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                    <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick="handleCommentLike(${comt.pk})"></div>
+                    <div class="cmt_delete_button" onclick="deleteComment(${comt.pk})">X</div>
                 </div>
+            </div>
+            <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+            </div>
+        </div>
+        `
+        } else {
+        cmt_wrap.innerHTML += `
+        <div class="vertical_alignment">
+            <div class="comment_box horizontal_alignment">
+                <div class="cmt_user horizontal_alignment">  
+                    <div class="cmt_nickname">${comt.user}</div>
+                    <div class="cmt_comment">${comt.comment}</div>
+                </div>
+                <div class="cmt_button_box horizontal_alignment">
+                    <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                    <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick="handleCommentLike(${comt.pk})"></div>
+                </div>
+            </div>
+            <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+            </div>
+        </div>
+        `
+
+    }
+
+
+    
+    comt.recomment.forEach(reco=>{
+        // 대댓글 삭제 부분
+        if(reco.user_id == User_payload.user_id){
+            cmt_wrap.innerHTML +=`
+            <div class="recomment_box horizontal_alignment">
+                <div class="reco_user horizontal_alignment">  
+                    <div class="reco_nickname">┗ ${reco.user}</div>
+                    <div class="reco_recomment">${reco.recomment}</div>
+                </div>
+                <div class="reco_delete_button" onclick="deleteRecomment(${comt.pk}, ${reco.pk})">X</div>
             </div>
             `
         } else {
-            cmt_wrap.innerHTML += `
-            <div class="vertical_alignment">
-                <div class="comment_box horizontal_alignment">
-                    <div class="cmt_user horizontal_alignment">  
-                        <div class="cmt_nickname">${comt.user}</div>
-                        <div class="cmt_comment">${comt.comment}</div>
-                    </div>
-                    <div class="cmt_button_box horizontal_alignment">
-                        <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
-                        <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart.png" onclick=""></div>
-                    </div>
-                </div>
-                <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
-                    <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
-                    <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+            cmt_wrap.innerHTML +=`
+            <div class="recomment_box horizontal_alignment">
+                <div class="reco_user horizontal_alignment">  
+                    <div class="reco_nickname">┗ ${reco.user}</div>
+                    <div class="reco_recomment">${reco.recomment}</div>
                 </div>
             </div>
             `
-
         }
-        comt.recomment.forEach(reco=>{
-            // 대댓글 삭제 부분
-            if(reco.user_id == User_payload.user_id){
-                cmt_wrap.innerHTML +=`
-                <div class="recomment_box horizontal_alignment">
-                    <div class="reco_user horizontal_alignment">  
-                        <div class="reco_nickname">┗ ${reco.user}</div>
-                        <div class="reco_recomment">${reco.recomment}</div>
-                    </div>
-                    <div class="reco_delete_button" onclick="deleteRecomment(${comt.pk}, ${reco.pk})">X</div>
+    })
+} else {
+    // 댓글 삭제 유무
+    if(comt.user_id == User_payload.user_id){
+        cmt_wrap.innerHTML += `
+        <div class="vertical_alignment">
+            <div class="comment_box horizontal_alignment">
+                <div class="cmt_user horizontal_alignment">  
+                    <div class="cmt_nickname">${comt.user}</div>
+                    <div class="cmt_comment">${comt.comment}</div>
                 </div>
-                `
-            } else {
-                cmt_wrap.innerHTML +=`
-                <div class="recomment_box horizontal_alignment">
-                    <div class="reco_user horizontal_alignment">  
-                        <div class="reco_nickname">┗ ${reco.user}</div>
-                        <div class="reco_recomment">${reco.recomment}</div>
-                    </div>
+                <div class="cmt_button_box horizontal_alignment">
+                    <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                    <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart_bk.png" onclick="handleCommentLike(${comt.pk})"></div>
+                    <div class="cmt_delete_button" onclick="deleteComment(${comt.pk})">X</div>
                 </div>
-                `
-            }
-        })
-        })
+            </div>
+            <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+            </div>
+        </div>
+        `
+    } else {
+        cmt_wrap.innerHTML += `
+        <div class="vertical_alignment">
+            <div class="comment_box horizontal_alignment">
+                <div class="cmt_user horizontal_alignment">  
+                    <div class="cmt_nickname">${comt.user}</div>
+                    <div class="cmt_comment">${comt.comment}</div>
+                </div>
+                <div class="cmt_button_box horizontal_alignment">
+                    <div class="cmt_reco_button" onclick="recommentInputFlex('#recomment_input_box_${comt.pk}')">대댓글</div>
+                    <div class="cmt_like_button"><img class="comment_heart_view" src="/static/img/heart_bk.png" onclick="handleCommentLike(${comt.pk})"></div>
+                </div>
+            </div>
+            <div class="recomment_input_box horizontal_alignment" id="recomment_input_box_${comt.pk}" style="display: none;">
+                <textarea class="reco_input" id="recomment_content_${comt.pk}" type="text" placeholder="대댓글..." cols="5"rows="5"></textarea>
+                <button class="recomment_create_button" type="submit" onclick="postRecomment(${feed_id}, ${comt.pk}, 'recomment_content_${comt.pk}')">댓글작성</button>
+            </div>
+        </div>
+        `
+
+    }
+
+
+    
+    comt.recomment.forEach(reco=>{
+        // 대댓글 삭제 부분
+        if(reco.user_id == User_payload.user_id){
+            cmt_wrap.innerHTML +=`
+            <div class="recomment_box horizontal_alignment">
+                <div class="reco_user horizontal_alignment">  
+                    <div class="reco_nickname">┗ ${reco.user}</div>
+                    <div class="reco_recomment">${reco.recomment}</div>
+                </div>
+                <div class="reco_delete_button" onclick="deleteRecomment(${comt.pk}, ${reco.pk})">X</div>
+            </div>
+            `
+        } else {
+            cmt_wrap.innerHTML +=`
+            <div class="recomment_box horizontal_alignment">
+                <div class="reco_user horizontal_alignment">  
+                    <div class="reco_nickname">┗ ${reco.user}</div>
+                    <div class="reco_recomment">${reco.recomment}</div>
+                </div>
+            </div>
+            `
+        }
+    })
+}
+    
+})
         // 좋아요 부분
             if(feed.like.length == 0){
                 like_wrap.innerHTML +=`<img class="feed_heart_view" src="/static/img/heart.png" onclick="handleLike()"/>`
