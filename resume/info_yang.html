@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>hanmari | 패션MD 5년차 출신 개발자</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='/style/header.css'>
+<link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+.project-title:hover {
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+
 </style>
 <body class="w3-light-grey">
 
@@ -21,102 +30,146 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-third">
     
       <div class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-display-container">
-          <img src="/static/img/default_sec.png" style="width:70%" alt="Avatar">
-          <div class="w3-display-bottomleft w3-container w3-text-blue">
-            <h2>Jane Doe</h2>
-          </div>
-        </div>
+
         <div class="w3-container">
-          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Designer</p>
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-blue"></i>London, UK</p>
-          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>ex@mail.com</p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-blue"></i>1224435534</p>
+          <p><h4><i class="fa fa-address-card fa-fw w3-margin-right w3-large w3-text-blue"></i>Yang. Gi. Cheol</h4></p>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Backend Developer</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-blue"></i>Seoul, KR</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>hanmari.code@gmail.com</p>
           <hr>
 
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Skills</b></p>
-          <p>Adobe Photoshop</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:50%">50%</div>
-          </div>
-          <p>Photography</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:80%">
-              <div class="w3-center w3-text-white">80%</div>
+          <p><li><img src="https://img.shields.io/badge/Python-80B5E3?style=for-the-badge&logo=Python&logoColor=white"></li></p>          
+          <p><li><img src="https://img.shields.io/badge/Django-80B5E3?style=for-the-badge&logo=Django&logoColor=white"></li></p>
+          <p><li><img src="https://img.shields.io/badge/Django RestFramework-80B5E3?style=for-the-badge&logo=Django&logoColor=white"></li></p>
+          <div style="display: flex; flex-direction: row;">
+            <div class="left">
+              <p><li><img src="https://img.shields.io/badge/JavaScript-80B5E3?style=for-the-badge&logo=JavaScript&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/HTML5-80B5E3?style=for-the-badge&logo=HTML5&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/CSS3-80B5E3?style=for-the-badge&logo=CSS3&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Amazon AWS-80B5E3?style=for-the-badge&logo=Amazon AWS&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Amazon EC2-80B5E3?style=for-the-badge&logo=Amazon EC2&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Amazon S3-80B5E3?style=for-the-badge&logo=Amazon S3&logoColor=white"></li></p>
             </div>
-          </div>
-          <p>Illustrator</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:75%">75%</div>
-          </div>
-          <p>Media</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:50%">50%</div>
-          </div>
-          <br>
-
-          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-blue"></i>Languages</b></p>
-          <p>Korean</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-blue" style="height:24px;width:100%"></div>
-          </div>
-          <p>English</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-blue" style="height:24px;width: 50%"></div>
-          </div>
-          <p>Japanese</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-blue" style="height:24px;width:60%"></div>
-          </div>
+            <div class="right" style="margin-left: 20px;">
+              <p><li><img src="https://img.shields.io/badge/AWS_PostgreSQL-80B5E3?style=for-the-badge&logo=PostgreSQL&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Docker-80B5E3?style=for-the-badge&logo=Docker&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/NGINX-80B5E3?style=for-the-badge&logo=NGINX&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Gunicorn-80B5E3?style=for-the-badge&logo=Gunicorn&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Route-80B5E3?style=for-the-badge&logo=Amazon EC2&logoColor=white"></li></p>          
+              <p><li><img src="https://img.shields.io/badge/Microsoft Excel-80B5E3?style=for-the-badge&logo=Microsoft Excel&logoColor=white"></li></p>
+            </div>
+          </div>       
           <br>
         </div>
       </div><br>
+
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>스파르타 코딩클럽 / AI 백엔드 과정</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Aug 29, 2022 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>인덕대학교 / 공간장식도자디자인</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2012 - 2014</h6>
+          <hr>
+        </div>
+      </div>
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Project Experience</b></p>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/hanmariyang/off_the_outfit_backend">off the outfit</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 30, 2022 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
+            <p>사용자의 지역에 따라서 옷을 추천해주고, 자신의 스타일 정보를 공유하는 패션 커뮤니티</p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/hanmariyang/CaBul_v2_backend">CaBul_v2</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 22, 2022 - Nov 28, 2022</h6>
+            <p>카테고리 분류 & 유화 제작 SNS</p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/hanmariyang/jjapflix_backend">Jjapflix</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 2, 2022 - Nov 8, 2022</h6>
+            <p>넷플릭스 클론코딩, 사용자의 취향에 맞춰서 영화 추천</p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/hanmariyang/CaBul">CaBul</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Oct 17, 2022 - Oct 21, 2022</h6>
+            <p>머신러닝을 이용한 이미지 카테고리 자동 분류 블로그</p>
+            <hr>
+          </div>
+        </div>
+      </div>
 
     <!-- End Left Column -->
     </div>
 
     <!-- Right Column -->
     <div class="w3-twothird">
-    
+
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Work Experience</h2>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Front End Developer / w3schools.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
-          <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
-          <hr>
+      
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user-circle fa-fw w3-margin-right w3-xxlarge w3-text-blue" ></i>hanmari | 패션MD 5년차 출신 개발자</h2>
+        <div style="display: flex; flex-direction: row;">
+          <div class="w3-container">
+            <div><img src="/static/img/yang.jpg" alt="ltk" width="250px;" height="250px;" style="margin: 50px 30px 50px 20px;"></div>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h3>Contact.</h3>
+            <p><h4><i class="fa fa-address-card fa-fw w3-margin-right w3-large w3-text-blue"></i>양기철 / Yang Gicheol</h4></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>hanmari.code@gmail.com</p>
+            <br>
+            <h3>Channel..</h3>
+            <p>Blog. <a href="https://hanmari-code.tistory.com/">https://hanmari-code.tistory.com/</a></p>
+            <p>GitHub. <a href="https://github.com/hanmariyang/">https://github.com/hanmariyang/</a></p>
+          </div>
         </div>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
-          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <h3><b>Introduce.</b></h3>
+          <h4>안녕하세요 패션 브랜드 MD 출신 준비되어있는 개발자 양기철 입니다.</h4>
+          <h6>5년 차 패션 브랜드 MD로 RMTCWORKS에서 패션 플랫폼 무신사, 29cm, 스타일쉐어, W컨셉 등등 여러 채널에서 로맨틱크라운, 배드인배드, 타게토, 텔미하유필 브랜드를 담당하였습니다.</h6>
+          <h6>경험을 통해 데이터를 활용하는 역량을 쌓기 위하여 5년 동안 걸어왔던 MD 길을 정리하고 백엔드 개발자로 성장하고자 부트캠프를 들어갔습니다. 하루에 12~16시간을 공부하는데 몰입하여 1000시간이 넘는 커리큘럼을 수료 하였고, 현재도 끊임없이 배움을 추구하고있는 중입니다.</h6>
           <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
         </div>
       </div>
+      
 
-      <div class="w3-container w3-card w3-white">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Education</h2>
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><img src="/static/img/title.png" height=" 50px;" /></h2>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
-          <p>Web Development! All I need to know in one place</p>
+          <p>- 나의 패션을 자랑해보고싶나요?<br>
+            - 내일 뭐 입을지 고민이신가요?<br>
+            - 다른 사람들의 옷장 속이 궁금하시지 않으신가요?<br>
+            <br>
+            사용자의 지역에 따라서 옷을 추천해주고, 자신의 스타일 정보를 공유하는 패션 커뮤니티</p>
+          <br>
+          <h4 class="w3-opacity"><b>Backend Developer</b></h4>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov. 2022 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
+          <br>
+          <h4>프로젝트 기획 및 DB 모델링 기본 CRUD + 프론트엔드 템플릿 및 API 연결</h4>
+          <br>
+          <h4>Products</h4>
+          <p><li>무신사내에 상품 정보를 크롤링하여 상품, 브랜드, 카테고리 DB 구축</li></p>
+          <p><li>개인 프로필에 상품을 저장할 수 있는 옷장 기능</li></p>
+          <p><li>상품 정보에 후기 작성 기능</li></p>
+          <br>
+          <h4>Recommend</h4>
+          <p><li>머신러닝을 이용하여 내 옷장이랑 유사한 옷장을 가진 유저 추천 기능</li></p>
+          <p><li>상품을 가지고있는 옷장에 다른 상품을 추천해주는 기능</li></p>
+          <p><li>내일뭐입지? 날씨 데이터를 통해 카테고리를 선정하여 무신사 상품을 랜덤 추천</li></p>
+          <br>
+          <h4>etc.</h4>
+          <p><li>추천 기능을 확인하기 위하여 더미 시스템 구축</li></p>
+          <p><li>검색시 검색어 저장 후 검색어 랭킹 기능</li></p>
           <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>London Business School</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
-          <p>Master Degree</p>
-          <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>School of Coding</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
-          <p>Bachelor Degree</p><br>
         </div>
       </div>
 
@@ -128,15 +181,24 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   
   <!-- End Page Container -->
 </div>
+<footer>
+  <div class="footer_area" style="margin-top: 100px;">
+      <div class="footer_box vertical_alignment">
+          <div class="icon_box horizontal_alignment">
+              <img src="/static/icon/github_icon.png">
+              <img src="/static/icon/insta_icon.png" onclick="location.href='https://www.instagram.com/offtheoutfit.official/'">
+          </div>
 
-<footer class="w3-container w3-blue w3-center w3-margin-top">
-  <p>Find me on social media.</p>
-  <i class="fa fa-facebook-official w3-hover-opacity"></i>
-  <i class="fa fa-instagram w3-hover-opacity"></i>
-  <i class="fa fa-kak w3-hover-opacity"></i>
-  <i class="fa fa-github w3-hover-opacity"></i>
+          <h4 class="footer_desc">COPYRIGHT (C) CABUL ALL RIGHTS RESERVED.<br>
+  
+              사이트 내 자체 생성 콘텐츠는 싸지방 및 오프더아웃핏 유저들에 저작권이 있습니다.<br>
+              
+              이러한 콘텐츠는 출처를 밝히고(오프더아웃핏 표기 및 www.offtheoutfit.com 링크 포함 필수) 비상업적인 용도에서만 활용하실 수 있습니다.<br></h4>
 
-  <p>Powered by <a href="https://www.offtheoutfit.com" target="_blank">OffTheOutFit</a></p>
+          <h4 class="footer_desc">주식회사 SJB 프로젝트 (SsaJiBang.Co., Ltd)<br>
+              <br>© 2022 OFF THE OUTFIT FROM SPARTA</h4>
+      </div>
+  </div>
 </footer>
 
 </body>
