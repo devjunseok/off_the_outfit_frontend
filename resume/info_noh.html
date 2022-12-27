@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='/style/header.css'>
+<link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16x16.png">
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+
+.project-title:hover {
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+
 </style>
 <body class="w3-light-grey">
 
@@ -21,102 +29,146 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-third">
     
       <div class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-display-container">
-          <img src="/static/img/default_sec.png" style="width:70%" alt="Avatar">
-          <div class="w3-display-bottomleft w3-container w3-text-blue">
-            <h2>Jane Doe</h2>
-          </div>
-        </div>
+
         <div class="w3-container">
-          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Designer</p>
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-blue"></i>London, UK</p>
-          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>ex@mail.com</p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-blue"></i>1224435534</p>
+          <p><h4><i class="fa fa-address-card fa-fw w3-margin-right w3-large w3-text-blue"></i>Nho. Woo. Seok</h4></p>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue"></i>Backend Developer</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-blue"></i>Incheon, KR</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>nohwooseok@gmail.com</p>
           <hr>
 
           <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Skills</b></p>
-          <p>Adobe Photoshop</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:50%">50%</div>
-          </div>
-          <p>Photography</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:80%">
-              <div class="w3-center w3-text-white">80%</div>
+          <p><li><img src="https://img.shields.io/badge/Python-80B5E3?style=for-the-badge&logo=Python&logoColor=white"></li></p>          
+          <p><li><img src="https://img.shields.io/badge/Django-80B5E3?style=for-the-badge&logo=Django&logoColor=white"></li></p>
+          <p><li><img src="https://img.shields.io/badge/Django RestFramework-80B5E3?style=for-the-badge&logo=Django&logoColor=white"></li></p>
+          <div style="display: flex; flex-direction: row;">
+            <div class="left">
+              <p><li><img src="https://img.shields.io/badge/JavaScript-80B5E3?style=for-the-badge&logo=JavaScript&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/HTML5-80B5E3?style=for-the-badge&logo=HTML5&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/CSS3-80B5E3?style=for-the-badge&logo=CSS3&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Amazon AWS-80B5E3?style=for-the-badge&logo=Amazon AWS&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Amazon EC2-80B5E3?style=for-the-badge&logo=Amazon EC2&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Amazon S3-80B5E3?style=for-the-badge&logo=Amazon S3&logoColor=white"></li></p>
             </div>
-          </div>
-          <p>Illustrator</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:75%">75%</div>
-          </div>
-          <p>Media</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-blue" style="width:50%">50%</div>
-          </div>
-          <br>
-
-          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-blue"></i>Languages</b></p>
-          <p>Korean</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-blue" style="height:24px;width:100%"></div>
-          </div>
-          <p>English</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-blue" style="height:24px;width: 50%"></div>
-          </div>
-          <p>Japanese</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-blue" style="height:24px;width:60%"></div>
-          </div>
+            <div class="right" style="margin-left: 20px;">
+              <p><li><img src="https://img.shields.io/badge/AWS_PostgreSQL-80B5E3?style=for-the-badge&logo=PostgreSQL&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Docker-80B5E3?style=for-the-badge&logo=Docker&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/NGINX-80B5E3?style=for-the-badge&logo=NGINX&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Gunicorn-80B5E3?style=for-the-badge&logo=Gunicorn&logoColor=white"></li></p>
+              <p><li><img src="https://img.shields.io/badge/Route-80B5E3?style=for-the-badge&logo=Amazon EC2&logoColor=white"></li></p>
+            </div>
+          </div>       
           <br>
         </div>
       </div><br>
+
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Education</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>스파르타 코딩클럽 / AI 백엔드 과정</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Aug 29, 2022 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>부천대학교 / 정보통신</b></h5>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2014 - 2018</h6>
+          <hr>
+        </div>
+      </div>
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-blue"></i>Project Experience</b></p>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/WooSeok-Nho/off_the_outfit_backend">off the outfit</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 30, 2022 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
+            <p>사용자의 지역에 따라서 옷을 추천해주고, 자신의 스타일 정보를 공유하는 패션 커뮤니티</p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/WooSeok-Nho/CaBul_v2_backend">CaBul_v2</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 22, 2022 - Nov 28, 2022</h6>
+            <p>카테고리 분류 & 유화 제작 SNS</p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/WooSeok-Nho/jjapflix_backend">Jjapflix</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov 2, 2022 - Nov 8, 2022</h6>
+            <p>넷플릭스 클론코딩, 사용자의 취향에 맞춰서 영화 추천</p>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity project-title"><b><a href="https://github.com/WooSeok-Nho/CaBul">CaBul</a></b></h5>
+            <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Oct 17, 2022 - Oct 21, 2022</h6>
+            <p>머신러닝을 이용한 이미지 카테고리 자동 분류 블로그</p>
+            <hr>
+          </div>
+        </div>
+      </div>
 
     <!-- End Left Column -->
     </div>
 
     <!-- Right Column -->
     <div class="w3-twothird">
-    
+
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Work Experience</h2>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Front End Developer / w3schools.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
-          <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
-          <hr>
+      
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user-circle fa-fw w3-margin-right w3-xxlarge w3-text-blue" ></i>배움에 부끄럼없는 태도를 가진 개발자, 노우석입니다</h2>
+        <div style="display: flex; flex-direction: row;">
+          <div class="w3-container">
+            <div><img src="/static/img/wooseok.jpg" alt="ltk" width="250px;" height="250px;" style="margin: 50px 30px 50px 20px;"></div>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h3>Contact.</h3>
+            <p><h4><i class="fa fa-address-card fa-fw w3-margin-right w3-large w3-text-blue"></i>노우석 / Nho WooSeok</h4></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>nohwooseok@gmail.com</p>
+            <br>
+            <h3>Channel..</h3>
+            <p>Blog. <a href="https://hanmari-code.tistory.com/">https://velog.io/@shdnjtjr96</a></p>
+            <p>GitHub. <a href="https://github.com/hanmariyang/">https://github.com/WooSeok-Nho/</a></p>
+          </div>
         </div>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
-          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
+          <h3><b>Introduce.</b></h3>
+          <h4>안녕하십니까 매일 공부하고 배우고 싶은 개발자 노우석입니다.</h4>
+          <h5>지인들의 추천과 관심 있는 분야인 백엔드 개발자가 되고싶어 스파르타 부트캠프에 참가하였습니다.</h5>
+          <h6>6개월 간 하루 12시간 이상 교육 커리큘럼을 끝내고 수료 완료하였습니다.</h6>
+          <h7>현재는 취업 하기위해 구직중이며 코드 공부를 병행하고 있습니다.</h7>
           <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
         </div>
       </div>
+      
 
-      <div class="w3-container w3-card w3-white">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-blue"></i>Education</h2>
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><img src="/static/img/title.png" height=" 50px;" /></h2>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
-          <p>Web Development! All I need to know in one place</p>
+          <p>- 나의 패션을 자랑해보고싶나요?<br>
+            - 내일 뭐 입을지 고민이신가요?<br>
+            - 다른 사람들의 옷장 속이 궁금하시지 않으신가요?<br>
+            <br>
+            사용자의 지역에 따라서 옷을 추천해주고, 자신의 스타일 정보를 공유하는 패션 커뮤니티</p>
+          <br>
+          <h4 class="w3-opacity"><b>Backend Developer</b></h4>
+          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Nov. 2022 - <span class="w3-tag w3-blue w3-round">Current</span></h6>
+          <br>
+          <h4>프로젝트 기획 및 DB 모델링 기본 CRUD + 프론트엔드 템플릿 및 API 연결</h4>
+          <br>
+          <h4>Products</h4>
+          <p><li>무신사내에 상품 정보를 크롤링하여 상품, 브랜드, 카테고리 DB 구축</li></p>
+          <p><li>개인 프로필에 상품을 저장할 수 있는 옷장 기능</li></p>
+          <p><li>상품 정보에 후기 작성 기능</li></p>
+          <br>
+          <h4>Recommend</h4>
+          <p><li>머신러닝을 이용하여 내 옷장이랑 유사한 옷장을 가진 유저 추천 기능</li></p>
+          <p><li>상품을 가지고있는 옷장에 다른 상품을 추천해주는 기능</li></p>
+          <p><li>내일뭐입지? 날씨 데이터를 통해 카테고리를 선정하여 무신사 상품을 랜덤 추천</li></p>
+          <br>
+          <h4>etc.</h4>
+          <p><li>추천 기능을 확인하기 위하여 더미 시스템 구축</li></p>
+          <p><li>검색시 검색어 저장 후 검색어 랭킹 기능</li></p>
           <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>London Business School</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
-          <p>Master Degree</p>
-          <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>School of Coding</b></h5>
-          <h6 class="w3-text-blue"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
-          <p>Bachelor Degree</p><br>
         </div>
       </div>
 
@@ -128,15 +180,24 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   
   <!-- End Page Container -->
 </div>
+<footer>
+  <div class="footer_area" style="margin-top: 100px;">
+      <div class="footer_box vertical_alignment">
+          <div class="icon_box horizontal_alignment">
+              <img src="/static/icon/github_icon.png">
+              <img src="/static/icon/insta_icon.png" onclick="location.href='https://www.instagram.com/offtheoutfit.official/'">
+          </div>
 
-<footer class="w3-container w3-blue w3-center w3-margin-top">
-  <p>Find me on social media.</p>
-  <i class="fa fa-facebook-official w3-hover-opacity"></i>
-  <i class="fa fa-instagram w3-hover-opacity"></i>
-  <i class="fa fa-kak w3-hover-opacity"></i>
-  <i class="fa fa-github w3-hover-opacity"></i>
+          <h4 class="footer_desc">COPYRIGHT (C) CABUL ALL RIGHTS RESERVED.<br>
+  
+              사이트 내 자체 생성 콘텐츠는 싸지방 및 오프더아웃핏 유저들에 저작권이 있습니다.<br>
+              
+              이러한 콘텐츠는 출처를 밝히고(오프더아웃핏 표기 및 www.offtheoutfit.com 링크 포함 필수) 비상업적인 용도에서만 활용하실 수 있습니다.<br></h4>
 
-  <p>Powered by <a href="https://www.offtheoutfit.com" target="_blank">OffTheOutFit</a></p>
+          <h4 class="footer_desc">주식회사 SJB 프로젝트 (SsaJiBang.Co., Ltd)<br>
+              <br>© 2022 OFF THE OUTFIT FROM SPARTA</h4>
+      </div>
+  </div>
 </footer>
 
 </body>
